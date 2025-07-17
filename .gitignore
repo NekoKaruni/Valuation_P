@@ -1,0 +1,14 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+
+# --- 追加するファイル/ディレクトリの無視ルール ---
+
+# TOPIX年次リターンデータファイルを無視
+^tpx_y.csv
+
+# ProcessedBankData/ ディレクトリ全体を無視
+ProcessedBankData/

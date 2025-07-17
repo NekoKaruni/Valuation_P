@@ -1,0 +1,56 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Valuation"
+  
+  navbar:
+    left:
+      # 「企業価値評価」をドロップダウンメニューの親項目として設定
+      - text: 企業価値評価
+        menu: # ここにドロップダウンメニューを定義
+          - text: 7150_島根銀行 # ドロップダウンに表示されるテキスト
+            href: 分析用R.qmd # リンク先のページ（分析用R.qmd）
+      - icon: github
+        href: https://github.com/NekoKaruni/Valuation.git
+
+  sidebar:
+    left:
+      style: "docked"
+      collapse-level: 1
+      search: true
+      contents:
+        # サイドバーの「企業価値評価」セクションはそのまま残し、
+        # 「7150_島根銀行」へのリンクを保持します。
+        - section: "企業価値評価"
+          contents: 
+            - text: 7150_島根銀行
+              href: 分析用R.qmd
+        
+        # もし既存の「理念・洞察」セクションを削除する場合は、このセクションを削除
+        # - section: "理念・洞察"
+        #   contents: 
+        #     - text: 概要 
+        #       href: 01_index.qmd 
+        
+format:
+  html:
+    theme:
+      - cosmo
+      - brand
+    css: styles.css
+    toc: true
+    margin:
+      top: 0.5in
+      bottom: 0.5in
+      left: 0.5in
+      right: 0.5in
+    navbar:
+      fixed: true
+      sticky: true
+    sidebar:
+      collapse: true
+      float: true
+
+editor: visual
