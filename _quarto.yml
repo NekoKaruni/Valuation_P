@@ -11,7 +11,11 @@ website:
       - text: 企業価値評価
         menu: # ここにドロップダウンメニューを定義
           - text: 7150_島根銀行 # ドロップダウンに表示されるテキスト
-            href: 分析用R.qmd # リンク先のページ（分析用R.qmd）
+            href: 分析用R.qmd
+          - text: 7161_じもとホールディングス
+            href: 7161_qmd
+          - text: 8349_東北銀行
+            href: 8349.qmd# リンク先のページ（分析用R.qmd）
       - icon: github
         href: https://github.com/NekoKaruni/Valuation_Pub.git
 
@@ -29,6 +33,8 @@ website:
               href: 分析用R.qmd
             - text: 7161_じもとホールディングス
               href: 7161_qmd
+            - text: 8349_東北銀行
+              href: 8349.qmd
         
         # もし既存の「理念・洞察」セクションを削除する場合は、このセクションを削除
         # - section: "理念・洞察"
