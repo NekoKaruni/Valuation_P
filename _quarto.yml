@@ -13,7 +13,7 @@ website:
           - text: 7150_島根銀行 # ドロップダウンに表示されるテキスト
             href: 分析用R.qmd # リンク先のページ（分析用R.qmd）
       - icon: github
-        href: https://github.com/NekoKaruni/Valuation.git
+        href: https://github.com/NekoKaruni/Valuation_Pub.git
 
   sidebar:
     left:
@@ -27,6 +27,8 @@ website:
           contents: 
             - text: 7150_島根銀行
               href: 分析用R.qmd
+            - text: 7161_じもとホールディングス
+              href: 7161_qmd
         
         # もし既存の「理念・洞察」セクションを削除する場合は、このセクションを削除
         # - section: "理念・洞察"
