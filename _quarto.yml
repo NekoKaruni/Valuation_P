@@ -13,7 +13,7 @@ website:
           - text: 7150_島根銀行 # ドロップダウンに表示されるテキスト
             href: 分析用R.qmd
           - text: 7161_じもとホールディングス
-            href: 7161_qmd
+            href: 7161.qmd
           - text: 8349_東北銀行
             href: 8349.qmd
       - icon: github
