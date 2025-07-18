@@ -15,7 +15,7 @@ website:
           - text: 7161_じもとホールディングス
             href: 7161_qmd
           - text: 8349_東北銀行
-            href: 8349.qmd# リンク先のページ（分析用R.qmd）
+            href: 8349.qmd
       - icon: github
         href: https://github.com/NekoKaruni/Valuation_Pub.git
 
