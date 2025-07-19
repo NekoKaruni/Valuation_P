@@ -1,6 +1,9 @@
 ---
-title: "01_Valuation"
-format: html
+title: "DCF法"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
 editor: visual
 ---
 

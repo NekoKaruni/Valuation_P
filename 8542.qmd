@@ -1,6 +1,9 @@
 ---
-title: "Valuation"
-format: html
+title: "8542_トマト銀行"
+format:
+  html:
+    sidebar: true
+    page-navigation: true
 editor: visual
 ---
 

@@ -1,6 +1,9 @@
 ---
-title: "Valuation"
-format: html
+title: "8416_高知銀行"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
 editor: visual
 ---
 

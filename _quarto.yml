@@ -1,62 +1,37 @@
 project:
-  type: website
-  output-dir: docs
+  type:  website
+  output-dir:  docs
 
 website:
-  title: "Valuation"
-  
   navbar:
+    background:  primary
+    search:  true
     left:
-      # 「企業価値評価」をドロップダウンメニューの親項目として設定
-      - text: 企業価値評価
-        menu: # ここにドロップダウンメニューを定義
-          - text: 7150_島根銀行 # ドロップダウンに表示されるテキスト
-            href: 分析用R.qmd
-          - text: 7161_じもとホールディングス
-            href: 7161.qmd
-          - text: 8349_東北銀行
-            href: 8349.qmd
-          - text: 8365_富山銀行
-            href: 8365.qmd
-          - text: 8383_鳥取銀行 
-            href: 8383.qmd
-          - text: 8416_高知銀行
-            href: 8416.qmd
-          - text: 8537_大光銀行
-            href: 8537.qmd 
-          - text: 8542_トマト銀行
-            href: 8542.qmd
-          - text: 8562_福島銀行
-            href: 8562.qmd
-          - text: 8563_大東銀行
-            href: 8563.qmd
-          - icon: github
-            href: https://github.com/NekoKaruni/Valuation_Pub.git
+      - text:  "企業価値評価"
+        href:  分析用R.qmd
+      - icon:  github
+        href:  https://github.com/NekoKaruni/Valuation_Pub.git
 
-
-        
-        # もし既存の「理念・洞察」セクションを削除する場合は、このセクションを削除
-        # - section: "理念・洞察"
-        #   contents: 
-        #     - text: 概要 
-        #       href: 01_index.qmd 
-        
+  sidebar:
+    style:  "docked"
+    collapse-level:  1
+    search:  true
+    contents:
+      - section:  "DCF法"
+        href:  01_Valuation.qmd
+        contents: 
+          - 分析用R.qmd
+          - 7161.qmd
+          - 8349.qmd
+          - 8365.qmd
+          - 8383.qmd
+          - 8416.qmd
+          - 8537.qmd 
+          - 8542.qmd
+          - 8562.qmd
+          - 8563.qmd
+              
 format:
   html:
-    theme:
-      - cosmo
-      - brand
-    toc: true
-    margin:
-      top: 0.5in
-      bottom: 0.5in
-      left: 0.5in
-      right: 0.5in
-    navbar:
-      fixed: true
-      sticky: true
-    sidebar:
-      collapse: true
-      float: true
-
-editor: visual
+    theme: cosmo
+    sidebar: true

@@ -1,6 +1,9 @@
 ---
-title: "Valuation"
-format: html
+title: "8383_鳥取銀行"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
 editor: visual
 ---
 
