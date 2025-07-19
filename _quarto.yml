@@ -4,7 +4,7 @@ project:
 
 website:
   navbar:
-    background:  primary
+    background:  light
     search:  true
     left:
       - text:  "企業価値評価"
@@ -33,5 +33,19 @@ website:
               
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-tools: true
+    link-external-icon: true
     sidebar: true
+    mainfont: "IBM Plex Sans JP"
+    sansfont: "IBM Plex Sans JP"
+    monofont: "Fira Code"
+    fontsize: 16px
+    line-height: 1.6
+    css: custom.scss
+    
+    include-in-header: header.html

@@ -7,23 +7,36 @@ format:
 editor: visual
 ---
 
-## Quarto
+## DCF法とは
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+DCF法(Discounted Cash Flow)は企業価値評価の代表的手法の一つです。企業や事業が将来生み出すと予測されているフリーキャッシュフロー(FCF)を適切な割引率で現在価値に割引き合計することで、企業や事業の価値を算出します。
 
-## Running Code
+現在の10000円は将来の10000円よりも価値があるという、貨幣の時間価値の概念に基づき、将来のキャッシュフローを現在の価値に換算し、評価します。現在の10000円と将来の10000円では価値が変化します。
 
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+## 将来の10,000円の現在価値を求める式（LaTeX形式）
 
-```{r}
-1 + 1
-```
+将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。
 
-You can add options to executable code like this
+### 各項目の意味
 
-```{r}
-#| echo: false
-2 * 2
-```
+-   PV: **現在価値** (Present Value)
 
-The `echo: false` option disables the printing of code (only output is displayed).
+-   FV: **将来価値** (Future Value) - ここでは10,000円
+
+-   r: **割引率** (Discount Rate) - 年利や要求利回りなど、貨幣の時間的価値とリスクを考慮した率　今回は無リスク金利と呼ばれる日本国債利回り1%として
+
+-   n: **期間** (Number of Periods) - 将来の時点までの年数　
+
+### 具体例（割引率1%、期間10年の場合）
+
+例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。
+
+$PV = \frac{10000}{(1 + 0.01)^{10}}$\
+
+$PV = \frac{10000}{(1.01)^{10}}$\
+
+$PV =\frac{10000}{1.104622}$\
+
+$PV≈9052.8 7$\
+
+計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。
