@@ -278,26 +278,26 @@ window.Quarto = {
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">##じもとホールディングス</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## 財務データ読み込み</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/7161_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/8563_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># TOPIX年次リターンデータの読み込み</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,437 × 4
-      No 項目         `金額（百万円）` ファイル名        
-   &lt;dbl&gt; &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt;             
- 1     1 現金預け金             159638 716120150311JP.csv
- 2     2 買入金銭債権              838 716120150311JP.csv
- 3     3 商品有価証券               26 716120150311JP.csv
- 4     4 有価証券               752854 716120150311JP.csv
- 5     5 貸出金                1600381 716120150311JP.csv
- 6     6 外国為替                  548 716120150311JP.csv
- 7     7 その他資産               6639 716120150311JP.csv
- 8     8 有形固定資産            24899 716120150311JP.csv
- 9     9 建物                     7907 716120150311JP.csv
-10    10 土地                    14406 716120150311JP.csv
-# ℹ 1,427 more rows</code></pre>
+<pre><code># A tibble: 1,296 × 4
+      No 項目                         `金額（百万円）` ファイル名        
+   &lt;dbl&gt; &lt;chr&gt;                                   &lt;dbl&gt; &lt;chr&gt;             
+ 1     1 現金預け金                              70944 856320150311JP.csv
+ 2     2 コールローン及び買入手形                 5000 856320150311JP.csv
+ 3     3 有価証券                               234701 856320150311JP.csv
+ 4     4 貸出金                                 472194 856320150311JP.csv
+ 5     5 外国為替                                  337 856320150311JP.csv
+ 6     6 リース債権及びリース投資資産             1995 856320150311JP.csv
+ 7     7 その他資産                               3291 856320150311JP.csv
+ 8     8 有形固定資産                            12932 856320150311JP.csv
+ 9     9 建物                                     2297 856320150311JP.csv
+10    10 土地                                     9646 856320150311JP.csv
+# ℹ 1,286 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(TOPIX)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -324,14 +324,14 @@ window.Quarto = {
 <p>WACCにおける負債総額 (<span class="math inline">\(D\)</span>) は、企業が<strong>利子を支払う義務のある負債</strong>、すなわち<strong>有利子負債</strong>を指す。銀行株を分析する際、<strong>預金</strong>については一般的な有利子負債とは性質が異なり、多くの場合、低金利で調達される。そのため、本評価においては、預金に対して通常の有利子負債とは異なる特定の金利を別途調査し、<span class="math inline">\(r\_D\)</span> の算出に際して適切に加味する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 財務データから有利子負債の項目を抽出</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>D_df_current_data <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"預金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"譲渡性預金"</span> <span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"新株予約権付社債"</span> <span class="sc">|</span>df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債"</span>,]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>D_df_current_data <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"預金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"譲渡性預金"</span>  <span class="sc">|</span>df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金"</span> <span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"社債"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"その他負債"</span>,]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(D_df_current_data<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) </span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 例として22行目と23行目の3列目を合計</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債総額 (D):"</span>, D, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>負債総額 (D): 24366624 </code></pre>
+<pre><code>負債総額 (D): 8047847 </code></pre>
 </div>
 </div>
 <hr>
@@ -341,15 +341,15 @@ window.Quarto = {
 <p>時価総額 (<span class="math inline">\(E\)</span>) は、評価対象企業の<strong>発行済み株式総数に現在の株価を乗じた値</strong>として算出する。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 発行済み株式総数:Nと現在の株価:Pを定義</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">72840263</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">346</span>         </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">12701000</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">729</span>          </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 時価総額の計算</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> N <span class="sc">*</span> P</span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額 (E):"</span>, E, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>時価総額 (E): 25202730998 </code></pre>
+<pre><code>時価総額 (E): 9259029000 </code></pre>
 </div>
 </div>
 <hr>
@@ -358,13 +358,13 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="負債コスト-r_d-の算出">2.4. 負債コスト (<span class="math inline">\(r\_D\)</span>) の算出</h4>
 <p>負債コスト (<span class="math inline">\(r\_D\)</span>) は、企業が負債に対して支払う平均的な金利を指す。これは、主に<strong>支払利息</strong>の総額を負債総額で除することで算出される。銀行株の場合、前述の通り預金にかかる特定の金利も考慮に入れ、<span class="math inline">\(D\)</span> と対応する利息コストを適切に計算する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rD_Total_Debt <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"資金調達費用"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"預金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"譲渡性預金利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"コールマネー利息及び売渡手形利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"その他の支払利息"</span>,]</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>rD_Total_Debt <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"資金調達費用"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"預金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"譲渡性預金利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"その他の支払利息"</span><span class="sc">|</span>df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"コールマネー利息及び売渡手形利息"</span>,]</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rD <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(rD_Total_Debt<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) <span class="sc">/</span> D <span class="co"># 例として42～44行目の3列目を合計しDで割る</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債コスト (rD):"</span>, <span class="fu">round</span>(rD <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>負債コスト (rD): 0.117 %</code></pre>
+<pre><code>負債コスト (rD): 0.075 %</code></pre>
 </div>
 </div>
 <hr>
@@ -395,12 +395,12 @@ window.Quarto = {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ (β) の設定</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 評価対象企業のβ値を調べて入力してください。beta.xlsxで計算済</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.384913011</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.801695869</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a> <span class="co"># 例示の値</span></span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ベータ (β):"</span>, <span class="fu">round</span>(beta, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ベータ (β): 0.385 </code></pre>
+<pre><code>ベータ (β): 0.802 </code></pre>
 </div>
 </div>
 </section>
@@ -443,7 +443,7 @@ window.Quarto = {
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト (rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>株主資本コスト (rE): 3.986 %</code></pre>
+<pre><code>株主資本コスト (rE): 6.601 %</code></pre>
 </div>
 </div>
 <hr>
@@ -464,7 +464,7 @@ window.Quarto = {
 <span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
 <span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"加重平均資本コスト (WACC):"</span>, <span class="fu">round</span>(WACC <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>加重平均資本コスト (WACC): 3.982 %</code></pre>
+<pre><code>加重平均資本コスト (WACC): 6.596 %</code></pre>
 </div>
 </div>
 <hr>
@@ -503,16 +503,16 @@ window.Quarto = {
 <pre><code># A tibble: 10 × 4
    年度               CFO_金額 CFI_金額     FCF
    &lt;chr&gt;                 &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;
- 1 716120150315JP.csv    20043   -14532   34575
- 2 716120160315JP.csv   -80784    58344 -139128
- 3 716120170315JP.csv    20683    42855  -22172
- 4 716120180315JP.csv   -63585    32639  -96224
- 5 716120190315JP.csv   -73709    84546 -158255
- 6 716120200315JP.csv    -7023    35390  -42413
- 7 716120210315JP.csv    96884   -84955  181839
- 8 716120220315JP.csv    28964    -7983   36947
- 9 716120230315JP.csv   -19967    19549  -39516
-10 716120240315JP.csv   -13850   129915 -143765</code></pre>
+ 1 856320150315JP.csv     8415    10252   -1837
+ 2 856320160315JP.csv   -11904    -3518   -8386
+ 3 856320170315JP.csv    -3266     8523  -11789
+ 4 856320180315JP.csv   -15481    -4083  -11398
+ 5 856320190315JP.csv   -21118    24111  -45229
+ 6 856320200315JP.csv    -2256    13876  -16132
+ 7 856320210315JP.csv   113437     2134  111303
+ 8 856320220315JP.csv   -33868     4577  -38445
+ 9 856320230315JP.csv   -92826    31352 -124178
+10 856320240315JP.csv    -9113     9423  -18536</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># FCFの値をベクトルとして取り出す（今後の予測モデルや企業価値計算で使用するため）</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co"># この FCF_past が、将来FCF予測の基礎データとなります。</span></span>
@@ -525,8 +525,8 @@ FCF_past (ベクトル形式):</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FCF_past)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]   34575 -139128  -22172  -96224 -158255  -42413  181839   36947  -39516
-[10] -143765</code></pre>
+<pre><code> [1]   -1837   -8386  -11789  -11398  -45229  -16132  111303  -38445 -124178
+[10]  -18536</code></pre>
 </div>
 </div>
 </section>
@@ -587,7 +587,7 @@ FCFが0以下の値を含む、または期間が不十分なため、CAGRの計
 </div>
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(FCF_forecast, <span class="dv">0</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -143765 -143765 -143765 -143765 -143765</code></pre>
+<pre><code>[1] -18536 -18536 -18536 -18536 -18536</code></pre>
 </div>
 </div>
 <hr>
@@ -615,11 +615,11 @@ FCFが0以下の値を含む、または期間が不十分なため、CAGRの計
 <span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"最終予測年度の翌年のFCF (FCF_N_plus_1):"</span>, <span class="fu">round</span>(FCF_N_plus_1, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>最終予測年度の翌年のFCF (FCF_N_plus_1): -143765 </code></pre>
+<pre><code>最終予測年度の翌年のFCF (FCF_N_plus_1): -18536 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ターミナルバリュー (TV):"</span>, <span class="fu">round</span>(TV, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>ターミナルバリュー (TV): -3610445 </code></pre>
+<pre><code>ターミナルバリュー (TV): -281032 </code></pre>
 </div>
 </div>
 <hr>
@@ -647,7 +647,7 @@ FCFが0以下の値を含む、または期間が不十分なため、CAGRの計
 <span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"DCF法による企業価値評価 (Valuation):"</span>, <span class="fu">round</span>(Valuation, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>DCF法による企業価値評価 (Valuation): -3610445 </code></pre>
+<pre><code>DCF法による企業価値評価 (Valuation): -281032 </code></pre>
 </div>
 </div>
 <hr>
@@ -658,7 +658,7 @@ FCFが0以下の値を含む、または期間が不十分なため、CAGRの計
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>FCF_E <span class="ot">&lt;-</span> last_fcf <span class="sc">/</span> (E<span class="sc">/</span><span class="fl">1e6</span>)</span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額フリーキャッシュフロー比率"</span>, <span class="fu">round</span>(FCF_E <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>時価総額フリーキャッシュフロー比率 -570.434 %</code></pre>
+<pre><code>時価総額フリーキャッシュフロー比率 -200.194 %</code></pre>
 </div>
 </div>
 
