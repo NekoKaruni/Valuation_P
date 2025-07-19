@@ -274,7 +274,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#dcf法とは" id="toc-dcf法とは" class="nav-link active" data-scroll-target="#dcf法とは"><span class="header-section-number">1</span> DCF法とは</a></li>
-  <li><a href="#将来の10000円の現在価値を求める式latex形式" id="toc-将来の10000円の現在価値を求める式latex形式" class="nav-link" data-scroll-target="#将来の10000円の現在価値を求める式latex形式"><span class="header-section-number">2</span> 将来の10,000円の現在価値を求める式（LaTeX形式）</a>
+  <li><a href="#将来の10000円の現在価値を求める式" id="toc-将来の10000円の現在価値を求める式" class="nav-link" data-scroll-target="#将来の10000円の現在価値を求める式"><span class="header-section-number">2</span> 将来の10,000円の現在価値を求める式</a>
   <ul class="collapse">
   <li><a href="#各項目の意味" id="toc-各項目の意味" class="nav-link" data-scroll-target="#各項目の意味"><span class="header-section-number">2.1</span> 各項目の意味</a></li>
   <li><a href="#具体例割引率1期間10年の場合" id="toc-具体例割引率1期間10年の場合" class="nav-link" data-scroll-target="#具体例割引率1期間10年の場合"><span class="header-section-number">2.2</span> 具体例（割引率1%、期間10年の場合）</a></li>
@@ -309,8 +309,8 @@ window.Quarto = {
 <p>DCF法(Discounted Cash Flow)は企業価値評価の代表的手法の一つです。企業や事業が将来生み出すと予測されているフリーキャッシュフロー(FCF)を適切な割引率で現在価値に割引き合計することで、企業や事業の価値を算出します。</p>
 <p>現在の10000円は将来の10000円よりも価値があるという、貨幣の時間価値の概念に基づき、将来のキャッシュフローを現在の価値に換算し、評価します。現在の10000円と将来の10000円では価値が変化します。</p>
 </section>
-<section id="将来の10000円の現在価値を求める式latex形式" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="将来の10000円の現在価値を求める式latex形式"><span class="header-section-number">2</span> 将来の10,000円の現在価値を求める式（LaTeX形式）</h2>
+<section id="将来の10000円の現在価値を求める式" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="将来の10000円の現在価値を求める式"><span class="header-section-number">2</span> 将来の10,000円の現在価値を求める式</h2>
 <p>将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。</p>
 <section id="各項目の意味" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="各項目の意味"><span class="header-section-number">2.1</span> 各項目の意味</h3>
@@ -324,14 +324,14 @@ window.Quarto = {
 <section id="具体例割引率1期間10年の場合" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="具体例割引率1期間10年の場合"><span class="header-section-number">2.2</span> 具体例（割引率1%、期間10年の場合）</h3>
 <p>例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。</p>
-<p><span class="math inline">\(PV = \frac{10000}{(1 + 0.01)^{10}}\)</span><br>
-</p>
-<p><span class="math inline">\(PV = \frac{10000}{(1.01)^{10}}\)</span><br>
-</p>
-<p><span class="math inline">\(PV =\frac{10000}{1.104622}\)</span><br>
-</p>
-<p><span class="math inline">\(PV≈9052.8 7\)</span><br>
-</p>
+<p><span class="math display">\[
+\begin{aligned}
+PV = \frac{10000}{(1 + 0.01)^{10}}\\
+PV = \frac{10000}{(1.01)^{10}}\\
+PV =\frac{10000}{1.104622}\\
+PV≈9052.8 7
+\end{aligned}
+\]</span></p>
 <p>計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。</p>
 
 
@@ -817,7 +817,7 @@ window.Quarto = {
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>現在の10000円は将来の10000円よりも価値があるという、貨幣の時間価値の概念に基づき、将来のキャッシュフローを現在の価値に換算し、評価します。現在の10000円と将来の10000円では価値が変化します。</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将来の10,000円の現在価値を求める式（LaTeX形式）</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将来の10,000円の現在価値を求める式</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
@@ -835,15 +835,16 @@ window.Quarto = {
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>$PV = \frac{10000}{(1 + 0.01)^{10}}$\</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>$PV = \frac{10000}{(1.01)^{10}}$\</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>$PV =\frac{10000}{1.104622}$\</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>$PV≈9052.8 7$\</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>PV = \frac{10000}{(1 + 0.01)^{10}}<span class="sc">\\</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>PV = \frac{10000}{(1.01)^{10}}<span class="sc">\\</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>PV =\frac{10000}{1.104622}<span class="sc">\\</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>PV≈9052.8 7</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
