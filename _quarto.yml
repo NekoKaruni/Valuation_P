@@ -33,36 +33,7 @@ website:
           - icon: github
             href: https://github.com/NekoKaruni/Valuation_Pub.git
 
-  sidebar:
-    left:
-      style: "docked"
-      collapse-level: 1
-      search: true
-      contents:
-        # サイドバーの「企業価値評価」セクションはそのまま残し、
-        # 「7150_島根銀行」へのリンクを保持します。
-        - section: "企業価値評価"
-          contents: 
-            - text: 7150_島根銀行
-              href: 分析用R.qmd
-            - text: 7161_じもとホールディングス
-              href: 7161.qmd
-            - text: 8349_東北銀行
-              href: 8349.qmd
-            - text: 8365_富山銀行
-              href: 8365.qmd
-            - text: 8383_鳥取銀行 
-              href: 8383.qmd
-            - text: 8416_高知銀行
-              href: 8416.qmd
-            - text: 8537_大光銀行
-              href: 8537.qmd
-            - text: 8542_トマト銀行
-              href: 8542.qmd
-            - text: 8562_福島銀行
-              href: 8562.qmd
-            - text: 8563_大東銀行
-              href: 8563.qmd
+
         
         # もし既存の「理念・洞察」セクションを削除する場合は、このセクションを削除
         # - section: "理念・洞察"
