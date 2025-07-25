@@ -1,0 +1,12 @@
+---
+title: "環境設定"
+editor: visual
+---
+
+```{r}
+sessionInfo()
+
+# 使用したパッケージのリスト
+search()
+required_packages <- c("tidyverse","")
+```

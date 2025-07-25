@@ -8,7 +8,9 @@ website:
     search:  true
     left:
       - text:  "企業価値評価"
-        href:  分析用R.qmd
+        href:  01_About_Valuation.qmd
+      - text: "環境設定"
+        href:  00_Environment.qmd
       - icon:  github
         href:  https://github.com/NekoKaruni/Valuation_Pub.git
 

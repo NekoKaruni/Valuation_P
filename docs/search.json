@@ -60,6 +60,118 @@
     ]
   },
   {
+    "objectID": "11_create_website.html",
+    "href": "11_create_website.html",
+    "title": "",
+    "section": "",
+    "text": "Code"
+  },
+  {
+    "objectID": "11_create_website.html#必要なツールのインストールと準備",
+    "href": "11_create_website.html#必要なツールのインストールと準備",
+    "title": "",
+    "section": "1.1 1. 必要なツールのインストールと準備",
+    "text": "1.1 1. 必要なツールのインストールと準備\n\n1.1.1 1-1. Gitのインストール\n\nGitはソースコードやドキュメントの変更履歴を管理するツールです。\n\nGit公式サイトからOSに合ったインストーラーをダウンロードし、インストールしてください。\n\n\n\n1.1.2 1-2. Rのインストール\n\nRは統計解析・データ分析向けのプログラミング言語です。\nCRAN（The Comprehensive R Archive Network）からOSに合ったインストーラーを入手してインストールします。\nインストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。\n\n\n\n1.1.3 1-3. RStudioのインストール\n\nRStudioはRを使いやすくする統合開発環境（IDE）です。\nRStudio公式サイトからインストーラーを取得しインストール。\n\n\n\n1.1.4 1-4. Quartoのインストール\n\nQuartoはMarkdown形式で文章やサイトを生成するツールです。\nQuarto公式サイトからインストーラーをダウンロードしインストール。\nRStudioのターミナルやコマンドラインで以下を実行し、動作確認します。"
+  },
+  {
+    "objectID": "11_create_website.html#githubアカウントの作成",
+    "href": "11_create_website.html#githubアカウントの作成",
+    "title": "",
+    "section": "1.2 2. GitHubアカウントの作成",
+    "text": "1.2 2. GitHubアカウントの作成\n\nGitHub公式サイトで無料アカウントを作成。\nメールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。\nアカウント作成後、ログインできることを確認してください。"
+  },
+  {
+    "objectID": "11_create_website.html#githubリポジトリの作成",
+    "href": "11_create_website.html#githubリポジトリの作成",
+    "title": "",
+    "section": "1.3 3. GitHubリポジトリの作成",
+    "text": "1.3 3. GitHubリポジトリの作成\n\nGitHubにログインした状態で画面右上の「+」→「New repository」をクリック。\nリポジトリ名（例：Sophillium）を入力。\nPublic を選択（無料アカウントでも公開リポジトリは作成可能）。\n「Add a README file」にチェックを入れておくと説明文を書けて便利。\n「Create repository」をクリック。"
+  },
+  {
+    "objectID": "11_create_website.html#rstudioでquartoプロジェクトを作成",
+    "href": "11_create_website.html#rstudioでquartoプロジェクトを作成",
+    "title": "",
+    "section": "1.4 4. RStudioでQuartoプロジェクトを作成",
+    "text": "1.4 4. RStudioでQuartoプロジェクトを作成\n\nRStudioを起動。\nメニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。\nプロジェクト名（例：Sophillium）を入力。\n「Browse」ボタンから好きなフォルダに保存場所を選択。\n「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。\n*私たちのRを参考にRStudioの設定をすることをおすすめします"
+  },
+  {
+    "objectID": "11_create_website.html#quarto.yml-ファイルの編集",
+    "href": "11_create_website.html#quarto.yml-ファイルの編集",
+    "title": "",
+    "section": "1.5 5. _quarto.yml ファイルの編集",
+    "text": "1.5 5. _quarto.yml ファイルの編集\n\nプロジェクトのルートにある _quarto.yml はウェブサイト全体の設定ファイルです。\n例えば以下のように書きます。\n\n\noutput-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)\n\n\n\nnavbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。\nページ作成（.qmdファイル）"
+  },
+  {
+    "objectID": "11_create_website.html#ページ作成",
+    "href": "11_create_website.html#ページ作成",
+    "title": "",
+    "section": "1.6 6.ページ作成",
+    "text": "1.6 6.ページ作成\n\n各ページは .qmd 拡張子のMarkdownファイルで作成します。\n\n\n\n例：01_index.qmd、02_about.qmd のように番号を付けて管理すると順序がわかりやすいです。\nファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。\n\n\n# x軸の値を生成\nx &lt;- seq(-4, 4, length=200)\n\n# 正規分布（平均0、標準偏差1）の確率密度関数\ny_norm &lt;- dnorm(x, mean=0, sd=1)\n\n# ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）\nx_gamma &lt;- seq(0, 10, length=200)\ny_gamma &lt;- dgamma(x_gamma, shape=2, rate=1)\n\n# ベータ分布（shape1=2, shape2=5）\nx_beta &lt;- seq(0, 1, length=200)\ny_beta &lt;- dbeta(x_beta, shape1=2, shape2=5)\n\n# プロット設定\npar(mfrow=c(3,1), mar=c(4,4,2,1))  # 3行1列に並べる\n\n# 正規分布のプロット\nplot(x, y_norm, type=\"l\", col=\"blue\", lwd=2, main=\"標準正規分布\", ylab=\"密度\", xlab=\"x\")\n\n# ガンマ分布のプロット\nplot(x_gamma, y_gamma, type=\"l\", col=\"red\", lwd=2, main=\"ガンマ分布 (shape=2, rate=1)\", ylab=\"密度\", xlab=\"x\")\n\n# ベータ分布のプロット\nplot(x_beta, y_beta, type=\"l\", col=\"green\", lwd=2, main=\"ベータ分布 (shape1=2, shape2=5)\", ylab=\"密度\", xlab=\"x\")"
+  },
+  {
+    "objectID": "11_create_website.html#プレビューとビルド",
+    "href": "11_create_website.html#プレビューとビルド",
+    "title": "",
+    "section": "1.7 7.プレビューとビルド",
+    "text": "1.7 7.プレビューとビルド\n\n個別ページのプレビュー\nRStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。\n文章やレイアウトの確認に便利です。\nサイト全体のビルド\nターミナル（RStudioのターミナルまたはコマンドプロンプト）を開き、プロジェクトのルートで以下を実行。\n\n\nquarto render\n\n\n_quarto.yml で指定した output-dir フォルダ（例：docs）にサイトのHTMLなどのファイル一式が生成されます。"
+  },
+  {
+    "objectID": "11_create_website.html#githubとrstudioの連携設定",
+    "href": "11_create_website.html#githubとrstudioの連携設定",
+    "title": "",
+    "section": "1.8 8.GitHubとRStudioの連携設定",
+    "text": "1.8 8.GitHubとRStudioの連携設定\n\nGitの初期化（初回のみ）\nRStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。\nプロジェクトのルートフォルダでターミナルを開き、以下を実行します。\n\n\ngit init\ngit remote add origin https://github.com/あなたのユーザー名/リポジトリ名.git\n\n\nRStudioでGit操作\nRStudioの右上の「Git」タブから変更ファイルのステージング（チェックボックスにチェック）、コミットメッセージ入力、コミット、プッシュができます。\n初回プッシュ時はパスワードの代わりにGitHubで作成したパーソナルアクセストークン（PAT）を使用することが多いです。\nGitHub Pagesの設定\nGitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」へ移動。\n「Source」のプルダウンで「Branch: main」「Folder: /docs」を選択し、「Save」ボタンを押します。\n数分待つとウェブサイトが https://あなたのユーザー名.github.io/リポジトリ名/ で公開されます。"
+  },
+  {
+    "objectID": "11_create_website.html#更新時の作業手順",
+    "href": "11_create_website.html#更新時の作業手順",
+    "title": "",
+    "section": "1.9 9.更新時の作業手順",
+    "text": "1.9 9.更新時の作業手順\nローカルで .qmd ファイルを編集。\nRStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。\n変更をGitでコミット。\n\ngit add .\ngit commit -m “Update website content”\n\nGitHubにプッシュ。 &gt; git push origin main\nGitHub Pagesが自動的に更新されるのを待つ。\n\n他の端末でリモートレポジトリの変更を行った際は競合を避けるためエラーになるので。レポジトリとローカルの内容を合わせてからPush\n\n最新の変更をリモートから取得\n\ngit pull origin main –rebase\n\nコンフリクトがあれば解決し、なければそのままpush\n\ngit push origin main"
+  },
+  {
+    "objectID": "11_create_website.html#トラブルシューティング注意点",
+    "href": "11_create_website.html#トラブルシューティング注意点",
+    "title": "",
+    "section": "1.10 10. トラブルシューティング・注意点",
+    "text": "1.10 10. トラブルシューティング・注意点\n\nリンク先ファイル名の不一致\n\n\n\n_quarto.yml のナビゲーションと .qmd のファイル名が違うとエラーになります。\n\nファイル名を変更したら必ず _quarto.yml も修正してください。\n\n\nGitのpushが拒否される\n\n\n\nリモートリポジトリに自分のローカルにない変更がある場合、git push が失敗します。\n\n先に以下を実行し、変更を取り込んでください。\n\n\ngit pull origin main\n\n\nコンフリクトがあれば手動で解消し、再度pushします。\n\n\nGitHub Pagesに成果物が表示されない\n\n\n\nGitHubのPages設定が正しいか（ブランチとフォルダ）必ず確認してください。\n\nQuartoのビルド成果物が指定フォルダにあるかも重要です。"
+  },
+  {
+    "objectID": "11_create_website.html#まとめ",
+    "href": "11_create_website.html#まとめ",
+    "title": "",
+    "section": "1.11 11. まとめ",
+    "text": "1.11 11. まとめ\n\nGit, R, RStudio, Quartoの準備 → GitHubアカウント作成\n\nGitHubリポジトリ作成 → RStudioでQuartoプロジェクト作成\n\n_quarto.yml編集でサイト設定 → .qmdでページ作成\n\nquarto renderでサイト生成 → Gitでコミット・プッシュ\n\nGitHub Pages設定で公開完了\n\nこの流れであなたのウェブサイトが自分で作れて、GitHubを使った公開まで自動化できます！\n\n参考リンク\n- Git公式サイト：https://git-scm.com/\n- R公式サイト：https://cran.r-project.org/\n- RStudio公式サイト：https://posit.co/download/rstudio-desktop/\n- Quarto公式サイト：https://quarto.org/docs/\n- GitHub公式サイト：https://github.com/\n- GitHub Pagesの使い方：https://docs.github.com/en/pages/getting-started-with-github-pages\n- 私たちのR：https://www.jaysong.net/RBook/aboutr.html"
+  },
+  {
+    "objectID": "01_About_Valuation.html",
+    "href": "01_About_Valuation.html",
+    "title": "企業価値評価とは",
+    "section": "",
+    "text": "グローバル経済において、企業の合併・買収(M&A)や新規株式公開(IPO)、資金調達といった場面において、企業価値評価は不可欠なプロセスとして位置づけられる。企業価値評価の基本的な概念、学術的、実務的意義として何があげられるのだろうか\n\n企業価値評価は、企業の事業戦略、財務状態、マクロ経済環境といった要素を統合的に分析する。"
+  },
+  {
+    "objectID": "01_About_Valuation.html#はじめに",
+    "href": "01_About_Valuation.html#はじめに",
+    "title": "企業価値評価とは",
+    "section": "",
+    "text": "グローバル経済において、企業の合併・買収(M&A)や新規株式公開(IPO)、資金調達といった場面において、企業価値評価は不可欠なプロセスとして位置づけられる。企業価値評価の基本的な概念、学術的、実務的意義として何があげられるのだろうか\n\n企業価値評価は、企業の事業戦略、財務状態、マクロ経済環境といった要素を統合的に分析する。"
+  },
+  {
+    "objectID": "01_About_Valuation.html#企業価値評価の定義と目的",
+    "href": "01_About_Valuation.html#企業価値評価の定義と目的",
+    "title": "企業価値評価とは",
+    "section": "2 企業価値評価の定義と目的",
+    "text": "2 企業価値評価の定義と目的\n\n企業価値評価とは何か？\n企業価値表評価とは、特定の時点における企業の経済的価値を貨幣単位で算定するプロセスを指します。企業の帳簿上の資産価値を算出するものではなく、企業が将来にわたって生み出すとされる利益をを評価するなど将来を見据えた分析手法となっています。\n企業価値は量的なデータを中心として分析されますが、質的データも考慮する必要があります。\n企業価値評価の主要な目的\n\n\nM&A(企業の合併、買収)：買収対象企業の適正な価格を算定し、買収プレミアムの妥当性を判断する際の情報となる、売り手も自社価値を客観的に提示するために評価を行います。\n資金調達（エクイティ・ファイナンス）： 新規株式発行による増資や、未公開企業の株式公開（IPO）に際して、投資家への情報提供と株価設定の根拠として用いられます。投資家は、企業価値評価を基に投資判断を行います。\n事業戦略・経営意思決定：企業内部においては、事業ポートフォリオの見直し、新規事業への投資判断、不採算事業からの撤退判断など、経営資源の最適配分に関する戦略的意思決定の根拠として活用されます。\n組織再編・事業承継： 会社分割、株式交換・移転、事業譲渡といった組織再編時や、非上場企業の事業承継時における株主間の利害調整や課税評価の基礎となります。"
+  },
+  {
+    "objectID": "00_Environment.html",
+    "href": "00_Environment.html",
+    "title": "環境設定",
+    "section": "",
+    "text": "sessionInfo()\n\nR version 4.4.3 (2025-02-28 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26100)\n\nMatrix products: default\n\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] compiler_4.4.3    fastmap_1.2.0     cli_3.6.5         tools_4.4.3      \n [5] htmltools_0.5.8.1 rstudioapi_0.17.1 yaml_2.3.10       rmarkdown_2.29   \n [9] knitr_1.50        jsonlite_2.0.0    xfun_0.52         digest_0.6.37    \n[13] rlang_1.1.6       evaluate_1.0.3   \n\n# 使用したパッケージのリスト\nsearch()\n\n[1] \".GlobalEnv\"        \"package:stats\"     \"package:graphics\" \n[4] \"package:grDevices\" \"package:utils\"     \"package:datasets\" \n[7] \"package:methods\"   \"Autoloads\"         \"package:base\"     \n\nrequired_packages &lt;- c(\"tidyverse\",\"\")"
+  },
+  {
     "objectID": "01_Valuation.html",
     "href": "01_Valuation.html",
     "title": "DCF法",
@@ -82,11 +194,11 @@
     ]
   },
   {
-    "objectID": "01_Valuation.html#将来の10000円の現在価値を求める式latex形式",
-    "href": "01_Valuation.html#将来の10000円の現在価値を求める式latex形式",
+    "objectID": "01_Valuation.html#将来の10000円の現在価値を求める式",
+    "href": "01_Valuation.html#将来の10000円の現在価値を求める式",
     "title": "DCF法",
-    "section": "2 将来の10,000円の現在価値を求める式（LaTeX形式）",
-    "text": "2 将来の10,000円の現在価値を求める式（LaTeX形式）\n将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。\n\n2.1 各項目の意味\n\nPV: 現在価値 (Present Value)\nFV: 将来価値 (Future Value) - ここでは10,000円\nr: 割引率 (Discount Rate) - 年利や要求利回りなど、貨幣の時間的価値とリスクを考慮した率　今回は無リスク金利と呼ばれる日本国債利回り1%として\nn: 期間 (Number of Periods) - 将来の時点までの年数　\n\n\n\n2.2 具体例（割引率1%、期間10年の場合）\n例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。\n\\(PV = \\frac{10000}{(1 + 0.01)^{10}}\\)\n\n\\(PV = \\frac{10000}{(1.01)^{10}}\\)\n\n\\(PV =\\frac{10000}{1.104622}\\)\n\n\\(PV≈9052.8 7\\)\n\n計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。",
+    "section": "2 将来の10,000円の現在価値を求める式",
+    "text": "2 将来の10,000円の現在価値を求める式\n将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。\n\n2.1 各項目の意味\n\nPV: 現在価値 (Present Value)\nFV: 将来価値 (Future Value) - ここでは10,000円\nr: 割引率 (Discount Rate) - 年利や要求利回りなど、貨幣の時間的価値とリスクを考慮した率　今回は無リスク金利と呼ばれる日本国債利回り1%として\nn: 期間 (Number of Periods) - 将来の時点までの年数　\n\n\n\n2.2 具体例（割引率1%、期間10年の場合）\n例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。\n\\[\n\\begin{aligned}\nPV = \\frac{10000}{(1 + 0.01)^{10}}\\\\\nPV = \\frac{10000}{(1.01)^{10}}\\\\\nPV =\\frac{10000}{1.104622}\\\\\nPV≈9052.8 7\n\\end{aligned}\n\\]\n計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。",
     "crumbs": [
       "企業価値評価",
       "DCF法"
@@ -150,17 +262,6 @@
       "企業価値評価",
       "DCF法",
       "8563_大東銀行"
-    ]
-  },
-  {
-    "objectID": "01_Valuation.html#将来の10000円の現在価値を求める式",
-    "href": "01_Valuation.html#将来の10000円の現在価値を求める式",
-    "title": "DCF法",
-    "section": "2 将来の10,000円の現在価値を求める式",
-    "text": "2 将来の10,000円の現在価値を求める式\n将来の10,000円（例えば10年後）が、現在価値に換算するといくらになるかを計算する。\n\n2.1 各項目の意味\n\nPV: 現在価値 (Present Value)\nFV: 将来価値 (Future Value) - ここでは10,000円\nr: 割引率 (Discount Rate) - 年利や要求利回りなど、貨幣の時間的価値とリスクを考慮した率　今回は無リスク金利と呼ばれる日本国債利回り1%として\nn: 期間 (Number of Periods) - 将来の時点までの年数　\n\n\n\n2.2 具体例（割引率1%、期間10年の場合）\n例えば、割引率を年利1% (r=0.01)、期間を10年 (n=10) と仮定して、将来の10,000円の現在価値を計算すると以下のようになります。\n\\[\n\\begin{aligned}\nPV = \\frac{10000}{(1 + 0.01)^{10}}\\\\\nPV = \\frac{10000}{(1.01)^{10}}\\\\\nPV =\\frac{10000}{1.104622}\\\\\nPV≈9052.8 7\n\\end{aligned}\n\\]\n計算結果は割引率1%を考慮すると、10年後の10000円は現在の9053円に値するということを意味する。",
-    "crumbs": [
-      "企業価値評価",
-      "DCF法"
     ]
   }
 ]
