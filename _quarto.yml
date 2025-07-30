@@ -12,7 +12,7 @@ website:
       - text:  "TOPIX"
         href:  TOPIX.qmd
       - text: "環境設定"
-        href:  00_Environment.qmd
+        href:  10_Environment.qmd
       - icon:  github
         href:  https://github.com/NekoKaruni/Valuation_Pub.git
 
