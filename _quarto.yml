@@ -19,6 +19,8 @@ website:
     collapse-level:  1
     search:  true
     contents:
+      - section:  "TOPIX"
+        href:  TOPIX.qmd
       - section:  "DCF法"
         href:  01_Valuation.qmd
         contents: 
