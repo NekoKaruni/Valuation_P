@@ -1,0 +1,8 @@
+---
+title: "7150_島根銀行"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
+editor: visual
+---

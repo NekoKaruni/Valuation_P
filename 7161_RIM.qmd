@@ -1,0 +1,8 @@
+---
+title: "7161_じもとHD"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
+editor: visual
+---

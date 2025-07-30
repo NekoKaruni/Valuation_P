@@ -32,6 +32,20 @@ website:
           - 8542.qmd
           - 8562.qmd
           - 8563.qmd
+      - section:  "RIM法"
+        href:  01_RIM.qmd
+        contents: 
+          - 7150_RIM.qmd
+          - 7161_RIM.qmd
+          - 8349_RIM.qmd
+          - 8365_RIM.qmd
+          - 8383_RIM.qmd
+          - 8416_RIM.qmd
+          - 8537_RIM.qmd 
+          - 8542_RIM.qmd
+          - 8562_RIM.qmd
+          - 8563_RIM.qmd
+          
               
 format:
   html:

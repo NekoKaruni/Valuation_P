@@ -1,0 +1,8 @@
+---
+title: "8365_富山銀行"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
+editor: visual
+---
