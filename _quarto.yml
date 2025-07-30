@@ -9,6 +9,8 @@ website:
     left:
       - text:  "企業価値評価"
         href:  01_About_Valuation.qmd
+      - text:  "TOPIX"
+        href:  TOPIX.qmd
       - text: "環境設定"
         href:  00_Environment.qmd
       - icon:  github
@@ -19,8 +21,6 @@ website:
     collapse-level:  1
     search:  true
     contents:
-      - section:  "TOPIX"
-        href:  TOPIX.qmd
       - section:  "DCF法"
         href:  01_Valuation.qmd
         contents: 
