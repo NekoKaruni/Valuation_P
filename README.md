@@ -1,4 +1,4 @@
-https://nekokaruni.github.io/Valuation_Pub/ 
+https://nekokaruni.github.io/Valuation_P/ 
 
 企業価値評価のqmdファイルの変更点
 
