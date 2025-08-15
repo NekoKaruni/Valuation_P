@@ -108,6 +108,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.scss">
 </head>
@@ -324,18 +353,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#rim法" id="toc-rim法" class="nav-link active" data-scroll-target="#rim法"><span class="header-section-number">1</span> RIM法</a>
+  <li><a href="#残余利益モデルrim" id="toc-残余利益モデルrim" class="nav-link active" data-scroll-target="#残余利益モデルrim"><span class="header-section-number">1</span> 残余利益モデル(RIM)</a>
   <ul class="collapse">
-  <li><a href="#残余利益モデルrimとは" id="toc-残余利益モデルrimとは" class="nav-link" data-scroll-target="#残余利益モデルrimとは"><span class="header-section-number">1.1</span> 残余利益モデル（RIM）とは</a></li>
-  <li><a href="#残余利益とは" id="toc-残余利益とは" class="nav-link" data-scroll-target="#残余利益とは"><span class="header-section-number">1.2</span> 残余利益とは</a></li>
-  <li><a href="#残余利益モデルによる株主価値の算定" id="toc-残余利益モデルによる株主価値の算定" class="nav-link" data-scroll-target="#残余利益モデルによる株主価値の算定"><span class="header-section-number">1.3</span> 残余利益モデルによる株主価値の算定</a></li>
-  </ul></li>
-  <li><a href="#残余利益モデルの重要なポイント" id="toc-残余利益モデルの重要なポイント" class="nav-link" data-scroll-target="#残余利益モデルの重要なポイント"><span class="header-section-number">2</span> 残余利益モデルの重要なポイント</a>
-  <ul class="collapse">
-  <li><a href="#クリーンサープラス関係" id="toc-クリーンサープラス関係" class="nav-link" data-scroll-target="#クリーンサープラス関係"><span class="header-section-number">2.1</span> クリーンサープラス関係</a></li>
-  <li><a href="#roeとpbrとの関連性" id="toc-roeとpbrとの関連性" class="nav-link" data-scroll-target="#roeとpbrとの関連性"><span class="header-section-number">2.2</span> ROEとPBRとの関連性</a></li>
-  <li><a href="#予想誤差が小さい特性" id="toc-予想誤差が小さい特性" class="nav-link" data-scroll-target="#予想誤差が小さい特性"><span class="header-section-number">2.3</span> 予想誤差が小さい特性</a></li>
-  <li><a href="#配当割引モデルとの比較" id="toc-配当割引モデルとの比較" class="nav-link" data-scroll-target="#配当割引モデルとの比較"><span class="header-section-number">2.4</span> 配当割引モデルとの比較</a></li>
+  <li><a href="#残余利益モデルの概要" id="toc-残余利益モデルの概要" class="nav-link" data-scroll-target="#残余利益モデルの概要"><span class="header-section-number">1.1</span> 残余利益モデルの概要</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -362,57 +382,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="rim法" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> RIM法</h1>
-<section id="残余利益モデルrimとは" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="残余利益モデルrimとは"><span class="header-section-number">1.1</span> 残余利益モデル（RIM）とは</h2>
-<p><strong>残余利益モデル（RIM）</strong>は、株主に帰属する企業価値を会計利益を用いて算定するモデルです。配当割引モデル（DDM）と並ぶ代表的な企業価値評価手法の一つです。</p>
-</section>
-<section id="残余利益とは" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="残余利益とは"><span class="header-section-number">1.2</span> 残余利益とは</h2>
-<p><strong>残余利益</strong>とは、親会社株主に帰属する当期純利益から、株主の期待利益（<strong>株主資本コスト × 株主資本簿価</strong>）を差し引いた利益のことです。簡単に言えば、株主が最低限要求する利益を超過して企業が稼ぎ出した利益を指します。</p>
-</section>
-<section id="残余利益モデルによる株主価値の算定" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="残余利益モデルによる株主価値の算定"><span class="header-section-number">1.3</span> 残余利益モデルによる株主価値の算定</h2>
-<p>残余利益モデルでは、この<strong>残余利益の現在価値の合計額</strong>に、現時点の<strong>株主資本の簿価</strong>を足し合わせることで株主価値を算定します。</p>
+<section id="残余利益モデルrim" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="残余利益モデルrim"><span class="header-section-number">1</span> 残余利益モデル(RIM)</h2>
+<section id="残余利益モデルの概要" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="残余利益モデルの概要"><span class="header-section-number">1.1</span> 残余利益モデルの概要</h3>
+<p>残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出</p>
+<ul>
+<li>企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。</li>
+</ul>
+<p><span class="math display">\[
+\begin{align*}\text{株式価値} =\ &amp; C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(C_t\)</span>：<span class="math inline">\(t\)</span>期末の自己資本簿価<br>
+</p></li>
+<li><p><span class="math inline">\(C_{t-1}\)</span>：<span class="math inline">\(t{-}1\)</span>期末（すなわち<span class="math inline">\(t\)</span>期首）の自己資本簿価<br>
+</p></li>
+<li><p><span class="math inline">\(A_t\)</span>：<span class="math inline">\(t\)</span>期の当期純利益<br>
+</p></li>
+<li><p><span class="math inline">\(d_t\)</span>：<span class="math inline">\(t\)</span>期の配当</p></li>
+<li><p><span class="math inline">\(r_e\)</span>:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出<br>
+</p></li>
+</ul>
+<p>自己資本の変動は、事業活動による利益（<span class="math inline">\(A_t\)</span>）の増加と、株主への配当（<span class="math inline">\(d_t\)</span>）による減少によって決まります。</p>
+<p><span class="math display">\[
+C_t = C_{t-1} + A_t - d_t\
+\]</span></p>
 <hr>
-</section>
-</section>
-<section id="残余利益モデルの重要なポイント" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> 残余利益モデルの重要なポイント</h1>
-<section id="クリーンサープラス関係" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="クリーンサープラス関係"><span class="header-section-number">2.1</span> クリーンサープラス関係</h2>
-<p><strong>クリーンサープラス関係</strong>が成立している限り、残余利益モデルは<strong>配当割引モデルと同義</strong>になります。</p>
-<ul>
-<li><strong>クリーンサープラス関係</strong>とは、例えば「株主資本の増加額 ＝ 当期純利益 － 支払配当」となる関係のことです。これは、貸借対照表と損益計算書の連環関係が利益を通じて成立していることを保証する重要な前提です。</li>
-</ul>
-</section>
-<section id="roeとpbrとの関連性" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="roeとpbrとの関連性"><span class="header-section-number">2.2</span> ROEとPBRとの関連性</h2>
-<p>残余利益モデルは、<strong>ROE（自己資本利益率）</strong>と<strong>PBR（株価純資産倍率）</strong>が企業価値と関連する重要な指標であることを示唆しています。</p>
-<ul>
-<li><strong>ROEが株主資本コストを上回る（下回る）場合、企業価値は株主資本簿価を上回る（下回る）</strong>ことを意味します。</li>
-<li>これは、PBRが1を上回る（下回る）ことが、企業が株主の要求する最低限の利益以上の（以下の）利益を稼ぐと予想されていることを示す、という考え方につながります。</li>
-<li><strong>伊藤レポート</strong>がROEを最も重要な業績指標の一つとして取り上げているのは、この残余利益モデルの理論的含意に基づいています。</li>
-</ul>
-</section>
-<section id="予想誤差が小さい特性" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="予想誤差が小さい特性"><span class="header-section-number">2.3</span> 予想誤差が小さい特性</h2>
-<p>残余利益モデルは、実際に企業価値を評価する際に<strong>比較的精度が高い</strong>という実証的な証拠があります。</p>
-<ul>
-<li>評価時点の<strong>株主資本簿価という実績値</strong>を用いるため、全てが将来の予想値である配当割引モデル（DMM）に比べて、<strong>予想誤差が小さい</strong>という特長があります。</li>
-<li>この点は、会計利益がキャッシュ・フロー情報よりも有用であることを正当化する際に援用されることもあります。</li>
-</ul>
-<hr>
-</section>
-<section id="配当割引モデルとの比較" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="配当割引モデルとの比較"><span class="header-section-number">2.4</span> 配当割引モデルとの比較</h2>
-<p>両モデルとも株主に帰属する企業価値を算定しますが、以下の点が異なります。</p>
-<ul>
-<li><strong>配当割引モデル</strong>は株主への<strong>キャッシュ・インフロー（配当）</strong>を用います。</li>
-<li><strong>残余利益モデル</strong>は<strong>会計利益</strong>を用います。</li>
-</ul>
-<p>理論的には、クリーンサープラス関係が成立していれば、両モデルで算定される企業価値は必ず一致します。</p>
 
 
 <!-- -->
@@ -894,55 +890,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># RIM法</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデル(RIM)</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデル（RIM）とは</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">### 残余利益モデルの概要</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>**残余利益モデル（RIM）**は、株主に帰属する企業価値を会計利益を用いて算定するモデルです。配当割引モデル（DDM）と並ぶ代表的な企業価値評価手法の一つです。</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益とは</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。</span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>**残余利益**とは、親会社株主に帰属する当期純利益から、株主の期待利益（**株主資本コスト × 株主資本簿価**）を差し引いた利益のことです。簡単に言えば、株主が最低限要求する利益を超過して企業が稼ぎ出した利益を指します。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデルによる株主価値の算定</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>\begin{align*}\text{株式価値} =\ &amp; C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>残余利益モデルでは、この**残余利益の現在価値の合計額**に、現時点の**株主資本の簿価**を足し合わせることで株主価値を算定します。</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_t$：$t$期末の自己資本簿価\</span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_{t-1}$：$t{-}1$期末（すなわち$t$期首）の自己資本簿価\</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu"># 残余利益モデルの重要なポイント</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$A_t$：$t$期の当期純利益\</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## クリーンサープラス関係</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$d_t$：$t$期の配当</span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>**クリーンサープラス関係**が成立している限り、残余利益モデルは**配当割引モデルと同義**になります。</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r_e$:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出\</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**クリーンサープラス関係**とは、例えば「株主資本の増加額 ＝ 当期純利益 － 支払配当」となる関係のことです。これは、貸借対照表と損益計算書の連環関係が利益を通じて成立していることを保証する重要な前提です。</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>自己資本の変動は、事業活動による利益（$A_t$）の増加と、株主への配当（$d_t$）による減少によって決まります。</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## ROEとPBRとの関連性</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>残余利益モデルは、**ROE（自己資本利益率）**と**PBR（株価純資産倍率）**が企業価値と関連する重要な指標であることを示唆しています。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>C_t = C_{t-1} + A_t - d_t\</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**ROEが株主資本コストを上回る（下回る）場合、企業価値は株主資本簿価を上回る（下回る）**ことを意味します。</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>これは、PBRが1を上回る（下回る）ことが、企業が株主の要求する最低限の利益以上の（以下の）利益を稼ぐと予想されていることを示す、という考え方につながります。</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**伊藤レポート**がROEを最も重要な業績指標の一つとして取り上げているのは、この残余利益モデルの理論的含意に基づいています。</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 予想誤差が小さい特性</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>残余利益モデルは、実際に企業価値を評価する際に**比較的精度が高い**という実証的な証拠があります。</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>評価時点の**株主資本簿価という実績値**を用いるため、全てが将来の予想値である配当割引モデル（DMM）に比べて、**予想誤差が小さい**という特長があります。</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>この点は、会計利益がキャッシュ・フロー情報よりも有用であることを正当化する際に援用されることもあります。</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配当割引モデルとの比較</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>両モデルとも株主に帰属する企業価値を算定しますが、以下の点が異なります。</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**配当割引モデル**は株主への**キャッシュ・インフロー（配当）**を用います。</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**残余利益モデル**は**会計利益**を用います。</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>理論的には、クリーンサープラス関係が成立していれば、両モデルで算定される企業価値は必ず一致します。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
