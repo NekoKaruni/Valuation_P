@@ -7,7 +7,7 @@ format:
 editor: visual
 ---
 
-# 有限期間配当割引モデル（DDM: Dividend Discount Model）
+# 配当割引モデル（DDM: Dividend Discount Model）
 
 有限期間配当割引モデル（Dividend Discount Model, DDM）は、**将来の配当金の現在価値を合計して株式価値を算出する方法**です。
 
@@ -34,14 +34,25 @@ $$ P_0 = \sum_{t=0}^{T} \frac{D_t}{(1+r_E)^t} $$
 
 ## 計算例（R）
 
-\`\`\`{r} \# 過去・予想配当（百万円単位） d \<- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95) rE \<- 0.08 \# 自己資本コスト N \<- 100000000 \# 発行済株式数（株）
+```{r} 
+# 過去・予想配当（百万円単位） 
+d <- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95) 
+rE <- 0.08 
+# 自己資本コスト 
+N <- 1000000 
+# 発行済株式数（株）
+t <- 1:length(d) 
 
-t \<- 1:length(d)
+```
 
 # 会社全体の株主価値（百万円）
 
-V_total_million \<- sum(d / (1 + rE)\^t)
-
+```{r} 
+V_total_million <- sum(d / (1 + rE)^t)
+```
 # 1株あたり株価（円）
 
-P0_per_share \<- V_total_million \* 1e6 / N P0_per_share
+```{r}
+P0_per_share <- V_total_million * 1e6 / N 
+P0_per_share
+```

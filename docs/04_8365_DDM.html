@@ -407,12 +407,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.471</span>, <span class="fl">0.440</span>, <span class="fl">0.269</span>, <span class="fl">0.438</span>, <span class="fl">0.303</span>, <span class="dv">0</span>, <span class="fl">0.119</span>, <span class="fl">0.293</span>, <span class="fl">0.217</span>, <span class="fl">0.267</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2384</span>, <span class="fl">0.2827</span>, <span class="fl">0.2405</span>, <span class="fl">0.2141</span>, <span class="fl">0.1965</span>, <span class="fl">0.3824</span>, <span class="fl">0.5156</span>, <span class="fl">0.8902</span>, <span class="fl">0.2862</span>, <span class="fl">0.4442</span>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "抽出された当期純利益データ:"</code></pre>
 </div>
@@ -438,7 +437,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Pay_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.471 0.440 0.269 0.438 0.303 0.000 0.119 0.293 0.217 0.267</code></pre>
+<pre><code> [1] 0.2384 0.2827 0.2405 0.2141 0.1965 0.3824 0.5156 0.8902 0.2862 0.4442</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Net_Income_U <span class="sc">*</span> Pay_ratio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -464,13 +463,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">round</span>(P0,<span class="dv">3</span>),<span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>株式価値: 2760.255 百万円</code></pre>
+<pre><code>株式価値: 2737.044 百万円</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"理想株価:"</span>, <span class="fu">round</span>((P0 <span class="sc">*</span> <span class="fl">1e6</span>)<span class="sc">/</span>N,<span class="dv">3</span>),<span class="st">"円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>理想株価: 327.977 円</code></pre>
+<pre><code>理想株価: 325.219 円</code></pre>
 </div>
 </div>
 
@@ -976,43 +975,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.471</span>, <span class="fl">0.440</span>, <span class="fl">0.269</span>, <span class="fl">0.438</span>, <span class="fl">0.303</span>, <span class="dv">0</span>, <span class="fl">0.119</span>, <span class="fl">0.293</span>, <span class="fl">0.217</span>, <span class="fl">0.267</span>)</span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"配当性向:"</span>)</span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Pay_ratio)</span>
-<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Net_Income_U <span class="sc">*</span> Pay_ratio</span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span></span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d)</span>
-<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>P0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(d<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>rE)<span class="sc">^</span>t)</span>
-<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">round</span>(P0,<span class="dv">3</span>),<span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
-<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"理想株価:"</span>, <span class="fu">round</span>((P0 <span class="sc">*</span> <span class="fl">1e6</span>)<span class="sc">/</span>N,<span class="dv">3</span>),<span class="st">"円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.2384</span>, <span class="fl">0.2827</span>, <span class="fl">0.2405</span>, <span class="fl">0.2141</span>, <span class="fl">0.1965</span>, <span class="fl">0.3824</span>, <span class="fl">0.5156</span>, <span class="fl">0.8902</span>, <span class="fl">0.2862</span>, <span class="fl">0.4442</span>)</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"配当性向:"</span>)</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Pay_ratio)</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Net_Income_U <span class="sc">*</span> Pay_ratio</span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d)</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>P0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(d<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>rE)<span class="sc">^</span>t)</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">round</span>(P0,<span class="dv">3</span>),<span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"理想株価:"</span>, <span class="fu">round</span>((P0 <span class="sc">*</span> <span class="fl">1e6</span>)<span class="sc">/</span>N,<span class="dv">3</span>),<span class="st">"円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
