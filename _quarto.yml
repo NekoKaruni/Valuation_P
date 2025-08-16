@@ -49,6 +49,20 @@ website:
           - 03_8542_RIM.qmd
           - 03_8562_RIM.qmd
           - 03_8563_RIM.qmd
+      - section:  "DDM法"
+        href:  00_DDM.qmd
+        contents: 
+          - 04_7150_DDM.qmd
+          - 04_7161_DDM.qmd
+          - 04_8349_DDM.qmd
+          - 04_8365_DDM.qmd
+          - 04_8383_DDM.qmd
+          - 04_8416_DDM.qmd
+          - 04_8537_DDM.qmd
+          - 04_8542_DDM.qmd
+          - 04_8562_DDM.qmd
+          - 04_8563_DDM.qmd
+          
           
               
 format:
