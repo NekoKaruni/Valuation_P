@@ -654,9 +654,13 @@
   {
     "objectID": "00_DDM.html",
     "href": "00_DDM.html",
-    "title": "配当割引モデル（DDM）について",
+    "title": "DDM",
     "section": "",
-    "text": "有限期間配当割引モデル（Dividend Discount Model, DDM）は、将来の配当金の現在価値を合計して株式価値を算出する方法です。\n\n\n\n\\[ P_0 = \\sum_{t=0}^{T} \\frac{D_t}{(1+r_E)^t} \\]\n\n(P_0)：現在の株式価値（株主資本の価値）\n\n(D_t)：t期目の配当金\n\n(r_E)：自己資本コスト（割引率）\n\n(T)：割引する期間（有限期間）\n\n\n\n\n\n\n配当総額ベース：D_tが会社全体の配当総額なら、P_0は会社全体の株主価値（時価総額）になる\n\n1株あたり株価：1株あたりの配当で計算するか、総株式数で割ることで算出可能\n\n有限期間：将来の配当を一定期間だけ想定することで、現実的な評価が可能\n\n\n\n\n\n\n# 過去・予想配当（百万円単位） \nd &lt;- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95) \nrE &lt;- 0.08 \n# 自己資本コスト \nN &lt;- 1000000 \n# 発行済株式数（株）\nt &lt;- 1:length(d)"
+    "text": "配当割引モデル（DDM: Dividend Discount Model）は、\n株式の価値を将来の配当の現在価値の合計として評価するモデルです。\n\n\n\n将来の配当が一定（成長しない）と仮定すると：\n\\[\nP_0 = \\frac{D}{r}\n\\]\n\n(P_0)：株式の現在価値（理論株価）\n\n(D)：1株あたりの配当\n\n(r)：投資家の要求収益率（割引率）\n\n\n\n\n\n配当が毎年一定の割合 (g) で成長すると仮定すると：\n\\[\nP_0 = \\frac{D_1}{r - g}\n\\]\n\n(D_1)：来期の配当\n\n(g)：配当の成長率\n\n(r)：投資家の要求収益率\n\n\n\n\n\n\n成熟企業（銀行、電力、食品など）の評価に有効\n\n配当を支払わない企業には適用困難\n\n成長率 (g) と割引率 (r) の仮定に大きく依存する\n\n\n\n\n\n配当割引モデル（DDM）は：\n\n「将来の配当の現在価値 = 株式の理論的価値」\n\nという考えに基づく、株式評価の基本モデルである。",
+    "crumbs": [
+      "企業価値評価",
+      "DDM法"
+    ]
   },
   {
     "objectID": "00_DDM.html#基本式",
@@ -1254,5 +1258,49 @@
     "title": "環境設定",
     "section": "",
     "text": "sessionInfo()\n\nR version 4.4.2 (2024-10-31 ucrt)\nPlatform: x86_64-w64-mingw32/x64\nRunning under: Windows 11 x64 (build 26100)\n\nMatrix products: default\n\n\nlocale:\n[1] LC_COLLATE=Japanese_Japan.utf8  LC_CTYPE=Japanese_Japan.utf8   \n[3] LC_MONETARY=Japanese_Japan.utf8 LC_NUMERIC=C                   \n[5] LC_TIME=Japanese_Japan.utf8    \n\ntime zone: Asia/Tokyo\ntzcode source: internal\n\nattached base packages:\n[1] stats     graphics  grDevices utils     datasets  methods   base     \n\nloaded via a namespace (and not attached):\n [1] htmlwidgets_1.6.4 compiler_4.4.2    fastmap_1.2.0     cli_3.6.4        \n [5] tools_4.4.2       htmltools_0.5.8.1 rstudioapi_0.17.1 yaml_2.3.10      \n [9] rmarkdown_2.29    knitr_1.49        jsonlite_1.8.9    xfun_0.50        \n[13] digest_0.6.37     rlang_1.1.5       evaluate_1.0.3   \n\n# 使用したパッケージのリスト\nsearch()\n\n[1] \".GlobalEnv\"        \"package:stats\"     \"package:graphics\" \n[4] \"package:grDevices\" \"package:utils\"     \"package:datasets\" \n[7] \"package:methods\"   \"Autoloads\"         \"package:base\"     \n\nrequired_packages &lt;- c(\"tidyverse\",\"\")"
+  },
+  {
+    "objectID": "00_DDM.html#基本形ゼロ成長モデル",
+    "href": "00_DDM.html#基本形ゼロ成長モデル",
+    "title": "DDM",
+    "section": "",
+    "text": "将来の配当が一定（成長しない）と仮定すると：\n\\[\nP_0 = \\frac{D}{r}\n\\]\n\n(P_0)：株式の現在価値（理論株価）\n\n(D)：1株あたりの配当\n\n(r)：投資家の要求収益率（割引率）",
+    "crumbs": [
+      "企業価値評価",
+      "DDM法"
+    ]
+  },
+  {
+    "objectID": "00_DDM.html#成長を考慮したモデルゴードン成長モデル",
+    "href": "00_DDM.html#成長を考慮したモデルゴードン成長モデル",
+    "title": "DDM",
+    "section": "",
+    "text": "配当が毎年一定の割合 (g) で成長すると仮定すると：\n\\[\nP_0 = \\frac{D_1}{r - g}\n\\]\n\n(D_1)：来期の配当\n\n(g)：配当の成長率\n\n(r)：投資家の要求収益率",
+    "crumbs": [
+      "企業価値評価",
+      "DDM法"
+    ]
+  },
+  {
+    "objectID": "00_DDM.html#特徴と限界",
+    "href": "00_DDM.html#特徴と限界",
+    "title": "DDM",
+    "section": "",
+    "text": "成熟企業（銀行、電力、食品など）の評価に有効\n\n配当を支払わない企業には適用困難\n\n成長率 (g) と割引率 (r) の仮定に大きく依存する",
+    "crumbs": [
+      "企業価値評価",
+      "DDM法"
+    ]
+  },
+  {
+    "objectID": "00_DDM.html#まとめ",
+    "href": "00_DDM.html#まとめ",
+    "title": "DDM",
+    "section": "",
+    "text": "配当割引モデル（DDM）は：\n\n「将来の配当の現在価値 = 株式の理論的価値」\n\nという考えに基づく、株式評価の基本モデルである。",
+    "crumbs": [
+      "企業価値評価",
+      "DDM法"
+    ]
   }
 ]
