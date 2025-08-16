@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7161_じもとHD</title>
+<title>配当割引モデル（DDM）について</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -106,6 +106,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="custom.scss">
 </head>
@@ -154,7 +183,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">7161_じもとHD</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">配当割引モデル（DDM）について</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -326,12 +355,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ddmによる企業価値評価" id="toc-ddmによる企業価値評価" class="nav-link active" data-scroll-target="#ddmによる企業価値評価"><span class="header-section-number">1</span> DDMによる企業価値評価</a>
+  <li><a href="#有限期間配当割引モデルddm-dividend-discount-model" id="toc-有限期間配当割引モデルddm-dividend-discount-model" class="nav-link active" data-scroll-target="#有限期間配当割引モデルddm-dividend-discount-model"><span class="header-section-number">1</span> 有限期間配当割引モデル（DDM: Dividend Discount Model）</a>
   <ul class="collapse">
-  <li><a href="#配当割引モデルddm" id="toc-配当割引モデルddm" class="nav-link" data-scroll-target="#配当割引モデルddm"><span class="header-section-number">1.1</span> 配当割引モデル(DDM)</a></li>
-  <li><a href="#配当割引モデルの概要" id="toc-配当割引モデルの概要" class="nav-link" data-scroll-target="#配当割引モデルの概要"><span class="header-section-number">1.2</span> 配当割引モデルの概要</a></li>
-  <li><a href="#前提データの準備" id="toc-前提データの準備" class="nav-link" data-scroll-target="#前提データの準備"><span class="header-section-number">1.3</span> 前提データの準備</a></li>
+  <li><a href="#基本式" id="toc-基本式" class="nav-link" data-scroll-target="#基本式"><span class="header-section-number">1.1</span> 基本式</a></li>
+  <li><a href="#特徴" id="toc-特徴" class="nav-link" data-scroll-target="#特徴"><span class="header-section-number">1.2</span> 特徴</a></li>
+  <li><a href="#計算例r" id="toc-計算例r" class="nav-link" data-scroll-target="#計算例r"><span class="header-section-number">1.3</span> 計算例（R）</a></li>
   </ul></li>
+  <li><a href="#会社全体の株主価値百万円" id="toc-会社全体の株主価値百万円" class="nav-link" data-scroll-target="#会社全体の株主価値百万円"><span class="header-section-number">2</span> 会社全体の株主価値（百万円）</a></li>
+  <li><a href="#株あたり株価円" id="toc-株あたり株価円" class="nav-link" data-scroll-target="#株あたり株価円"><span class="header-section-number">3</span> 1株あたり株価（円）</a></li>
   </ul>
 </nav>
     </div>
@@ -340,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">7161_じもとHD</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">配当割引モデル（DDM）について</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -357,126 +388,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="ddmによる企業価値評価" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> DDMによる企業価値評価</h1>
-<section id="配当割引モデルddm" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="配当割引モデルddm"><span class="header-section-number">1.1</span> 配当割引モデル(DDM)</h2>
-</section>
-<section id="配当割引モデルの概要" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="配当割引モデルの概要"><span class="header-section-number">1.2</span> 配当割引モデルの概要</h2>
-<p>配当割引モデルは、資産が生み出す将来の現金収入の期待値を、購入者が要求する収益率で割り引いた現在価値に等しいと考える。</p>
+<section id="有限期間配当割引モデルddm-dividend-discount-model" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 有限期間配当割引モデル（DDM: Dividend Discount Model）</h1>
+<p>有限期間配当割引モデル（Dividend Discount Model, DDM）は、<strong>将来の配当金の現在価値を合計して株式価値を算出する方法</strong>です。</p>
+<hr>
+<section id="基本式" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="基本式"><span class="header-section-number">1.1</span> 基本式</h2>
+<p><span class="math display">\[ P_0 = \sum_{t=0}^{T} \frac{D_t}{(1+r_E)^t} \]</span></p>
+<ul>
+<li>(P_0)：現在の株式価値（株主資本の価値）<br>
+</li>
+<li>(D_t)：t期目の配当金<br>
+</li>
+<li>(r_E)：自己資本コスト（割引率）<br>
+</li>
+<li>(T)：割引する期間（有限期間）</li>
+</ul>
 <hr>
 </section>
-<section id="前提データの準備" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="前提データの準備"><span class="header-section-number">1.3</span> 前提データの準備</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.0.4     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># データのエンコーディングに合わせて locale を指定</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/7161_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "dfの列名:"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "No"             "項目"           "金額（百万円）" "ファイル名"    </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.471</span>, <span class="fl">0.440</span>, <span class="fl">0.269</span>, <span class="fl">0.438</span>, <span class="fl">0.303</span>, <span class="dv">0</span>, <span class="fl">0.119</span>, <span class="fl">0.293</span>, <span class="fl">0.217</span>, <span class="fl">0.267</span>)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "抽出された当期純利益データ:"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 2
-     No `金額（百万円）`
-  &lt;dbl&gt;            &lt;dbl&gt;
-1    39             5986
-2    41             4891
-3    40             4637
-4    39             3027
-5    39             1709
-6    39             1738
-7    39            -3175
-8    39             2593
-9    40            -7078</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"配当性向:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "配当性向:"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Pay_ratio)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.471 0.440 0.269 0.438 0.303 0.000 0.119 0.293 0.217 0.267</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Net_Income_U <span class="sc">*</span> Pay_ratio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>株主資本コスト(rE): 8.35 %</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>P0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(d<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>rE)<span class="sc">^</span>t)</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">round</span>(P0,<span class="dv">3</span>),<span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>株式価値: 5708.603 百万円</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"理想株価:"</span>, <span class="fu">round</span>((P0 <span class="sc">*</span> <span class="fl">1e6</span>)<span class="sc">/</span>N,<span class="dv">3</span>),<span class="st">"円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>理想株価: 678.304 円</code></pre>
-</div>
-</div>
+<section id="特徴" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="特徴"><span class="header-section-number">1.2</span> 特徴</h2>
+<ul>
+<li><strong>配当総額ベース</strong>：D_tが会社全体の配当総額なら、P_0は会社全体の株主価値（時価総額）になる<br>
+</li>
+<li><strong>1株あたり株価</strong>：1株あたりの配当で計算するか、総株式数で割ることで算出可能<br>
+</li>
+<li><strong>有限期間</strong>：将来の配当を一定期間だけ想定することで、現実的な評価が可能</li>
+</ul>
+<hr>
+</section>
+<section id="計算例r" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="計算例r"><span class="header-section-number">1.3</span> 計算例（R）</h2>
+<p>```{r} # 過去・予想配当（百万円単位） d &lt;- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95) rE &lt;- 0.08 # 自己資本コスト N &lt;- 100000000 # 発行済株式数（株）</p>
+<p>t &lt;- 1:length(d)</p>
+</section>
+</section>
+<section id="会社全体の株主価値百万円" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 会社全体の株主価値（百万円）</h1>
+<p>V_total_million &lt;- sum(d / (1 + rE)^t)</p>
+</section>
+<section id="株あたり株価円" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> 1株あたり株価（円）</h1>
+<p>P0_per_share &lt;- V_total_million * 1e6 / N P0_per_share</p>
 
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -932,87 +889,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "7161_じもとHD"</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">    sidebar: true</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">    page-navigation: true</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># DDMによる企業価値評価</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配当割引モデル(DDM)</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配当割引モデルの概要</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>配当割引モデルは、資産が生み出す将来の現金収入の期待値を、購入者が要求する収益率で割り引いた現在価値に等しいと考える。</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## 前提データの準備</span></span>
-<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
-<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
-<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
-<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="co"># データのエンコーディングに合わせて locale を指定</span></span>
-<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/7161_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
-<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span>
-<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span>
-<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
-<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
-<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>Pay_ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.471</span>, <span class="fl">0.440</span>, <span class="fl">0.269</span>, <span class="fl">0.438</span>, <span class="fl">0.303</span>, <span class="dv">0</span>, <span class="fl">0.119</span>, <span class="fl">0.293</span>, <span class="fl">0.217</span>, <span class="fl">0.267</span>)</span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"配当性向:"</span>)</span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Pay_ratio)</span>
-<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> Net_Income_U <span class="sc">*</span> Pay_ratio</span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span></span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(d)</span>
-<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>P0 <span class="ot">&lt;-</span> <span class="fu">sum</span>(d<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>rE)<span class="sc">^</span>t)</span>
-<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">round</span>(P0,<span class="dv">3</span>),<span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
-<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"理想株価:"</span>, <span class="fu">round</span>((P0 <span class="sc">*</span> <span class="fl">1e6</span>)<span class="sc">/</span>N,<span class="dv">3</span>),<span class="st">"円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "配当割引モデル（DDM）について"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">    sidebar: true</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    page-navigation: true</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># 有限期間配当割引モデル（DDM: Dividend Discount Model）</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>有限期間配当割引モデル（Dividend Discount Model, DDM）は、**将来の配当金の現在価値を合計して株式価値を算出する方法**です。</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## 基本式</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>$$ P_0 = \sum_{t=0}^{T} \frac{D_t}{(1+r_E)^t} $$</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>(P_0)：現在の株式価値（株主資本の価値）\</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>(D_t)：t期目の配当金\</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>(r_E)：自己資本コスト（割引率）\</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>(T)：割引する期間（有限期間）</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## 特徴</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**配当総額ベース**：D_tが会社全体の配当総額なら、P_0は会社全体の株主価値（時価総額）になる\</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**1株あたり株価**：1株あたりの配当で計算するか、総株式数で割ることで算出可能\</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**有限期間**：将来の配当を一定期間だけ想定することで、現実的な評価が可能</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 計算例（R）</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="sc">\`\`\`</span>{r} <span class="sc">\#</span> 過去・予想配当（百万円単位） d <span class="sc">\&lt;</span>- c(50, 55, 60, 65, 70, 75, 80, 85, 90, 95) rE <span class="sc">\&lt;</span>- 0.08 <span class="sc">\#</span> 自己資本コスト N <span class="sc">\&lt;</span>- 100000000 <span class="sc">\#</span> 発行済株式数（株）</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>t <span class="sc">\&lt;</span>- 1:length(d)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu"># 会社全体の株主価値（百万円）</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>V_total_million <span class="sc">\&lt;</span>- sum(d / (1 + rE)\^t)</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># 1株あたり株価（円）</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>P0_per_share <span class="sc">\&lt;</span>- V_total_million <span class="sc">\*</span> 1e6 / N P0_per_share</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
