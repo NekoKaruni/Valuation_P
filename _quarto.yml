@@ -8,11 +8,11 @@ website:
     search:  true
     left:
       - text:  "企業価値評価"
-        href:  01_About_Valuation.qmd
+        href:  00_About_Valuation.qmd
       - text:  "TOPIX"
-        href:  TOPIX.qmd
+        href:  00_TOPIX.qmd
       - text:  "指数平滑法"
-        href:  02_Exponsmooth.qmd
+        href:  00_Exponsmooth.qmd
       - text: "環境設定"
         href:  10_Environment.qmd
       - icon:  github
@@ -24,31 +24,31 @@ website:
     search:  true
     contents:
       - section:  "DCF法"
-        href:  01_Valuation.qmd
+        href:  00_Valuation.qmd
         contents: 
-          - 分析用R.qmd
-          - 7161.qmd
-          - 8349.qmd
-          - 8365.qmd
-          - 8383.qmd
-          - 8416.qmd
-          - 8537.qmd 
-          - 8542.qmd
-          - 8562.qmd
-          - 8563.qmd
+          - 02_7150.qmd
+          - 02_7161.qmd
+          - 02_8349.qmd
+          - 02_8365.qmd
+          - 02_8383.qmd
+          - 02_8416.qmd
+          - 02_8537.qmd 
+          - 02_8542.qmd
+          - 02_8562.qmd
+          - 02_8563.qmd
       - section:  "RIM法"
-        href:  01_RIM.qmd
+        href:  00_RIM.qmd
         contents: 
-          - 7150_RIM.qmd
-          - 7161_RIM.qmd
-          - 8349_RIM.qmd
-          - 8365_RIM.qmd
-          - 8383_RIM.qmd
-          - 8416_RIM.qmd
-          - 8537_RIM.qmd 
-          - 8542_RIM.qmd
-          - 8562_RIM.qmd
-          - 8563_RIM.qmd
+          - 03_7150_RIM.qmd
+          - 03_7161_RIM.qmd
+          - 03_8349_RIM.qmd
+          - 03_8365_RIM.qmd
+          - 03_8383_RIM.qmd
+          - 03_8416_RIM.qmd
+          - 03_8537_RIM.qmd 
+          - 03_8542_RIM.qmd
+          - 03_8562_RIM.qmd
+          - 03_8563_RIM.qmd
           
               
 format:

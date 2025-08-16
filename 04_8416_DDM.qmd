@@ -1,0 +1,135 @@
+---
+title: "8416_高知銀行"
+format: 
+  html:
+    sidebar: true
+    page-navigation: true
+editor: visual
+---
+
+# RIMによる企業価値評価
+
+## 残余利益モデル(RIM)
+
+## 残余利益モデルの概要
+
+残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出
+
+-   企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。
+
+$$ \begin{align*}\text{株式価値} =\ & C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*} $$
+
+-   $C_t$：$t$期末の自己資本簿価
+
+-   $C_{t-1}$：$t{-}1$期末（すなわち$t$期首）の自己資本簿価
+
+-   $A_t$：$t$期の当期純利益
+
+-   $d_t$：$t$期の配当
+
+-   $r_e$:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出
+
+自己資本の変動は、事業活動による利益（$A_t$）の増加と、株主への配当（$d_t$）による減少によって決まります。
+
+$$ C_t = C_{t-1} + A_t - d_t\ $$
+
+------------------------------------------------------------------------
+
+## 前提データの準備
+
+```{r}
+# パッケージの読み込み
+library(tidyverse)
+# データの読み込み
+# 列名が自動的に変換されないように、check.names = FALSE を設定
+df <- read_csv("ProcessedBankData/8416_processed_data.csv", show_col_types = FALSE)
+TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
+
+# データの列名を確認
+print("dfの列名:")
+print(names(df))
+```
+
+```{r}
+# 当期純利益（Net_Income）の抽出
+# 項目名が複数ある場合もまとめて抽出
+Net_Income_U <- df %>%
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) %>%
+  slice(which(row_number() %% 2 != 0)) %>%
+  select(No, `金額（百万円）`)
+
+# 自己資本簿価（Net_assets）の抽出
+# 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
+Net_assets <- df %>%
+  filter(項目 %in% c("株主資本合計", "その他の包括利益累計額合計")) %>%
+  group_by(No) %>%
+  summarise(自己資本 = sum(`金額（百万円）`), .groups = 'drop')
+
+# 抽出したデータの確認
+print("抽出された当期純利益データ:")
+print(Net_Income_U)
+print("抽出された自己資本簿価データ:")
+print(Net_assets)
+
+# C0（最も直近の自己資本簿価）の定義
+C0 <- tail(Net_assets$自己資本, 1)
+```
+
+```{r}
+rf <- 0.01570
+beta <- 0.873145223
+TOPIX_OPEN <- TOPIX$Close[1:55]
+TOPIX_CLOSE <- TOPIX$Close[2:56]
+topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
+Er <- mean(topix_return, na.rm = TRUE) # 欠損値があれば除去
+market_risk_premium <- Er - rf
+rE <- rf +  beta * market_risk_premium
+cat("株主資本コスト(rE):", round(rE * 100,3), "%\n")
+```
+
+```{r}
+# 計算に必要な変数の定義
+n <- nrow(Net_Income_U)
+payout_ratio <- 0.30
+g <- 0.03 # 永久成長率
+
+# 各期の自己資本簿価を格納するベクトル
+C <- c(C0, rep(NA, n))
+# 各期の残余利益の現在価値を格納するベクトル
+pv_residual_income <- rep(NA, n)
+
+# ループ処理で各期の残余利益と現在価値を計算
+for (t in 1:n) {
+  # 当期純利益 (A_t)
+  A_t <- Net_Income_U$`金額（百万円）`[t]
+  
+  # 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価
+  residual_income_t <- A_t - rE * C[t]
+  
+  # t期の残余利益の現在価値を計算
+  pv_residual_income[t] <- residual_income_t / (1 + rE)^t
+  
+  # 次期（t+1期）の期首自己資本簿価を計算
+  # クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t
+  # d_t = 配当性向 * A_t と仮定
+  if (t < n) {
+    C[t+1] <- C[t] + A_t * (1 - payout_ratio)
+  }
+}
+print(Net_Income_U)
+# 最終期の残余利益
+last_residual_income <- A_t - rE * C[n]
+# 継続価値（Terminal Value）の計算
+terminal_value <- last_residual_income * (1 + g) / (rE - g)
+pv_terminal_value <- terminal_value / (1 + rE)^n
+
+# 株式価値の計算
+equity_value <- C0 + sum(pv_residual_income) + pv_terminal_value
+
+# 結果の出力
+cat("\n--- RIMによる企業価値評価結果 ---\n")
+cat("株式価値:", format(round(equity_value, 2), big.mark = ","), "百万円\n")
+cat("  - C0（現在の自己資本簿価）:", format(round(C0, 2), big.mark = ","), "百万円\n")
+cat("  - 将来の残余利益の現在価値合計:", format(round(sum(pv_residual_income), 2), big.mark = ","), "百万円\n")
+cat("  - 継続価値の現在価値:", format(round(pv_terminal_value, 2), big.mark = ","), "百万円\n")
+```
