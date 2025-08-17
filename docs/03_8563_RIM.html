@@ -350,12 +350,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./00_DDM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DDM法</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">DDM</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_7150_DDM.html" class="sidebar-item-text sidebar-link">
@@ -488,10 +488,34 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'tidyverse' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'ggplot2' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'tibble' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'tidyr' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'readr' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'dplyr' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'forcats' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: パッケージ 'lubridate' はバージョン 4.5.1 の R の下で造られました</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
 ✔ dplyr     1.1.4     ✔ readr     2.1.5
 ✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ ggplot2   3.5.2     ✔ tibble    3.3.0
 ✔ lubridate 1.9.4     ✔ tidyr     1.3.1
 ✔ purrr     1.0.4     
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -499,42 +523,42 @@ window.Quarto = {
 ✖ dplyr::lag()    masks stats::lag()
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/8563_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/8563_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "dfの列名:"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "No"             "項目"           "金額（百万円）" "ファイル名"    </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>Net_assets <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"株主資本合計"</span>, <span class="st">"その他の包括利益累計額合計"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(No) <span class="sc">%&gt;%</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(自己資本 <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>Net_assets <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"株主資本合計"</span>, <span class="st">"その他の包括利益累計額合計"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(No) <span class="sc">%&gt;%</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(自己資本 <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "抽出された当期純利益データ:"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
       No `金額（百万円）`
@@ -550,11 +574,11 @@ window.Quarto = {
  9    36             1311
 10    34             1270</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された自己資本簿価データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された自己資本簿価データ:"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "抽出された自己資本簿価データ:"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_assets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_assets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
      No 自己資本
@@ -567,53 +591,53 @@ window.Quarto = {
 6    44     6355
 7    45     6344</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">tail</span>(Net_assets<span class="sc">$</span>自己資本, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">tail</span>(Net_assets<span class="sc">$</span>自己資本, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.801695869</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.801695869</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>株主資本コスト(rE): 6.601 %</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算に必要な変数の定義</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(Net_Income_U)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>payout_ratio <span class="ot">&lt;-</span> <span class="fl">0.30</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fl">0.03</span> <span class="co"># 永久成長率</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の自己資本簿価を格納するベクトル</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">c</span>(C0, <span class="fu">rep</span>(<span class="cn">NA</span>, n))</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の残余利益の現在価値を格納するベクトル</span></span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>pv_residual_income <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ループ処理で各期の残余利益と現在価値を計算</span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 当期純利益 (A_t)</span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  A_t <span class="ot">&lt;-</span> Net_Income_U<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>[t]</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価</span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  residual_income_t <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[t]</span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t期の残余利益の現在価値を計算</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  pv_residual_income[t] <span class="ot">&lt;-</span> residual_income_t <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>t</span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 次期（t+1期）の期首自己資本簿価を計算</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># d_t = 配当性向 * A_t と仮定</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (t <span class="sc">&lt;</span> n) {</span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>    C[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> C[t] <span class="sc">+</span> A_t <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> payout_ratio)</span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算に必要な変数の定義</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(Net_Income_U)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>payout_ratio <span class="ot">&lt;-</span> <span class="fl">0.30</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fl">0.03</span> <span class="co"># 永久成長率</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の自己資本簿価を格納するベクトル</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">c</span>(C0, <span class="fu">rep</span>(<span class="cn">NA</span>, n))</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の残余利益の現在価値を格納するベクトル</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>pv_residual_income <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ループ処理で各期の残余利益と現在価値を計算</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 当期純利益 (A_t)</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  A_t <span class="ot">&lt;-</span> Net_Income_U<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>[t]</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  residual_income_t <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[t]</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t期の残余利益の現在価値を計算</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  pv_residual_income[t] <span class="ot">&lt;-</span> residual_income_t <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>t</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 次期（t+1期）の期首自己資本簿価を計算</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t</span></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># d_t = 配当性向 * A_t と仮定</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (t <span class="sc">&lt;</span> n) {</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>    C[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> C[t] <span class="sc">+</span> A_t <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> payout_ratio)</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 2
       No `金額（百万円）`
@@ -629,34 +653,34 @@ window.Quarto = {
  9    36             1311
 10    34             1270</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終期の残余利益</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>last_residual_income <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[n]</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続価値（Terminal Value）の計算</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>terminal_value <span class="ot">&lt;-</span> last_residual_income <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>pv_terminal_value <span class="ot">&lt;-</span> terminal_value <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>n</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 株式価値の計算</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>equity_value <span class="ot">&lt;-</span> C0 <span class="sc">+</span> <span class="fu">sum</span>(pv_residual_income) <span class="sc">+</span> pv_terminal_value</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の出力</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">--- RIMによる企業価値評価結果 ---</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終期の残余利益</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>last_residual_income <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[n]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続価値（Terminal Value）の計算</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>terminal_value <span class="ot">&lt;-</span> last_residual_income <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>pv_terminal_value <span class="ot">&lt;-</span> terminal_value <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>n</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 株式価値の計算</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>equity_value <span class="ot">&lt;-</span> C0 <span class="sc">+</span> <span class="fu">sum</span>(pv_residual_income) <span class="sc">+</span> pv_terminal_value</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の出力</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">--- RIMによる企業価値評価結果 ---</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 --- RIMによる企業価値評価結果 ---</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(equity_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(equity_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>株式価値: 15,547.83 百万円</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - C0（現在の自己資本簿価）:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(C0, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - C0（現在の自己資本簿価）:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(C0, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  - C0（現在の自己資本簿価）: 6,344 百万円</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 将来の残余利益の現在価値合計:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sum</span>(pv_residual_income), <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 将来の残余利益の現在価値合計:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sum</span>(pv_residual_income), <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  - 将来の残余利益の現在価値合計: 5,805.05 百万円</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 継続価値の現在価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(pv_terminal_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 継続価値の現在価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(pv_terminal_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  - 継続価値の現在価値: 3,398.77 百万円</code></pre>
 </div>
@@ -1128,146 +1152,146 @@ window.Quarto = {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./00_DDM.html" class="pagination-link" aria-label="DDM法">
-        <span class="nav-page-text">DDM法</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./00_DDM.html" class="pagination-link" aria-label="DDM">
+        <span class="nav-page-text">DDM</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb30" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "8563_大東銀行"</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">    sidebar: true</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">    page-navigation: true</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># RIMによる企業価値評価</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデル(RIM)</span></span>
-<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデルの概要</span></span>
-<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出</span>
-<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。</span>
-<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>$$ \begin{align*}\text{株式価値} =\ &amp; C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*} $$</span>
-<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_t$：$t$期末の自己資本簿価</span>
-<span id="cb30-23"><a href="#cb30-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-24"><a href="#cb30-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_{t-1}$：$t{-}1$期末（すなわち$t$期首）の自己資本簿価</span>
-<span id="cb30-25"><a href="#cb30-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-26"><a href="#cb30-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$A_t$：$t$期の当期純利益</span>
-<span id="cb30-27"><a href="#cb30-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-28"><a href="#cb30-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$d_t$：$t$期の配当</span>
-<span id="cb30-29"><a href="#cb30-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-30"><a href="#cb30-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r_e$:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出</span>
-<span id="cb30-31"><a href="#cb30-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-32"><a href="#cb30-32" aria-hidden="true" tabindex="-1"></a>自己資本の変動は、事業活動による利益（$A_t$）の増加と、株主への配当（$d_t$）による減少によって決まります。</span>
-<span id="cb30-33"><a href="#cb30-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-34"><a href="#cb30-34" aria-hidden="true" tabindex="-1"></a>$$ C_t = C_{t-1} + A_t - d_t\ $$</span>
-<span id="cb30-35"><a href="#cb30-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-36"><a href="#cb30-36" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb30-37"><a href="#cb30-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-38"><a href="#cb30-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 前提データの準備</span></span>
-<span id="cb30-39"><a href="#cb30-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-42"><a href="#cb30-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-43"><a href="#cb30-43" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
-<span id="cb30-44"><a href="#cb30-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb30-45"><a href="#cb30-45" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
-<span id="cb30-46"><a href="#cb30-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
-<span id="cb30-47"><a href="#cb30-47" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/8563_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb30-48"><a href="#cb30-48" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb30-49"><a href="#cb30-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-50"><a href="#cb30-50" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
-<span id="cb30-51"><a href="#cb30-51" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span>
-<span id="cb30-52"><a href="#cb30-52" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span>
-<span id="cb30-53"><a href="#cb30-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-54"><a href="#cb30-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-57"><a href="#cb30-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-58"><a href="#cb30-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
-<span id="cb30-59"><a href="#cb30-59" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
-<span id="cb30-60"><a href="#cb30-60" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb30-61"><a href="#cb30-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-62"><a href="#cb30-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-63"><a href="#cb30-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
-<span id="cb30-64"><a href="#cb30-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-65"><a href="#cb30-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
-<span id="cb30-66"><a href="#cb30-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
-<span id="cb30-67"><a href="#cb30-67" aria-hidden="true" tabindex="-1"></a>Net_assets <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
-<span id="cb30-68"><a href="#cb30-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"株主資本合計"</span>, <span class="st">"その他の包括利益累計額合計"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb30-69"><a href="#cb30-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(No) <span class="sc">%&gt;%</span></span>
-<span id="cb30-70"><a href="#cb30-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(自己資本 <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
-<span id="cb30-71"><a href="#cb30-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-72"><a href="#cb30-72" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
-<span id="cb30-73"><a href="#cb30-73" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span>
-<span id="cb30-74"><a href="#cb30-74" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
-<span id="cb30-75"><a href="#cb30-75" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された自己資本簿価データ:"</span>)</span>
-<span id="cb30-76"><a href="#cb30-76" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_assets)</span>
-<span id="cb30-77"><a href="#cb30-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-78"><a href="#cb30-78" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
-<span id="cb30-79"><a href="#cb30-79" aria-hidden="true" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">tail</span>(Net_assets<span class="sc">$</span>自己資本, <span class="dv">1</span>)</span>
-<span id="cb30-80"><a href="#cb30-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-81"><a href="#cb30-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-84"><a href="#cb30-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-85"><a href="#cb30-85" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
-<span id="cb30-86"><a href="#cb30-86" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.801695869</span></span>
-<span id="cb30-87"><a href="#cb30-87" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb30-88"><a href="#cb30-88" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb30-89"><a href="#cb30-89" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb30-90"><a href="#cb30-90" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
-<span id="cb30-91"><a href="#cb30-91" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
-<span id="cb30-92"><a href="#cb30-92" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb30-93"><a href="#cb30-93" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-94"><a href="#cb30-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb30-95"><a href="#cb30-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-98"><a href="#cb30-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb30-99"><a href="#cb30-99" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算に必要な変数の定義</span></span>
-<span id="cb30-100"><a href="#cb30-100" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(Net_Income_U)</span>
-<span id="cb30-101"><a href="#cb30-101" aria-hidden="true" tabindex="-1"></a>payout_ratio <span class="ot">&lt;-</span> <span class="fl">0.30</span></span>
-<span id="cb30-102"><a href="#cb30-102" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fl">0.03</span> <span class="co"># 永久成長率</span></span>
-<span id="cb30-103"><a href="#cb30-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-104"><a href="#cb30-104" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の自己資本簿価を格納するベクトル</span></span>
-<span id="cb30-105"><a href="#cb30-105" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">c</span>(C0, <span class="fu">rep</span>(<span class="cn">NA</span>, n))</span>
-<span id="cb30-106"><a href="#cb30-106" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の残余利益の現在価値を格納するベクトル</span></span>
-<span id="cb30-107"><a href="#cb30-107" aria-hidden="true" tabindex="-1"></a>pv_residual_income <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
-<span id="cb30-108"><a href="#cb30-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-109"><a href="#cb30-109" aria-hidden="true" tabindex="-1"></a><span class="co"># ループ処理で各期の残余利益と現在価値を計算</span></span>
-<span id="cb30-110"><a href="#cb30-110" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb30-111"><a href="#cb30-111" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 当期純利益 (A_t)</span></span>
-<span id="cb30-112"><a href="#cb30-112" aria-hidden="true" tabindex="-1"></a>  A_t <span class="ot">&lt;-</span> Net_Income_U<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>[t]</span>
-<span id="cb30-113"><a href="#cb30-113" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-114"><a href="#cb30-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価</span></span>
-<span id="cb30-115"><a href="#cb30-115" aria-hidden="true" tabindex="-1"></a>  residual_income_t <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[t]</span>
-<span id="cb30-116"><a href="#cb30-116" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-117"><a href="#cb30-117" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t期の残余利益の現在価値を計算</span></span>
-<span id="cb30-118"><a href="#cb30-118" aria-hidden="true" tabindex="-1"></a>  pv_residual_income[t] <span class="ot">&lt;-</span> residual_income_t <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>t</span>
-<span id="cb30-119"><a href="#cb30-119" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb30-120"><a href="#cb30-120" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 次期（t+1期）の期首自己資本簿価を計算</span></span>
-<span id="cb30-121"><a href="#cb30-121" aria-hidden="true" tabindex="-1"></a>  <span class="co"># クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t</span></span>
-<span id="cb30-122"><a href="#cb30-122" aria-hidden="true" tabindex="-1"></a>  <span class="co"># d_t = 配当性向 * A_t と仮定</span></span>
-<span id="cb30-123"><a href="#cb30-123" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (t <span class="sc">&lt;</span> n) {</span>
-<span id="cb30-124"><a href="#cb30-124" aria-hidden="true" tabindex="-1"></a>    C[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> C[t] <span class="sc">+</span> A_t <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> payout_ratio)</span>
-<span id="cb30-125"><a href="#cb30-125" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb30-126"><a href="#cb30-126" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-127"><a href="#cb30-127" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
-<span id="cb30-128"><a href="#cb30-128" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終期の残余利益</span></span>
-<span id="cb30-129"><a href="#cb30-129" aria-hidden="true" tabindex="-1"></a>last_residual_income <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[n]</span>
-<span id="cb30-130"><a href="#cb30-130" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続価値（Terminal Value）の計算</span></span>
-<span id="cb30-131"><a href="#cb30-131" aria-hidden="true" tabindex="-1"></a>terminal_value <span class="ot">&lt;-</span> last_residual_income <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g)</span>
-<span id="cb30-132"><a href="#cb30-132" aria-hidden="true" tabindex="-1"></a>pv_terminal_value <span class="ot">&lt;-</span> terminal_value <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>n</span>
-<span id="cb30-133"><a href="#cb30-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-134"><a href="#cb30-134" aria-hidden="true" tabindex="-1"></a><span class="co"># 株式価値の計算</span></span>
-<span id="cb30-135"><a href="#cb30-135" aria-hidden="true" tabindex="-1"></a>equity_value <span class="ot">&lt;-</span> C0 <span class="sc">+</span> <span class="fu">sum</span>(pv_residual_income) <span class="sc">+</span> pv_terminal_value</span>
-<span id="cb30-136"><a href="#cb30-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-137"><a href="#cb30-137" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の出力</span></span>
-<span id="cb30-138"><a href="#cb30-138" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">--- RIMによる企業価値評価結果 ---</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-139"><a href="#cb30-139" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(equity_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-140"><a href="#cb30-140" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - C0（現在の自己資本簿価）:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(C0, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-141"><a href="#cb30-141" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 将来の残余利益の現在価値合計:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sum</span>(pv_residual_income), <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-142"><a href="#cb30-142" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 継続価値の現在価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(pv_terminal_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb30-143"><a href="#cb30-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb38" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "8563_大東銀行"</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">    sidebar: true</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a><span class="co">    page-navigation: true</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># RIMによる企業価値評価</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデル(RIM)</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## 残余利益モデルの概要</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。</span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>$$ \begin{align*}\text{株式価値} =\ &amp; C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*} $$</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_t$：$t$期末の自己資本簿価</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$C_{t-1}$：$t{-}1$期末（すなわち$t$期首）の自己資本簿価</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$A_t$：$t$期の当期純利益</span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$d_t$：$t$期の配当</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r_e$:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a>自己資本の変動は、事業活動による利益（$A_t$）の増加と、株主への配当（$d_t$）による減少によって決まります。</span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a>$$ C_t = C_{t-1} + A_t - d_t\ $$</span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 前提データの準備</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="co"># パッケージの読み込み</span></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a><span class="co"># データの読み込み</span></span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a><span class="co"># 列名が自動的に変換されないように、check.names = FALSE を設定</span></span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/8563_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a><span class="co"># データの列名を確認</span></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"dfの列名:"</span>)</span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">names</span>(df))</span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 当期純利益（Net_Income）の抽出</span></span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a><span class="co"># 項目名が複数ある場合もまとめて抽出</span></span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a>Net_Income_U <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"当期純利益"</span>, <span class="st">"当期純利益又は当期純損失（△）"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-62"><a href="#cb38-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which</span>(<span class="fu">row_number</span>() <span class="sc">%%</span> <span class="dv">2</span> <span class="sc">!=</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(No, <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)</span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a><span class="co"># 自己資本簿価（Net_assets）の抽出</span></span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算</span></span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a>Net_assets <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(項目 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"株主資本合計"</span>, <span class="st">"その他の包括利益累計額合計"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(No) <span class="sc">%&gt;%</span></span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(自己資本 <span class="ot">=</span> <span class="fu">sum</span>(<span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="at">.groups =</span> <span class="st">'drop'</span>)</span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a><span class="co"># 抽出したデータの確認</span></span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された当期純利益データ:"</span>)</span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"抽出された自己資本簿価データ:"</span>)</span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_assets)</span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a><span class="co"># C0（最も直近の自己資本簿価）の定義</span></span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a>C0 <span class="ot">&lt;-</span> <span class="fu">tail</span>(Net_assets<span class="sc">$</span>自己資本, <span class="dv">1</span>)</span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-85"><a href="#cb38-85" aria-hidden="true" tabindex="-1"></a>rf <span class="ot">&lt;-</span> <span class="fl">0.01570</span></span>
+<span id="cb38-86"><a href="#cb38-86" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">0.801695869</span></span>
+<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
+<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
+<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
+<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># 欠損値があれば除去</span></span>
+<span id="cb38-91"><a href="#cb38-91" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rf</span>
+<span id="cb38-92"><a href="#cb38-92" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rf <span class="sc">+</span>  beta <span class="sc">*</span> market_risk_premium</span>
+<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト(rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>,<span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算に必要な変数の定義</span></span>
+<span id="cb38-100"><a href="#cb38-100" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(Net_Income_U)</span>
+<span id="cb38-101"><a href="#cb38-101" aria-hidden="true" tabindex="-1"></a>payout_ratio <span class="ot">&lt;-</span> <span class="fl">0.30</span></span>
+<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fl">0.03</span> <span class="co"># 永久成長率</span></span>
+<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の自己資本簿価を格納するベクトル</span></span>
+<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a>C <span class="ot">&lt;-</span> <span class="fu">c</span>(C0, <span class="fu">rep</span>(<span class="cn">NA</span>, n))</span>
+<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a><span class="co"># 各期の残余利益の現在価値を格納するベクトル</span></span>
+<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a>pv_residual_income <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a><span class="co"># ループ処理で各期の残余利益と現在価値を計算</span></span>
+<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (t <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb38-111"><a href="#cb38-111" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 当期純利益 (A_t)</span></span>
+<span id="cb38-112"><a href="#cb38-112" aria-hidden="true" tabindex="-1"></a>  A_t <span class="ot">&lt;-</span> Net_Income_U<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>[t]</span>
+<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価</span></span>
+<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a>  residual_income_t <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[t]</span>
+<span id="cb38-116"><a href="#cb38-116" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-117"><a href="#cb38-117" aria-hidden="true" tabindex="-1"></a>  <span class="co"># t期の残余利益の現在価値を計算</span></span>
+<span id="cb38-118"><a href="#cb38-118" aria-hidden="true" tabindex="-1"></a>  pv_residual_income[t] <span class="ot">&lt;-</span> residual_income_t <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>t</span>
+<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 次期（t+1期）の期首自己資本簿価を計算</span></span>
+<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a>  <span class="co"># クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t</span></span>
+<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a>  <span class="co"># d_t = 配当性向 * A_t と仮定</span></span>
+<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (t <span class="sc">&lt;</span> n) {</span>
+<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a>    C[t<span class="sc">+</span><span class="dv">1</span>] <span class="ot">&lt;-</span> C[t] <span class="sc">+</span> A_t <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> payout_ratio)</span>
+<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Net_Income_U)</span>
+<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終期の残余利益</span></span>
+<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a>last_residual_income <span class="ot">&lt;-</span> A_t <span class="sc">-</span> rE <span class="sc">*</span> C[n]</span>
+<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a><span class="co"># 継続価値（Terminal Value）の計算</span></span>
+<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a>terminal_value <span class="ot">&lt;-</span> last_residual_income <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g)</span>
+<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a>pv_terminal_value <span class="ot">&lt;-</span> terminal_value <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>n</span>
+<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a><span class="co"># 株式価値の計算</span></span>
+<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a>equity_value <span class="ot">&lt;-</span> C0 <span class="sc">+</span> <span class="fu">sum</span>(pv_residual_income) <span class="sc">+</span> pv_terminal_value</span>
+<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の出力</span></span>
+<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">--- RIMによる企業価値評価結果 ---</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株式価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(equity_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - C0（現在の自己資本簿価）:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(C0, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 将来の残余利益の現在価値合計:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sum</span>(pv_residual_income), <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"  - 継続価値の現在価値:"</span>, <span class="fu">format</span>(<span class="fu">round</span>(pv_terminal_value, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">","</span>), <span class="st">"百万円</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
