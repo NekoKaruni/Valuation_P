@@ -56,6 +56,31 @@ d <- Net_Income_U * Pay_ratio
 ```
 
 ```{r}
+Year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
+
+Look_Payratio <- data_frame(Year, Pay_ratio)
+
+# 必要なパッケージを読み込む
+library(ggplot2)
+
+# 折れ線グラフの作成
+ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) +
+  geom_line(size = 0.5) +
+  geom_point(size = 1) +
+  geom_text(aes(label = round(Pay_ratio *100, 1)), vjust = -1, size = 3, color = "darkblue") +
+  scale_color_brewer(palette = "Paired") + 
+  ylim(0, 200)+
+  labs(
+    title = "年度別配当性向の推移",
+    x = "年度",
+    y = "配当性向 (%)"
+  ) +
+  scale_x_continuous(breaks = Look_Payratio$Year, labels = Look_Payratio$Year) +  
+  theme_minimal() +
+  scale_x_continuous(breaks = unique(Look_Payratio$Year))
+```
+
+```{r}
 rf <- 0.01570
 beta <- 1.08036867948469
 TOPIX_OPEN <- TOPIX$Close[1:55]
