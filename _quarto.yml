@@ -79,5 +79,9 @@ format:
     fontsize: 16px
     line-height: 1.6
     css: custom.scss
+    fig-responsive: true    # 画面幅に応じて図を拡大縮小
+    fig-width: 12           # 横幅（inch）
+    fig-height: 7           # 高さ（inch）
+    dpi: 120                # 解像度\
     
     include-in-header: header.html

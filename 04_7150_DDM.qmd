@@ -9,8 +9,6 @@ editor: visual
 
 # DDMによる企業価値評価
 
-## 配当割引モデル(DDM)
-
 ## 配当割引モデルの概要
 
 配当割引モデルは、資産が生み出す将来の現金収入の期待値を、購入者が要求する収益率で割り引いた現在価値に等しいと考える。
@@ -18,6 +16,18 @@ editor: visual
 ------------------------------------------------------------------------
 
 ## 前提データの準備
+
+```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
 
 ```{r}
 # パッケージの読み込み
@@ -30,7 +40,6 @@ df <- read_csv("ProcessedBankData/7150_processed_data.csv", show_col_types = FAL
 TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
 
 # データの列名を確認
-print("dfの列名:")
 print(names(df))
 ```
 
@@ -45,10 +54,10 @@ Net_Income_U <- df %>%
 # 自己資本簿価（Net_assets）の抽出
 # 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
 Pay_ratio <- c(0.4946, 0.4299, 0.2924, 0.4520, 0.3431, 0, 0.1302, 0.3003, 0.2187, 0.2157)
-# 抽出したデータの確認
-print("抽出された当期純利益データ:")
+
+# 当期純利益
 print(Net_Income_U)
-print("配当性向:")
+# 配当性向
 print(Pay_ratio)
 
 # C0（最も直近の自己資本簿価）の定義
@@ -56,28 +65,28 @@ d <- Net_Income_U * Pay_ratio
 ```
 
 ```{r}
-Year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
-
-Look_Payratio <- data_frame(Year, Pay_ratio)
-
-# 必要なパッケージを読み込む
-library(ggplot2)
+Look_Payratio <- tibble(Year = c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), Pay_ratio)
 
 # 折れ線グラフの作成
-ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) +
-  geom_line(size = 0.5) +
+ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) + 
+  geom_line(linewidth = 0.5) +
   geom_point(size = 1) +
   geom_text(aes(label = round(Pay_ratio *100, 1)), vjust = -1, size = 3, color = "darkblue") +
-  scale_color_brewer(palette = "Paired") + 
-  ylim(0, 200)+
+  coord_cartesian(ylim = c(0, 200))+
   labs(
     title = "年度別配当性向の推移",
     x = "年度",
     y = "配当性向 (%)"
   ) +
-  scale_x_continuous(breaks = Look_Payratio$Year, labels = Look_Payratio$Year) +  
-  theme_minimal() +
-  scale_x_continuous(breaks = unique(Look_Payratio$Year))
+  scale_x_continuous(breaks = unique(Look_Payratio$Year)) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold", margin = margin(b = 30)),
+    axis.text.x = element_text(size = 12, vjust = 1, margin = margin(t = 5)),  # 年度ラベルの下に余白
+    axis.title.x = element_text(size = 14, margin = margin(t = 30)),
+    axis.title.y = element_text(size = 14, margin = margin(r = 30))
+  )
+
 ```
 
 ```{r}
