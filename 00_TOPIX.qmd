@@ -1,11 +1,7 @@
 ---
 title: "TOPIX"
-format: 
-  html:
-    sidebar: true
-    page-navigation: true
-editor: visual
 ---
+
 ```{r}
 library("tidyverse")
 TOPIX <- read_csv("^tpx_y.csv")

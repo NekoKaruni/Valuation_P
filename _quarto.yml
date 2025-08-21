@@ -1,30 +1,33 @@
 project:
-  type:  website
-  output-dir:  docs
+  type: website
+  output-dir: docs
+editor: visual   # ← プロジェクト全体で visual editor を有効化
 
 website:
   navbar:
-    background:  light
-    search:  true
+    background: light
+    search: true
     left:
-      - text:  "企業価値評価"
-        href:  00_About_Valuation.qmd
-      - text:  "TOPIX"
-        href:  00_TOPIX.qmd
-      - text:  "指数平滑法"
-        href:  00_Exponsmooth.qmd
+      - text: "企業価値評価"
+        href: 00_About_Valuation.qmd
+      - text: "TOPIX"
+        href: 00_TOPIX.qmd
+      - text: "指数平滑法"
+        href: 00_Exponsmooth.qmd
       - text: "環境設定"
-        href:  10_Environment.qmd
-      - icon:  github
-        href:  https://github.com/NekoKaruni/Valuation_Pub.git
+        href: 10_Environment.qmd
+      - icon: globe-asia-australia
+        href: 11_create_website.qmd
+      - icon: github
+        href: https://github.com/NekoKaruni/Valuation_Pub.git
 
   sidebar:
-    style:  "docked"
-    collapse-level:  1
-    search:  true
+    style: "docked"
+    collapse-level: 1
+    search: true
     contents:
-      - section:  "DCF法"
-        href:  00_Valuation.qmd
+      - section: "DCF法"
+        href: 00_Valuation.qmd
         contents: 
           - 02_7150.qmd
           - 02_7161.qmd
@@ -36,8 +39,8 @@ website:
           - 02_8542.qmd
           - 02_8562.qmd
           - 02_8563.qmd
-      - section:  "RIM法"
-        href:  00_RIM.qmd
+      - section: "RIM法"
+        href: 00_RIM.qmd
         contents: 
           - 03_7150_RIM.qmd
           - 03_7161_RIM.qmd
@@ -49,8 +52,8 @@ website:
           - 03_8542_RIM.qmd
           - 03_8562_RIM.qmd
           - 03_8563_RIM.qmd
-      - seDDction:  "DDM法"
-        href:  00_DDM.qmd
+      - section: "DDM法"
+        href: 00_DDM.qmd
         contents: 
           - 04_7150_DDM.qmd
           - 04_7161_DDM.qmd
@@ -65,6 +68,8 @@ website:
           
 format:
   html:
+    sidebar: true
+    page-navigation: true
     theme:
       light: cosmo
     toc: true
@@ -72,16 +77,14 @@ format:
     number-sections: true
     code-tools: true
     link-external-icon: true
-    sidebar: true
     mainfont: "IBM Plex Sans JP"
     sansfont: "IBM Plex Sans JP"
     monofont: "Fira Code"
     fontsize: 16px
     line-height: 1.6
     css: custom.scss
-    fig-responsive: true    # 画面幅に応じて図を拡大縮小
-    fig-width: 12           # 横幅（inch）
-    fig-height: 7           # 高さ（inch）
-    dpi: 120                # 解像度\
-    
+    fig-responsive: true
+    fig-width: 12
+    fig-height: 7
+    dpi: 120
     include-in-header: header.html

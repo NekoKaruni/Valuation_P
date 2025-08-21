@@ -1,6 +1,5 @@
 ---
 title: "環境設定"
-editor: visual
 ---
 
 ```{r}

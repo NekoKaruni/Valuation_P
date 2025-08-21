@@ -1,6 +1,5 @@
 ---
 title: "企業価値評価とは"
-editor: visual
 ---
 
 ## はじめに

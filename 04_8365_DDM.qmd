@@ -1,10 +1,5 @@
 ---
 title: "8365_富山銀行"
-format: 
-  html:
-    sidebar: true
-    page-navigation: true
-editor: visual
 ---
 
 # DDMによる企業価値評価

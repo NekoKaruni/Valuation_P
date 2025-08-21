@@ -169,6 +169,11 @@ window.Quarto = {
     <a class="nav-link" href="./10_Environment.html"> 
 <span class="menu-text">環境設定</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./11_create_website.html"> <i class="bi bi-globe-asia-australia" role="img">
+</i> 
+<span class="menu-text">ウェブサイトの作り方（詳解版）</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NekoKaruni/Valuation_Pub.git"> <i class="bi bi-github" role="img">
 </i> 
@@ -350,12 +355,12 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="./00_DDM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">DDM</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="false" aria-label="Toggle section">
+ <span class="menu-text">DDM法</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_7150_DDM.html" class="sidebar-item-text sidebar-link">
@@ -1372,343 +1377,338 @@ FCF_past (ベクトル形式):</code></pre>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb49" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "7150_島根銀行"</span></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="co">    sidebar: true</span></span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">    page-navigation: true</span></span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># 企業価値評価における割引率の算出：WACCを用いたアプローチ</span></span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a>本稿では、ディスカウント・キャッシュフロー（DCF）法を用いた企業価値評価において不可欠な要素である**割引率**の算出に焦点を当てる。割引率には、企業の加重平均資本コスト（WACC: Weighted Average Cost of Capital）を用いることとし、その構成要素である負債コストと株主資本コストの算出方法について詳細に論じる。</span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACC（加重平均資本コスト）の定義と重要性</span></span>
-<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a>WACCは、企業が資金を調達するために株主や債権者に平均して支払うコストを表す。企業が将来生み出すフリーキャッシュフロー（FCF）を現在価値に割り引く際の割引率としてWACCを用いることで、企業が継続的に価値を創造するために最低限稼ぐべき収益率を反映した評価が可能となる。WACCの一般的な算出式は以下の通りである。</span>
-<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a>$$WACC = \frac{D}{D+E} \times r_D \times (1-T) + \frac{E}{D+E} \times r_E$$</span>
-<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a>ここで、各記号は以下の要素を示す。</span>
-<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$D$ : 負債総額</span>
-<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$E$ : 時価総額</span>
-<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r<span class="sc">\_</span>D$ : 負債コスト</span>
-<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r<span class="sc">\_</span>E$ : 株主資本コスト</span>
-<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$T$ : 実効税率</span>
-<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACCの構成要素の算出</span></span>
-<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a>WACCを算出するためには、$D$、$E$、$r<span class="sc">\_</span>D$、$r<span class="sc">\_</span>E$ の各要素を正確に特定する必要がある。</span>
-<span id="cb49-35"><a href="#cb49-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-36"><a href="#cb49-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### 前提データの準備</span></span>
-<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a>まずは、分析に必要なライブラリを読み込み、財務データとTOPIXデータを準備します。</span>
-<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a><span class="co"># 必要なライブラリの読み込み</span></span>
-<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 島根銀行財務データ読み込み</span></span>
-<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/7150_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a><span class="co"># TOPIX年次リターンデータの読み込み</span></span>
-<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span>
-<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(TOPIX)</span>
-<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-55"><a href="#cb49-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-56"><a href="#cb49-56" aria-hidden="true" tabindex="-1"></a><span class="fu">### 負債総額 ($D$) の算出</span></span>
-<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a>WACCにおける負債総額 ($D$) は、企業が**利子を支払う義務のある負債**、すなわち**有利子負債**を指す。銀行株を分析する際、**預金**については一般的な有利子負債とは性質が異なり、多くの場合、低金利で調達される。そのため、本評価においては、預金に対して通常の有利子負債とは異なる特定の金利を別途調査し、$r<span class="sc">\_</span>D$ の算出に際して適切に加味する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</span>
-<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 財務データから有利子負債の項目を抽出</span></span>
-<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a>D_df_current_data <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"預金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債"</span>,]</span>
-<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(D_df_current_data<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) </span>
-<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 例として22行目と23行目の3列目を合計</span></span>
-<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債総額 (D):"</span>, D, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-73"><a href="#cb49-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-74"><a href="#cb49-74" aria-hidden="true" tabindex="-1"></a><span class="fu">### 時価総額 ($E$) の算出</span></span>
-<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a>時価総額 ($E$) は、評価対象企業の**発行済み株式総数に現在の株価を乗じた値**として算出する。</span>
-<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a><span class="co"># 発行済み株式総数:Nと現在の株価:Pを定義</span></span>
-<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
-<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">459</span>         </span>
-<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a><span class="co"># 時価総額の計算</span></span>
-<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> N <span class="sc">*</span> P</span>
-<span id="cb49-86"><a href="#cb49-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-87"><a href="#cb49-87" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-88"><a href="#cb49-88" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額 (E):"</span>, E, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-92"><a href="#cb49-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-93"><a href="#cb49-93" aria-hidden="true" tabindex="-1"></a><span class="fu">### 負債コスト ($r\_D$) の算出</span></span>
-<span id="cb49-94"><a href="#cb49-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-95"><a href="#cb49-95" aria-hidden="true" tabindex="-1"></a>負債コスト ($r<span class="sc">\_</span>D$) は、企業が負債に対して支払う平均的な金利を指す。これは、主に**支払利息**の総額を負債総額で除することで算出される。銀行株の場合、前述の通り預金にかかる特定の金利も考慮に入れ、$D$ と対応する利息コストを適切に計算する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</span>
-<span id="cb49-96"><a href="#cb49-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-99"><a href="#cb49-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a>rD_Total_Debt <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"資金調達費用"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"預金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債利息"</span>,]</span>
-<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a>rD <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(rD_Total_Debt<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) <span class="sc">/</span> D <span class="co"># 例として42～44行目の3列目を合計しDで割る</span></span>
-<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債コスト (rD):"</span>, <span class="fu">round</span>(rD <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-105"><a href="#cb49-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-106"><a href="#cb49-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### 株主資本コスト ($r\_E$) の算出</span></span>
-<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-111"><a href="#cb49-111" aria-hidden="true" tabindex="-1"></a>株主資本コスト ($r<span class="sc">\_</span>E$) は、株主が企業に投資することで期待する最低限の収益率であり、一般的には**資本資産評価モデル (CAPM: Capital Asset Pricing Model)** を用いて算出される。</span>
-<span id="cb49-112"><a href="#cb49-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-113"><a href="#cb49-113" aria-hidden="true" tabindex="-1"></a>$$r_E = r_F + \beta \times (E_R - r_F)$$</span>
-<span id="cb49-114"><a href="#cb49-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-115"><a href="#cb49-115" aria-hidden="true" tabindex="-1"></a><span class="fu">### リスクフリーレート ($r\_F$)</span></span>
-<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a>日本では、通常、**日本国債の利回り**をその代理変数として用いる。これは、国債が信用リスクが極めて低い投資対象と見なされるためである。</span>
-<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a><span class="co"># リスクフリーレート (rF) の設定</span></span>
-<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a><span class="co"># 例として、現在の日本国債10年物利回りなどを設定します。</span></span>
-<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a><span class="co"># 実際の評価時点の最新の利回りを調べて入力してください。</span></span>
-<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a>rF <span class="ot">&lt;-</span> <span class="fl">0.01570</span> <span class="co"># 例示の値 (1.57%)</span></span>
-<span id="cb49-126"><a href="#cb49-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-127"><a href="#cb49-127" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"リスクフリーレート (rF):"</span>, <span class="fu">round</span>(rF <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-130"><a href="#cb49-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-131"><a href="#cb49-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### β (ベータ)</span></span>
-<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-133"><a href="#cb49-133" aria-hidden="true" tabindex="-1"></a>評価対象となる特定の株式が、市場全体の動きに対してどれだけ敏感に反応するかを示す指標である。</span>
-<span id="cb49-134"><a href="#cb49-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-137"><a href="#cb49-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ (β) の設定</span></span>
-<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a><span class="co"># 評価対象企業のβ値を調べて入力してください。beta.xlsxで計算済</span></span>
-<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span> <span class="co"># 例示の値</span></span>
-<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ベータ (β):"</span>, <span class="fu">round</span>(beta, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-144"><a href="#cb49-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-145"><a href="#cb49-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### 市場リスクプレミアム ($E\_R - r\_F$)</span></span>
-<span id="cb49-146"><a href="#cb49-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-147"><a href="#cb49-147" aria-hidden="true" tabindex="-1"></a>市場全体の期待されるリターン ($E<span class="sc">\_</span>R$) からリスクフリーレート ($r<span class="sc">\_</span>F$) を差し引いたものであり、リスクを負って株式市場に投資する投資家が要求する追加リターンを意味する。</span>
-<span id="cb49-148"><a href="#cb49-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-149"><a href="#cb49-149" aria-hidden="true" tabindex="-1"></a>$E<span class="sc">\_</span>R$ は、**TOPIXが始まった1970年から2024年までの年次リターンの平均**から求める。</span>
-<span id="cb49-150"><a href="#cb49-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-153"><a href="#cb49-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-154"><a href="#cb49-154" aria-hidden="true" tabindex="-1"></a><span class="co"># TOPIXの年次リターン計算 (再掲、確認のため)</span></span>
-<span id="cb49-155"><a href="#cb49-155" aria-hidden="true" tabindex="-1"></a><span class="co"># 年初始値と年末終値をベクトルにまとめる</span></span>
-<span id="cb49-156"><a href="#cb49-156" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb49-157"><a href="#cb49-157" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb49-158"><a href="#cb49-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-159"><a href="#cb49-159" aria-hidden="true" tabindex="-1"></a><span class="co"># 年次リターン（価格収益率）を計算</span></span>
-<span id="cb49-160"><a href="#cb49-160" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb49-161"><a href="#cb49-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-162"><a href="#cb49-162" aria-hidden="true" tabindex="-1"></a><span class="co"># 期待収益率（年平均リターン） = 市場の期待リターン (Er)</span></span>
-<span id="cb49-163"><a href="#cb49-163" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return)</span>
-<span id="cb49-164"><a href="#cb49-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-165"><a href="#cb49-165" aria-hidden="true" tabindex="-1"></a><span class="co"># 市場リスクプレミアムの計算</span></span>
-<span id="cb49-166"><a href="#cb49-166" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rF</span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># 企業価値評価における割引率の算出：WACCを用いたアプローチ</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>本稿では、ディスカウント・キャッシュフロー（DCF）法を用いた企業価値評価において不可欠な要素である**割引率**の算出に焦点を当てる。割引率には、企業の加重平均資本コスト（WACC: Weighted Average Cost of Capital）を用いることとし、その構成要素である負債コストと株主資本コストの算出方法について詳細に論じる。</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACC（加重平均資本コスト）の定義と重要性</span></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>WACCは、企業が資金を調達するために株主や債権者に平均して支払うコストを表す。企業が将来生み出すフリーキャッシュフロー（FCF）を現在価値に割り引く際の割引率としてWACCを用いることで、企業が継続的に価値を創造するために最低限稼ぐべき収益率を反映した評価が可能となる。WACCの一般的な算出式は以下の通りである。</span>
+<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a>$$WACC = \frac{D}{D+E} \times r_D \times (1-T) + \frac{E}{D+E} \times r_E$$</span>
+<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-17"><a href="#cb49-17" aria-hidden="true" tabindex="-1"></a>ここで、各記号は以下の要素を示す。</span>
+<span id="cb49-18"><a href="#cb49-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-19"><a href="#cb49-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$D$ : 負債総額</span>
+<span id="cb49-20"><a href="#cb49-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$E$ : 時価総額</span>
+<span id="cb49-21"><a href="#cb49-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r<span class="sc">\_</span>D$ : 負債コスト</span>
+<span id="cb49-22"><a href="#cb49-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$r<span class="sc">\_</span>E$ : 株主資本コスト</span>
+<span id="cb49-23"><a href="#cb49-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>$T$ : 実効税率</span>
+<span id="cb49-24"><a href="#cb49-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="#cb49-25" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-26"><a href="#cb49-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-27"><a href="#cb49-27" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACCの構成要素の算出</span></span>
+<span id="cb49-28"><a href="#cb49-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-29"><a href="#cb49-29" aria-hidden="true" tabindex="-1"></a>WACCを算出するためには、$D$、$E$、$r<span class="sc">\_</span>D$、$r<span class="sc">\_</span>E$ の各要素を正確に特定する必要がある。</span>
+<span id="cb49-30"><a href="#cb49-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-31"><a href="#cb49-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### 前提データの準備</span></span>
+<span id="cb49-32"><a href="#cb49-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-33"><a href="#cb49-33" aria-hidden="true" tabindex="-1"></a>まずは、分析に必要なライブラリを読み込み、財務データとTOPIXデータを準備します。</span>
+<span id="cb49-34"><a href="#cb49-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-37"><a href="#cb49-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-38"><a href="#cb49-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 必要なライブラリの読み込み</span></span>
+<span id="cb49-39"><a href="#cb49-39" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb49-40"><a href="#cb49-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 島根銀行財務データ読み込み</span></span>
+<span id="cb49-41"><a href="#cb49-41" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"ProcessedBankData/7150_processed_data.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb49-42"><a href="#cb49-42" aria-hidden="true" tabindex="-1"></a><span class="co"># TOPIX年次リターンデータの読み込み</span></span>
+<span id="cb49-43"><a href="#cb49-43" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb49-44"><a href="#cb49-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-45"><a href="#cb49-45" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df)</span>
+<span id="cb49-46"><a href="#cb49-46" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(TOPIX)</span>
+<span id="cb49-47"><a href="#cb49-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-48"><a href="#cb49-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-49"><a href="#cb49-49" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-50"><a href="#cb49-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-51"><a href="#cb49-51" aria-hidden="true" tabindex="-1"></a><span class="fu">### 負債総額 ($D$) の算出</span></span>
+<span id="cb49-52"><a href="#cb49-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-53"><a href="#cb49-53" aria-hidden="true" tabindex="-1"></a>WACCにおける負債総額 ($D$) は、企業が**利子を支払う義務のある負債**、すなわち**有利子負債**を指す。銀行株を分析する際、**預金**については一般的な有利子負債とは性質が異なり、多くの場合、低金利で調達される。そのため、本評価においては、預金に対して通常の有利子負債とは異なる特定の金利を別途調査し、$r<span class="sc">\_</span>D$ の算出に際して適切に加味する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</span>
+<span id="cb49-54"><a href="#cb49-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-57"><a href="#cb49-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-58"><a href="#cb49-58" aria-hidden="true" tabindex="-1"></a><span class="co"># 財務データから有利子負債の項目を抽出</span></span>
+<span id="cb49-59"><a href="#cb49-59" aria-hidden="true" tabindex="-1"></a>D_df_current_data <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目<span class="sc">==</span><span class="st">"預金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債"</span>,]</span>
+<span id="cb49-60"><a href="#cb49-60" aria-hidden="true" tabindex="-1"></a>D <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(D_df_current_data<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) </span>
+<span id="cb49-61"><a href="#cb49-61" aria-hidden="true" tabindex="-1"></a><span class="co"># 例として22行目と23行目の3列目を合計</span></span>
+<span id="cb49-62"><a href="#cb49-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-63"><a href="#cb49-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-64"><a href="#cb49-64" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債総額 (D):"</span>, D, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-65"><a href="#cb49-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-66"><a href="#cb49-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-67"><a href="#cb49-67" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-68"><a href="#cb49-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-69"><a href="#cb49-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 時価総額 ($E$) の算出</span></span>
+<span id="cb49-70"><a href="#cb49-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-71"><a href="#cb49-71" aria-hidden="true" tabindex="-1"></a>時価総額 ($E$) は、評価対象企業の**発行済み株式総数に現在の株価を乗じた値**として算出する。</span>
+<span id="cb49-72"><a href="#cb49-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-75"><a href="#cb49-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-76"><a href="#cb49-76" aria-hidden="true" tabindex="-1"></a><span class="co"># 発行済み株式総数:Nと現在の株価:Pを定義</span></span>
+<span id="cb49-77"><a href="#cb49-77" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="dv">8416000</span> </span>
+<span id="cb49-78"><a href="#cb49-78" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="dv">459</span>         </span>
+<span id="cb49-79"><a href="#cb49-79" aria-hidden="true" tabindex="-1"></a><span class="co"># 時価総額の計算</span></span>
+<span id="cb49-80"><a href="#cb49-80" aria-hidden="true" tabindex="-1"></a>E <span class="ot">&lt;-</span> N <span class="sc">*</span> P</span>
+<span id="cb49-81"><a href="#cb49-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-82"><a href="#cb49-82" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-83"><a href="#cb49-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額 (E):"</span>, E, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-84"><a href="#cb49-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-85"><a href="#cb49-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-86"><a href="#cb49-86" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-87"><a href="#cb49-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-88"><a href="#cb49-88" aria-hidden="true" tabindex="-1"></a><span class="fu">### 負債コスト ($r\_D$) の算出</span></span>
+<span id="cb49-89"><a href="#cb49-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-90"><a href="#cb49-90" aria-hidden="true" tabindex="-1"></a>負債コスト ($r<span class="sc">\_</span>D$) は、企業が負債に対して支払う平均的な金利を指す。これは、主に**支払利息**の総額を負債総額で除することで算出される。銀行株の場合、前述の通り預金にかかる特定の金利も考慮に入れ、$D$ と対応する利息コストを適切に計算する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)</span>
+<span id="cb49-91"><a href="#cb49-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-94"><a href="#cb49-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-95"><a href="#cb49-95" aria-hidden="true" tabindex="-1"></a>rD_Total_Debt <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"資金調達費用"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"預金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"借用金利息"</span> <span class="sc">|</span> df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"社債利息"</span>,]</span>
+<span id="cb49-96"><a href="#cb49-96" aria-hidden="true" tabindex="-1"></a>rD <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">as.numeric</span>(rD_Total_Debt<span class="sc">$</span><span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>)) <span class="sc">/</span> D <span class="co"># 例として42～44行目の3列目を合計しDで割る</span></span>
+<span id="cb49-97"><a href="#cb49-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-98"><a href="#cb49-98" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-99"><a href="#cb49-99" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"負債コスト (rD):"</span>, <span class="fu">round</span>(rD <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-100"><a href="#cb49-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-101"><a href="#cb49-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-102"><a href="#cb49-102" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-103"><a href="#cb49-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-104"><a href="#cb49-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### 株主資本コスト ($r\_E$) の算出</span></span>
+<span id="cb49-105"><a href="#cb49-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-106"><a href="#cb49-106" aria-hidden="true" tabindex="-1"></a>株主資本コスト ($r<span class="sc">\_</span>E$) は、株主が企業に投資することで期待する最低限の収益率であり、一般的には**資本資産評価モデル (CAPM: Capital Asset Pricing Model)** を用いて算出される。</span>
+<span id="cb49-107"><a href="#cb49-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-108"><a href="#cb49-108" aria-hidden="true" tabindex="-1"></a>$$r_E = r_F + \beta \times (E_R - r_F)$$</span>
+<span id="cb49-109"><a href="#cb49-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-110"><a href="#cb49-110" aria-hidden="true" tabindex="-1"></a><span class="fu">### リスクフリーレート ($r\_F$)</span></span>
+<span id="cb49-111"><a href="#cb49-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-112"><a href="#cb49-112" aria-hidden="true" tabindex="-1"></a>日本では、通常、**日本国債の利回り**をその代理変数として用いる。これは、国債が信用リスクが極めて低い投資対象と見なされるためである。</span>
+<span id="cb49-113"><a href="#cb49-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-116"><a href="#cb49-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-117"><a href="#cb49-117" aria-hidden="true" tabindex="-1"></a><span class="co"># リスクフリーレート (rF) の設定</span></span>
+<span id="cb49-118"><a href="#cb49-118" aria-hidden="true" tabindex="-1"></a><span class="co"># 例として、現在の日本国債10年物利回りなどを設定します。</span></span>
+<span id="cb49-119"><a href="#cb49-119" aria-hidden="true" tabindex="-1"></a><span class="co"># 実際の評価時点の最新の利回りを調べて入力してください。</span></span>
+<span id="cb49-120"><a href="#cb49-120" aria-hidden="true" tabindex="-1"></a>rF <span class="ot">&lt;-</span> <span class="fl">0.01570</span> <span class="co"># 例示の値 (1.57%)</span></span>
+<span id="cb49-121"><a href="#cb49-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-122"><a href="#cb49-122" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-123"><a href="#cb49-123" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"リスクフリーレート (rF):"</span>, <span class="fu">round</span>(rF <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-124"><a href="#cb49-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-125"><a href="#cb49-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-126"><a href="#cb49-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### β (ベータ)</span></span>
+<span id="cb49-127"><a href="#cb49-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-128"><a href="#cb49-128" aria-hidden="true" tabindex="-1"></a>評価対象となる特定の株式が、市場全体の動きに対してどれだけ敏感に反応するかを示す指標である。</span>
+<span id="cb49-129"><a href="#cb49-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-132"><a href="#cb49-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-133"><a href="#cb49-133" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ (β) の設定</span></span>
+<span id="cb49-134"><a href="#cb49-134" aria-hidden="true" tabindex="-1"></a><span class="co"># 評価対象企業のβ値を調べて入力してください。beta.xlsxで計算済</span></span>
+<span id="cb49-135"><a href="#cb49-135" aria-hidden="true" tabindex="-1"></a>beta <span class="ot">&lt;-</span> <span class="fl">1.08036867948469</span> <span class="co"># 例示の値</span></span>
+<span id="cb49-136"><a href="#cb49-136" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-137"><a href="#cb49-137" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ベータ (β):"</span>, <span class="fu">round</span>(beta, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-138"><a href="#cb49-138" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-139"><a href="#cb49-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-140"><a href="#cb49-140" aria-hidden="true" tabindex="-1"></a><span class="fu">### 市場リスクプレミアム ($E\_R - r\_F$)</span></span>
+<span id="cb49-141"><a href="#cb49-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-142"><a href="#cb49-142" aria-hidden="true" tabindex="-1"></a>市場全体の期待されるリターン ($E<span class="sc">\_</span>R$) からリスクフリーレート ($r<span class="sc">\_</span>F$) を差し引いたものであり、リスクを負って株式市場に投資する投資家が要求する追加リターンを意味する。</span>
+<span id="cb49-143"><a href="#cb49-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-144"><a href="#cb49-144" aria-hidden="true" tabindex="-1"></a>$E<span class="sc">\_</span>R$ は、**TOPIXが始まった1970年から2024年までの年次リターンの平均**から求める。</span>
+<span id="cb49-145"><a href="#cb49-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-148"><a href="#cb49-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-149"><a href="#cb49-149" aria-hidden="true" tabindex="-1"></a><span class="co"># TOPIXの年次リターン計算 (再掲、確認のため)</span></span>
+<span id="cb49-150"><a href="#cb49-150" aria-hidden="true" tabindex="-1"></a><span class="co"># 年初始値と年末終値をベクトルにまとめる</span></span>
+<span id="cb49-151"><a href="#cb49-151" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
+<span id="cb49-152"><a href="#cb49-152" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
+<span id="cb49-153"><a href="#cb49-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-154"><a href="#cb49-154" aria-hidden="true" tabindex="-1"></a><span class="co"># 年次リターン（価格収益率）を計算</span></span>
+<span id="cb49-155"><a href="#cb49-155" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
+<span id="cb49-156"><a href="#cb49-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-157"><a href="#cb49-157" aria-hidden="true" tabindex="-1"></a><span class="co"># 期待収益率（年平均リターン） = 市場の期待リターン (Er)</span></span>
+<span id="cb49-158"><a href="#cb49-158" aria-hidden="true" tabindex="-1"></a>Er <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return)</span>
+<span id="cb49-159"><a href="#cb49-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-160"><a href="#cb49-160" aria-hidden="true" tabindex="-1"></a><span class="co"># 市場リスクプレミアムの計算</span></span>
+<span id="cb49-161"><a href="#cb49-161" aria-hidden="true" tabindex="-1"></a>market_risk_premium <span class="ot">&lt;-</span> Er <span class="sc">-</span> rF</span>
+<span id="cb49-162"><a href="#cb49-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-163"><a href="#cb49-163" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-164"><a href="#cb49-164" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"市場の期待リターン (Er):"</span>, <span class="fu">round</span>(Er <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-165"><a href="#cb49-165" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"市場リスクプレミアム (Er - rF):"</span>, <span class="fu">round</span>(market_risk_premium <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-166"><a href="#cb49-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-167"><a href="#cb49-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-168"><a href="#cb49-168" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-169"><a href="#cb49-169" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"市場の期待リターン (Er):"</span>, <span class="fu">round</span>(Er <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-170"><a href="#cb49-170" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"市場リスクプレミアム (Er - rF):"</span>, <span class="fu">round</span>(market_risk_premium <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-171"><a href="#cb49-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-172"><a href="#cb49-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-173"><a href="#cb49-173" aria-hidden="true" tabindex="-1"></a><span class="fu">### 株主資本コスト ($r\_E$) の最終算出</span></span>
-<span id="cb49-174"><a href="#cb49-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-177"><a href="#cb49-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-178"><a href="#cb49-178" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本コスト (rE) の計算</span></span>
-<span id="cb49-179"><a href="#cb49-179" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rF <span class="sc">+</span> beta <span class="sc">*</span> market_risk_premium</span>
-<span id="cb49-180"><a href="#cb49-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-181"><a href="#cb49-181" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-182"><a href="#cb49-182" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト (rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-183"><a href="#cb49-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-184"><a href="#cb49-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-185"><a href="#cb49-185" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-186"><a href="#cb49-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-187"><a href="#cb49-187" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACCの最終算出</span></span>
-<span id="cb49-188"><a href="#cb49-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-189"><a href="#cb49-189" aria-hidden="true" tabindex="-1"></a>上記で計算した各要素 ($D$, $E$, $r<span class="sc">\_</span>D$, $r<span class="sc">\_</span>E$) と実効税率 ($T$) を用いて、WACCを最終的に算出します。</span>
-<span id="cb49-190"><a href="#cb49-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-193"><a href="#cb49-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-194"><a href="#cb49-194" aria-hidden="true" tabindex="-1"></a><span class="co"># 法人実効税率 (T) の設定</span></span>
-<span id="cb49-195"><a href="#cb49-195" aria-hidden="true" tabindex="-1"></a><span class="co"># 最新の法人実効税率を調べて設定してください。</span></span>
-<span id="cb49-196"><a href="#cb49-196" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fl">0.2320</span> <span class="co"># 例示の値 (23.20%)</span></span>
-<span id="cb49-197"><a href="#cb49-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-198"><a href="#cb49-198" aria-hidden="true" tabindex="-1"></a><span class="co"># WACCの計算</span></span>
-<span id="cb49-199"><a href="#cb49-199" aria-hidden="true" tabindex="-1"></a>WACC <span class="ot">&lt;-</span> D <span class="sc">/</span> (D <span class="sc">+</span> E) <span class="sc">*</span> rD <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> T) <span class="sc">+</span> E <span class="sc">/</span> (D <span class="sc">+</span> E) <span class="sc">*</span> rE</span>
-<span id="cb49-200"><a href="#cb49-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-201"><a href="#cb49-201" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
-<span id="cb49-202"><a href="#cb49-202" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"加重平均資本コスト (WACC):"</span>, <span class="fu">round</span>(WACC <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-203"><a href="#cb49-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-204"><a href="#cb49-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-205"><a href="#cb49-205" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-206"><a href="#cb49-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-207"><a href="#cb49-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## フリーキャッシュフロー (FCF) の推計と企業価値の算出</span></span>
-<span id="cb49-208"><a href="#cb49-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-209"><a href="#cb49-209" aria-hidden="true" tabindex="-1"></a>割引率であるWACCが算出できたら、次に企業の将来のフリーキャッシュフロー（FCF）を推計し、それらをWACCで現在価値に割り引くことで企業価値を算出します。</span>
-<span id="cb49-210"><a href="#cb49-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-211"><a href="#cb49-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### フリーキャッシュフロー (FCF) の定義と推計</span></span>
-<span id="cb49-212"><a href="#cb49-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-213"><a href="#cb49-213" aria-hidden="true" tabindex="-1"></a>フリーキャッシュフローは、企業が営業活動によって生み出したキャッシュのうち、事業の維持・拡大に必要な投資を行った後に残るキャッシュのことであり、株主や債権者に自由に分配可能なキャッシュフローを指します。一般的には、**営業活動によるキャッシュ・フロー ＋ 投資活動によるキャッシュ・フロー**として簡易的に計算されます。</span>
-<span id="cb49-214"><a href="#cb49-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-217"><a href="#cb49-217" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-218"><a href="#cb49-218" aria-hidden="true" tabindex="-1"></a><span class="co"># 営業活動によるキャッシュ・フロー (CFO) の抽出</span></span>
-<span id="cb49-219"><a href="#cb49-219" aria-hidden="true" tabindex="-1"></a>CFO <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"営業活動によるキャッシュ・フロー"</span>,]</span>
-<span id="cb49-220"><a href="#cb49-220" aria-hidden="true" tabindex="-1"></a><span class="co"># 投資活動によるキャッシュ・フロー (CFI) の抽出</span></span>
-<span id="cb49-221"><a href="#cb49-221" aria-hidden="true" tabindex="-1"></a>CFI <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"投資活動によるキャッシュ・フロー"</span>,]</span>
-<span id="cb49-222"><a href="#cb49-222" aria-hidden="true" tabindex="-1"></a><span class="co"># ここでは、簡便的に過去データを利用していますが、実務では詳細な予測モデルを構築します。</span></span>
-<span id="cb49-223"><a href="#cb49-223" aria-hidden="true" tabindex="-1"></a>CFO <span class="ot">&lt;-</span> CFO <span class="sc">%&gt;%</span> <span class="fu">rename</span>(年度 <span class="ot">=</span> ファイル名) </span>
-<span id="cb49-224"><a href="#cb49-224" aria-hidden="true" tabindex="-1"></a>CFI <span class="ot">&lt;-</span> CFI <span class="sc">%&gt;%</span> <span class="fu">rename</span>(年度 <span class="ot">=</span> ファイル名) </span>
-<span id="cb49-225"><a href="#cb49-225" aria-hidden="true" tabindex="-1"></a>FCF_combined_df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
-<span id="cb49-226"><a href="#cb49-226" aria-hidden="true" tabindex="-1"></a>  CFO <span class="sc">%&gt;%</span> <span class="fu">select</span>(年度, CFO_金額 <span class="ot">=</span> <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="co"># CFOデータから年度と金額（CFO_金額としてリネーム）を選択</span></span>
-<span id="cb49-227"><a href="#cb49-227" aria-hidden="true" tabindex="-1"></a>  CFI <span class="sc">%&gt;%</span> <span class="fu">select</span>(年度, CFI_金額 <span class="ot">=</span> <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="co"># CFIデータから年度と金額（CFI_金額としてリネーム）を選択</span></span>
-<span id="cb49-228"><a href="#cb49-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"年度"</span></span>
-<span id="cb49-229"><a href="#cb49-229" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
-<span id="cb49-230"><a href="#cb49-230" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FCF =</span> CFO_金額 <span class="sc">-</span> CFI_金額) <span class="sc">|&gt;</span> </span>
-<span id="cb49-231"><a href="#cb49-231" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FCF =</span> <span class="fu">replace_na</span>(FCF, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb49-232"><a href="#cb49-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(年度)</span>
+<span id="cb49-168"><a href="#cb49-168" aria-hidden="true" tabindex="-1"></a><span class="fu">### 株主資本コスト ($r\_E$) の最終算出</span></span>
+<span id="cb49-169"><a href="#cb49-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-172"><a href="#cb49-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-173"><a href="#cb49-173" aria-hidden="true" tabindex="-1"></a><span class="co"># 株主資本コスト (rE) の計算</span></span>
+<span id="cb49-174"><a href="#cb49-174" aria-hidden="true" tabindex="-1"></a>rE <span class="ot">&lt;-</span> rF <span class="sc">+</span> beta <span class="sc">*</span> market_risk_premium</span>
+<span id="cb49-175"><a href="#cb49-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-176"><a href="#cb49-176" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-177"><a href="#cb49-177" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"株主資本コスト (rE):"</span>, <span class="fu">round</span>(rE <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-178"><a href="#cb49-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-179"><a href="#cb49-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-180"><a href="#cb49-180" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-181"><a href="#cb49-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-182"><a href="#cb49-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## WACCの最終算出</span></span>
+<span id="cb49-183"><a href="#cb49-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-184"><a href="#cb49-184" aria-hidden="true" tabindex="-1"></a>上記で計算した各要素 ($D$, $E$, $r<span class="sc">\_</span>D$, $r<span class="sc">\_</span>E$) と実効税率 ($T$) を用いて、WACCを最終的に算出します。</span>
+<span id="cb49-185"><a href="#cb49-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-188"><a href="#cb49-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-189"><a href="#cb49-189" aria-hidden="true" tabindex="-1"></a><span class="co"># 法人実効税率 (T) の設定</span></span>
+<span id="cb49-190"><a href="#cb49-190" aria-hidden="true" tabindex="-1"></a><span class="co"># 最新の法人実効税率を調べて設定してください。</span></span>
+<span id="cb49-191"><a href="#cb49-191" aria-hidden="true" tabindex="-1"></a>T <span class="ot">&lt;-</span> <span class="fl">0.2320</span> <span class="co"># 例示の値 (23.20%)</span></span>
+<span id="cb49-192"><a href="#cb49-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-193"><a href="#cb49-193" aria-hidden="true" tabindex="-1"></a><span class="co"># WACCの計算</span></span>
+<span id="cb49-194"><a href="#cb49-194" aria-hidden="true" tabindex="-1"></a>WACC <span class="ot">&lt;-</span> D <span class="sc">/</span> (D <span class="sc">+</span> E) <span class="sc">*</span> rD <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> T) <span class="sc">+</span> E <span class="sc">/</span> (D <span class="sc">+</span> E) <span class="sc">*</span> rE</span>
+<span id="cb49-195"><a href="#cb49-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-196"><a href="#cb49-196" aria-hidden="true" tabindex="-1"></a><span class="co"># 算出結果の確認</span></span>
+<span id="cb49-197"><a href="#cb49-197" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"加重平均資本コスト (WACC):"</span>, <span class="fu">round</span>(WACC <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-198"><a href="#cb49-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-199"><a href="#cb49-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-200"><a href="#cb49-200" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-201"><a href="#cb49-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-202"><a href="#cb49-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## フリーキャッシュフロー (FCF) の推計と企業価値の算出</span></span>
+<span id="cb49-203"><a href="#cb49-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-204"><a href="#cb49-204" aria-hidden="true" tabindex="-1"></a>割引率であるWACCが算出できたら、次に企業の将来のフリーキャッシュフロー（FCF）を推計し、それらをWACCで現在価値に割り引くことで企業価値を算出します。</span>
+<span id="cb49-205"><a href="#cb49-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-206"><a href="#cb49-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### フリーキャッシュフロー (FCF) の定義と推計</span></span>
+<span id="cb49-207"><a href="#cb49-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-208"><a href="#cb49-208" aria-hidden="true" tabindex="-1"></a>フリーキャッシュフローは、企業が営業活動によって生み出したキャッシュのうち、事業の維持・拡大に必要な投資を行った後に残るキャッシュのことであり、株主や債権者に自由に分配可能なキャッシュフローを指します。一般的には、**営業活動によるキャッシュ・フロー ＋ 投資活動によるキャッシュ・フロー**として簡易的に計算されます。</span>
+<span id="cb49-209"><a href="#cb49-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-212"><a href="#cb49-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-213"><a href="#cb49-213" aria-hidden="true" tabindex="-1"></a><span class="co"># 営業活動によるキャッシュ・フロー (CFO) の抽出</span></span>
+<span id="cb49-214"><a href="#cb49-214" aria-hidden="true" tabindex="-1"></a>CFO <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"営業活動によるキャッシュ・フロー"</span>,]</span>
+<span id="cb49-215"><a href="#cb49-215" aria-hidden="true" tabindex="-1"></a><span class="co"># 投資活動によるキャッシュ・フロー (CFI) の抽出</span></span>
+<span id="cb49-216"><a href="#cb49-216" aria-hidden="true" tabindex="-1"></a>CFI <span class="ot">&lt;-</span> df[df<span class="sc">$</span>項目 <span class="sc">==</span> <span class="st">"投資活動によるキャッシュ・フロー"</span>,]</span>
+<span id="cb49-217"><a href="#cb49-217" aria-hidden="true" tabindex="-1"></a><span class="co"># ここでは、簡便的に過去データを利用していますが、実務では詳細な予測モデルを構築します。</span></span>
+<span id="cb49-218"><a href="#cb49-218" aria-hidden="true" tabindex="-1"></a>CFO <span class="ot">&lt;-</span> CFO <span class="sc">%&gt;%</span> <span class="fu">rename</span>(年度 <span class="ot">=</span> ファイル名) </span>
+<span id="cb49-219"><a href="#cb49-219" aria-hidden="true" tabindex="-1"></a>CFI <span class="ot">&lt;-</span> CFI <span class="sc">%&gt;%</span> <span class="fu">rename</span>(年度 <span class="ot">=</span> ファイル名) </span>
+<span id="cb49-220"><a href="#cb49-220" aria-hidden="true" tabindex="-1"></a>FCF_combined_df <span class="ot">&lt;-</span> <span class="fu">inner_join</span>(</span>
+<span id="cb49-221"><a href="#cb49-221" aria-hidden="true" tabindex="-1"></a>  CFO <span class="sc">%&gt;%</span> <span class="fu">select</span>(年度, CFO_金額 <span class="ot">=</span> <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="co"># CFOデータから年度と金額（CFO_金額としてリネーム）を選択</span></span>
+<span id="cb49-222"><a href="#cb49-222" aria-hidden="true" tabindex="-1"></a>  CFI <span class="sc">%&gt;%</span> <span class="fu">select</span>(年度, CFI_金額 <span class="ot">=</span> <span class="st">`</span><span class="at">金額（百万円）</span><span class="st">`</span>), <span class="co"># CFIデータから年度と金額（CFI_金額としてリネーム）を選択</span></span>
+<span id="cb49-223"><a href="#cb49-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"年度"</span></span>
+<span id="cb49-224"><a href="#cb49-224" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span> </span>
+<span id="cb49-225"><a href="#cb49-225" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FCF =</span> CFO_金額 <span class="sc">-</span> CFI_金額) <span class="sc">|&gt;</span> </span>
+<span id="cb49-226"><a href="#cb49-226" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">FCF =</span> <span class="fu">replace_na</span>(FCF, <span class="dv">0</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb49-227"><a href="#cb49-227" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(年度)</span>
+<span id="cb49-228"><a href="#cb49-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-229"><a href="#cb49-229" aria-hidden="true" tabindex="-1"></a>FCF_past <span class="ot">&lt;-</span> FCF_combined_df<span class="sc">$</span>FCF</span>
+<span id="cb49-230"><a href="#cb49-230" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算されたFCFのデータフレームを確認</span></span>
+<span id="cb49-231"><a href="#cb49-231" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"各年度のフリーキャッシュフロー (FCF):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-232"><a href="#cb49-232" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FCF_combined_df)</span>
 <span id="cb49-233"><a href="#cb49-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-234"><a href="#cb49-234" aria-hidden="true" tabindex="-1"></a>FCF_past <span class="ot">&lt;-</span> FCF_combined_df<span class="sc">$</span>FCF</span>
-<span id="cb49-235"><a href="#cb49-235" aria-hidden="true" tabindex="-1"></a><span class="co"># 計算されたFCFのデータフレームを確認</span></span>
-<span id="cb49-236"><a href="#cb49-236" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"各年度のフリーキャッシュフロー (FCF):</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-237"><a href="#cb49-237" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FCF_combined_df)</span>
-<span id="cb49-238"><a href="#cb49-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-239"><a href="#cb49-239" aria-hidden="true" tabindex="-1"></a><span class="co"># FCFの値をベクトルとして取り出す（今後の予測モデルや企業価値計算で使用するため）</span></span>
-<span id="cb49-240"><a href="#cb49-240" aria-hidden="true" tabindex="-1"></a><span class="co"># この FCF_past が、将来FCF予測の基礎データとなります。</span></span>
-<span id="cb49-241"><a href="#cb49-241" aria-hidden="true" tabindex="-1"></a>FCF_past <span class="ot">&lt;-</span> FCF_combined_df<span class="sc">$</span>FCF</span>
+<span id="cb49-234"><a href="#cb49-234" aria-hidden="true" tabindex="-1"></a><span class="co"># FCFの値をベクトルとして取り出す（今後の予測モデルや企業価値計算で使用するため）</span></span>
+<span id="cb49-235"><a href="#cb49-235" aria-hidden="true" tabindex="-1"></a><span class="co"># この FCF_past が、将来FCF予測の基礎データとなります。</span></span>
+<span id="cb49-236"><a href="#cb49-236" aria-hidden="true" tabindex="-1"></a>FCF_past <span class="ot">&lt;-</span> FCF_combined_df<span class="sc">$</span>FCF</span>
+<span id="cb49-237"><a href="#cb49-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-238"><a href="#cb49-238" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">FCF_past (ベクトル形式):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-239"><a href="#cb49-239" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FCF_past)</span>
+<span id="cb49-240"><a href="#cb49-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-241"><a href="#cb49-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb49-242"><a href="#cb49-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-243"><a href="#cb49-243" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">FCF_past (ベクトル形式):</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-244"><a href="#cb49-244" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(FCF_past)</span>
-<span id="cb49-245"><a href="#cb49-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-246"><a href="#cb49-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-247"><a href="#cb49-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-248"><a href="#cb49-248" aria-hidden="true" tabindex="-1"></a><span class="fu">### 将来フリーキャッシュフローの予測</span></span>
-<span id="cb49-249"><a href="#cb49-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-252"><a href="#cb49-252" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-253"><a href="#cb49-253" aria-hidden="true" tabindex="-1"></a><span class="co"># 既に計算済みの FCF_past ベクトルを使用</span></span>
-<span id="cb49-254"><a href="#cb49-254" aria-hidden="true" tabindex="-1"></a>first_fcf <span class="ot">&lt;-</span> FCF_past[<span class="dv">1</span>]</span>
-<span id="cb49-255"><a href="#cb49-255" aria-hidden="true" tabindex="-1"></a>last_fcf <span class="ot">&lt;-</span> FCF_past[<span class="fu">length</span>(FCF_past)]</span>
-<span id="cb49-256"><a href="#cb49-256" aria-hidden="true" tabindex="-1"></a>num_periods <span class="ot">&lt;-</span> <span class="fu">length</span>(FCF_past) <span class="sc">-</span> <span class="dv">1</span> <span class="co"># 10年データなら9期間</span></span>
-<span id="cb49-257"><a href="#cb49-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-258"><a href="#cb49-258" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (first_fcf <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">||</span> last_fcf <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">||</span> num_periods <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb49-259"><a href="#cb49-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">"FCFが0以下の値を含む、または期間が不十分なため、CAGRの計算が不正確になる可能性があります。"</span>)</span>
-<span id="cb49-260"><a href="#cb49-260" aria-hidden="true" tabindex="-1"></a>  cagr_fcf <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb49-261"><a href="#cb49-261" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-262"><a href="#cb49-262" aria-hidden="true" tabindex="-1"></a>  cagr_fcf <span class="ot">&lt;-</span> (last_fcf <span class="sc">/</span> first_fcf)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> num_periods) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb49-263"><a href="#cb49-263" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-264"><a href="#cb49-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-265"><a href="#cb49-265" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"--- 過去のFCF年平均成長率 (CAGR) ---</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-266"><a href="#cb49-266" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(cagr_fcf)) {</span>
-<span id="cb49-267"><a href="#cb49-267" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"CAGR (過去 %d年間): %.2f%%</span><span class="sc">\n</span><span class="st">"</span>, num_periods, cagr_fcf <span class="sc">*</span> <span class="dv">100</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-268"><a href="#cb49-268" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-269"><a href="#cb49-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"CAGRは計算できませんでした (FCFが0以下、または期間が不十分)。</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-270"><a href="#cb49-270" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-271"><a href="#cb49-271" aria-hidden="true" tabindex="-1"></a><span class="co"># 明示的予測期間の設定（例として5年間とします）</span></span>
-<span id="cb49-272"><a href="#cb49-272" aria-hidden="true" tabindex="-1"></a>forecast_period <span class="ot">&lt;-</span> <span class="dv">5</span></span>
-<span id="cb49-273"><a href="#cb49-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-274"><a href="#cb49-274" aria-hidden="true" tabindex="-1"></a><span class="co"># 永久成長率 (g) の設定</span></span>
-<span id="cb49-275"><a href="#cb49-275" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業の長期的な安定成長率を仮定します (0%～2%程度が一般的)。</span></span>
-<span id="cb49-276"><a href="#cb49-276" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># 例示の値 (1%)</span></span>
-<span id="cb49-277"><a href="#cb49-277" aria-hidden="true" tabindex="-1"></a><span class="co"># 将来FCFの予測値の計算</span></span>
-<span id="cb49-278"><a href="#cb49-278" aria-hidden="true" tabindex="-1"></a><span class="co"># 過去のFCFの最終年度の値を基準に、一定の成長率で予測します。</span></span>
-<span id="cb49-279"><a href="#cb49-279" aria-hidden="true" tabindex="-1"></a><span class="co"># FCF_pastの最後の値が最新年度のFCF実績値であると仮定します。</span></span>
-<span id="cb49-280"><a href="#cb49-280" aria-hidden="true" tabindex="-1"></a>last_FCF_actual <span class="ot">&lt;-</span> FCF_past[<span class="fu">length</span>(FCF_past)]</span>
-<span id="cb49-281"><a href="#cb49-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-282"><a href="#cb49-282" aria-hidden="true" tabindex="-1"></a>FCF_forecast <span class="ot">&lt;-</span> <span class="fu">numeric</span>(forecast_period)</span>
-<span id="cb49-283"><a href="#cb49-283" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb49-284"><a href="#cb49-284" aria-hidden="true" tabindex="-1"></a>  FCF_forecast[<span class="dv">1</span>] <span class="ot">&lt;-</span> last_FCF_actual <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="co"># 予測1年目 (最終実績値から1期成長)</span></span>
-<span id="cb49-285"><a href="#cb49-285" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>forecast_period) {</span>
-<span id="cb49-286"><a href="#cb49-286" aria-hidden="true" tabindex="-1"></a>    FCF_forecast[i] <span class="ot">&lt;-</span> FCF_forecast[i<span class="dv">-1</span>] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
-<span id="cb49-287"><a href="#cb49-287" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb49-288"><a href="#cb49-288" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-289"><a href="#cb49-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"予測期間が0または負の値のため、FCF予測は行われません。"</span>)</span>
-<span id="cb49-290"><a href="#cb49-290" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-291"><a href="#cb49-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-292"><a href="#cb49-292" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"将来FCF予測 (簡易モデル -"</span>, forecast_period, <span class="st">"年間):</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-293"><a href="#cb49-293" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(FCF_forecast, <span class="dv">0</span>))</span>
-<span id="cb49-294"><a href="#cb49-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-295"><a href="#cb49-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-296"><a href="#cb49-296" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-297"><a href="#cb49-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-298"><a href="#cb49-298" aria-hidden="true" tabindex="-1"></a><span class="fu">### ターミナルバリュー (TV) の算出</span></span>
-<span id="cb49-299"><a href="#cb49-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-300"><a href="#cb49-300" aria-hidden="true" tabindex="-1"></a>ターミナルバリューは、明示的に予測する期間（ここでは10年間）以降の、企業が永続的に生み出すと仮定されるフリーキャッシュフローの現在価値の合計を表します。ゴードン成長モデルを用いて算出します。</span>
-<span id="cb49-301"><a href="#cb49-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-302"><a href="#cb49-302" aria-hidden="true" tabindex="-1"></a>$$TV = \frac{FCF_{N+1}}{WACC - g}$$</span>
-<span id="cb49-303"><a href="#cb49-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-304"><a href="#cb49-304" aria-hidden="true" tabindex="-1"></a>ここで、$FCF<span class="sc">\_</span>{N+1}$ は最終予測年度の翌年のFCF、$WACC$ は加重平均資本コスト、$g$ は永久成長率です。</span>
-<span id="cb49-305"><a href="#cb49-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-308"><a href="#cb49-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-309"><a href="#cb49-309" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終予測年度の翌年 (forecast_period + 1 年目) のFCF (FCF_N_plus_1) を計算</span></span>
-<span id="cb49-310"><a href="#cb49-310" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb49-311"><a href="#cb49-311" aria-hidden="true" tabindex="-1"></a>  FCF_N_plus_1 <span class="ot">&lt;-</span> FCF_forecast[forecast_period] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
-<span id="cb49-312"><a href="#cb49-312" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-313"><a href="#cb49-313" aria-hidden="true" tabindex="-1"></a>  FCF_N_plus_1 <span class="ot">&lt;-</span> last_FCF_actual <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
-<span id="cb49-314"><a href="#cb49-314" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-315"><a href="#cb49-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-316"><a href="#cb49-316" aria-hidden="true" tabindex="-1"></a><span class="co"># ターミナルバリュー (TV) の計算</span></span>
-<span id="cb49-317"><a href="#cb49-317" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (WACC <span class="sc">-</span> g <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
-<span id="cb49-318"><a href="#cb49-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">"WACC - g が0以下になるため、ターミナルバリューの計算が適切ではありません。"</span>)</span>
-<span id="cb49-319"><a href="#cb49-319" aria-hidden="true" tabindex="-1"></a>  TV <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb49-320"><a href="#cb49-320" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-321"><a href="#cb49-321" aria-hidden="true" tabindex="-1"></a>  TV <span class="ot">&lt;-</span> FCF_N_plus_1 <span class="sc">/</span> (WACC <span class="sc">-</span> g)</span>
-<span id="cb49-322"><a href="#cb49-322" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-323"><a href="#cb49-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-324"><a href="#cb49-324" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"最終予測年度の翌年のFCF (FCF_N_plus_1):"</span>, <span class="fu">round</span>(FCF_N_plus_1, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-325"><a href="#cb49-325" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ターミナルバリュー (TV):"</span>, <span class="fu">round</span>(TV, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-326"><a href="#cb49-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-327"><a href="#cb49-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-328"><a href="#cb49-328" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-329"><a href="#cb49-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-330"><a href="#cb49-330" aria-hidden="true" tabindex="-1"></a><span class="fu">### 企業価値 (Valuation) の算出</span></span>
-<span id="cb49-331"><a href="#cb49-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-332"><a href="#cb49-332" aria-hidden="true" tabindex="-1"></a>各年度のフリーキャッシュフローとターミナルバリューをWACCで現在価値に割り引き、合計することで企業価値を算出します。</span>
-<span id="cb49-333"><a href="#cb49-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-336"><a href="#cb49-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-337"><a href="#cb49-337" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業価値の計算 (予測FCFの現在価値 + TVの現在価値)</span></span>
-<span id="cb49-338"><a href="#cb49-338" aria-hidden="true" tabindex="-1"></a>Valuation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb49-339"><a href="#cb49-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-340"><a href="#cb49-340" aria-hidden="true" tabindex="-1"></a><span class="co"># 明示的予測期間のFCFの現在価値を合計</span></span>
-<span id="cb49-341"><a href="#cb49-341" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb49-342"><a href="#cb49-342" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>forecast_period) {</span>
-<span id="cb49-343"><a href="#cb49-343" aria-hidden="true" tabindex="-1"></a>    Valuation <span class="ot">&lt;-</span> Valuation <span class="sc">+</span> FCF_forecast[i] <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> WACC)<span class="sc">^</span>i</span>
-<span id="cb49-344"><a href="#cb49-344" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb49-345"><a href="#cb49-345" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb49-346"><a href="#cb49-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-347"><a href="#cb49-347" aria-hidden="true" tabindex="-1"></a><span class="co"># ターミナルバリューの現在価値を加算</span></span>
-<span id="cb49-348"><a href="#cb49-348" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(TV)) {</span>
-<span id="cb49-349"><a href="#cb49-349" aria-hidden="true" tabindex="-1"></a>  Valuation <span class="ot">&lt;-</span> Valuation <span class="sc">+</span> TV <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> WACC)<span class="sc">^</span>forecast_period</span>
-<span id="cb49-350"><a href="#cb49-350" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb49-351"><a href="#cb49-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"ターミナルバリューが計算できないため、企業価値の計算はTVを含んでいません。"</span>)</span>
-<span id="cb49-352"><a href="#cb49-352" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-243"><a href="#cb49-243" aria-hidden="true" tabindex="-1"></a><span class="fu">### 将来フリーキャッシュフローの予測</span></span>
+<span id="cb49-244"><a href="#cb49-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-247"><a href="#cb49-247" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-248"><a href="#cb49-248" aria-hidden="true" tabindex="-1"></a><span class="co"># 既に計算済みの FCF_past ベクトルを使用</span></span>
+<span id="cb49-249"><a href="#cb49-249" aria-hidden="true" tabindex="-1"></a>first_fcf <span class="ot">&lt;-</span> FCF_past[<span class="dv">1</span>]</span>
+<span id="cb49-250"><a href="#cb49-250" aria-hidden="true" tabindex="-1"></a>last_fcf <span class="ot">&lt;-</span> FCF_past[<span class="fu">length</span>(FCF_past)]</span>
+<span id="cb49-251"><a href="#cb49-251" aria-hidden="true" tabindex="-1"></a>num_periods <span class="ot">&lt;-</span> <span class="fu">length</span>(FCF_past) <span class="sc">-</span> <span class="dv">1</span> <span class="co"># 10年データなら9期間</span></span>
+<span id="cb49-252"><a href="#cb49-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-253"><a href="#cb49-253" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (first_fcf <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">||</span> last_fcf <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">||</span> num_periods <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb49-254"><a href="#cb49-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">"FCFが0以下の値を含む、または期間が不十分なため、CAGRの計算が不正確になる可能性があります。"</span>)</span>
+<span id="cb49-255"><a href="#cb49-255" aria-hidden="true" tabindex="-1"></a>  cagr_fcf <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb49-256"><a href="#cb49-256" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-257"><a href="#cb49-257" aria-hidden="true" tabindex="-1"></a>  cagr_fcf <span class="ot">&lt;-</span> (last_fcf <span class="sc">/</span> first_fcf)<span class="sc">^</span>(<span class="dv">1</span> <span class="sc">/</span> num_periods) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb49-258"><a href="#cb49-258" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-259"><a href="#cb49-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-260"><a href="#cb49-260" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"--- 過去のFCF年平均成長率 (CAGR) ---</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-261"><a href="#cb49-261" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(cagr_fcf)) {</span>
+<span id="cb49-262"><a href="#cb49-262" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">"CAGR (過去 %d年間): %.2f%%</span><span class="sc">\n</span><span class="st">"</span>, num_periods, cagr_fcf <span class="sc">*</span> <span class="dv">100</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-263"><a href="#cb49-263" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-264"><a href="#cb49-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"CAGRは計算できませんでした (FCFが0以下、または期間が不十分)。</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-265"><a href="#cb49-265" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-266"><a href="#cb49-266" aria-hidden="true" tabindex="-1"></a><span class="co"># 明示的予測期間の設定（例として5年間とします）</span></span>
+<span id="cb49-267"><a href="#cb49-267" aria-hidden="true" tabindex="-1"></a>forecast_period <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb49-268"><a href="#cb49-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-269"><a href="#cb49-269" aria-hidden="true" tabindex="-1"></a><span class="co"># 永久成長率 (g) の設定</span></span>
+<span id="cb49-270"><a href="#cb49-270" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業の長期的な安定成長率を仮定します (0%～2%程度が一般的)。</span></span>
+<span id="cb49-271"><a href="#cb49-271" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># 例示の値 (1%)</span></span>
+<span id="cb49-272"><a href="#cb49-272" aria-hidden="true" tabindex="-1"></a><span class="co"># 将来FCFの予測値の計算</span></span>
+<span id="cb49-273"><a href="#cb49-273" aria-hidden="true" tabindex="-1"></a><span class="co"># 過去のFCFの最終年度の値を基準に、一定の成長率で予測します。</span></span>
+<span id="cb49-274"><a href="#cb49-274" aria-hidden="true" tabindex="-1"></a><span class="co"># FCF_pastの最後の値が最新年度のFCF実績値であると仮定します。</span></span>
+<span id="cb49-275"><a href="#cb49-275" aria-hidden="true" tabindex="-1"></a>last_FCF_actual <span class="ot">&lt;-</span> FCF_past[<span class="fu">length</span>(FCF_past)]</span>
+<span id="cb49-276"><a href="#cb49-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-277"><a href="#cb49-277" aria-hidden="true" tabindex="-1"></a>FCF_forecast <span class="ot">&lt;-</span> <span class="fu">numeric</span>(forecast_period)</span>
+<span id="cb49-278"><a href="#cb49-278" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb49-279"><a href="#cb49-279" aria-hidden="true" tabindex="-1"></a>  FCF_forecast[<span class="dv">1</span>] <span class="ot">&lt;-</span> last_FCF_actual <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="co"># 予測1年目 (最終実績値から1期成長)</span></span>
+<span id="cb49-280"><a href="#cb49-280" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>forecast_period) {</span>
+<span id="cb49-281"><a href="#cb49-281" aria-hidden="true" tabindex="-1"></a>    FCF_forecast[i] <span class="ot">&lt;-</span> FCF_forecast[i<span class="dv">-1</span>] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
+<span id="cb49-282"><a href="#cb49-282" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb49-283"><a href="#cb49-283" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-284"><a href="#cb49-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"予測期間が0または負の値のため、FCF予測は行われません。"</span>)</span>
+<span id="cb49-285"><a href="#cb49-285" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-286"><a href="#cb49-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-287"><a href="#cb49-287" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"将来FCF予測 (簡易モデル -"</span>, forecast_period, <span class="st">"年間):</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-288"><a href="#cb49-288" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">round</span>(FCF_forecast, <span class="dv">0</span>))</span>
+<span id="cb49-289"><a href="#cb49-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-290"><a href="#cb49-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-291"><a href="#cb49-291" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-292"><a href="#cb49-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-293"><a href="#cb49-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### ターミナルバリュー (TV) の算出</span></span>
+<span id="cb49-294"><a href="#cb49-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-295"><a href="#cb49-295" aria-hidden="true" tabindex="-1"></a>ターミナルバリューは、明示的に予測する期間（ここでは10年間）以降の、企業が永続的に生み出すと仮定されるフリーキャッシュフローの現在価値の合計を表します。ゴードン成長モデルを用いて算出します。</span>
+<span id="cb49-296"><a href="#cb49-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-297"><a href="#cb49-297" aria-hidden="true" tabindex="-1"></a>$$TV = \frac{FCF_{N+1}}{WACC - g}$$</span>
+<span id="cb49-298"><a href="#cb49-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-299"><a href="#cb49-299" aria-hidden="true" tabindex="-1"></a>ここで、$FCF<span class="sc">\_</span>{N+1}$ は最終予測年度の翌年のFCF、$WACC$ は加重平均資本コスト、$g$ は永久成長率です。</span>
+<span id="cb49-300"><a href="#cb49-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-303"><a href="#cb49-303" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-304"><a href="#cb49-304" aria-hidden="true" tabindex="-1"></a><span class="co"># 最終予測年度の翌年 (forecast_period + 1 年目) のFCF (FCF_N_plus_1) を計算</span></span>
+<span id="cb49-305"><a href="#cb49-305" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb49-306"><a href="#cb49-306" aria-hidden="true" tabindex="-1"></a>  FCF_N_plus_1 <span class="ot">&lt;-</span> FCF_forecast[forecast_period] <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
+<span id="cb49-307"><a href="#cb49-307" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-308"><a href="#cb49-308" aria-hidden="true" tabindex="-1"></a>  FCF_N_plus_1 <span class="ot">&lt;-</span> last_FCF_actual <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)</span>
+<span id="cb49-309"><a href="#cb49-309" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-310"><a href="#cb49-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-311"><a href="#cb49-311" aria-hidden="true" tabindex="-1"></a><span class="co"># ターミナルバリュー (TV) の計算</span></span>
+<span id="cb49-312"><a href="#cb49-312" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (WACC <span class="sc">-</span> g <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
+<span id="cb49-313"><a href="#cb49-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">warning</span>(<span class="st">"WACC - g が0以下になるため、ターミナルバリューの計算が適切ではありません。"</span>)</span>
+<span id="cb49-314"><a href="#cb49-314" aria-hidden="true" tabindex="-1"></a>  TV <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb49-315"><a href="#cb49-315" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-316"><a href="#cb49-316" aria-hidden="true" tabindex="-1"></a>  TV <span class="ot">&lt;-</span> FCF_N_plus_1 <span class="sc">/</span> (WACC <span class="sc">-</span> g)</span>
+<span id="cb49-317"><a href="#cb49-317" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-318"><a href="#cb49-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-319"><a href="#cb49-319" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"最終予測年度の翌年のFCF (FCF_N_plus_1):"</span>, <span class="fu">round</span>(FCF_N_plus_1, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-320"><a href="#cb49-320" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"ターミナルバリュー (TV):"</span>, <span class="fu">round</span>(TV, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-321"><a href="#cb49-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-322"><a href="#cb49-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-323"><a href="#cb49-323" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb49-324"><a href="#cb49-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-325"><a href="#cb49-325" aria-hidden="true" tabindex="-1"></a><span class="fu">### 企業価値 (Valuation) の算出</span></span>
+<span id="cb49-326"><a href="#cb49-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-327"><a href="#cb49-327" aria-hidden="true" tabindex="-1"></a>各年度のフリーキャッシュフローとターミナルバリューをWACCで現在価値に割り引き、合計することで企業価値を算出します。</span>
+<span id="cb49-328"><a href="#cb49-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-331"><a href="#cb49-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-332"><a href="#cb49-332" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業価値の計算 (予測FCFの現在価値 + TVの現在価値)</span></span>
+<span id="cb49-333"><a href="#cb49-333" aria-hidden="true" tabindex="-1"></a>Valuation <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb49-334"><a href="#cb49-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-335"><a href="#cb49-335" aria-hidden="true" tabindex="-1"></a><span class="co"># 明示的予測期間のFCFの現在価値を合計</span></span>
+<span id="cb49-336"><a href="#cb49-336" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (forecast_period <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb49-337"><a href="#cb49-337" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>forecast_period) {</span>
+<span id="cb49-338"><a href="#cb49-338" aria-hidden="true" tabindex="-1"></a>    Valuation <span class="ot">&lt;-</span> Valuation <span class="sc">+</span> FCF_forecast[i] <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> WACC)<span class="sc">^</span>i</span>
+<span id="cb49-339"><a href="#cb49-339" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb49-340"><a href="#cb49-340" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-341"><a href="#cb49-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-342"><a href="#cb49-342" aria-hidden="true" tabindex="-1"></a><span class="co"># ターミナルバリューの現在価値を加算</span></span>
+<span id="cb49-343"><a href="#cb49-343" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(TV)) {</span>
+<span id="cb49-344"><a href="#cb49-344" aria-hidden="true" tabindex="-1"></a>  Valuation <span class="ot">&lt;-</span> Valuation <span class="sc">+</span> TV <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> WACC)<span class="sc">^</span>forecast_period</span>
+<span id="cb49-345"><a href="#cb49-345" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb49-346"><a href="#cb49-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">message</span>(<span class="st">"ターミナルバリューが計算できないため、企業価値の計算はTVを含んでいません。"</span>)</span>
+<span id="cb49-347"><a href="#cb49-347" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb49-348"><a href="#cb49-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-349"><a href="#cb49-349" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"DCF法による企業価値評価 (Valuation):"</span>, <span class="fu">round</span>(Valuation, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-350"><a href="#cb49-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-351"><a href="#cb49-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-352"><a href="#cb49-352" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
 <span id="cb49-353"><a href="#cb49-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-354"><a href="#cb49-354" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"DCF法による企業価値評価 (Valuation):"</span>, <span class="fu">round</span>(Valuation, <span class="dv">0</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-355"><a href="#cb49-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb49-356"><a href="#cb49-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-357"><a href="#cb49-357" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb49-358"><a href="#cb49-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-359"><a href="#cb49-359" aria-hidden="true" tabindex="-1"></a><span class="fu">### 時価総額とFCF</span></span>
-<span id="cb49-360"><a href="#cb49-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-363"><a href="#cb49-363" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb49-364"><a href="#cb49-364" aria-hidden="true" tabindex="-1"></a>FCF_E <span class="ot">&lt;-</span> last_fcf <span class="sc">/</span> (E<span class="sc">/</span><span class="fl">1e6</span>)</span>
-<span id="cb49-365"><a href="#cb49-365" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額フリーキャッシュフロー比率"</span>, <span class="fu">round</span>(FCF_E <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb49-366"><a href="#cb49-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-367"><a href="#cb49-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb49-354"><a href="#cb49-354" aria-hidden="true" tabindex="-1"></a><span class="fu">### 時価総額とFCF</span></span>
+<span id="cb49-355"><a href="#cb49-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-358"><a href="#cb49-358" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb49-359"><a href="#cb49-359" aria-hidden="true" tabindex="-1"></a>FCF_E <span class="ot">&lt;-</span> last_fcf <span class="sc">/</span> (E<span class="sc">/</span><span class="fl">1e6</span>)</span>
+<span id="cb49-360"><a href="#cb49-360" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"時価総額フリーキャッシュフロー比率"</span>, <span class="fu">round</span>(FCF_E <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb49-361"><a href="#cb49-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-362"><a href="#cb49-362" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -1,10 +1,5 @@
 ---
 title: "RIM法"
-format: 
-  html:
-    sidebar: true
-    page-navigation: true
-editor: visual
 ---
 
 ## 残余利益モデル(RIM)

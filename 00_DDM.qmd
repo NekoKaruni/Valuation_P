@@ -1,10 +1,5 @@
 ---
 title: "DDM法"
-format: 
-  html:
-    sidebar: true
-    page-navigation: true
-editor: visual
 ---
 
 # 配当割引モデル（DDM）
