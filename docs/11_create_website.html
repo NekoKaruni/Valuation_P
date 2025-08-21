@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>create_website</title>
+<title>ウェブサイトの作り方</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,7 +108,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="custom.scss">
-<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light">
@@ -142,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link active" href="./11_create_website.html" aria-current="page"> <i class="bi bi-globe-asia-australia" role="img">
 </i> 
-<span class="menu-text">ウェブサイトの作り方（詳解版）</span></a>
+<span class="menu-text">サイトの作り方</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NekoKaruni/Valuation_Pub.git"> <i class="bi bi-github" role="img">
@@ -160,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">ウェブサイトの作り方</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -403,65 +402,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#ウェブサイトの作り方詳解版" id="toc-ウェブサイトの作り方詳解版" class="nav-link active" data-scroll-target="#ウェブサイトの作り方詳解版"><span class="header-section-number">1</span> ウェブサイトの作り方（詳解版）</a>
+  <li><a href="#必要なツールのインストールと準備" id="toc-必要なツールのインストールと準備" class="nav-link active" data-scroll-target="#必要なツールのインストールと準備"><span class="header-section-number">1</span> 必要なツールのインストールと準備</a>
   <ul class="collapse">
-  <li><a href="#必要なツールのインストールと準備" id="toc-必要なツールのインストールと準備" class="nav-link" data-scroll-target="#必要なツールのインストールと準備"><span class="header-section-number">1.1</span> 1. 必要なツールのインストールと準備</a>
-  <ul class="collapse">
-  <li><a href="#gitのインストール" id="toc-gitのインストール" class="nav-link" data-scroll-target="#gitのインストール"><span class="header-section-number">1.1.1</span> 1-1. Gitのインストール</a></li>
-  <li><a href="#rのインストール" id="toc-rのインストール" class="nav-link" data-scroll-target="#rのインストール"><span class="header-section-number">1.1.2</span> 1-2. Rのインストール</a></li>
-  <li><a href="#rstudioのインストール" id="toc-rstudioのインストール" class="nav-link" data-scroll-target="#rstudioのインストール"><span class="header-section-number">1.1.3</span> 1-3. RStudioのインストール</a></li>
-  <li><a href="#quartoのインストール" id="toc-quartoのインストール" class="nav-link" data-scroll-target="#quartoのインストール"><span class="header-section-number">1.1.4</span> 1-4. Quartoのインストール</a></li>
+  <li><a href="#gitのインストール" id="toc-gitのインストール" class="nav-link" data-scroll-target="#gitのインストール"><span class="header-section-number">1.1</span> Gitのインストール</a></li>
+  <li><a href="#rのインストール" id="toc-rのインストール" class="nav-link" data-scroll-target="#rのインストール"><span class="header-section-number">1.2</span> Rのインストール</a></li>
+  <li><a href="#rstudioのインストール" id="toc-rstudioのインストール" class="nav-link" data-scroll-target="#rstudioのインストール"><span class="header-section-number">1.3</span> RStudioのインストール</a></li>
+  <li><a href="#quartoのインストール" id="toc-quartoのインストール" class="nav-link" data-scroll-target="#quartoのインストール"><span class="header-section-number">1.4</span> Quartoのインストール</a></li>
   </ul></li>
-  <li><a href="#githubアカウントの作成" id="toc-githubアカウントの作成" class="nav-link" data-scroll-target="#githubアカウントの作成"><span class="header-section-number">1.2</span> 2. GitHubアカウントの作成</a></li>
-  <li><a href="#githubリポジトリの作成" id="toc-githubリポジトリの作成" class="nav-link" data-scroll-target="#githubリポジトリの作成"><span class="header-section-number">1.3</span> 3. GitHubリポジトリの作成</a></li>
-  <li><a href="#rstudioでquartoプロジェクトを作成" id="toc-rstudioでquartoプロジェクトを作成" class="nav-link" data-scroll-target="#rstudioでquartoプロジェクトを作成"><span class="header-section-number">1.4</span> 4. RStudioでQuartoプロジェクトを作成</a></li>
-  <li><a href="#quarto.yml-ファイルの編集" id="toc-quarto.yml-ファイルの編集" class="nav-link" data-scroll-target="#quarto.yml-ファイルの編集"><span class="header-section-number">1.5</span> 5. <code>_quarto.yml</code> ファイルの編集</a></li>
-  <li><a href="#ページ作成" id="toc-ページ作成" class="nav-link" data-scroll-target="#ページ作成"><span class="header-section-number">1.6</span> 6.ページ作成</a></li>
-  <li><a href="#プレビューとビルド" id="toc-プレビューとビルド" class="nav-link" data-scroll-target="#プレビューとビルド"><span class="header-section-number">1.7</span> 7.プレビューとビルド</a></li>
-  <li><a href="#githubとrstudioの連携設定" id="toc-githubとrstudioの連携設定" class="nav-link" data-scroll-target="#githubとrstudioの連携設定"><span class="header-section-number">1.8</span> 8.GitHubとRStudioの連携設定</a></li>
-  <li><a href="#更新時の作業手順" id="toc-更新時の作業手順" class="nav-link" data-scroll-target="#更新時の作業手順"><span class="header-section-number">1.9</span> 9.更新時の作業手順</a></li>
-  <li><a href="#トラブルシューティング注意点" id="toc-トラブルシューティング注意点" class="nav-link" data-scroll-target="#トラブルシューティング注意点"><span class="header-section-number">1.10</span> 10. トラブルシューティング・注意点</a></li>
-  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">1.11</span> 11. まとめ</a></li>
-  </ul></li>
+  <li><a href="#githubアカウントの作成" id="toc-githubアカウントの作成" class="nav-link" data-scroll-target="#githubアカウントの作成"><span class="header-section-number">2</span> GitHubアカウントの作成</a></li>
+  <li><a href="#githubリポジトリの作成" id="toc-githubリポジトリの作成" class="nav-link" data-scroll-target="#githubリポジトリの作成"><span class="header-section-number">3</span> GitHubリポジトリの作成</a></li>
+  <li><a href="#rstudioでquartoプロジェクトを作成" id="toc-rstudioでquartoプロジェクトを作成" class="nav-link" data-scroll-target="#rstudioでquartoプロジェクトを作成"><span class="header-section-number">4</span> RStudioでQuartoプロジェクトを作成</a></li>
+  <li><a href="#quarto.yml-ファイルの編集" id="toc-quarto.yml-ファイルの編集" class="nav-link" data-scroll-target="#quarto.yml-ファイルの編集"><span class="header-section-number">5</span> _quarto.yml ファイルの編集</a></li>
+  <li><a href="#ページ作成" id="toc-ページ作成" class="nav-link" data-scroll-target="#ページ作成"><span class="header-section-number">6</span> ページ作成</a></li>
+  <li><a href="#プレビューとビルド" id="toc-プレビューとビルド" class="nav-link" data-scroll-target="#プレビューとビルド"><span class="header-section-number">7</span> プレビューとビルド</a></li>
+  <li><a href="#githubとrstudioの連携設定" id="toc-githubとrstudioの連携設定" class="nav-link" data-scroll-target="#githubとrstudioの連携設定"><span class="header-section-number">8</span> GitHubとRStudioの連携設定</a></li>
+  <li><a href="#更新時の作業手順" id="toc-更新時の作業手順" class="nav-link" data-scroll-target="#更新時の作業手順"><span class="header-section-number">9</span> 更新時の作業手順</a></li>
+  <li><a href="#トラブルシューティング注意点" id="toc-トラブルシューティング注意点" class="nav-link" data-scroll-target="#トラブルシューティング注意点"><span class="header-section-number">10</span> トラブルシューティング・注意点</a></li>
+  <li><a href="#まとめ" id="toc-まとめ" class="nav-link" data-scroll-target="#まとめ"><span class="header-section-number">11</span> まとめ</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="title display-7"></h1></header><div class="quarto-title-block"><div class="quarto-title-tools-only"><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">ウェブサイトの作り方</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<section id="ウェブサイトの作り方詳解版" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> ウェブサイトの作り方（詳解版）</h1>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
 <hr>
-<section id="必要なツールのインストールと準備" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="必要なツールのインストールと準備"><span class="header-section-number">1.1</span> 1. 必要なツールのインストールと準備</h2>
-<section id="gitのインストール" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="gitのインストール"><span class="header-section-number">1.1.1</span> 1-1. Gitのインストール</h3>
+<section id="必要なツールのインストールと準備" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 必要なツールのインストールと準備</h1>
+<section id="gitのインストール" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="gitのインストール"><span class="header-section-number">1.1</span> Gitのインストール</h2>
 <ul>
 <li><p><strong>Git</strong>はソースコードやドキュメントの変更履歴を管理するツールです。<br>
 </p></li>
 <li><p><a href="https://git-scm.com/">Git公式サイト</a>からOSに合ったインストーラーをダウンロードし、インストールしてください。</p></li>
 </ul>
 </section>
-<section id="rのインストール" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="rのインストール"><span class="header-section-number">1.1.2</span> 1-2. Rのインストール</h3>
+<section id="rのインストール" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="rのインストール"><span class="header-section-number">1.2</span> Rのインストール</h2>
 <ul>
 <li><p><strong>R</strong>は統計解析・データ分析向けのプログラミング言語です。</p></li>
 <li><p><a href="https://cran.r-project.org/">CRAN（The Comprehensive R Archive Network）</a>からOSに合ったインストーラーを入手してインストールします。</p></li>
 <li><p>インストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。</p></li>
 </ul>
 </section>
-<section id="rstudioのインストール" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="rstudioのインストール"><span class="header-section-number">1.1.3</span> 1-3. RStudioのインストール</h3>
+<section id="rstudioのインストール" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="rstudioのインストール"><span class="header-section-number">1.3</span> RStudioのインストール</h2>
 <ul>
 <li><p><strong>RStudio</strong>はRを使いやすくする統合開発環境（IDE）です。</p></li>
 <li><p><a href="https://posit.co/download/rstudio-desktop/">RStudio公式サイト</a>からインストーラーを取得しインストール。</p></li>
 </ul>
 </section>
-<section id="quartoのインストール" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="quartoのインストール"><span class="header-section-number">1.1.4</span> 1-4. Quartoのインストール</h3>
+<section id="quartoのインストール" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="quartoのインストール"><span class="header-section-number">1.4</span> Quartoのインストール</h2>
 <ul>
 <li><p><strong>Quarto</strong>はMarkdown形式で文章やサイトを生成するツールです。</p></li>
 <li><p><a href="https://quarto.org/docs/get-started/">Quarto公式サイト</a>からインストーラーをダウンロードしインストール。</p></li>
@@ -469,16 +479,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="githubアカウントの作成" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="githubアカウントの作成"><span class="header-section-number">1.2</span> 2. GitHubアカウントの作成</h2>
+<section id="githubアカウントの作成" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> GitHubアカウントの作成</h1>
 <ul>
 <li><p><a href="https://github.com/">GitHub公式サイト</a>で無料アカウントを作成。</p></li>
 <li><p>メールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。</p></li>
 <li><p>アカウント作成後、ログインできることを確認してください。</p></li>
 </ul>
 </section>
-<section id="githubリポジトリの作成" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="githubリポジトリの作成"><span class="header-section-number">1.3</span> 3. GitHubリポジトリの作成</h2>
+<section id="githubリポジトリの作成" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> GitHubリポジトリの作成</h1>
 <ol type="1">
 <li><p>GitHubにログインした状態で画面右上の「+」→「New repository」をクリック。</p></li>
 <li><p>リポジトリ名（例：<code>Sophillium</code>）を入力。</p></li>
@@ -487,8 +497,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>「Create repository」をクリック。</p></li>
 </ol>
 </section>
-<section id="rstudioでquartoプロジェクトを作成" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="rstudioでquartoプロジェクトを作成"><span class="header-section-number">1.4</span> 4. RStudioでQuartoプロジェクトを作成</h2>
+<section id="rstudioでquartoプロジェクトを作成" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> RStudioでQuartoプロジェクトを作成</h1>
 <ol type="1">
 <li><p>RStudioを起動。</p></li>
 <li><p>メニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。</p></li>
@@ -498,12 +508,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>*<a href="https://www.jaysong.net/RBook/aboutr.html">私たちのR</a>を参考にRStudioの設定をすることをおすすめします</p></li>
 </ol>
 </section>
-<section id="quarto.yml-ファイルの編集" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="quarto.yml-ファイルの編集"><span class="header-section-number">1.5</span> 5. <code>_quarto.yml</code> ファイルの編集</h2>
+<section id="quarto.yml-ファイルの編集" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> _quarto.yml ファイルの編集</h1>
 <ul>
 <li><p>プロジェクトのルートにある <code>_quarto.yml</code> はウェブサイト全体の設定ファイルです。</p></li>
 <li><p>例えば以下のように書きます。</p></li>
 </ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">``` yaml</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span><span class="co">  # ビルド成果物を docs フォルダに出力</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Sophillium"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Home"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.qmd</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"About"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.qmd</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span><span class="co">  # CSSでデザインをカスタマイズ可能</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>output-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)</li>
 </ul>
@@ -511,12 +539,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p>navbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。</p></li>
 <li><p>ページ作成（.qmdファイル）</p></li>
-<li></li>
 </ul>
 <!-- -->
 </section>
-<section id="ページ作成" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="ページ作成"><span class="header-section-number">1.6</span> 6.ページ作成</h2>
+<section id="ページ作成" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> ページ作成</h1>
 <ul>
 <li>各ページは .qmd 拡張子のMarkdownファイルで作成します。</li>
 </ul>
@@ -526,31 +553,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>ファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># x軸の値を生成</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布（平均0、標準偏差1）の確率密度関数</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y_norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>x_gamma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(x_gamma, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">rate=</span><span class="dv">1</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布（shape1=2, shape2=5）</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>x_beta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>y_beta <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x_beta, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># プロット設定</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))  <span class="co"># 3行1列に並べる</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布のプロット</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y_norm, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"標準正規分布"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布のプロット</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_gamma, y_gamma, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ガンマ分布 (shape=2, rate=1)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布のプロット</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_beta, y_beta, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"green"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ベータ分布 (shape1=2, shape2=5)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># x軸の値を生成</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布（平均0、標準偏差1）の確率密度関数</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>y_norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>x_gamma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(x_gamma, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">rate=</span><span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布（shape1=2, shape2=5）</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>x_beta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>y_beta <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x_beta, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># プロット設定</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))  <span class="co"># 3行1列に並べる</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布のプロット</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y_norm, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"標準正規分布"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布のプロット</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_gamma, y_gamma, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ガンマ分布 (shape=2, rate=1)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布のプロット</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_beta, y_beta, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"green"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ベータ分布 (shape1=2, shape2=5)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -561,8 +588,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <hr>
 </section>
-<section id="プレビューとビルド" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="プレビューとビルド"><span class="header-section-number">1.7</span> 7.プレビューとビルド</h2>
+<section id="プレビューとビルド" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> プレビューとビルド</h1>
 <ol type="1">
 <li><p>個別ページのプレビュー<br>
 RStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。<br>
@@ -578,8 +605,8 @@ RStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラ�
 </ul>
 <hr>
 </section>
-<section id="githubとrstudioの連携設定" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="githubとrstudioの連携設定"><span class="header-section-number">1.8</span> 8.GitHubとRStudioの連携設定</h2>
+<section id="githubとrstudioの連携設定" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> GitHubとRStudioの連携設定</h1>
 <ol type="1">
 <li>Gitの初期化（初回のみ）<br>
 RStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。<br>
@@ -600,8 +627,8 @@ GitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」�
 </ol>
 <hr>
 </section>
-<section id="更新時の作業手順" class="level2" data-number="1.9">
-<h2 data-number="1.9" class="anchored" data-anchor-id="更新時の作業手順"><span class="header-section-number">1.9</span> 9.更新時の作業手順</h2>
+<section id="更新時の作業手順" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> 更新時の作業手順</h1>
 <p>ローカルで .qmd ファイルを編集。<br>
 RStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。<br>
 変更をGitでコミット。</p>
@@ -623,8 +650,8 @@ git commit -m “Update website content”</p>
 <p>git push origin main</p>
 <hr>
 </section>
-<section id="トラブルシューティング注意点" class="level2" data-number="1.10">
-<h2 data-number="1.10" class="anchored" data-anchor-id="トラブルシューティング注意点"><span class="header-section-number">1.10</span> 10. トラブルシューティング・注意点</h2>
+<section id="トラブルシューティング注意点" class="level1" data-number="10">
+<h1 data-number="10"><span class="header-section-number">10</span> トラブルシューティング・注意点</h1>
 <ol type="1">
 <li>リンク先ファイル名の不一致<br>
 </li>
@@ -660,8 +687,8 @@ git commit -m “Update website content”</p>
 </ul>
 <hr>
 </section>
-<section id="まとめ" class="level2" data-number="1.11">
-<h2 data-number="1.11" class="anchored" data-anchor-id="まとめ"><span class="header-section-number">1.11</span> 11. まとめ</h2>
+<section id="まとめ" class="level1" data-number="11">
+<h1 data-number="11"><span class="header-section-number">11</span> まとめ</h1>
 <ul>
 <li>Git, R, RStudio, Quartoの準備 → GitHubアカウント作成<br>
 </li>
@@ -687,7 +714,6 @@ git commit -m “Update website content”</p>
 
 <!-- -->
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -1143,256 +1169,256 @@ git commit -m “Update website content”</p>
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># ウェブサイトの作り方（詳解版）</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1. 必要なツールのインストールと準備</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1-1. Gitのインストール</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Git**はソースコードやドキュメントの変更履歴を管理するツールです。\</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Git公式サイト</span><span class="co">](https://git-scm.com/)</span>からOSに合ったインストーラーをダウンロードし、インストールしてください。</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1-2. Rのインストール</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**R**は統計解析・データ分析向けのプログラミング言語です。</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">CRAN（The Comprehensive R Archive Network）</span><span class="co">](https://cran.r-project.org/)</span>からOSに合ったインストーラーを入手してインストールします。</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>インストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1-3. RStudioのインストール</span></span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**RStudio**はRを使いやすくする統合開発環境（IDE）です。</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">RStudio公式サイト</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span>からインストーラーを取得しインストール。</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 1-4. Quartoのインストール</span></span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Quarto**はMarkdown形式で文章やサイトを生成するツールです。</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Quarto公式サイト</span><span class="co">](https://quarto.org/docs/get-started/)</span>からインストーラーをダウンロードしインストール。</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>RStudioのターミナルやコマンドラインで以下を実行し、動作確認します。</span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2. GitHubアカウントの作成</span></span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">GitHub公式サイト</span><span class="co">](https://github.com/)</span>で無料アカウントを作成。</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>メールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。</span>
-<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>アカウント作成後、ログインできることを確認してください。</span>
-<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 3. GitHubリポジトリの作成</span></span>
-<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>GitHubにログインした状態で画面右上の「+」→「New repository」をクリック。</span>
-<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>リポジトリ名（例：<span class="in">`Sophillium`</span>）を入力。</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Public** を選択（無料アカウントでも公開リポジトリは作成可能）。</span>
-<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Add a README file」にチェックを入れておくと説明文を書けて便利。</span>
-<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>「Create repository」をクリック。</span>
-<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## 4. RStudioでQuartoプロジェクトを作成</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>RStudioを起動。</span>
-<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>メニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。</span>
-<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>プロジェクト名（例：<span class="in">`Sophillium`</span>）を入力。</span>
-<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Browse」ボタンから好きなフォルダに保存場所を選択。</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\*</span><span class="co">[</span><span class="ot">私たちのR</span><span class="co">](https://www.jaysong.net/RBook/aboutr.html)</span>を参考にRStudioの設定をすることをおすすめします</span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## 5. `_quarto.yml` ファイルの編集</span></span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>プロジェクトのルートにある <span class="in">`_quarto.yml`</span> はウェブサイト全体の設定ファイルです。</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>例えば以下のように書きます。</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>project:</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  type: website</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  output-dir: docs  # ビルド成果物を docs フォルダに出力</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>website:</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  title: "Sophillium"</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  navbar:</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    left:</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="ss">      - </span>text: "Home"</span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        href: index.qmd</span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="ss">      - </span>text: "About"</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>        href: about.qmd</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>format:</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  html:</span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    theme: cosmo</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    css: styles.css  # CSSでデザインをカスタマイズ可能</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>output-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>navbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。</span>
-<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ページ作成（.qmdファイル）</span>
-<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span></span>
-<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
-<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## 6.ページ作成</span></span>
-<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>各ページは .qmd 拡張子のMarkdownファイルで作成します。</span>
-<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>例：01_index.qmd、02_about.qmd のように番号を付けて管理すると順序がわかりやすいです。</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。</span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="co"># x軸の値を生成</span></span>
-<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布（平均0、標準偏差1）の確率密度関数</span></span>
-<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a>y_norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
-<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）</span></span>
-<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a>x_gamma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(x_gamma, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">rate=</span><span class="dv">1</span>)</span>
-<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布（shape1=2, shape2=5）</span></span>
-<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a>x_beta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
-<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a>y_beta <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x_beta, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>)</span>
-<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="co"># プロット設定</span></span>
-<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))  <span class="co"># 3行1列に並べる</span></span>
-<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布のプロット</span></span>
-<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y_norm, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"標準正規分布"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
-<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布のプロット</span></span>
-<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_gamma, y_gamma, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ガンマ分布 (shape=2, rate=1)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
-<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布のプロット</span></span>
-<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_beta, y_beta, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"green"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ベータ分布 (shape1=2, shape2=5)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
-<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## 7.プレビューとビルド</span></span>
-<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>個別ページのプレビュー\</span>
-<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>    RStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。\</span>
-<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>    文章やレイアウトの確認に便利です。</span>
-<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>サイト全体のビルド</span>
-<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>    ターミナル（RStudioのターミナルまたはコマンドプロンプト）を開き、プロジェクトのルートで以下を実行。</span>
-<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; quarto render</span></span>
-<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml で指定した output-dir フォルダ（例：docs）にサイトのHTMLなどのファイル一式が生成されます。</span>
-<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a><span class="fu">## 8.GitHubとRStudioの連携設定</span></span>
-<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Gitの初期化（初回のみ）\</span>
-<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>    RStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。\</span>
-<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a>    プロジェクトのルートフォルダでターミナルを開き、以下を実行します。</span>
-<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git init\</span></span>
-<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git remote add origin </span><span class="ot">&lt;https://github.com/あなたのユーザー名/リポジトリ名.git&gt;</span></span>
-<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>RStudioでGit操作\</span>
-<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>    RStudioの右上の「Git」タブから変更ファイルのステージング（チェックボックスにチェック）、コミットメッセージ入力、コミット、プッシュができます。\</span>
-<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>    初回プッシュ時はパスワードの代わりにGitHubで作成したパーソナルアクセストークン（PAT）を使用することが多いです。</span>
-<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>GitHub Pagesの設定\</span>
-<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a>    GitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」へ移動。</span>
-<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Source」のプルダウンで「Branch: main」「Folder: /docs」を選択し、「Save」ボタンを押します。</span>
-<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>数分待つとウェブサイトが <span class="ot">&lt;https://あなたのユーザー名.github.io/リポジトリ名/&gt;</span> で公開されます。</span>
-<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## 9.更新時の作業手順</span></span>
-<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a>ローカルで .qmd ファイルを編集。\</span>
-<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a>RStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。\</span>
-<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a>変更をGitでコミット。</span>
-<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git add .\</span></span>
-<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git commit -m "Update website content"</span></span>
-<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a>GitHubにプッシュ。 <span class="sc">\&gt;</span> git push origin main</span>
-<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a>GitHub Pagesが自動的に更新されるのを待つ。\</span>
-<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a>他の端末でリモートレポジトリの変更を行った際は競合を避けるためエラーになるので。レポジトリとローカルの内容を合わせてからPush</span>
-<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a><span class="ss"> 1. </span>最新の変更をリモートから取得</span>
-<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a>git pull origin main --rebase</span>
-<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>コンフリクトがあれば解決し、なければそのままpush</span>
-<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a>git push origin main</span>
-<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a><span class="fu">## 10. トラブルシューティング・注意点</span></span>
-<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>リンク先ファイル名の不一致\</span>
-<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-214"><a href="#cb2-214" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml のナビゲーションと .qmd のファイル名が違うとエラーになります。\</span>
-<span id="cb2-215"><a href="#cb2-215" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ファイル名を変更したら必ず <span class="sc">\_</span>quarto.yml も修正してください。</span>
-<span id="cb2-216"><a href="#cb2-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-217"><a href="#cb2-217" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Gitのpushが拒否される\</span>
-<span id="cb2-218"><a href="#cb2-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-219"><a href="#cb2-219" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>リモートリポジトリに自分のローカルにない変更がある場合、git push が失敗します。\</span>
-<span id="cb2-220"><a href="#cb2-220" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>先に以下を実行し、変更を取り込んでください。</span>
-<span id="cb2-221"><a href="#cb2-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-222"><a href="#cb2-222" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git pull origin main</span></span>
-<span id="cb2-223"><a href="#cb2-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-224"><a href="#cb2-224" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>コンフリクトがあれば手動で解消し、再度pushします。</span>
-<span id="cb2-225"><a href="#cb2-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-226"><a href="#cb2-226" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>GitHub Pagesに成果物が表示されない\</span>
-<span id="cb2-227"><a href="#cb2-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-228"><a href="#cb2-228" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHubのPages設定が正しいか（ブランチとフォルダ）必ず確認してください。\</span>
-<span id="cb2-229"><a href="#cb2-229" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Quartoのビルド成果物が指定フォルダにあるかも重要です。</span>
-<span id="cb2-230"><a href="#cb2-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-231"><a href="#cb2-231" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-232"><a href="#cb2-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-233"><a href="#cb2-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## 11. まとめ</span></span>
-<span id="cb2-234"><a href="#cb2-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-235"><a href="#cb2-235" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Git, R, RStudio, Quartoの準備 → GitHubアカウント作成\</span>
-<span id="cb2-236"><a href="#cb2-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHubリポジトリ作成 → RStudioでQuartoプロジェクト作成\</span>
-<span id="cb2-237"><a href="#cb2-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml編集でサイト設定 → .qmdでページ作成\</span>
-<span id="cb2-238"><a href="#cb2-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>quarto renderでサイト生成 → Gitでコミット・プッシュ\</span>
-<span id="cb2-239"><a href="#cb2-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHub Pages設定で公開完了</span>
-<span id="cb2-240"><a href="#cb2-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-241"><a href="#cb2-241" aria-hidden="true" tabindex="-1"></a>この流れであなたのウェブサイトが自分で作れて、GitHubを使った公開まで自動化できます！</span>
-<span id="cb2-242"><a href="#cb2-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-243"><a href="#cb2-243" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
-<span id="cb2-244"><a href="#cb2-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-245"><a href="#cb2-245" aria-hidden="true" tabindex="-1"></a>参考リンク\</span>
-<span id="cb2-246"><a href="#cb2-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Git公式サイト：<span class="ot">&lt;https://git-scm.com/&gt;</span>\</span>
-<span id="cb2-247"><a href="#cb2-247" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R公式サイト：<span class="ot">&lt;https://cran.r-project.org/&gt;</span>\</span>
-<span id="cb2-248"><a href="#cb2-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>RStudio公式サイト：<span class="ot">&lt;https://posit.co/download/rstudio-desktop/&gt;</span>\</span>
-<span id="cb2-249"><a href="#cb2-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quarto公式サイト：<span class="ot">&lt;https://quarto.org/docs/&gt;</span>\</span>
-<span id="cb2-250"><a href="#cb2-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GitHub公式サイト：<span class="ot">&lt;https://github.com/&gt;</span>\</span>
-<span id="cb2-251"><a href="#cb2-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GitHub Pagesの使い方：<span class="ot">&lt;https://docs.github.com/en/pages/getting-started-with-github-pages&gt;</span>\</span>
-<span id="cb2-252"><a href="#cb2-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>私たちのR：<span class="ot">&lt;https://www.jaysong.net/RBook/aboutr.html&gt;</span>　</span>
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "ウェブサイトの作り方"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu"># 必要なツールのインストールと準備</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Gitのインストール</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Git**はソースコードやドキュメントの変更履歴を管理するツールです。\</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Git公式サイト</span><span class="co">](https://git-scm.com/)</span>からOSに合ったインストーラーをダウンロードし、インストールしてください。</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Rのインストール</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**R**は統計解析・データ分析向けのプログラミング言語です。</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">CRAN（The Comprehensive R Archive Network）</span><span class="co">](https://cran.r-project.org/)</span>からOSに合ったインストーラーを入手してインストールします。</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>インストール後、コマンドラインまたはRStudioからRを起動できることを確認してください。</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## RStudioのインストール</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**RStudio**はRを使いやすくする統合開発環境（IDE）です。</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">RStudio公式サイト</span><span class="co">](https://posit.co/download/rstudio-desktop/)</span>からインストーラーを取得しインストール。</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quartoのインストール</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**Quarto**はMarkdown形式で文章やサイトを生成するツールです。</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">Quarto公式サイト</span><span class="co">](https://quarto.org/docs/get-started/)</span>からインストーラーをダウンロードしインストール。</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>RStudioのターミナルやコマンドラインで以下を実行し、動作確認します。</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu"># GitHubアカウントの作成</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="co">[</span><span class="ot">GitHub公式サイト</span><span class="co">](https://github.com/)</span>で無料アカウントを作成。</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>メールアドレスが必要です。管理しやすい専用のメール（例：Gmail）を新規作成することを推奨します。</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>アカウント作成後、ログインできることを確認してください。</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># GitHubリポジトリの作成</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>GitHubにログインした状態で画面右上の「+」→「New repository」をクリック。</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>リポジトリ名（例：<span class="in">`Sophillium`</span>）を入力。</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>**Public** を選択（無料アカウントでも公開リポジトリは作成可能）。</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Add a README file」にチェックを入れておくと説明文を書けて便利。</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>「Create repository」をクリック。</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="fu"># RStudioでQuartoプロジェクトを作成</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>RStudioを起動。</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>メニューから「File」→「New Project」→「New Directory」→「Quarto Website」を選択。</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>プロジェクト名（例：<span class="in">`Sophillium`</span>）を入力。</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Browse」ボタンから好きなフォルダに保存場所を選択。</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>「Create Project」を押すと、新しいQuartoウェブサイトプロジェクトが作成されます。</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="sc">\*</span><span class="co">[</span><span class="ot">私たちのR</span><span class="co">](https://www.jaysong.net/RBook/aboutr.html)</span>を参考にRStudioの設定をすることをおすすめします</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="fu"># \_quarto.yml ファイルの編集</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>プロジェクトのルートにある <span class="in">`_quarto.yml`</span> はウェブサイト全体の設定ファイルです。</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>例えば以下のように書きます。</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="in">``` yaml</span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="fu">project</span><span class="kw">:</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> website</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">output-dir</span><span class="kw">:</span><span class="at"> docs</span><span class="co">  # ビルド成果物を docs フォルダに出力</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="fu">website</span><span class="kw">:</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Sophillium"</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">navbar</span><span class="kw">:</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">left</span><span class="kw">:</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"Home"</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> index.qmd</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">text</span><span class="kw">:</span><span class="at"> </span><span class="st">"About"</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> about.qmd</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">theme</span><span class="kw">:</span><span class="at"> cosmo</span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">css</span><span class="kw">:</span><span class="at"> styles.css</span><span class="co">  # CSSでデザインをカスタマイズ可能</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>output-dir はビルド後の静的サイトのファイル置き場で、GitHub Pagesで公開したいフォルダ名と一致させます。(docsでいい)</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>navbar でメニューのリンクを設定します。リンク先ファイル名は実際の .qmd ファイル名と完全に一致させる必要があります。</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ページ作成（.qmdファイル）</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="fu"># ページ作成</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>各ページは .qmd 拡張子のMarkdownファイルで作成します。</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- --&gt;</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>例：01_index.qmd、02_about.qmd のように番号を付けて管理すると順序がわかりやすいです。</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ファイルの中身はMarkdown記法で文章を書き、必要に応じてRコードチャンクを埋め込み可能です。</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="co"># x軸の値を生成</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">4</span>, <span class="dv">4</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布（平均0、標準偏差1）の確率密度関数</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>y_norm <span class="ot">&lt;-</span> <span class="fu">dnorm</span>(x, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span><span class="dv">1</span>)</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布（shape=2, rate=1）の確率密度関数（xは正の範囲で）</span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>x_gamma <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>y_gamma <span class="ot">&lt;-</span> <span class="fu">dgamma</span>(x_gamma, <span class="at">shape=</span><span class="dv">2</span>, <span class="at">rate=</span><span class="dv">1</span>)</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布（shape1=2, shape2=5）</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>x_beta <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length=</span><span class="dv">200</span>)</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>y_beta <span class="ot">&lt;-</span> <span class="fu">dbeta</span>(x_beta, <span class="at">shape1=</span><span class="dv">2</span>, <span class="at">shape2=</span><span class="dv">5</span>)</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="co"># プロット設定</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">1</span>), <span class="at">mar=</span><span class="fu">c</span>(<span class="dv">4</span>,<span class="dv">4</span>,<span class="dv">2</span>,<span class="dv">1</span>))  <span class="co"># 3行1列に並べる</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="co"># 正規分布のプロット</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y_norm, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"標準正規分布"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="co"># ガンマ分布のプロット</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_gamma, y_gamma, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ガンマ分布 (shape=2, rate=1)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="co"># ベータ分布のプロット</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x_beta, y_beta, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"green"</span>, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">main=</span><span class="st">"ベータ分布 (shape1=2, shape2=5)"</span>, <span class="at">ylab=</span><span class="st">"密度"</span>, <span class="at">xlab=</span><span class="st">"x"</span>)</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="fu"># プレビューとビルド</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>個別ページのプレビュー\</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>    RStudioで .qmd ファイルを開き、「Render」ボタンを押すとブラウザにプレビューが表示されます。\</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>    文章やレイアウトの確認に便利です。</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>サイト全体のビルド</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>    ターミナル（RStudioのターミナルまたはコマンドプロンプト）を開き、プロジェクトのルートで以下を実行。</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; quarto render</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml で指定した output-dir フォルダ（例：docs）にサイトのHTMLなどのファイル一式が生成されます。</span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="fu"># GitHubとRStudioの連携設定</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>Gitの初期化（初回のみ）\</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>    RStudioの「Git」タブが表示されていない場合、Git管理が有効になっていません。\</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>    プロジェクトのルートフォルダでターミナルを開き、以下を実行します。</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git init\</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git remote add origin </span><span class="ot">&lt;https://github.com/あなたのユーザー名/リポジトリ名.git&gt;</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>RStudioでGit操作\</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>    RStudioの右上の「Git」タブから変更ファイルのステージング（チェックボックスにチェック）、コミットメッセージ入力、コミット、プッシュができます。\</span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>    初回プッシュ時はパスワードの代わりにGitHubで作成したパーソナルアクセストークン（PAT）を使用することが多いです。</span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>GitHub Pagesの設定\</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>    GitHubのリポジトリ画面にアクセスし、「Settings」→「Pages」へ移動。</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>「Source」のプルダウンで「Branch: main」「Folder: /docs」を選択し、「Save」ボタンを押します。</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>数分待つとウェブサイトが <span class="ot">&lt;https://あなたのユーザー名.github.io/リポジトリ名/&gt;</span> で公開されます。</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="fu"># 更新時の作業手順</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>ローカルで .qmd ファイルを編集。\</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>RStudioで quarto render を実行しサイトをビルド（または「Render」ボタンで個別に確認）。\</span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>変更をGitでコミット。</span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git add .\</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git commit -m "Update website content"</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>GitHubにプッシュ。 <span class="sc">\&gt;</span> git push origin main</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>GitHub Pagesが自動的に更新されるのを待つ。\</span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>他の端末でリモートレポジトリの変更を行った際は競合を避けるためエラーになるので。レポジトリとローカルの内容を合わせてからPush</span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>最新の変更をリモートから取得</span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>git pull origin main --rebase</span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>コンフリクトがあれば解決し、なければそのままpush</span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>git push origin main</span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="fu"># トラブルシューティング・注意点</span></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>リンク先ファイル名の不一致\</span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml のナビゲーションと .qmd のファイル名が違うとエラーになります。\</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>ファイル名を変更したら必ず <span class="sc">\_</span>quarto.yml も修正してください。</span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>Gitのpushが拒否される\</span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>リモートリポジトリに自分のローカルにない変更がある場合、git push が失敗します。\</span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>先に以下を実行し、変更を取り込んでください。</span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; git pull origin main</span></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>コンフリクトがあれば手動で解消し、再度pushします。</span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>GitHub Pagesに成果物が表示されない\</span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHubのPages設定が正しいか（ブランチとフォルダ）必ず確認してください。\</span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Quartoのビルド成果物が指定フォルダにあるかも重要です。</span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a><span class="fu"># まとめ</span></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Git, R, RStudio, Quartoの準備 → GitHubアカウント作成\</span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHubリポジトリ作成 → RStudioでQuartoプロジェクト作成\</span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="sc">\_</span>quarto.yml編集でサイト設定 → .qmdでページ作成\</span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>quarto renderでサイト生成 → Gitでコミット・プッシュ\</span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>GitHub Pages設定で公開完了</span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>この流れであなたのウェブサイトが自分で作れて、GitHubを使った公開まで自動化できます！</span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------</span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>参考リンク\</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Git公式サイト：<span class="ot">&lt;https://git-scm.com/&gt;</span>\</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>R公式サイト：<span class="ot">&lt;https://cran.r-project.org/&gt;</span>\</span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>RStudio公式サイト：<span class="ot">&lt;https://posit.co/download/rstudio-desktop/&gt;</span>\</span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quarto公式サイト：<span class="ot">&lt;https://quarto.org/docs/&gt;</span>\</span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GitHub公式サイト：<span class="ot">&lt;https://github.com/&gt;</span>\</span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>GitHub Pagesの使い方：<span class="ot">&lt;https://docs.github.com/en/pages/getting-started-with-github-pages&gt;</span>\</span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>私たちのR：<span class="ot">&lt;https://www.jaysong.net/RBook/aboutr.html&gt;</span>　</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

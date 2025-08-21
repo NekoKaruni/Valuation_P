@@ -13,7 +13,17 @@ title: "8562_福島銀行"
 ------------------------------------------------------------------------
 
 ## 前提データの準備
+```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
 
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
 ```{r}
 # パッケージの読み込み
 library(tidyverse)
@@ -51,28 +61,27 @@ d <- Net_Income_U * Pay_ratio
 ```
 
 ```{r}
-Year <- c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024)
-
-Look_Payratio <- data_frame(Year, Pay_ratio)
-
-# 必要なパッケージを読み込む
-library(ggplot2)
+Look_Payratio <- tibble(Year = c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), Pay_ratio)
 
 # 折れ線グラフの作成
 ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) +
-  geom_line(size = 0.5) +
+  geom_line(linewidth = 0.5) +
   geom_point(size = 1) +
   geom_text(aes(label = round(Pay_ratio *100, 1)), vjust = -1, size = 3, color = "darkblue") +
-  scale_color_brewer(palette = "Paired") + 
-  ylim(0, 200)+
+  coord_cartesian(ylim = c(0, 200))+
   labs(
     title = "年度別配当性向の推移",
     x = "年度",
     y = "配当性向 (%)"
   ) +
-  scale_x_continuous(breaks = Look_Payratio$Year, labels = Look_Payratio$Year) +  
-  theme_minimal() +
-  scale_x_continuous(breaks = unique(Look_Payratio$Year))
+  scale_x_continuous(breaks = unique(Look_Payratio$Year)) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold", margin = margin(b = 30)),
+    axis.text.x = element_text(size = 12, vjust = 1, margin = margin(t = 5)),  # 年度ラベルの下に余白
+    axis.title.x = element_text(size = 14, margin = margin(t = 30)),
+    axis.title.y = element_text(size = 14, margin = margin(r = 30))
+  )
 ```
 
 ```{r}

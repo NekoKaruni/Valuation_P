@@ -141,7 +141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./11_create_website.html"> <i class="bi bi-globe-asia-australia" role="img">
 </i> 
-<span class="menu-text">ウェブサイトの作り方（詳解版）</span></a>
+<span class="menu-text">サイトの作り方</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/NekoKaruni/Valuation_Pub.git"> <i class="bi bi-github" role="img">
@@ -426,15 +426,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.2     ✔ tibble    3.3.0
-✔ lubridate 1.9.4     ✔ tidyr     1.3.1
-✔ purrr     1.1.0     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+✔ forcats   1.0.0     ✔ readr     2.1.5
+✔ ggplot2   3.5.2     ✔ stringr   1.5.1
+✔ lubridate 1.9.4     ✔ tibble    3.3.0
+✔ purrr     1.1.0     ✔ tidyr     1.3.1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -458,7 +453,7 @@ date (1): Date
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1970</span><span class="sc">:</span><span class="dv">2024</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co"># データフレーム化して見やすく表示</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>topix_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>topix_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> years,</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Open =</span> TOPIX_OPEN,</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Close =</span> TOPIX_CLOSE,</span>
@@ -471,62 +466,20 @@ date (1): Date
 <span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の表示</span></span>
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(topix_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>   Year    Open   Close Return
-1  1970  179.30  148.35 -17.26
-2  1971  148.35  199.45  34.45
-3  1972  199.45  401.70 101.40
-4  1973  401.70  306.44 -23.71
-5  1974  306.44  278.34  -9.17
-6  1975  278.34  323.43  16.20
-7  1976  323.43  383.88  18.69
-8  1977  383.88  364.08  -5.16
-9  1978  364.08  449.55  23.48
-10 1979  449.55  459.61   2.24
-11 1980  459.61  494.10   7.50
-12 1981  494.10  570.31  15.42
-13 1982  570.31  593.72   4.10
-14 1983  593.72  731.82  23.26
-15 1984  731.82  913.37  24.81
-16 1985  913.37 1049.40  14.89
-17 1986 1049.40 1556.37  48.31
-18 1987 1556.37 1725.83  10.89
-19 1988 1725.83 2357.03  36.57
-20 1989 2357.03 2881.37  22.25
-21 1990 2881.37 1733.83 -39.83
-22 1991 1733.83 1714.68  -1.10
-23 1992 1714.68 1307.66 -23.74
-24 1993 1307.66 1439.31  10.07
-25 1994 1439.31 1559.09   8.32
-26 1995 1559.09 1577.70   1.19
-27 1996 1577.70 1470.94  -6.77
-28 1997 1470.94 1175.03 -20.12
-29 1998 1175.03 1086.99  -7.49
-30 1999 1086.99 1722.20  58.44
-31 2000 1722.20 1283.67 -25.46
-32 2001 1283.67 1032.14 -19.59
-33 2002 1032.14  843.29 -18.30
-34 2003  843.29 1043.69  23.76
-35 2004 1043.69 1149.63  10.15
-36 2005 1149.63 1649.76  43.50
-37 2006 1649.76 1681.07   1.90
-38 2007 1681.07 1475.68 -12.22
-39 2008 1475.68  859.24 -41.77
-40 2009  859.24  907.59   5.63
-41 2010  907.59  898.80  -0.97
-42 2011  898.80  728.61 -18.94
-43 2012  728.61  859.80  18.01
-44 2013  859.80 1302.29  51.46
-45 2014 1302.29 1407.51   8.08
-46 2015 1407.51 1547.30   9.93
-47 2016 1547.30 1518.61  -1.85
-48 2017 1518.61 1817.56  19.69
-49 2018 1817.56 1494.09 -17.80
-50 2019 1494.09 1721.36  15.21
-51 2020 1721.36 1804.68   4.84
-52 2021 1804.68 1992.33  10.40
-53 2022 1992.33 1891.71  -5.05
-54 2023 1891.71 2366.39  25.09
-55 2024 2366.39 2784.92  17.69</code></pre>
+<pre><code># A tibble: 55 × 4
+    Year  Open Close Return
+   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1  1970  179.  148. -17.3 
+ 2  1971  148.  199.  34.4 
+ 3  1972  199.  402. 101.  
+ 4  1973  402.  306. -23.7 
+ 5  1974  306.  278.  -9.17
+ 6  1975  278.  323.  16.2 
+ 7  1976  323.  384.  18.7 
+ 8  1977  384.  364.  -5.16
+ 9  1978  364.  450.  23.5 
+10  1979  450.  460.   2.24
+# ℹ 45 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"期待収益率（1970～2024年の平均）:"</span>, <span class="fu">round</span>(expected_return <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -540,7 +493,7 @@ date (1): Date
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>                              <span class="at">names_to =</span> <span class="st">"項目"</span>, <span class="at">values_to =</span> <span class="st">"値"</span>)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="fu">ifelse</span>(項目 <span class="sc">==</span> <span class="st">"Return"</span>, 値 <span class="sc">*</span> coef, 値), <span class="at">color =</span> 項目)) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"TOPIX指数"</span>,</span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> coef, <span class="at">name =</span> <span class="st">"値上がり率（%）"</span>)</span>
@@ -554,14 +507,10 @@ date (1): Date
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-ℹ Please use `linewidth` instead.</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="00_TOPIX_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="1152"></p>
+<p><img src="00_TOPIX_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
@@ -1024,64 +973,76 @@ date (1): Date
     }
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "TOPIX"</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>)</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## TOPIXの算出が始まり、切りのいい1970年から算出</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 年初始値と年末終値をベクトルにまとめるx</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 年次リターン（価格収益率）を計算</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 年度</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1970</span><span class="sc">:</span><span class="dv">2024</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># データフレーム化して見やすく表示</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>topix_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> years,</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">Open =</span> TOPIX_OPEN,</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">Close =</span> TOPIX_CLOSE,</span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">Return =</span> <span class="fu">round</span>(topix_return <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># パーセント表示</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 期待収益率（年平均リターン）</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>expected_return <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return)</span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の表示</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(topix_df)</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"期待収益率（1970～2024年の平均）:"</span>, <span class="fu">round</span>(expected_return <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co"># coefを計算（Returnの最大値に合わせる）</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">max</span>(topix_df<span class="sc">$</span>Close) <span class="sc">/</span> <span class="fu">max</span>(topix_df<span class="sc">$</span>Return)</span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot_longerで長い形式に</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>TOPIX_df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(topix_df, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Close"</span>, <span class="st">"Return"</span>),</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>                              <span class="at">names_to =</span> <span class="st">"項目"</span>, <span class="at">values_to =</span> <span class="st">"値"</span>)</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="fu">ifelse</span>(項目 <span class="sc">==</span> <span class="st">"Return"</span>, 値 <span class="sc">*</span> coef, 値), <span class="at">color =</span> 項目)) <span class="sc">+</span></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"TOPIX指数"</span>,</span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> coef, <span class="at">name =</span> <span class="st">"値上がり率（%）"</span>)</span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Close"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Return"</span> <span class="ot">=</span> <span class="st">"red"</span>),</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"TOPIX指数"</span>, <span class="st">"値上がり率（%）"</span>)) <span class="sc">+</span></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"1970年~2024年 TOPIX指数と値上がり率"</span>,</span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span>,</span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">""</span></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "TOPIX"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(conflicted)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"filter"</span>, <span class="st">"dplyr"</span>)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">conflict_prefer</span>(<span class="st">"lag"</span>,   <span class="st">"dplyr"</span>)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>TOPIX <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"^tpx_y.csv"</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="do">## TOPIXの算出が始まり、切りのいい1970年から算出</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="co"># 年初始値と年末終値をベクトルにまとめるx</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>TOPIX_OPEN <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">1</span><span class="sc">:</span><span class="dv">55</span>]</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>TOPIX_CLOSE <span class="ot">&lt;-</span> TOPIX<span class="sc">$</span>Close[<span class="dv">2</span><span class="sc">:</span><span class="dv">56</span>]</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># 年次リターン（価格収益率）を計算</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>topix_return <span class="ot">&lt;-</span> (TOPIX_CLOSE <span class="sc">-</span> TOPIX_OPEN) <span class="sc">/</span> TOPIX_OPEN</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co"># 年度</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="dv">1970</span><span class="sc">:</span><span class="dv">2024</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># データフレーム化して見やすく表示</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>topix_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> years,</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">Open =</span> TOPIX_OPEN,</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">Close =</span> TOPIX_CLOSE,</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">Return =</span> <span class="fu">round</span>(topix_return <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># パーセント表示</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co"># 期待収益率（年平均リターン）</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>expected_return <span class="ot">&lt;-</span> <span class="fu">mean</span>(topix_return)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co"># 結果の表示</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(topix_df)</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"期待収益率（1970～2024年の平均）:"</span>, <span class="fu">round</span>(expected_return <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">3</span>), <span class="st">"%</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="co"># coefを計算（Returnの最大値に合わせる）</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>coef <span class="ot">&lt;-</span> <span class="fu">max</span>(topix_df<span class="sc">$</span>Close) <span class="sc">/</span> <span class="fu">max</span>(topix_df<span class="sc">$</span>Return)</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="co"># pivot_longerで長い形式に</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>TOPIX_df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(topix_df, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"Close"</span>, <span class="st">"Return"</span>),</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>                              <span class="at">names_to =</span> <span class="st">"項目"</span>, <span class="at">values_to =</span> <span class="st">"値"</span>)</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> <span class="fu">ifelse</span>(項目 <span class="sc">==</span> <span class="st">"Return"</span>, 値 <span class="sc">*</span> coef, 値), <span class="at">color =</span> 項目)) <span class="sc">+</span></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"TOPIX指数"</span>,</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>    <span class="at">sec.axis =</span> <span class="fu">sec_axis</span>(<span class="sc">~</span> . <span class="sc">/</span> coef, <span class="at">name =</span> <span class="st">"値上がり率（%）"</span>)</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Close"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Return"</span> <span class="ot">=</span> <span class="st">"red"</span>),</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"TOPIX指数"</span>, <span class="st">"値上がり率（%）"</span>)) <span class="sc">+</span></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"1970年~2024年 TOPIX指数と値上がり率"</span>,</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span>,</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">""</span></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

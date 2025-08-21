@@ -3,6 +3,18 @@ title: "TOPIX"
 ---
 
 ```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
+
+```{r}
 library("tidyverse")
 TOPIX <- read_csv("^tpx_y.csv")
 ## TOPIXの算出が始まり、切りのいい1970年から算出
@@ -16,7 +28,7 @@ topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
 years <- 1970:2024
 
 # データフレーム化して見やすく表示
-topix_df <- data.frame(
+topix_df <- tibble(
   Year = years,
   Open = TOPIX_OPEN,
   Close = TOPIX_CLOSE,
@@ -40,7 +52,7 @@ TOPIX_df_long <- pivot_longer(topix_df, cols = c("Close", "Return"),
                               names_to = "項目", values_to = "値")
 
 ggplot(TOPIX_df_long, aes(x = Year, y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目)) +
-  geom_line(size = 1) +
+  geom_line(linewidth = 1) +
   scale_y_continuous(
     name = "TOPIX指数",
     sec.axis = sec_axis(~ . / coef, name = "値上がり率（%）")
