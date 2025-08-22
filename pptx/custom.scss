@@ -1,0 +1,29 @@
+/* 本文・段落・見出しを一貫したサンセリフ体で */
+body, p {
+  font-family: "IBM Plex Sans JP", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  line-height: 1.7;
+  font-size: 16px;
+  color: #333333;
+}
+
+/* 見出しも統一フォントで力強く */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "IBM Plex Sans JP", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  color: #222222;
+  letter-spacing: 0.02em;
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+}
+
+/* コードやコンソール出力に最適な等幅フォント */
+code, pre {
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 14px;
+  background-color: #f5f5f5;
+  padding: 0.15em 0.3em;
+  border-radius: 3px;
+  color: #3a5068;
+  overflow-x: auto;
+  tab-size: 4;
+}
