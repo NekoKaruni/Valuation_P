@@ -1,0 +1,1844 @@
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2024/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,988932,
+  コールローン,  Call loans,50000,
+  有価証券,  Securities,118077,
+  貸出金,  Loans and bills discounted,56289,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,205420,
+  会員未収金,  Accounts receivable-members,134340,
+  その他資産,  Other assets,76038,
+  有形固定資産,  Tangible fixed assets,39150,
+   建物,   Buildings. net,1970,
+   ＡＴＭ,   ATMs,32302,
+   その他の有形固定資産,   Other tangible fixed assets,4877,
+  無形固定資産,  Intangible fixed assets,46795,
+   ソフトウエア,   Software,36530,
+   その他の無形固定資産,   Other intangible fixed assets,10264,
+  退職給付に係る資産,  Retirement benefit asset,2615,
+  繰延税金資産,  Deferred tax assets,4751,
+  貸倒引当金,  Allowance for loan losses,-4593,
+  資産の部合計,  Total assets,1717818,
+ 負債の部, Liabilities,,
+  預金,  Deposits,914768,
+  譲渡性預金,  Negotiable certificates of deposit,650,
+  コールマネー,  Call money,110000,
+  借用金,  Borrowed money,19052,
+  社債,  Bonds payable,65000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,118566,
+  クレジットカード事業未払金,  Accounts payable for credit card business,42429,
+  電子マネー預り金,  Deposits for electronic money,70899,
+  その他負債,  Other liabilities,97177,
+  賞与引当金,  Provision for bonuses,1032,
+  退職給付に係る負債,  Retirement benefit liability,25,
+  役員退職慰労引当金,  Provision for retirement benefits for directors (and other officers),29,
+  株式給付引当金,  Reserve for stocks payment,812,
+  訴訟損失引当金,  Provision for loss on litigation,1418,
+  繰延税金負債,  Deferred tax liabilities,99,
+  負債の部合計,  Total liabilities,1441962,
+ 純資産の部, Net assets,,
+  資本金,  Share capital,30724,
+  資本剰余金,  Capital surplus,30850,
+  利益剰余金,  Retained earnings,201836,
+  自己株式,  Treasury shares,-2744,
+  株主資本合計,  Total shareholders' equity,260666,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,607,
+  為替換算調整勘定,  Foreign currency translation adjustment,8574,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,688,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,9870,
+  新株予約権,  Share acquisition rights,12,
+  非支配株主持分,  Non-controlling interests,5306,
+  純資産の部合計,  Total net assets,275856,
+ 負債及び純資産の部合計, Total liabilities and net assets,1717818,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2023/04/01-2024/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,197877,
+  資金運用収益,  Interest income,8158,
+   貸出金利息,   Interest on loans and discounts,7453,
+   有価証券利息配当金,   Interest and dividends on securities,147,
+   コールローン利息,   Interest on call loans,49,
+   預け金利息,   Interest on deposits with banks,508,
+  役務取引等収益,  Fees and commissions,186235,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,3744,
+   ＡＴＭ受入手数料,   ATM-related fee income,149446,
+   クレジットカード営業収入,   Credit card operating income,10058,
+   電子マネー営業収入,   Electronic money operating income,10201,
+   その他の役務収益,   Other fees and commissions,12783,
+  その他業務収益,  Other ordinary income,309,
+  その他経常収益,  Other income,3174,
+   その他の経常収益,   Other,3174,
+ 経常費用, Ordinary expenses,167351,
+  資金調達費用,  Interest expenses,1174,
+   預金利息,   Interest on deposits,32,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-59,
+   借用金利息,   Interest on borrowings and rediscounts,903,
+   社債利息,   Interest expenses on bonds,298,
+  役務取引等費用,  Fees and commissions payments,53418,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1808,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,31541,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,10187,
+   クレジットカード業務経費,   Credit card operating expense,4306,
+   電子マネー業務経費,   Electronic money operating expense,726,
+   その他の役務費用,   Other fees and commissions,4849,
+  営業経費,  General and administrative expenses,108084,
+  その他経常費用,  Other expenses,4673,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,2179,
+   その他の経常費用,   Other,2493,
+ 経常利益, Ordinary profit,30526,
+ 特別利益, Extraordinary income,22326,
+  固定資産処分益,  Gain on disposal of non-current assets,0,
+  関係会社株式売却益,  Gain on sale of shares of subsidiaries and associates,785,
+  負ののれん発生益,  Gain on bargain purchase,21540,
+ 特別損失, Extraordinary losses,7722,
+  固定資産処分損,  Loss on disposal of non-current assets,549,
+  減損損失,  Impairment losses,351,
+  マイナポイント関連損失,  Loss on My-number point,4619,
+  訴訟損失引当金繰入額,  Provision for loss on litigation,1406,
+  その他の特別損失,  Other,795,
+ 税金等調整前当期純利益, Profit before income taxes,45130,
+ 法人税、住民税及び事業税, Income taxes - current,8503,
+ 法人税等調整額, Income taxes - deferred,4667,
+ 法人税等合計, Total income taxes,13170,
+ 当期純利益, Profit,31959,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-11,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,31970,
+ 当期純利益, Profit,31959,
+ その他の包括利益, Other comprehensive income,2428,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,107,
+  為替換算調整勘定,  Foreign currency translation adjustment,2030,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,289,
+ 包括利益, Comprehensive income,34387,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,34156,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,230,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2023/04/01-2024/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,45130,
+  減価償却費,  Depreciation,23302,
+  減損損失,  Impairment losses,351,
+  マイナポイント関連損失,  Loss on My-number point,4619,
+  のれん償却額,  Amortization of goodwill,90,
+  負ののれん発生益,  Gain on bargain purchase,-21540,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,19,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,-169,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,138,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-256,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for retirement benefits for directors (and other officers),-3,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in provision for share awards,181,
+  訴訟損失引当金の増減額（△は減少）,  Increase (decrease) in provision for loss on litigation,1406,
+  資金運用収益,  Interest income,-8158,
+  資金調達費用,  Interest expenses,1174,
+  有価証券関係損益（△）,  Loss (gain) related to securities,820,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,549,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-8950,
+  預金の純増減（△）,  Net increase (decrease) in deposits,94010,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,-100,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,8298,
+  預け金（現金同等物を除く）の純増（△）減,  Net decrease (increase) in due from banks (excluding cash equivalents),1591,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,-22000,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,60000,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,-20000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-43217,
+  会員未収金の純増（△）減,  Net decrease (increase) in accounts receivable-members,3570,
+  クレジットカード事業未払金の純増減（△）,  Net increase (decrease) in accounts payable for credit card business,1396,
+  電子マネー預り金の純増減（△）,  Net increase (decrease) in deposits for electronic money,-9765,
+  資金運用による収入,  Interest received,8391,
+  資金調達による支出,  Interest paid,-1186,
+  その他,  Other. net,-6099,
+  小計,  Subtotal,113594,
+  法人税等の支払額,  Income taxes paid,-12849,
+  法人税等の還付額,  Income taxes refund,6,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,100751,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-37590,
+  有価証券の売却による収入,  Proceeds from sale of securities,1279,
+  有価証券の償還による収入,  Proceeds from redemption of securities,18048,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-17739,
+  有形固定資産の売却による収入,  Proceeds from sale of tangible fixed assets,0,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-21534,
+  連結の範囲の変更を伴う子会社株式の取得による支出,  Purchase of shares of subsidiaries resulting in change in scope of consolidation,,
+  連結の範囲の変更を伴う子会社株式の取得による収入,  Proceeds from purchase of shares of subsidiaries resulting in change in scope of consolidation,5598,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-51937,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,2988,
+  連結の範囲の変更を伴わない子会社株式の取得による支出,  Purchase of shares of subsidiaries not resulting in change in scope of consolidation,-189,
+  配当金の支払額,  Dividends paid,-12966,
+  自己株式の取得による支出,  Purchase of treasury shares,-1873,
+  その他,  Other. net,-49,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-12090,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,1742,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,38464,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,950256,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,988721,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2023/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,952027,
+  コールローン,  Call loans,28000,
+  有価証券,  Securities,99651,
+  貸出金,  Loans and bills discounted,35111,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,98296,
+  その他資産,  Other assets,30273,
+  有形固定資産,  Tangible fixed assets,30256,
+   建物,   Buildings. net,1804,
+   ＡＴＭ,   ATMs,24281,
+   その他の有形固定資産,   Other tangible fixed assets,4170,
+  無形固定資産,  Intangible fixed assets,34350,
+   ソフトウエア,   Software,27342,
+   その他の無形固定資産,   Other intangible fixed assets,7007,
+  退職給付に係る資産,  Retirement benefit asset,1113,
+  繰延税金資産,  Deferred tax assets,4712,
+  貸倒引当金,  Allowance for loan losses,-1521,
+  資産の部合計,  Total assets,1312273,
+ 負債の部, Liabilities,,
+  預金,  Deposits,820758,
+  譲渡性預金,  Negotiable certificates of deposit,750,
+  コールマネー,  Call money,50000,
+  借用金,  Borrowed money,9958,
+  社債,  Bonds payable,85000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,54773,
+  その他負債,  Other liabilities,35282,
+  賞与引当金,  Provision for bonuses,826,
+  退職給付に係る負債,  Retirement benefit liability,15,
+  株式給付引当金,  Reserve for stocks payment,631,
+  繰延税金負債,  Deferred tax liabilities,34,
+  負債の部合計,  Total liabilities,1058031,
+ 純資産の部, Net assets,,
+  資本金,  Share capital,30724,
+  資本剰余金,  Capital surplus,30864,
+  利益剰余金,  Retained earnings,182431,
+  自己株式,  Treasury shares,-900,
+  株主資本合計,  Total shareholders' equity,243120,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,500,
+  為替換算調整勘定,  Foreign currency translation adjustment,6783,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,226,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,7510,
+  非支配株主持分,  Non-controlling interests,3611,
+  純資産の部合計,  Total net assets,254242,
+ 負債及び純資産の部合計, Total liabilities and net assets,1312273,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2022/04/01-2023/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,154984,
+  資金運用収益,  Interest income,4932,
+   貸出金利息,   Interest on loans and discounts,4669,
+   有価証券利息配当金,   Interest and dividends on securities,85,
+   コールローン利息,   Interest on call loans,39,
+   預け金利息,   Interest on deposits with banks,137,
+  役務取引等収益,  Fees and commissions,147718,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,3312,
+   ＡＴＭ受入手数料,   ATM-related fee income,135122,
+   その他の役務収益,   Other fees and commissions,9283,
+  その他業務収益,  Other ordinary income,488,
+  その他経常収益,  Other income,1845,
+   その他の経常収益,   Other,1845,
+ 経常費用, Ordinary expenses,126059,
+  資金調達費用,  Interest expenses,815,
+   預金利息,   Interest on deposits,33,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-25,
+   借用金利息,   Interest on borrowings and rediscounts,346,
+   社債利息,   Interest expenses on bonds,460,
+  役務取引等費用,  Fees and commissions payments,42258,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1508,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,31216,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,5663,
+   その他の役務費用,   Other fees and commissions,3870,
+  営業経費,  General and administrative expenses,80195,
+  その他経常費用,  Other expenses,2790,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,1017,
+   その他の経常費用,   Other,1772,
+ 経常利益, Ordinary profit,28924,
+ 特別利益, Extraordinary income,6,
+  固定資産処分益,  Gain on disposal of non-current assets,6,
+  持分変動利益,  Gain on change in equity,,
+ 特別損失, Extraordinary losses,1507,
+  固定資産処分損,  Loss on disposal of non-current assets,252,
+  減損損失,  Impairment losses,1254,
+ 税金等調整前当期純利益, Profit before income taxes,27423,
+ 法人税、住民税及び事業税, Income taxes - current,10030,
+ 法人税等調整額, Income taxes - deferred,-1167,
+ 法人税等合計, Total income taxes,8863,
+ 当期純利益, Profit,18560,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-294,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,18854,
+ 当期純利益, Profit,18560,
+ その他の包括利益, Other comprehensive income,1898,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,-106,
+  為替換算調整勘定,  Foreign currency translation adjustment,2100,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,-94,
+ 包括利益, Comprehensive income,20459,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,20723,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-264,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2022/04/01-2023/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,27423,
+  減価償却費,  Depreciation,19526,
+  減損損失,  Impairment losses,1254,
+  のれん償却額,  Amortization of goodwill,30,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,576,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,1017,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,15,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-182,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in provision for share awards,-142,
+  資金運用収益,  Interest income,-4932,
+  資金調達費用,  Interest expenses,815,
+  有価証券関係損益（△）,  Loss (gain) related to securities,-441,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,246,
+  持分変動損益（△は益）,  Loss (gain) on change in equity,,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-7054,
+  預金の純増減（△）,  Net increase (decrease) in deposits,30820,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,8318,
+  預け金（現金同等物を除く）の純増（△）減,  Net decrease (increase) in due from banks (excluding cash equivalents),-1591,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,-28000,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,50000,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,-20000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-8291,
+  資金運用による収入,  Interest received,5083,
+  資金調達による支出,  Interest paid,-820,
+  その他,  Other. net,1145,
+  小計,  Subtotal,74818,
+  法人税等の支払額,  Income taxes paid,-8268,
+  法人税等の還付額,  Income taxes refund,27,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,66577,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-48079,
+  有価証券の売却による収入,  Proceeds from sale of securities,1947,
+  有価証券の償還による収入,  Proceeds from redemption of securities,35713,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-13328,
+  有形固定資産の売却による収入,  Proceeds from sale of tangible fixed assets,6,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-11991,
+  連結の範囲の変更を伴う子会社株式の取得による支出,  Purchase of shares of subsidiaries resulting in change in scope of consolidation,-459,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-36191,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,,
+  配当金の支払額,  Dividends paid,-12973,
+  自己株式の取得による支出,  Purchase of treasury shares,-0,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-12973,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,1440,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,18852,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,931404,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,950256,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2022/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,931404,
+  有価証券,  Securities,89945,
+  貸出金,  Loans and bills discounted,28056,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,84461,
+  その他資産,  Other assets,24062,
+  有形固定資産,  Tangible fixed assets,26571,
+   建物,   Buildings. net,1784,
+   ＡＴＭ,   ATMs,20947,
+   その他の有形固定資産,   Other tangible fixed assets,3839,
+  無形固定資産,  Intangible fixed assets,33593,
+   ソフトウエア,   Software,28605,
+   その他の無形固定資産,   Other intangible fixed assets,4988,
+  退職給付に係る資産,  Retirement benefit asset,1051,
+  繰延税金資産,  Deferred tax assets,2979,
+  貸倒引当金,  Allowance for loan losses,-504,
+  資産の部合計,  Total assets,1221623,
+ 負債の部, Liabilities,,
+  預金,  Deposits,789937,
+  譲渡性預金,  Negotiable certificates of deposit,750,
+  借用金,  Borrowed money,1936,
+  社債,  Bonds payable,105000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,49233,
+  その他負債,  Other liabilities,29071,
+  賞与引当金,  Provision for bonuses,789,
+  退職給付に係る負債,  Retirement benefit liability,13,
+  株式給付引当金,  Reserve for stocks payment,774,
+  繰延税金負債,  Deferred tax liabilities,3,
+  負債の部合計,  Total liabilities,977509,
+ 純資産の部, Net assets,,
+  資本金,  Share capital,30724,
+  資本剰余金,  Capital surplus,30764,
+  利益剰余金,  Retained earnings,176549,
+  自己株式,  Treasury shares,-1173,
+  株主資本合計,  Total shareholders' equity,236864,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,606,
+  為替換算調整勘定,  Foreign currency translation adjustment,4714,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,320,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,5641,
+  非支配株主持分,  Non-controlling interests,1606,
+  純資産の部合計,  Total net assets,244113,
+ 負債及び純資産の部合計, Total liabilities and net assets,1221623,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2021/04/01-2022/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,136667,
+  資金運用収益,  Interest income,4032,
+   貸出金利息,   Interest on loans and discounts,3890,
+   有価証券利息配当金,   Interest and dividends on securities,34,
+   コールローン利息,   Interest on call loans,5,
+   預け金利息,   Interest on deposits with banks,102,
+  役務取引等収益,  Fees and commissions,131320,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,3362,
+   ＡＴＭ受入手数料,   ATM-related fee income,121731,
+   その他の役務収益,   Other fees and commissions,6225,
+  その他業務収益,  Other ordinary income,390,
+  その他経常収益,  Other income,924,
+   その他の経常収益,   Other,924,
+ 経常費用, Ordinary expenses,108412,
+  資金調達費用,  Interest expenses,602,
+   預金利息,   Interest on deposits,45,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-4,
+   借用金利息,   Interest on borrowings and rediscounts,94,
+   社債利息,   Interest on bonds,466,
+  役務取引等費用,  Fees and commissions payments,35816,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1631,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,28345,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,2327,
+   その他の役務費用,   Other fees and commissions,3511,
+  営業経費,  General and administrative expenses,70245,
+  その他経常費用,  Other expenses,1747,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,415,
+   その他の経常費用,   Other,1332,
+ 経常利益, Ordinary profit,28255,
+ 特別利益, Extraordinary income,435,
+  固定資産処分益,  Gain on disposal of non-current assets,19,
+  持分変動利益,  Gain on change in equity,415,
+ 特別損失, Extraordinary losses,1536,
+  固定資産処分損,  Loss on disposal of non-current assets,773,
+  減損損失,  Impairment losses,763,
+ 税金等調整前当期純利益, Profit before income taxes,27154,
+ 法人税、住民税及び事業税, Income taxes - current,8772,
+ 法人税等調整額, Income taxes - deferred,-2300,
+ 法人税等合計, Total income taxes,6471,
+ 当期純利益, Profit,20682,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-144,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,20827,
+ 当期純利益, Profit,20682,
+ その他の包括利益, Other comprehensive income,1480,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,166,
+  為替換算調整勘定,  Foreign currency translation adjustment,1353,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,-38,
+ 包括利益, Comprehensive income,22163,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,22261,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-98,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2021/04/01-2022/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,27154,
+  減価償却費,  Depreciation,16388,
+  減損損失,  Impairment losses,763,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,694,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,415,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,164,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-190,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for retirement benefits for directors (and other officers),,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in provision for share awards,140,
+  資金運用収益,  Interest income,-4032,
+  資金調達費用,  Interest expenses,602,
+  有価証券関係損益（△）,  Loss (gain) related to securities,65,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,753,
+  持分変動損益（△は益）,  Loss (gain) on change in equity,-415,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-3727,
+  預金の純増減（△）,  Net increase (decrease) in deposits,7278,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,1228,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,1472,
+  資金運用による収入,  Interest received,4181,
+  資金調達による支出,  Interest paid,-642,
+  その他,  Other. net,-2273,
+  小計,  Subtotal,50023,
+  法人税等の支払額,  Income taxes paid,-8734,
+  法人税等の還付額,  Income taxes refund,22,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,41311,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-23739,
+  有価証券の償還による収入,  Proceeds from redemption of securities,11892,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-12468,
+  有形固定資産の売却による収入,  Proceeds from sale of tangible fixed assets,19,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-11817,
+  無形固定資産の売却による収入,  Proceeds from sale of intangible fixed assets,,
+  持分法適用関連会社株式の取得による支出,  Purchase of stocks of equity method affiliate,,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-36114,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,337,
+  ストックオプションの行使による収入,  Proceeds from exercise of employee share options,,
+  配当金の支払額,  Dividends paid,-12967,
+  自己株式の取得による支出,  Purchase of treasury shares,-97,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-12727,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,989,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,-6541,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,937945,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,931404,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2021/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,937945,
+  有価証券,  Securities,78154,
+  貸出金,  Loans and bills discounted,24329,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,83681,
+  その他資産,  Other assets,17442,
+  有形固定資産,  Tangible fixed assets,19218,
+   建物,   Buildings. net,1690,
+   ＡＴＭ,   ATMs,14342,
+   その他の有形固定資産,   Other tangible fixed assets,3185,
+  無形固定資産,  Intangible fixed assets,34857,
+   ソフトウエア,   Software,26215,
+   その他の無形固定資産,   Other intangible fixed assets,8642,
+  退職給付に係る資産,  Retirement benefit asset,909,
+  繰延税金資産,  Deferred tax assets,707,
+  貸倒引当金,  Allowance for loan losses,-88,
+  資産の部合計,  Total assets,1197158,
+ 負債の部, Liabilities,,
+  預金,  Deposits,782658,
+  譲渡性預金,  Negotiable certificates of deposit,750,
+  借用金,  Borrowed money,591,
+  社債,  Bonds payable,105000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,47046,
+  その他負債,  Other liabilities,25098,
+  賞与引当金,  Provision for bonuses,610,
+  退職給付に係る負債,  Retirement benefit liability,6,
+  役員退職慰労引当金,  Provision for retirement benefits for directors (and other officers),,
+  株式給付引当金,  Reserve for stocks payment,634,
+  繰延税金負債,  Deferred tax liabilities,87,
+  負債の部合計,  Total liabilities,962482,
+ 純資産の部, Net assets,,
+  資本金,  Share capital,30724,
+  資本剰余金,  Capital surplus,30724,
+  利益剰余金,  Retained earnings,168694,
+  自己株式,  Treasury shares,-1081,
+  株主資本合計,  Total shareholders' equity,229061,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,440,
+  為替換算調整勘定,  Foreign currency translation adjustment,3407,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,359,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,4207,
+  新株予約権,  Share acquisition rights,,
+  非支配株主持分,  Non-controlling interests,1407,
+  純資産の部合計,  Total net assets,234676,
+ 負債及び純資産の部合計, Total liabilities and net assets,1197158,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2020/04/01-2021/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,137267,
+  資金運用収益,  Interest income,3609,
+   貸出金利息,   Interest on loans and discounts,3475,
+   有価証券利息配当金,   Interest and dividends on securities,29,
+   コールローン利息,   Interest on call loans,1,
+   預け金利息,   Interest on deposits with banks,102,
+  役務取引等収益,  Fees and commissions,131709,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,3438,
+   ＡＴＭ受入手数料,   ATM-related fee income,123501,
+   その他の役務収益,   Other fees and commissions,4769,
+  その他業務収益,  Other ordinary income,201,
+  その他経常収益,  Other income,1746,
+   その他の経常収益,   Other,1746,
+ 経常費用, Ordinary expenses,101626,
+  資金調達費用,  Interest expenses,539,
+   預金利息,   Interest on deposits,67,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-9,
+   借用金利息,   Interest on borrowings and rediscounts,14,
+   社債利息,   Interest on bonds,467,
+  役務取引等費用,  Fees and commissions payments,35360,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1773,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,28282,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,2444,
+   その他の役務費用,   Other fees and commissions,2859,
+  営業経費,  General and administrative expenses,64308,
+  その他経常費用,  Other expenses,1418,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,63,
+   その他の経常費用,   Other,1355,
+ 経常利益, Ordinary profit,35640,
+ 特別利益, Extraordinary income,273,
+  固定資産処分益,  Gain on disposal of non-current assets,273,
+ 特別損失, Extraordinary losses,258,
+  固定資産処分損,  Loss on disposal of non-current assets,258,
+ 税金等調整前当期純利益, Profit before income taxes,35655,
+ 法人税、住民税及び事業税, Income taxes - current,9867,
+ 法人税等調整額, Income taxes - deferred,51,
+ 法人税等合計, Total income taxes,9918,
+ 当期純利益, Profit,25737,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-168,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,25905,
+ 当期純利益, Profit,25737,
+ その他の包括利益, Other comprehensive income,-131,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,-59,
+  為替換算調整勘定,  Foreign currency translation adjustment,-369,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,296,
+ 包括利益, Comprehensive income,25605,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,25782,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-177,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2020/04/01-2021/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,35655,
+  減価償却費,  Depreciation,14070,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,796,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,63,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,45,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-100,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for retirement benefits for directors (and other officers),-4,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in provision for share awards,397,
+  資金運用収益,  Interest income,-3609,
+  資金調達費用,  Interest expenses,539,
+  有価証券関係損益（△）,  Loss (gain) related to securities,88,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,-14,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-1045,
+  預金の純増減（△）,  Net increase (decrease) in deposits,98898,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,-50,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,404,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,274,
+  資金運用による収入,  Interest received,3815,
+  資金調達による支出,  Interest paid,-613,
+  その他,  Other. net,-213,
+  小計,  Subtotal,149397,
+  法人税等の支払額,  Income taxes paid,-13358,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,136039,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-20484,
+  有価証券の償還による収入,  Proceeds from redemption of securities,13084,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-10436,
+  有形固定資産の売却による収入,  Proceeds from sale of tangible fixed assets,273,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-14808,
+  無形固定資産の売却による収入,  Proceeds from sale of intangible fixed assets,100,
+  持分法適用関連会社株式の取得による支出,  Purchase of stocks of equity method affiliate,-499,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-32770,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,183,
+  ストックオプションの行使による収入,  Proceeds from exercise of employee share options,0,
+  配当金の支払額,  Dividends paid,-12968,
+  自己株式の取得による支出,  Purchase of treasury shares,-770,
+  その他,  Other. net,,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-13555,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-213,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,89498,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,848446,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,937945,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2020/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,848446,
+  有価証券,  Securities,70911,
+  貸出金,  Loans and bills discounted,23283,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,81965,
+  その他資産,  Other assets,16365,
+  有形固定資産,  Tangible fixed assets,13985,
+   建物,   Buildings. net,1630,
+   ＡＴＭ,   ATMs,9042,
+   その他の有形固定資産,   Other tangible fixed assets,3312,
+  無形固定資産,  Intangible fixed assets,29665,
+   ソフトウエア,   Software,20930,
+   その他の無形固定資産,   Other intangible fixed assets,8734,
+  退職給付に係る資産,  Retirement benefit asset,378,
+  繰延税金資産,  Deferred tax assets,909,
+  貸倒引当金,  Allowance for loan losses,-25,
+  資産の部合計,  Total assets,1085885,
+ 負債の部, Liabilities,,
+  預金,  Deposits,683760,
+  譲渡性預金,  Negotiable certificates of deposit,800,
+  借用金,  Borrowed money,196,
+  社債,  Bonds payable,105000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,45052,
+  その他負債,  Other liabilities,27288,
+  賞与引当金,  Provision for bonuses,573,
+  退職給付に係る負債,  Retirement benefit liability,3,
+  役員退職慰労引当金,  Provision for retirement benefits for directors (and other officers),4,
+  株式給付引当金,  Reserve for stocks payment,236,
+  繰延税金負債,  Deferred tax liabilities,137,
+  負債の部合計,  Total liabilities,863051,
+ 純資産の部, Net assets,,
+  資本金,  Share capital,30702,
+  資本剰余金,  Capital surplus,30757,
+  利益剰余金,  Retained earnings,155760,
+  自己株式,  Treasury shares,-338,
+  株主資本合計,  Total shareholders' equity,216882,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,499,
+  為替換算調整勘定,  Foreign currency translation adjustment,3767,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,62,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,4329,
+  新株予約権,  Share acquisition rights,274,
+  非支配株主持分,  Non-controlling interests,1346,
+  純資産の部合計,  Total net assets,222833,
+ 負債及び純資産の部合計, Total liabilities and net assets,1085885,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2019/04/01-2020/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,148553,
+  資金運用収益,  Interest income,3569,
+   貸出金利息,   Interest on loans and discounts,3451,
+   有価証券利息配当金,   Interest and dividends on securities,26,
+   コールローン利息,   Interest on call loans,0,
+   預け金利息,   Interest on deposits with banks,90,
+  役務取引等収益,  Fees and commissions,144280,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,3062,
+   ＡＴＭ受入手数料,   ATM-related fee income,136486,
+   その他の役務収益,   Other fees and commissions,4730,
+  その他業務収益,  Other ordinary income,281,
+  その他経常収益,  Other income,422,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,,
+   その他の経常収益,   Other,422,
+ 経常費用, Ordinary expenses,108716,
+  資金調達費用,  Interest expenses,674,
+   預金利息,   Interest on deposits,99,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-12,
+   借用金利息,   Interest on borrowings and rediscounts,15,
+   社債利息,   Interest on bonds,570,
+  役務取引等費用,  Fees and commissions payments,40305,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1591,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,31013,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,4886,
+   その他の役務費用,   Other fees and commissions,2813,
+  その他業務費用,  Other ordinary expenses,,
+  営業経費,  General and administrative expenses,62813,
+  その他経常費用,  Other expenses,4922,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,2,
+   その他の経常費用,   Other,4920,
+ 経常利益, Ordinary profit,39836,
+ 特別利益, Extraordinary income,91,
+  固定資産処分益,  Gain on disposal of non-current assets,91,
+ 特別損失, Extraordinary losses,147,
+  固定資産処分損,  Loss on disposal of non-current assets,147,
+  減損損失,  Impairment loss,,
+ 税金等調整前当期純利益, Profit before income taxes,39780,
+ 法人税、住民税及び事業税, Income taxes - current,13840,
+ 法人税等調整額, Income taxes - deferred,-164,
+ 法人税等合計, Total income taxes,13675,
+ 当期純利益, Profit,26105,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-57,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,26162,
+ 当期純利益, Profit,26105,
+ その他の包括利益, Other comprehensive income,-165,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,7,
+  為替換算調整勘定,  Foreign currency translation adjustment,-53,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,-119,
+ 包括利益, Comprehensive income,25939,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,26019,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-79,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2019/04/01-2020/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,39780,
+  減価償却費,  Depreciation,14634,
+  減損損失,  Impairment loss,,
+  のれん償却額,  Amortization of goodwill,,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,4770,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,1,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,36,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-106,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for retirement benefits for directors (and other officers),-1,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in provision for share-based remuneration,69,
+  資金運用収益,  Interest income,-3569,
+  資金調達費用,  Interest expenses,674,
+  有価証券関係損益（△）,  Loss (gain) related to securities,38,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,56,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-595,
+  預金の純増減（△）,  Net increase (decrease) in deposits,5095,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,-10,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,-9807,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,-30000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,77146,
+  資金運用による収入,  Interest received,3840,
+  資金調達による支出,  Interest paid,-805,
+  その他,  Other. net,1398,
+  小計,  Subtotal,102648,
+  法人税等の支払額,  Income taxes paid,-13029,
+  法人税等の還付額,  Income taxes refund,,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,89619,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-16171,
+  有価証券の償還による収入,  Proceeds from redemption of securities,27920,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-4547,
+  有形固定資産の売却による収入,  Proceeds from sales of tangible fixed assets,98,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-11100,
+  無形固定資産の売却による収入,  Proceeds from sales of intangible fixed assets,,
+  持分法適用関連会社株式の取得による支出,  Purchase of stocks of equity method affiliate,-2000,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-5801,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,1487,
+  ストックオプションの行使による収入,  Proceeds from exercise of employee share options,0,
+  配当金の支払額,  Dividends paid,-13635,
+  自己株式の取得による支出,  Purchase of treasury shares,-3857,
+  その他,  Other. net,-3,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-16009,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-11,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,67796,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,780650,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,848446,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2019/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,780650,
+  有価証券,  Securities,85639,
+  貸出金,  Loans and bills discounted,22688,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,194910,
+  その他資産,  Other assets,15074,
+  有形固定資産,  Tangible fixed assets,15155,
+   建物,   Buildings. net,1669,
+   ＡＴＭ,   ATMs,11062,
+   その他の有形固定資産,   Other tangible fixed assets,2424,
+  無形固定資産,  Intangible fixed assets,26655,
+   ソフトウエア,   Software,20708,
+   その他の無形固定資産,   Other intangible fixed assets,5946,
+  退職給付に係る資産,  Retirement benefit asset,444,
+  繰延税金資産,  Deferred tax assets,732,
+  貸倒引当金,  Allowance for loan losses,-23,
+  資産の部合計,  Total assets,1141926,
+ 負債の部, Liabilities,,
+  預金,  Deposits,678664,
+  譲渡性預金,  Negotiable certificates of deposit,810,
+  借用金,  Borrowed money,10000,
+  社債,  Bonds payable,135000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,80853,
+  その他負債,  Other liabilities,22816,
+  賞与引当金,  Provision for bonuses,537,
+  退職給付に係る負債,  Retirement benefit liability,2,
+  役員退職慰労引当金,  Provision for retirement benefits for directors (and other officers),5,
+  株式給付引当金,  Reserve for stocks payment,166,
+  繰延税金負債,  Deferred tax liabilities,179,
+  負債の部合計,  Total liabilities,929036,
+ 純資産の部, Net assets,,
+  資本金,  Capital stock,30679,
+  資本剰余金,  Capital surplus,30661,
+  利益剰余金,  Retained earnings,147094,
+  自己株式,  Treasury shares,-352,
+  株主資本合計,  Total shareholders' equity,208083,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,492,
+  為替換算調整勘定,  Foreign currency translation adjustment,3798,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,182,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,4473,
+  新株予約権,  Share acquisition rights,320,
+  非支配株主持分,  Non-controlling interests,11,
+  純資産の部合計,  Total net assets,212890,
+ 負債及び純資産の部合計, Total liabilities and net assets,1141926,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2018/04/01-2019/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,147288,
+  資金運用収益,  Interest income,3529,
+   貸出金利息,   Interest on loans and discounts,3419,
+   有価証券利息配当金,   Interest and dividends on securities,21,
+   コールローン利息,   Interest on call loans,0,
+   預け金利息,   Interest on deposits with banks,87,
+  役務取引等収益,  Fees and commissions,142614,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,2750,
+   ＡＴＭ受入手数料,   ATM-related fee income,135324,
+   その他の役務収益,   Other fees and commissions,4538,
+  その他業務収益,  Other ordinary income,275,
+  その他経常収益,  Other income,869,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,13,
+   その他の経常収益,   Other,856,
+ 経常費用, Ordinary expenses,106574,
+  資金調達費用,  Interest expenses,686,
+   預金利息,   Interest on deposits,119,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-37,
+   借用金利息,   Interest on borrowings and rediscounts,74,
+   社債利息,   Interest on bonds,530,
+  役務取引等費用,  Fees and commissions payments,39236,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1476,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,30511,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,4499,
+   その他の役務費用,   Other fees and commissions,2749,
+  その他業務費用,  Other ordinary expenses,116,
+  営業経費,  General and administrative expenses,66070,
+  その他経常費用,  Other expenses,462,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,,
+   その他の経常費用,   Other,462,
+ 経常利益, Ordinary profit,40714,
+ 特別損失, Extraordinary losses,14970,
+  固定資産処分損,  Loss on disposal of non-current assets,139,
+  減損損失,  Impairment loss,14830,
+ 税金等調整前当期純利益, Profit before income taxes,25744,
+ 法人税、住民税及び事業税, Income taxes - current,13119,
+ 法人税等調整額, Income taxes - deferred,-605,
+ 法人税等合計, Total income taxes,12513,
+ 当期純利益, Profit,13230,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-5,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,13236,
+ 当期純利益, Profit,13230,
+ その他の包括利益, Other comprehensive income,-179,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,248,
+  為替換算調整勘定,  Foreign currency translation adjustment,-511,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,83,
+ 包括利益, Comprehensive income,13051,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,13058,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-7,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2018/04/01-2019/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,25744,
+  減価償却費,  Depreciation,17529,
+  減損損失,  Impairment loss,14830,
+  のれん償却額,  Amortization of goodwill,487,
+  持分法による投資損益（△は益）,  Share of loss (profit) of entities accounted for using equity method,239,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,-13,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,80,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-59,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for retirement benefits for directors (and other officers),3,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in reserve for stocks payment,64,
+  資金運用収益,  Gain on fund management,-3529,
+  資金調達費用,  Financing expenses,686,
+  有価証券関係損益（△）,  Loss (gain) related to securities,49,
+  為替差損益（△は益）,  Foreign exchange losses (gains),,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,139,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,27,
+  預金の純増減（△）,  Net increase (decrease) in deposit,56257,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,10,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,40000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-26118,
+  資金運用による収入,  Proceeds from fund management,3848,
+  資金調達による支出,  Payments for finance,-757,
+  その他,  Other. net,2062,
+  小計,  Subtotal,131584,
+  法人税等の支払額,  Income taxes paid,-14115,
+  法人税等の還付額,  Income taxes refund,2,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,117471,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-39313,
+  有価証券の償還による収入,  Proceeds from redemption of securities,20630,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-3121,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-8664,
+  無形固定資産の売却による収入,  Proceeds from sales of intangible fixed assets,586,
+  持分法適用関連会社株式の取得による支出,  Purchase of stocks of equity method affiliate,-4999,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-34882,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  ストックオプションの行使による収入,  Proceeds from exercise of share options,0,
+  配当金の支払額,  Cash dividends paid,-12215,
+  自己株式の取得による支出,  Purchase of treasury shares,,
+  その他,  Other. net,-32,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-12246,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-60,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,70281,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,710369,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,780650,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2018/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,710369,
+  有価証券,  Securities,61939,
+  貸出金,  Loans and bills discounted,22715,
+  外国為替,  Foreign exchanges,0,
+  ＡＴＭ仮払金,  ATM-related temporary payments,146977,
+  その他資産,  Other assets,18537,
+  有形固定資産,  Tangible fixed assets,24798,
+   建物,   Buildings. net,1691,
+   ＡＴＭ,   ATMs,19804,
+   その他の有形固定資産,   Other tangible fixed assets,3301,
+  無形固定資産,  Intangible fixed assets,35958,
+   ソフトウエア,   Software,16873,
+   その他の無形固定資産,   Other intangible fixed assets,19084,
+  退職給付に係る資産,  Net defined benefit asset,264,
+  繰延税金資産,  Deferred tax assets,962,
+  貸倒引当金,  Allowance for loan losses,-36,
+  資産の部合計,  Total assets,1022485,
+ 負債の部, Liabilities,,
+  預金,  Deposits,622406,
+  譲渡性預金,  Negotiable certificates of deposit,800,
+  コールマネー,  Call money,,
+  借用金,  Borrowed money,10000,
+  社債,  Bonds payable,95000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,59032,
+  その他負債,  Other liabilities,21769,
+  賞与引当金,  Provision for bonuses,457,
+  退職給付に係る負債,  Net defined benefit liability,2,
+  役員退職慰労引当金,  Provision for directors' retirement benefits,2,
+  株式給付引当金,  Reserve for stocks payment,102,
+  繰延税金負債,  Deferred tax liabilities,885,
+  負債の部合計,  Total liabilities,810458,
+ 純資産の部, Net assets,,
+  資本金,  Capital stock,30572,
+  資本剰余金,  Capital surplus,30554,
+  利益剰余金,  Retained earnings,146075,
+  自己株式,  Treasury shares,-380,
+  株主資本合計,  Total shareholders' equity,206823,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,244,
+  為替換算調整勘定,  Foreign currency translation adjustment,4308,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,98,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,4651,
+  新株予約権,  Share acquisition rights,533,
+  非支配株主持分,  Non-controlling interests,18,
+  純資産の部合計,  Total net assets,212027,
+ 負債及び純資産の部合計, Total liabilities and net assets,1022485,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2017/04/01-2018/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,127656,
+  資金運用収益,  Interest income,3391,
+   貸出金利息,   Interest on loans and discounts,3271,
+   有価証券利息配当金,   Interest and dividends on securities,18,
+   コールローン利息,   Interest on call loans,1,
+   預け金利息,   Interest on deposits with banks,100,
+  役務取引等収益,  Fees and commissions,123507,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,2582,
+   ＡＴＭ受入手数料,   ATM-related fee income,116854,
+   その他の役務収益,   Other fees and commissions,4070,
+  その他業務収益,  Other ordinary income,279,
+  その他経常収益,  Other income,477,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,,
+   その他の経常収益,   Other,477,
+ 経常費用, Ordinary expenses,89350,
+  資金調達費用,  Interest expenses,718,
+   預金利息,   Interest on deposits,163,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-28,
+   借用金利息,   Interest on borrowings and rediscounts,76,
+   社債利息,   Interest on bonds,506,
+  役務取引等費用,  Fees and commissions payments,26583,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1466,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,20853,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,2375,
+   その他の役務費用,   Other fees and commissions,1888,
+  その他業務費用,  Other ordinary expenses,90,
+  営業経費,  General and administrative expenses,61645,
+  その他経常費用,  Other expenses,312,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,6,
+   その他の経常費用,   Other,306,
+ 経常利益, Ordinary profit,38305,
+ 特別損失, Extraordinary losses,141,
+  固定資産処分損,  Loss on disposal of non-current assets,141,
+ 税金等調整前当期純利益, Profit before income taxes,38163,
+ 法人税、住民税及び事業税, Income taxes - current,13302,
+ 法人税等調整額, Income taxes - deferred,-437,
+ 法人税等合計, Total income taxes,12864,
+ 当期純利益, Profit,25298,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-3,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,25301,
+ 当期純利益, Profit,25298,
+ その他の包括利益, Other comprehensive income,-653,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,27,
+  為替換算調整勘定,  Foreign currency translation adjustment,-704,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,24,
+ 包括利益, Comprehensive income,24645,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,24649,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-4,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2017/04/01-2018/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,38163,
+  減価償却費,  Depreciation,17102,
+  のれん償却額,  Amortization of goodwill,990,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,6,
+  賞与引当金の増減額（△は減少）,  Increase (decrease) in provision for bonuses,-12,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-43,
+  役員退職慰労引当金の増減額（△は減少）,  Increase (decrease) in provision for directors' retirement benefits,2,
+  株式給付引当金の増減額（△は減少）,  Increase (decrease) in reserve for stocks payment,102,
+  資金運用収益,  Gain on fund management,-3391,
+  資金調達費用,  Financing expenses,718,
+  為替差損益（△は益）,  Foreign exchange losses (gains),9,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,141,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-2886,
+  預金の純増減（△）,  Net increase (decrease) in deposit,50895,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,-10000,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,-15000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-36423,
+  資金運用による収入,  Proceeds from fund management,3815,
+  資金調達による支出,  Payments for finance,-799,
+  その他,  Other. net,-689,
+  小計,  Subtotal,42700,
+  法人税等の支払額,  Income taxes paid,-11239,
+  法人税等の還付額,  Income taxes refund,5,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,31466,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-17269,
+  有価証券の償還による収入,  Proceeds from redemption of securities,33015,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-8468,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-10927,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-3649,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  ストックオプションの行使による収入,  Proceeds from exercise of share options,,
+  配当金の支払額,  Cash dividends paid,-11316,
+  自己株式の取得による支出,  Purchase of treasury shares,-380,
+  その他,  Other. net,-33,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-11729,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-306,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,15780,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,694588,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,710369,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2017/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,694588,
+  コールローン,  Call loans,,
+  有価証券,  Securities,77866,
+  貸出金,  Loans and bills discounted,19829,
+  ＡＴＭ仮払金,  ATM-related temporary payments,89286,
+  その他資産,  Other assets,15064,
+  有形固定資産,  Tangible fixed assets,25740,
+   建物,   Buildings. net,1724,
+   ＡＴＭ,   ATMs,19867,
+   その他の有形固定資産,   Other tangible fixed assets,4148,
+  無形固定資産,  Intangible fixed assets,34473,
+   ソフトウエア,   Software,19424,
+   その他の無形固定資産,   Other intangible fixed assets,15049,
+  退職給付に係る資産,  Net defined benefit asset,183,
+  繰延税金資産,  Deferred tax assets,790,
+  貸倒引当金,  Allowance for loan losses,-30,
+  資産の部合計,  Total assets,957792,
+ 負債の部, Liabilities,,
+  預金,  Deposits,571510,
+  譲渡性預金,  Negotiable certificates of deposit,800,
+  コールマネー,  Call money,10000,
+  借用金,  Borrowed money,10000,
+  社債,  Bonds payable,110000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,37763,
+  その他負債,  Other liabilities,16992,
+  賞与引当金,  Provision for bonuses,471,
+  退職給付に係る負債,  Net defined benefit liability,1,
+  繰延税金負債,  Deferred tax liabilities,1170,
+  負債の部合計,  Total liabilities,758710,
+ 純資産の部, Net assets,,
+  資本金,  Capital stock,30572,
+  資本剰余金,  Capital surplus,30554,
+  利益剰余金,  Retained earnings,132093,
+  自己株式,  Treasury shares,-0,
+  株主資本合計,  Total shareholders' equity,193221,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,217,
+  為替換算調整勘定,  Foreign currency translation adjustment,5012,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,73,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,5303,
+  新株予約権,  Subscription rights to shares,533,
+  非支配株主持分,  Non-controlling interests,22,
+  純資産の部合計,  Total net assets,199081,
+ 負債及び純資産の部合計, Total liabilities and net assets,957792,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2016/04/01-2017/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,121608,
+  資金運用収益,  Interest income,2848,
+   貸出金利息,   Interest on loans and discounts,2704,
+   有価証券利息配当金,   Interest and dividends on securities,26,
+   コールローン利息,   Interest on call loans,2,
+   預け金利息,   Interest on deposits with banks,115,
+  役務取引等収益,  Fees and commissions,118226,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,2358,
+   ＡＴＭ受入手数料,   ATM-related fee income,112051,
+   その他の役務収益,   Other fees and commissions,3815,
+  その他業務収益,  Other ordinary income,249,
+  その他経常収益,  Other income,283,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,34,
+   その他の経常収益,   Other,248,
+ 経常費用, Ordinary expenses,84897,
+  資金調達費用,  Interest expenses,954,
+   預金利息,   Interest on deposits,320,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,0,
+   コールマネー利息,   Interest on call money,-20,
+   借用金利息,   Interest on borrowings and rediscounts,105,
+   社債利息,   Interest on bonds,548,
+  役務取引等費用,  Fees and commissions payments,23092,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1359,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,18693,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,1527,
+   その他の役務費用,   Other fees and commissions,1511,
+  営業経費,  General and administrative expenses,60781,
+  その他経常費用,  Other expenses,68,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,,
+   その他の経常費用,   Other,68,
+ 経常利益, Ordinary profit,36710,
+ 特別損失, Extraordinary losses,167,
+  固定資産処分損,  Loss on disposal of non-current assets,167,
+ 税金等調整前当期純利益, Profit before income taxes,36542,
+ 法人税、住民税及び事業税, Income taxes - current,11701,
+ 法人税等調整額, Income taxes - deferred,-272,
+ 法人税等合計, Total income taxes,11429,
+ 当期純利益, Profit,25113,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-1,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,25114,
+ 当期純利益, Profit,25113,
+ その他の包括利益, Other comprehensive income,-509,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,-126,
+  為替換算調整勘定,  Foreign currency translation adjustment,-450,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,67,
+ 包括利益, Comprehensive income,24604,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,24605,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-1,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2016/04/01-2017/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,36542,
+  減価償却費,  Depreciation,18766,
+  のれん償却額,  Amortization of goodwill,960,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,-34,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-16,
+  資金運用収益,  Gain on fund management,-2848,
+  資金調達費用,  Financing expenses,954,
+  有価証券関係損益（△）,  Loss (gain) related to securities,,
+  為替差損益（△は益）,  Foreign exchange losses (gains),,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,167,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-3620,
+  預金の純増減（△）,  Net increase (decrease) in deposit,24529,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,-5021,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,25000,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,10000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-5944,
+  資金運用による収入,  Proceeds from fund management,3086,
+  資金調達による支出,  Payments for finance,-1011,
+  その他,  Other. net,-628,
+  小計,  Subtotal,100882,
+  法人税等の支払額,  Income taxes paid,-12802,
+  法人税等の還付額,  Income taxes refund,38,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,88118,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-33849,
+  有価証券の売却による収入,  Proceeds from sales of securities,,
+  有価証券の償還による収入,  Proceeds from redemption of securities,21000,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-6712,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-9256,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-28818,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  ストックオプションの行使による収入,  Proceeds from exercise of share options,0,
+  配当金の支払額,  Cash dividends paid,-10419,
+  その他,  Other. net,-26,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-10446,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-103,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,48750,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,645838,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,694588,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2016/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,645838,
+  コールローン,  Call loans,25000,
+  有価証券,  Securities,66797,
+  貸出金,  Loans and bills discounted,16208,
+  ＡＴＭ仮払金,  ATM-related temporary payments,83407,
+  その他資産,  Other assets,11961,
+  有形固定資産,  Tangible fixed assets,30890,
+   建物,   Buildings. net,1741,
+   ＡＴＭ,   ATMs,25493,
+   その他の有形固定資産,   Other tangible fixed assets,3656,
+  無形固定資産,  Intangible fixed assets,34356,
+   ソフトウエア,   Software,18626,
+   その他の無形固定資産,   Other intangible fixed assets,15730,
+  退職給付に係る資産,  Net defined benefit asset,68,
+  繰延税金資産,  Deferred tax assets,921,
+  貸倒引当金,  Allowance for loan losses,-65,
+  資産の部合計,  Total assets,915385,
+ 負債の部, Liabilities,,
+  預金,  Deposits,546981,
+  譲渡性預金,  Negotiable certificates of deposit,800,
+  借用金,  Borrowed money,15022,
+  社債,  Bonds payable,110000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,37830,
+  その他負債,  Other liabilities,17807,
+  賞与引当金,  Provision for bonuses,458,
+  退職給付に係る負債,  Net defined benefit liability,0,
+  繰延税金負債,  Deferred tax liabilities,1690,
+  負債の部合計,  Total liabilities,730590,
+ 純資産の部, Net assets,,
+  資本金,  Capital stock,30514,
+  資本剰余金,  Capital surplus,30496,
+  利益剰余金,  Retained earnings,117402,
+  自己株式,  Treasury shares,-0,
+  株主資本合計,  Total shareholders' equity,178412,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,343,
+  為替換算調整勘定,  Foreign currency translation adjustment,5462,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,6,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,5812,
+  新株予約権,  Subscription rights to shares,545,
+  非支配株主持分,  Non-controlling interests,24,
+  純資産の部合計,  Total net assets,184794,
+ 負債及び純資産の部合計, Total liabilities and net assets,915385,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2015/04/01-2016/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,119939,
+  資金運用収益,  Interest income,2274,
+   貸出金利息,   Interest on loans and discounts,2078,
+   有価証券利息配当金,   Interest and dividends on securities,58,
+   コールローン利息,   Interest on call loans,35,
+   預け金利息,   Interest on deposits with banks,102,
+  役務取引等収益,  Fees and commissions,117265,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,2039,
+   ＡＴＭ受入手数料,   ATM-related fee income,111619,
+   その他の役務収益,   Other fees and commissions,3606,
+  その他業務収益,  Other ordinary income,193,
+  その他経常収益,  Other income,206,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,,
+   その他の経常収益,   Other,206,
+ 経常費用, Ordinary expenses,82772,
+  資金調達費用,  Interest expenses,1253,
+   預金利息,   Interest on deposits,565,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,2,
+   コールマネー利息,   Interest on call money,18,
+   借用金利息,   Interest on borrowings and rediscounts,113,
+   社債利息,   Interest on bonds,553,
+  役務取引等費用,  Fees and commissions payments,21661,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,1164,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,17858,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,1448,
+   その他の役務費用,   Other fees and commissions,1190,
+  その他業務費用,  Other ordinary expenses,,
+  営業経費,  General and administrative expenses,59757,
+  その他経常費用,  Other expenses,99,
+   貸倒引当金繰入額,   Provision of allowance for loan losses,18,
+   その他の経常費用,   Other,81,
+ 経常利益, Ordinary income,37167,
+ 特別損失, Extraordinary losses,210,
+  固定資産処分損,  Loss on disposal of non-current assets,210,
+ 税金等調整前当期純利益, Profit before income taxes,36956,
+ 法人税、住民税及び事業税, Income taxes - current,12666,
+ 法人税等調整額, Income taxes - deferred,-413,
+ 法人税等合計, Total income taxes,12252,
+ 当期純利益, Profit,24703,
+ 非支配株主に帰属する当期純損失（△）, Loss attributable to non-controlling interests,-13,
+ 親会社株主に帰属する当期純利益, Profit attributable to owners of parent,24716,
+ 当期純利益, Profit,24703,
+ その他の包括利益, Other comprehensive income,-68,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,-17,
+  為替換算調整勘定,  Foreign currency translation adjustment,-44,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,-6,
+ 包括利益, Comprehensive income,24635,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,24655,
+  非支配株主に係る包括利益,  Comprehensive income attributable to non-controlling interests,-19,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2015/04/01-2016/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Profit before income taxes,36956,
+  減価償却費,  Depreciation,18779,
+  のれん償却額,  Amortization of goodwill,1069,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,18,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,-18,
+  資金運用収益,  Gain on fund management,-2274,
+  資金調達費用,  Financing expenses,1253,
+  有価証券関係損益（△）,  Loss (gain) related to securities,-2,
+  為替差損益（△は益）,  Foreign exchange losses (gains),-8,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,210,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-5801,
+  預金の純増減（△）,  Net increase (decrease) in deposit,45568,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,40,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,-976,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,-12000,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,-1817,
+  資金運用による収入,  Proceeds from fund management,2295,
+  資金調達による支出,  Payments for finance,-1395,
+  その他,  Other. net,-2161,
+  小計,  Subtotal,79735,
+  法人税等の支払額,  Income taxes paid,-13268,
+  法人税等の還付額,  Income taxes refund,15,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,66482,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-43013,
+  有価証券の売却による収入,  Proceeds from sales of securities,334,
+  有価証券の償還による収入,  Proceeds from redemption of securities,49000,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-10511,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-7444,
+  その他,  Other. net,,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,-11634,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  非支配株主からの払込みによる収入,  Proceeds from share issuance to non-controlling shareholders,,
+  ストックオプションの行使による収入,  Proceeds from exercise of share options,,
+  配当金の支払額,  Cash dividends paid,-9823,
+  その他,  Other. net,-2,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-9826,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,-42,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,44978,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,600859,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,645838,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結貸借対照表
+
+
+
+（百万円）
+2015/03/31現在
+連結貸借対照表,Consolidated balance sheet,,
+ 資産の部, Assets,,
+  現金預け金,  Cash and due from banks,600859,
+  コールローン,  Call loans,13000,
+  有価証券,  Securities,71853,
+  貸出金,  Loans and bills discounted,10406,
+  ＡＴＭ仮払金,  ATM-related temporary payments,81617,
+  その他資産,  Other assets,10411,
+  有形固定資産,  Tangible fixed assets,31673,
+   建物,   Buildings. net,1671,
+   ＡＴＭ,   ATMs,26090,
+   その他の有形固定資産,   Other tangible fixed assets,3911,
+  無形固定資産,  Intangible fixed assets,35625,
+   ソフトウエア,   Software,18579,
+   その他の無形固定資産,   Other intangible fixed assets,17046,
+  退職給付に係る資産,  Net defined benefit asset,60,
+  繰延税金資産,  Deferred tax assets,951,
+  貸倒引当金,  Allowance for loan losses,-46,
+  資産の部合計,  Total assets,856415,
+ 負債の部, Liabilities,,
+  預金,  Deposits,501413,
+  譲渡性預金,  Negotiable certificates of deposit,760,
+  借用金,  Borrowed money,16000,
+  社債,  Bonds payable,110000,
+  ＡＴＭ仮受金,  ATM-related temporary advances,37857,
+  その他負債,  Other liabilities,17890,
+  賞与引当金,  Provision for bonuses,449,
+  退職給付に係る負債,  Net defined benefit liability,0,
+  繰延税金負債,  Deferred tax liabilities,2154,
+  負債の部合計,  Total liabilities,686525,
+ 純資産の部, Net assets,,
+  資本金,  Capital stock,30514,
+  資本剰余金,  Capital surplus,30514,
+  利益剰余金,  Retained earnings,102511,
+  自己株式,  Treasury shares,-0,
+  株主資本合計,  Total shareholders' equity,163539,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,360,
+  為替換算調整勘定,  Foreign currency translation adjustment,5500,
+  退職給付に係る調整累計額,  Remeasurements of defined benefit plans,13,
+  その他の包括利益累計額合計,  Total accumulated other comprehensive income,5874,
+  新株予約権,  Subscription rights to shares,449,
+  少数株主持分,  Minority interests,26,
+  純資産の部合計,  Total net assets,169890,
+ 負債及び純資産の部合計, Total liabilities and net assets,856415,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結損益（及び包括利益）計算書
+
+
+
+（百万円）
+2014/04/01-2015/03/31
+連結損益計算書,Consolidated statement of income,,
+ 経常収益, Ordinary income,114036,
+  資金運用収益,  Interest income,1372,
+   貸出金利息,   Interest on loans and discounts,1157,
+   有価証券利息配当金,   Interest and dividends on securities,150,
+   コールローン利息,   Interest on call loans,37,
+   預け金利息,   Interest on deposits with banks,27,
+  役務取引等収益,  Fees and commissions,112274,
+   受入為替手数料,   Fees and commissions on domestic and foreign exchanges,1664,
+   ＡＴＭ受入手数料,   ATM-related fee income,107213,
+   その他の役務収益,   Other fees and commissions,3396,
+  その他業務収益,  Other ordinary income,161,
+  その他経常収益,  Other income,227,
+   貸倒引当金戻入益,   Reversal of allowance for loan losses,9,
+   その他の経常収益,   Other,217,
+ 経常費用, Ordinary expenses,76997,
+  資金調達費用,  Interest expenses,1254,
+   預金利息,   Interest on deposits,545,
+   譲渡性預金利息,   Interest on negotiable certificates of deposit,13,
+   コールマネー利息,   Interest on call money,14,
+   借用金利息,   Interest on borrowings and rediscounts,141,
+   社債利息,   Interest on bonds,539,
+  役務取引等費用,  Fees and commissions payments,19174,
+   支払為替手数料,   Fees and commissions on domestic and foreign exchanges,942,
+   ＡＴＭ設置支払手数料,   ATM-placement fee expenses,16311,
+   ＡＴＭ支払手数料,   ATM-related fee expenses,1178,
+   その他の役務費用,   Other fees and commissions,742,
+  その他業務費用,  Other ordinary expenses,53,
+  営業経費,  General and administrative expenses,56419,
+  その他経常費用,  Other expenses,95,
+   その他の経常費用,   Other,95,
+ 経常利益, Ordinary income,37038,
+ 特別損失, Extraordinary losses,195,
+  固定資産処分損,  Loss on disposal of non-current assets,195,
+ 税金等調整前当期純利益, Income before income taxes and minority interests,36842,
+ 法人税、住民税及び事業税, Income taxes - current,13544,
+ 法人税等調整額, Income taxes - deferred,79,
+ 法人税等合計, Total income taxes,13624,
+ 少数株主損益調整前当期純利益, Income before minority interests,23218,
+ 少数株主損失（△）, Minority interests in loss,-2,
+ 当期純利益, Net income,23220,
+ 少数株主損益調整前当期純利益, Income before minority interests,23218,
+ その他の包括利益, Other comprehensive income,2378,
+  その他有価証券評価差額金,  Valuation difference on available-for-sale securities,357,
+  為替換算調整勘定,  Foreign currency translation adjustment,1889,
+  退職給付に係る調整額,  Remeasurements of defined benefit plans. net of tax,132,
+ 包括利益, Comprehensive income,25597,
+ （内訳）, Comprehensive income attributable to,,
+  親会社株主に係る包括利益,  Comprehensive income attributable to owners of parent,25597,
+  少数株主に係る包括利益,  Comprehensive income attributable to minority interests,-0,
+
+
+
+
+
+企業名,株式会社セブン銀行,Seven Bank, Ltd.
+証券ｺｰﾄﾞ,8410
+表名称,連結キャッシュ・フロー計算書
+
+
+
+（百万円）
+2014/04/01-2015/03/31
+連結キャッシュ・フロー計算書,Consolidated statement of cash flows,,
+ 営業活動によるキャッシュ・フロー, Cash flows from operating activities,,
+  税金等調整前当期純利益,  Income before income taxes and minority interests,36842,
+  減価償却費,  Depreciation,16251,
+  のれん償却額,  Amortization of goodwill,933,
+  貸倒引当金の増減（△）,  Increase (decrease) in allowance for loan losses,-9,
+  退職給付に係る資産又は負債の増減額,  Decrease/increase in net defined benefit asset/liability,23,
+  資金運用収益,  Gain on fund management,-1372,
+  資金調達費用,  Financing expenses,1254,
+  有価証券関係損益（△）,  Loss (gain) related to securities,-19,
+  為替差損益（△は益）,  Foreign exchange losses (gains),-14,
+  固定資産処分損益（△は益）,  Loss (gain) on disposal of non-current assets,195,
+  貸出金の純増（△）減,  Net decrease (increase) in loans and bills discounted,-5149,
+  預金の純増減（△）,  Net increase (decrease) in deposit,63824,
+  譲渡性預金の純増減（△）,  Net increase (decrease) in negotiable certificates of deposit,,
+  借用金の純増減（△）,  Net increase (decrease) in borrowed money,-5000,
+  コールローン等の純増（△）減,  Net decrease (increase) in call loans,2000,
+  コールマネー等の純増減（△）,  Net increase (decrease) in call money,,
+  普通社債発行及び償還による増減（△）,  Increase (decrease) in straight bonds - issuance and redemption,-5000,
+  ＡＴＭ未決済資金の純増（△）減,  Net change in ATM-related temporary accounts,8060,
+  資金運用による収入,  Proceeds from fund management,1407,
+  資金調達による支出,  Payments for finance,-1302,
+  その他,  Other. net,1811,
+  小計,  Subtotal,114737,
+  法人税等の支払額,  Income taxes paid,-14805,
+  営業活動によるキャッシュ・フロー,  Net cash provided by (used in) operating activities,99931,
+ 投資活動によるキャッシュ・フロー, Cash flows from investing activities,,
+  有価証券の取得による支出,  Purchase of securities,-25411,
+  有価証券の売却による収入,  Proceeds from sales of securities,1687,
+  有価証券の償還による収入,  Proceeds from redemption of securities,50500,
+  有形固定資産の取得による支出,  Purchase of tangible fixed assets,-13489,
+  無形固定資産の取得による支出,  Purchase of intangible fixed assets,-8352,
+  事業譲受による支出,  Payments for transfer of business,,
+  その他,  Other. net,60,
+  投資活動によるキャッシュ・フロー,  Net cash provided by (used in) investing activities,4994,
+ 財務活動によるキャッシュ・フロー, Cash flows from financing activities,,
+  少数株主からの払込みによる収入,  Proceeds from share issuance to minority shareholders,26,
+  ストックオプションの行使による収入,  Proceeds from exercise of share options,0,
+  配当金の支払額,  Cash dividends paid,-9231,
+  自己株式の取得による支出,  Purchase of treasury shares,,
+  財務活動によるキャッシュ・フロー,  Net cash provided by (used in) financing activities,-9204,
+ 現金及び現金同等物に係る換算差額, Effect of exchange rate change on cash and cash equivalents,149,
+ 現金及び現金同等物の増減額（△は減少）, Net increase (decrease) in cash and cash equivalents,95872,
+ 現金及び現金同等物の期首残高, Cash and cash equivalents at beginning of period,504987,
+ 現金及び現金同等物の期末残高, Cash and cash equivalents at end of period,600859,
