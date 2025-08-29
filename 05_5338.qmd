@@ -1,0 +1,534 @@
+---
+title: "5338_楽天銀行"
+---
+
+```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
+
+```{r}
+# 必要なライブラリの読み込み
+library(tidyverse)
+## 楽天銀行財務データ読み込み
+df <- read_csv("Processed_PrimeBank/5338.csv", show_col_types = FALSE)
+# TOPIX年次リターンデータの読み込み
+TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
+
+print(df)
+print(TOPIX)
+```
+
+### 負債総額 ($D$) の算出
+
+WACCにおける負債総額 ($D$) は、企業が**利子を支払う義務のある負債**、すなわち**有利子負債**を指す。銀行株を分析する際、**預金**については一般的な有利子負債とは性質が異なり、多くの場合、低金利で調達される。そのため、本評価においては、預金に対して通常の有利子負債とは異なる特定の金利を別途調査し、$r\_D$ の算出に際して適切に加味する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)
+
+```{r}
+# 財務データから有利子負債の項目を抽出
+D_df_current_data <- df[df$項目=="預金" | df$項目 == "借用金" | df$項目 == "社債",]
+D <- sum(as.numeric(D_df_current_data$`金額`)) 
+
+# 算出結果の確認
+cat("負債総額 (D):", D, "\n")
+```
+
+### 時価総額 ($E$) の算出
+
+時価総額 ($E$) は、評価対象企業の**発行済み株式総数に現在の株価を乗じた値**として算出する。
+
+```{r}
+# 発行済み株式総数:Nと現在の株価:Pを定義
+N <- 174482000
+P <- 8426          
+# 時価総額の計算
+E <- N * P
+
+# 算出結果の確認
+cat("時価総額 (E):", E/1e+8, "億円\n")
+```
+
+## 負債コスト ($r\_D$) の算出
+
+負債コスト ($r\_D$) は、企業が負債に対して支払う平均的な金利を指す。これは、主に**支払利息**の総額を負債総額で除することで算出される。銀行株の場合、前述の通り預金にかかる特定の金利も考慮に入れ、$D$ と対応する利息コストを適切に計算する。 複数年度の平均(できれば加重平均をとることで偶発的な変動リスクを抑える)
+
+```{r}
+
+rD_Total_Debt <- df[df$項目 == "資金調達費用" | df$項目 == "預金利息" | df$項目 == "借用金利息" | df$項目 == "社債利息",]
+rD <- sum(as.numeric(rD_Total_Debt$`金額`)) / D # 例として42～44行目の3列目を合計しDで割る
+
+# 算出結果の確認
+cat("負債コスト (rD):", round(rD * 100, 3), "%\n")
+```
+
+### 株主資本コスト ($r\_E$) の算出
+
+株主資本コスト ($r\_E$) は、株主が企業に投資することで期待する最低限の収益率であり、一般的には**資本資産評価モデル (CAPM: Capital Asset Pricing Model)** を用いて算出される。
+
+$$r_E = r_F + \beta \times (E_R - r_F)$$
+
+### リスクフリーレート ($r\_F$)
+
+日本では、通常、**日本国債の利回り**をその代理変数として用いる。これは、国債が信用リスクが極めて低い投資対象と見なされるためである。
+
+```{r}
+# リスクフリーレート (rF) の設定
+# 例として、現在の日本国債10年物利回りなどを設定します。
+# 実際の評価時点の最新の利回りを調べて入力してください。
+rF <- 0.01570 # 例示の値 (1.57%)
+
+# 算出結果の確認
+cat("リスクフリーレート (rF):", round(rF * 100, 3), "%\n")
+```
+
+## β (ベータ)
+
+評価対象となる特定の株式が、市場全体の動きに対してどれだけ敏感に反応するかを示す指標である。
+
+```{r}
+# ベータ (β) の設定
+# 評価対象企業のβ値を調べて入力してください。beta.xlsxで計算済
+beta <- 0  #-0.872360575 マイナスのため最小値である０ 
+# 算出結果の確認
+cat("ベータ (β):", round(beta, 3), "\n")
+```
+
+### 市場リスクプレミアム ($E\_R - r\_F$)
+
+市場全体の期待されるリターン ($E\_R$) からリスクフリーレート ($r\_F$) を差し引いたものであり、リスクを負って株式市場に投資する投資家が要求する追加リターンを意味する。
+
+$E\_R$ は、**TOPIXが始まった1970年から2024年までの年次リターンの平均**から求める。
+
+```{r}
+# TOPIXの年次リターン計算 (再掲、確認のため)
+# 年初始値と年末終値をベクトルにまとめる
+TOPIX_OPEN <- TOPIX$Close[1:55]
+TOPIX_CLOSE <- TOPIX$Close[2:56]
+
+# 年次リターン（価格収益率）を計算
+topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
+
+# 期待収益率（年平均リターン） = 市場の期待リターン (Er)
+Er <- mean(topix_return)
+
+# 市場リスクプレミアムの計算
+market_risk_premium <- Er - rF
+
+# 算出結果の確認
+cat("市場の期待リターン (Er):", round(Er * 100, 3), "%\n")
+cat("市場リスクプレミアム (Er - rF):", round(market_risk_premium * 100, 3), "%\n")
+```
+
+### 株主資本コスト ($r\_E$) の最終算出
+
+```{r}
+# 株主資本コスト (rE) の計算
+rE <- rF + beta * market_risk_premium
+
+# 算出結果の確認
+cat("株主資本コスト (rE):", round(rE * 100, 3), "%\n")
+```
+
+## WACCの最終算出
+
+上記で計算した各要素 ($D$, $E$, $r\_D$, $r\_E$) と実効税率 ($T$) を用いて、WACCを最終的に算出します。
+
+```{r} 
+# 法人実効税率 (T) の設定 \# 最新の法人実効税率を調べて設定してください。 T \<- 0.2320 \# 例示の値 (23.20%)
+
+# WACCの計算
+
+WACC <- D / (D + E) * rD * (1 - T) + E / (D + E) * rE
+
+# 算出結果の確認
+cat("加重平均資本コスト (WACC):", round(WACC * 100, 3), "%\n")
+```
+## フリーキャッシュフロー (FCF) の推計と企業価値の算出
+
+割引率であるWACCが算出できたら、次に企業の将来のフリーキャッシュフロー（FCF）を推計し、それらをWACCで現在価値に割り引くことで企業価値を算出します。
+
+### フリーキャッシュフロー (FCF) の定義と推計
+
+フリーキャッシュフローは、企業が営業活動によって生み出したキャッシュのうち、事業の維持・拡大に必要な投資を行った後に残るキャッシュのことであり、株主や債権者に自由に分配可能なキャッシュフローを指します。一般的には、**営業活動によるキャッシュ・フロー ＋ 投資活動によるキャッシュ・フロー**として簡易的に計算されます。
+
+```{r}
+# 営業活動によるキャッシュ・フロー (CFO) の抽出
+CFO <- df[df$項目 == "営業活動によるキャッシュ・フロー",]
+# 投資活動によるキャッシュ・フロー (CFI) の抽出
+CFI <- df[df$項目 == "投資活動によるキャッシュ・フロー",]
+FCF_combined_df <- full_join(CFO,CFI, by = "年度")
+FCF_combined_df <- FCF_combined_df |> 
+  mutate(FCF = as.numeric(金額.x) + as.numeric(金額.y) )
+
+FCF_past <- FCF_combined_df$FCF
+# 計算されたFCFのデータフレームを確認
+cat("各年度のフリーキャッシュフロー (FCF):\n")
+print(FCF_combined_df)
+
+# FCFの値をベクトルとして取り出す（今後の予測モデルや企業価値計算で使用するため）
+# この FCF_past が、将来FCF予測の基礎データとなります。
+FCF_past <- FCF_combined_df$FCF
+
+cat("\nFCF_past (ベクトル形式):\n")
+print(FCF_past)
+
+```
+### 将来フリーキャッシュフローの予測
+
+```{r}
+# 既に計算済みの FCF_past ベクトルを使用
+first_fcf <- FCF_past[1]
+last_fcf <- FCF_past[length(FCF_past)]
+num_periods <- length(FCF_past) - 1 # 10年データなら9期間
+
+if (first_fcf <= 0 || last_fcf <= 0 || num_periods == 0) {
+  warning("FCFが0以下の値を含む、または期間が不十分なため、CAGRの計算が不正確になる可能性があります。")
+  cagr_fcf <- NA
+} else {
+  cagr_fcf <- (last_fcf / first_fcf)^(1 / num_periods) - 1
+}
+
+cat("--- 過去のFCF年平均成長率 (CAGR) ---\n")
+if (!is.na(cagr_fcf)) {
+  cat(sprintf("CAGR (過去 %d年間): %.2f%%\n", num_periods, cagr_fcf * 100), "\n")
+} else {
+  cat("CAGRは計算できませんでした (FCFが0以下、または期間が不十分)。\n")
+}
+# 明示的予測期間の設定（例として5年間とします）
+forecast_period <- 5
+
+# 永久成長率 (g) の設定
+# 企業の長期的な安定成長率を仮定します (0%～2%程度が一般的)。
+g <- 0 # 例示の値 (1%)
+# 将来FCFの予測値の計算
+# 過去のFCFの最終年度の値を基準に、一定の成長率で予測します。
+# FCF_pastの最後の値が最新年度のFCF実績値であると仮定します。
+last_FCF_actual <- FCF_past[length(FCF_past)]
+
+FCF_forecast <- numeric(forecast_period)
+if (forecast_period > 0) {
+  FCF_forecast[1] <- last_FCF_actual * (1 + g) # 予測1年目 (最終実績値から1期成長)
+  for (i in 2:forecast_period) {
+    FCF_forecast[i] <- FCF_forecast[i-1] * (1 + g)
+  }
+} else {
+  message("予測期間が0または負の値のため、FCF予測は行われません。")
+}
+
+cat("将来FCF予測 (簡易モデル -", forecast_period, "年間):\n")
+print(round(FCF_forecast, 0))
+```
+### ターミナルバリュー (TV) の算出
+
+ターミナルバリューは、明示的に予測する期間（ここでは10年間）以降の、企業が永続的に生み出すと仮定されるフリーキャッシュフローの現在価値の合計を表します。ゴードン成長モデルを用いて算出します。
+
+$$TV = \frac{FCF_{N+1}}{WACC - g}$$
+
+ここで、$FCF\_{N+1}$ は最終予測年度の翌年のFCF、$WACC$ は加重平均資本コスト、$g$ は永久成長率です。
+
+```{r}
+# 最終予測年度の翌年 (forecast_period + 1 年目) のFCF (FCF_N_plus_1) を計算
+if (forecast_period > 0) {
+  FCF_N_plus_1 <- FCF_forecast[forecast_period] * (1 + g)
+} else {
+  FCF_N_plus_1 <- last_FCF_actual * (1 + g)
+}
+
+# ターミナルバリュー (TV) の計算
+if (WACC - g <= 0) {
+  warning("WACC - g が0以下になるため、ターミナルバリューの計算が適切ではありません。")
+  TV <- NA
+} else {
+  TV <- FCF_N_plus_1 / (WACC - g)
+}
+
+cat("最終予測年度の翌年のFCF (FCF_N_plus_1):", round(FCF_N_plus_1, 0), "\n")
+cat("ターミナルバリュー (TV):", round(TV, 0), "\n")
+```
+
+### 企業価値 (Valuation) の算出
+
+各年度のフリーキャッシュフローとターミナルバリューをWACCで現在価値に割り引き、合計することで企業価値を算出します。
+
+```{r}
+# 企業価値の計算 (予測FCFの現在価値 + TVの現在価値)
+Valuation <- 0
+
+# 明示的予測期間のFCFの現在価値を合計
+if (forecast_period > 0) {
+  for (i in 1:forecast_period) {
+    Valuation <- Valuation + FCF_forecast[i] / (1 + WACC)^i
+  }
+}
+
+# ターミナルバリューの現在価値を加算
+if (!is.na(TV)) {
+  Valuation <- Valuation + TV / (1 + WACC)^forecast_period
+} else {
+  message("ターミナルバリューが計算できないため、企業価値の計算はTVを含んでいません。")
+}
+
+cat("DCF法による企業価値評価 (Valuation):", round(Valuation, 0), "\n")
+```
+### 時価総額とFCF
+
+```{r}
+FCF_E <- last_fcf / (E/1e6)
+cat("時価総額フリーキャッシュフロー比率", round(FCF_E * 100, 3), "%\n")
+
+```
+
+# RIM法
+
+# RIMによる企業価値評価
+
+## 残余利益モデル(RIM)
+
+## 残余利益モデルの概要
+
+残余利益モデルは、企業の株式価値を現在の自己資本の簿価と、将来の超過利益の割引現在価値の合計として算出
+
+-   企業の純利益から自己資本が生み出すべき正常な利益を差し引いたものである。残余の部分が株主にとっての追加的な価値を生み出すと考えられる。
+
+$$ \begin{align*}\text{株式価値} =\ & C_0 + \frac{A_1 - r_e C_0}{1 + r_e} + \frac{A_2 - r_e C_1}{(1 + r_e)^2} + \frac{A_3 - r_e C_2}{(1 + r_e)^3} + \cdots\end{align*} $$
+
+-   $C_t$：$t$期末の自己資本簿価
+
+-   $C_{t-1}$：$t{-}1$期末（すなわち$t$期首）の自己資本簿価
+
+-   $A_t$：$t$期の当期純利益
+
+-   $d_t$：$t$期の配当
+
+-   $r_e$:株主が要求するリターン率。CAPM(資本資産価格モデル)を用いて算出
+
+自己資本の変動は、事業活動による利益（$A_t$）の増加と、株主への配当（$d_t$）による減少によって決まります。
+
+$$ C_t = C_{t-1} + A_t - d_t\ $$
+
+------------------------------------------------------------------------
+
+## 前提データの準備
+
+```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
+
+```{r}
+# パッケージの読み込み
+library(tidyverse)
+
+# データの読み込み
+# 列名が自動的に変換されないように、check.names = FALSE を設定
+# データのエンコーディングに合わせて locale を指定
+df <- read_csv("ProcessedBankData/7150_processed_data.csv", show_col_types = FALSE)
+TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
+
+# データの列名を確認
+print("dfの列名:")
+print(names(df))
+```
+
+```{r}
+# 当期純利益（Net_Income）の抽出
+# 項目名が複数ある場合もまとめて抽出
+Net_Income_U <- df %>%
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) %>%
+  slice(which(row_number() %% 2 != 0)) %>%
+  select(No, `金額（百万円）`)
+
+# 自己資本簿価（Net_assets）の抽出
+# 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
+Net_assets <- df %>%
+  filter(項目 %in% c("株主資本合計", "その他の包括利益累計額合計")) %>%
+  group_by(No) %>%
+  summarise(自己資本 = sum(`金額（百万円）`), .groups = 'drop')
+
+# 抽出したデータの確認
+print("抽出された当期純利益データ:")
+print(Net_Income_U)
+print("抽出された自己資本簿価データ:")
+print(Net_assets)
+
+# C0（最も直近の自己資本簿価）の定義
+C0 <- tail(Net_assets$自己資本, 1)
+```
+
+```{r}
+rf <- 0.01570
+beta <- 1.08036867948469
+TOPIX_OPEN <- TOPIX$Close[1:55]
+TOPIX_CLOSE <- TOPIX$Close[2:56]
+topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
+Er <- mean(topix_return, na.rm = TRUE) # 欠損値があれば除去
+market_risk_premium <- Er - rf
+rE <- rf +  beta * market_risk_premium
+cat("株主資本コスト(rE):", round(rE * 100,3), "%\n")
+```
+
+```{r}
+# 計算に必要な変数の定義
+n <- nrow(Net_Income_U)
+payout_ratio <- 0.30
+g <- 0.02 # 永久成長率
+
+# 各期の自己資本簿価を格納するベクトル
+C <- c(C0, rep(NA, n))
+# 各期の残余利益の現在価値を格納するベクトル
+pv_residual_income <- rep(NA, n)
+
+# ループ処理で各期の残余利益と現在価値を計算
+for (t in 1:n) {
+  # 当期純利益 (A_t)
+  A_t <- Net_Income_U$`金額（百万円）`[t]
+  
+  # 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価
+  residual_income_t <- A_t - rE * C[t]
+  
+  # t期の残余利益の現在価値を計算
+  pv_residual_income[t] <- residual_income_t / (1 + rE)^t
+  
+  # 次期（t+1期）の期首自己資本簿価を計算
+  # クリーン・サープラス関係: C_t = C_{t-1} + A_t - d_t
+  # d_t = 配当性向 * A_t と仮定
+  if (t < n) {
+    C[t+1] <- C[t] + A_t * (1 - payout_ratio)
+  }
+}
+print(Net_Income_U)
+# 最終期の残余利益
+last_residual_income <- A_t - rE * C[n]
+# 継続価値（Terminal Value）の計算
+terminal_value <- last_residual_income * (1 + g) / (rE - g)
+pv_terminal_value <- terminal_value / (1 + rE)^n
+
+# 株式価値の計算
+equity_value <- C0 + sum(pv_residual_income) + pv_terminal_value
+
+# 結果の出力
+cat("\n--- RIMによる企業価値評価結果 ---\n")
+cat("株式価値:", format(round(equity_value, 2), big.mark = ","), "百万円\n")
+cat("  - C0（現在の自己資本簿価）:", format(round(C0, 2), big.mark = ","), "百万円\n")
+cat("  - 将来の残余利益の現在価値合計:", format(round(sum(pv_residual_income), 2), big.mark = ","), "百万円\n")
+cat("  - 継続価値の現在価値:", format(round(pv_terminal_value, 2), big.mark = ","), "百万円\n")
+```
+
+# DDMによる企業価値評価
+
+## 配当割引モデルの概要
+
+配当割引モデルは、資産が生み出す将来の現金収入の期待値を、購入者が要求する収益率で割り引いた現在価値に等しいと考える。
+
+------------------------------------------------------------------------
+
+## 前提データの準備
+
+```{r}
+#| echo: false
+#| message: false
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(conflicted)
+})
+
+conflict_prefer("filter", "dplyr")
+conflict_prefer("lag",   "dplyr")
+```
+
+```{r}
+# パッケージの読み込み
+library(tidyverse)
+
+# データの読み込み
+# 列名が自動的に変換されないように、check.names = FALSE を設定
+# データのエンコーディングに合わせて locale を指定
+df <- read_csv("ProcessedBankData/7150_processed_data.csv", show_col_types = FALSE)
+TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
+
+# データの列名を確認
+print(names(df))
+```
+
+```{r}
+# 当期純利益（Net_Income）の抽出
+# 項目名が複数ある場合もまとめて抽出
+Net_Income_U <- df %>%
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) %>%
+  slice(which(row_number() %% 2 != 0)) %>%
+  select(No, `金額（百万円）`)
+
+# 自己資本簿価（Net_assets）の抽出
+# 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
+Pay_ratio <- c(0.4946, 0.4299, 0.2924, 0.4520, 0.3431, 0, 0.1302, 0.3003, 0.2187, 0.2157)
+
+# 当期純利益
+print(Net_Income_U)
+# 配当性向
+print(Pay_ratio)
+
+# C0（最も直近の自己資本簿価）の定義
+d <- Net_Income_U * Pay_ratio
+```
+
+```{r}
+Look_Payratio <- tibble(Year = c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), Pay_ratio)
+
+# 折れ線グラフの作成
+ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) + 
+  geom_line(linewidth = 0.5) +
+  geom_point(size = 1) +
+  geom_text(aes(label = round(Pay_ratio *100, 1)), vjust = -1, size = 3, color = "darkblue") +
+  coord_cartesian(ylim = c(0, 200))+
+  labs(
+    title = "年度別配当性向の推移",
+    x = "年度",
+    y = "配当性向 (%)"
+  ) +
+  scale_x_continuous(breaks = unique(Look_Payratio$Year)) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 18, face = "bold", margin = margin(b = 30)),
+    axis.text.x = element_text(size = 12, vjust = 1, margin = margin(t = 5)),  # 年度ラベルの下に余白
+    axis.title.x = element_text(size = 14, margin = margin(t = 30)),
+    axis.title.y = element_text(size = 14, margin = margin(r = 30))
+  )
+
+```
+
+```{r}
+rf <- 0.01570
+beta <- 1.08036867948469
+TOPIX_OPEN <- TOPIX$Close[1:55]
+TOPIX_CLOSE <- TOPIX$Close[2:56]
+topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
+Er <- mean(topix_return, na.rm = TRUE) # 欠損値があれば除去
+market_risk_premium <- Er - rf
+rE <- rf +  beta * market_risk_premium
+cat("株主資本コスト(rE):", round(rE * 100,3), "%\n")
+```
+
+```{r}
+t <- 1:length(d)
+
+P0 <- sum(d/(1+rE)^t)
+
+cat("株式価値:", round(P0,3),"百万円\n")
+
+N <- 8416000 
+
+cat("理想株価:", round((P0 * 1e6)/N,3),"円\n")
+```
