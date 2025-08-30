@@ -1,6 +1,8 @@
 ---
-title: "5338_楽天銀行"
+title: "5838_楽天銀行"
 ---
+
+# DCF法
 
 ```{r}
 #| echo: false
@@ -255,7 +257,7 @@ cat("最終予測年度の翌年のFCF (FCF_N_plus_1):", round(FCF_N_plus_1, 0),
 cat("ターミナルバリュー (TV):", round(TV, 0), "\n")
 ```
 
-### 企業価値 (Valuation) の算出
+# DCF法による企業価値評価
 
 各年度のフリーキャッシュフローとターミナルバリューをWACCで現在価値に割り引き、合計することで企業価値を算出します。
 
@@ -333,35 +335,33 @@ conflict_prefer("lag",   "dplyr")
 ```
 
 ```{r}
-# パッケージの読み込み
-library(tidyverse)
-
-# データの読み込み
-# 列名が自動的に変換されないように、check.names = FALSE を設定
-# データのエンコーディングに合わせて locale を指定
-df <- read_csv("ProcessedBankData/7150_processed_data.csv", show_col_types = FALSE)
-TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
-
-# データの列名を確認
-print("dfの列名:")
-print(names(df))
-```
-
-```{r}
+library(stringr)
 # 当期純利益（Net_Income）の抽出
 # 項目名が複数ある場合もまとめて抽出
 Net_Income_U <- df %>%
   filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) %>%
   slice(which(row_number() %% 2 != 0)) %>%
-  select(No, `金額（百万円）`)
+  select(`年度`, `金額`)
 
+# ---
 # 自己資本簿価（Net_assets）の抽出
 # 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
-Net_assets <- df %>%
+Net_assets_intermediate <- df %>%
+  filter(!str_detect(項目, "企業名")) %>%
   filter(項目 %in% c("株主資本合計", "その他の包括利益累計額合計")) %>%
-  group_by(No) %>%
-  summarise(自己資本 = sum(`金額（百万円）`), .groups = 'drop')
+  # 金額列を数値に変換する
+  mutate(金額 = parse_number(金額)) %>%
+  group_by(年度)
 
+# 中間経過を出力する
+print("自己資本簿価の途中経過（項目ごとの金額）:")
+print(Net_assets_intermediate)
+
+# 中間結果を使用して最終的な自己資本を計算する
+Net_assets <- Net_assets_intermediate %>%
+  summarise(自己資本 = sum(金額, na.rm = TRUE), .groups = 'drop')
+
+# ---
 # 抽出したデータの確認
 print("抽出された当期純利益データ:")
 print(Net_Income_U)
@@ -370,18 +370,6 @@ print(Net_assets)
 
 # C0（最も直近の自己資本簿価）の定義
 C0 <- tail(Net_assets$自己資本, 1)
-```
-
-```{r}
-rf <- 0.01570
-beta <- 1.08036867948469
-TOPIX_OPEN <- TOPIX$Close[1:55]
-TOPIX_CLOSE <- TOPIX$Close[2:56]
-topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
-Er <- mean(topix_return, na.rm = TRUE) # 欠損値があれば除去
-market_risk_premium <- Er - rf
-rE <- rf +  beta * market_risk_premium
-cat("株主資本コスト(rE):", round(rE * 100,3), "%\n")
 ```
 
 ```{r}
@@ -398,7 +386,7 @@ pv_residual_income <- rep(NA, n)
 # ループ処理で各期の残余利益と現在価値を計算
 for (t in 1:n) {
   # 当期純利益 (A_t)
-  A_t <- Net_Income_U$`金額（百万円）`[t]
+  A_t <- as.numeric(Net_Income_U$`金額`[t])
   
   # 残余利益 (RI_t) = 当期純利益 - rE * 期首の自己資本簿価
   residual_income_t <- A_t - rE * C[t]
@@ -454,42 +442,26 @@ conflict_prefer("lag",   "dplyr")
 ```
 
 ```{r}
-# パッケージの読み込み
-library(tidyverse)
-
-# データの読み込み
-# 列名が自動的に変換されないように、check.names = FALSE を設定
-# データのエンコーディングに合わせて locale を指定
-df <- read_csv("ProcessedBankData/7150_processed_data.csv", show_col_types = FALSE)
-TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
-
-# データの列名を確認
-print(names(df))
-```
-
-```{r}
 # 当期純利益（Net_Income）の抽出
 # 項目名が複数ある場合もまとめて抽出
 Net_Income_U <- df %>%
   filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) %>%
   slice(which(row_number() %% 2 != 0)) %>%
-  select(No, `金額（百万円）`)
+  select(年度, `金額`)
 
 # 自己資本簿価（Net_assets）の抽出
 # 株主資本合計とその他の包括利益累計額合計を年度（No）ごとに合算
-Pay_ratio <- c(0.4946, 0.4299, 0.2924, 0.4520, 0.3431, 0, 0.1302, 0.3003, 0.2187, 0.2157)
+Pay_ratio <- c(0.4946, 0.4299, 0.2924, 0.4520)
 
 # 当期純利益
 print(Net_Income_U)
 # 配当性向
 print(Pay_ratio)
 
-# C0（最も直近の自己資本簿価）の定義
-d <- Net_Income_U * Pay_ratio
 ```
 
 ```{r}
-Look_Payratio <- tibble(Year = c(2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024), Pay_ratio)
+Look_Payratio <- tibble(Year = c( 2021, 2022, 2023, 2024), Pay_ratio)
 
 # 折れ線グラフの作成
 ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) + 
@@ -514,25 +486,12 @@ ggplot(Look_Payratio, aes(x = Year, y = Pay_ratio * 100)) +
 ```
 
 ```{r}
-rf <- 0.01570
-beta <- 1.08036867948469
-TOPIX_OPEN <- TOPIX$Close[1:55]
-TOPIX_CLOSE <- TOPIX$Close[2:56]
-topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
-Er <- mean(topix_return, na.rm = TRUE) # 欠損値があれば除去
-market_risk_premium <- Er - rf
-rE <- rf +  beta * market_risk_premium
-cat("株主資本コスト(rE):", round(rE * 100,3), "%\n")
-```
+t <- 1:length(Net_assets)
 
-```{r}
-t <- 1:length(d)
-
-P0 <- sum(d/(1+rE)^t)
+P0 <- sum(Net_assets/(1+rE)^t)
 
 cat("株式価値:", round(P0,3),"百万円\n")
 
-N <- 8416000 
 
 cat("理想株価:", round((P0 * 1e6)/N,3),"円\n")
 ```
