@@ -66,7 +66,14 @@ website:
           - 04_8542_DDM.qmd
           - 04_8562_DDM.qmd
           - 04_8563_DDM.qmd
-          
+      
+      - section: "東証プライム銀行"
+        href: 05.qmd
+        contents: 
+          - 05_5838.qmd
+          - 05_8331.qmd
+          - 05_8334.qmd
+          - 05_8410.qmd
 format:
   html:
     sidebar: true

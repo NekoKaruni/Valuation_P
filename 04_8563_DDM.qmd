@@ -13,6 +13,7 @@ title: "8563_大東銀行"
 ------------------------------------------------------------------------
 
 ## 前提データの準備
+
 ```{r}
 #| echo: false
 #| message: false
@@ -24,6 +25,7 @@ suppressPackageStartupMessages({
 conflict_prefer("filter", "dplyr")
 conflict_prefer("lag",   "dplyr")
 ```
+
 ```{r}
 # パッケージの読み込み
 library(tidyverse)

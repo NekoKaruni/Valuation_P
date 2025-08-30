@@ -18,7 +18,7 @@ conflict_prefer("lag",   "dplyr")
 # 必要なライブラリの読み込み
 library(tidyverse)
 ## 楽天銀行財務データ読み込み
-df <- read_csv("Processed_PrimeBank/5338.csv", show_col_types = FALSE)
+df <- read_csv("Processed_PrimeBank/5838.csv", show_col_types = FALSE)
 # TOPIX年次リターンデータの読み込み
 TOPIX <- read_csv("^tpx_y.csv", show_col_types = FALSE)
 
@@ -139,7 +139,7 @@ cat("株主資本コスト (rE):", round(rE * 100, 3), "%\n")
 
 上記で計算した各要素 ($D$, $E$, $r\_D$, $r\_E$) と実効税率 ($T$) を用いて、WACCを最終的に算出します。
 
-```{r} 
+```{r}
 # 法人実効税率 (T) の設定 \# 最新の法人実効税率を調べて設定してください。 T \<- 0.2320 \# 例示の値 (23.20%)
 
 # WACCの計算
@@ -149,6 +149,7 @@ WACC <- D / (D + E) * rD * (1 - T) + E / (D + E) * rE
 # 算出結果の確認
 cat("加重平均資本コスト (WACC):", round(WACC * 100, 3), "%\n")
 ```
+
 ## フリーキャッシュフロー (FCF) の推計と企業価値の算出
 
 割引率であるWACCが算出できたら、次に企業の将来のフリーキャッシュフロー（FCF）を推計し、それらをWACCで現在価値に割り引くことで企業価値を算出します。
@@ -179,6 +180,7 @@ cat("\nFCF_past (ベクトル形式):\n")
 print(FCF_past)
 
 ```
+
 ### 将来フリーキャッシュフローの予測
 
 ```{r}
@@ -224,6 +226,7 @@ if (forecast_period > 0) {
 cat("将来FCF予測 (簡易モデル -", forecast_period, "年間):\n")
 print(round(FCF_forecast, 0))
 ```
+
 ### ターミナルバリュー (TV) の算出
 
 ターミナルバリューは、明示的に予測する期間（ここでは10年間）以降の、企業が永続的に生み出すと仮定されるフリーキャッシュフローの現在価値の合計を表します。ゴードン成長モデルを用いて算出します。
@@ -276,6 +279,7 @@ if (!is.na(TV)) {
 
 cat("DCF法による企業価値評価 (Valuation):", round(Valuation, 0), "\n")
 ```
+
 ### 時価総額とFCF
 
 ```{r}

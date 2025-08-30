@@ -31,6 +31,7 @@ WACCを算出するためには、$D$、$E$、$r\_D$、$r\_E$ の各要素を正
 ### 前提データの準備
 
 まずは、分析に必要なライブラリを読み込み、財務データとTOPIXデータを準備します。
+
 ```{r}
 #| echo: false
 #| message: false
@@ -42,6 +43,7 @@ suppressPackageStartupMessages({
 conflict_prefer("filter", "dplyr")
 conflict_prefer("lag",   "dplyr")
 ```
+
 ```{r}
 # 必要なライブラリの読み込み
 library(tidyverse)
