@@ -1,1 +1,1 @@
-*.qmd linguist-vendored
+*.qmd linguist-detectable=true
