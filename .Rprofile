@@ -1,1 +1,5 @@
 source("renv/activate.R")
+library(tidyverse)
+library(stats)
+library(lubridate)
+library(GGally)

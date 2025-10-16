@@ -43,28 +43,102 @@ print(topix_df)
 cat("期待収益率（1970～2024年の平均）:", round(expected_return * 100, 3), "%\n")
 
 
+```
+
+```{r}
+# ------------------------------------------------------------
+# ライブラリ読み込み
+# ------------------------------------------------------------
+library(tidyverse)
+library(ggrepel)
+
+# ------------------------------------------------------------
+# データ読み込み
+# ------------------------------------------------------------
+TOPIX <- read_csv("^tpx_y.csv")
+
+# 年初始値と年末終値
+TOPIX_OPEN <- TOPIX$Close[1:55]
+TOPIX_CLOSE <- TOPIX$Close[2:56]
+
+# 年次リターン（価格収益率）
+topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
+
+# 年度
+years <- 1970:2024
+
+# データフレーム化
+topix_df <- tibble(
+  Year = years,
+  Open = TOPIX_OPEN,
+  Close = TOPIX_CLOSE,
+  Return = round(topix_return * 100, 2)  # パーセント表示
+)
 
 # coefを計算（Returnの最大値に合わせる）
 coef <- max(topix_df$Close) / max(topix_df$Return)
 
-# pivot_longerで長い形式に
+# pivot_longerで長い形式
 TOPIX_df_long <- pivot_longer(topix_df, cols = c("Close", "Return"),
                               names_to = "項目", values_to = "値")
 
-ggplot(TOPIX_df_long, aes(x = Year, y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目)) +
-  geom_line(linewidth = 1) +
+# ------------------------------------------------------------
+# ±30%以上のReturnイベント抽出
+# ------------------------------------------------------------
+threshold <- 30
+extreme_events <- topix_df %>%
+  filter(abs(Return) >= threshold) %>%
+  mutate(
+    type = ifelse(Return > 0, "上昇", "下落"),
+    # 上下交互にラベルをずらす
+    y_label = Close + ifelse(row_number() %% 2 == 0, 1, -1) * max(topix_df$Close) * 0.05
+  )
+
+# ラベルを手動で設定
+extreme_events$label[extreme_events$Year == 1989] <- "バブル崩壊"
+
+
+# ------------------------------------------------------------
+# グラフ作成
+# ------------------------------------------------------------
+ggplot(TOPIX_df_long, aes(x = Year)) +
+  geom_line(aes(y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目),
+            linewidth = 1.2, alpha = 0.8) +
+  # 縦線
+  geom_vline(data = extreme_events, aes(xintercept = Year, color = type),
+             linetype = "dotted", linewidth = 0.8, show.legend = FALSE) +
+  # ラベル横書き・上下交互
+  geom_text_repel(
+    data = extreme_events %>% filter(!is.na(label)),
+    aes(x = Year, y = y_label, label = label),
+    angle = 0,            # 横書き
+    nudge_y = 0,
+    size = 3,
+    color = "gray30",
+    segment.size = 0.5,
+    segment.color = "gray50",
+    force = 1,
+    max.overlaps = Inf
+  ) +
+  # y軸と副軸
   scale_y_continuous(
     name = "TOPIX指数",
     sec.axis = sec_axis(~ . / coef, name = "値上がり率（%）")
   ) +
-  scale_color_manual(values = c("Close" = "blue", "Return" = "red"),
-                     labels = c("TOPIX指数", "値上がり率（%）")) +
+  # 色の設定
+  scale_color_manual(values = c("Close" = "black", "Return" = "gray",
+                                "上昇" = "red", "下落" = "blue"),
+                     labels = c("TOPIX指数", "値上がり率（%）","","")) +
   labs(
-    title = "1970年~2024年 TOPIX指数と値上がり率",
-    x = "年",
-    color = ""
+    title = "TOPIX指数と日本経済主要イベント",
+    x = "年"
   ) +
-  theme_minimal() +
-  theme(legend.position = "top")
+  theme_classic() +
+  theme(
+    legend.position = "top",
+    plot.title = element_text(size = 14, face = "bold"),
+    axis.title.y = element_text(color = "black"),
+    axis.title.y.right = element_text(color = "black")
+  )
 
 ```

@@ -12,3 +12,10 @@
 
 # ProcessedBankData/ ディレクトリ全体を無視
 ProcessedBankData/
+Machine/
+Prime_Bank/
+ProcessedMachineData/
+Processed_PrimeBank/
+docx/
+pptx/
+
