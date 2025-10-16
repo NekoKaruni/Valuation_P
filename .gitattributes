@@ -1,1 +1,5 @@
-*.qnd linguist-language=R
+# QuartoファイルをQuartoとして認識させる
+*.qmd linguist-language=Quarto
+
+# Pythonファイルを除外（自動生成物など扱いの場合）
+*.py linguist-generated=true
