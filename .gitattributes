@@ -1,1 +1,3 @@
-*.qmd linguist-detectable=qmd
+*.qmd linguist-detectable=TRUE
+
+*.qnd linguist-language=R
