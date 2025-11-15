@@ -4,7 +4,7 @@ format:
   html:
    css: styles.css
 ---
-
+# データ加工
 ```{r}
 library(tidyverse)
 
@@ -628,6 +628,9 @@ af <- bf8563 |>
 
 write_csv(af,"af/8563.csv")
 ```
+
+
+# 計算式
 
 ```{r}
 df7150 <- read_csv("af/7150.csv")
