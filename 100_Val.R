@@ -161,5 +161,5 @@ final_result <- bind_rows(results_list)
 ALL_df <- read_csv("Valuation_results.csv")
 ALL_df <- ALL_df |> 
   mutate(
-    NP = final_result$NP
+    RIMDDM = (RIM_value + DDM_value) / 2
   )
