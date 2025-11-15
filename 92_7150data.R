@@ -3,7 +3,7 @@ library(dplyr)
 library(stringr)
 
 # 1. データ読み込み
-df <- read_csv("ProcessedBankData/7150_processed_data.csv")
+df <- read_csv("ProcessedBankData/8383_processed_data.csv")
 
 # 2. 年度列作成 & 金額NA除外 & 負債集計
 result <- df %>%
@@ -41,7 +41,7 @@ result <- result %>%
 
 # 4. CFOとCFI抽出 & FCF計算
 CFO <- df %>% filter(項目 == "営業活動によるキャッシュ・フロー") %>% rename(年度 = ファイル名)
-CFI <- df %>% filter(項目 == "投資活動によるキャッシュ・フロー") %>% rename(年度 = ファイル名)
+CFI <- df %>% filter(項目 == "投資活動によるキャッシュ・フロー") %>% rename(年度 = ファイル名)ええ
 
 FCF_combined_df <- inner_join(
   CFO %>% select(年度, CFO_金額 = `金額（百万円）`),
@@ -79,5 +79,5 @@ cat("加重DCFによる株主価値（Equity Value）:", round(Equity_value_weig
 
 
 if(!dir.exists("data")) dir.create("data")
-write_csv(result, "data/result7150.csv")
+write_csv(result, "data/result83.csv")
 

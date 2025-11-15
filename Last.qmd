@@ -1,0 +1,839 @@
+---
+title: "last"
+---
+
+```{r}
+library(tidyverse)
+
+df7150 <- read_csv("ProcessedBankData/7150_processed_data.csv")
+
+result <- df7150 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df7150 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_asset <- df7150 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df7150 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df7150 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result,"bf/bf7150.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df7161 <- read_csv("ProcessedBankData/7161_processed_data.csv")
+
+result <- df7161 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df7161 |> 
+  filter(項目 %in% c("当期純利益", 	"当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_income <- c(Net_income,-23462)
+
+Net_asset <- df7161 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df7161 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df7161 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result,"bf/bf7161.csv") 
+
+
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8349 <- read_csv("ProcessedBankData/8349_processed_data.csv")
+
+result <- df8349 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8349 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>  
+  pull(`金額（百万円）`)
+
+Net_asset <- df8349 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8349 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8349 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result,"bf/bf8349.csv")
+
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8365 <- read_csv("ProcessedBankData/8365_processed_data.csv")
+
+result <- df8365 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8365 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>  
+  pull(`金額（百万円）`)
+
+Net_asset <- df8365 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8365 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8365 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result,"bf/bf8365.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8383 <- read_csv("ProcessedBankData/8383_processed_data.csv")
+
+result <- df8383 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8383 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>  
+  pull(`金額（百万円）`)
+
+Net_asset <- df8383 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8383 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8383 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+# 9行目に追加する行を作成
+new_row <- tibble(
+  年度 = "2023",
+  D     = NA,
+  DU    = NA,
+  rD    = NA,
+)
+
+# 8行目まで + 新しい9行目 + 残り
+result <- bind_rows(
+  result[1:8, ],   # 元の1〜8行目
+  new_row,         # 9行目に2023とNA
+  result[9:nrow(result), ]  # 元の9行目以降を10行目以降にずらす
+)
+
+
+
+# 各列ベクトルを作成
+Net_income_vec <- c(Net_income[1:8], NA, Net_income[9:length(Net_income)])
+Net_asset_vec  <- c(Net_asset[1:8], NA, Net_asset[9:length(Net_asset)])
+CFO_vec        <- c(CFO_V[1:8], NA, CFO_V[9:length(CFO_V)])
+CFI_vec        <- c(CFI_V[1:8], NA, CFI_V[9:length(CFI_V)])
+FCF_vec        <- CFO_vec + CFI_vec
+
+# result に追加
+result <- result |> 
+  mutate(
+    Net_income = Net_income_vec,
+    Net_asset  = Net_asset_vec,
+    CFO        = CFO_vec,
+    CFI        = CFI_vec,
+    FCF        = FCF_vec
+  )
+
+
+write_csv(result,"bf/bf8383.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8416 <- read_csv("ProcessedBankData/8416_processed_data.csv")
+
+result <- df8416 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8416 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_asset <- df8416 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8416 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8416 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result, "bf/bf8416.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8537 <- read_csv("ProcessedBankData/8537_processed_data.csv")
+
+result <- df8537 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8537 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_asset <- df8537 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8537 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8537 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result, "bf/bf8537.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8542 <- read_csv("ProcessedBankData/8542_processed_data.csv")
+
+result <- df8542 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8542 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>  
+  pull(`金額（百万円）`)
+
+Net_asset <- df8542 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8542 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8542 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+# 8行目に追加する行を作成（7行目まで + 8行目NA）
+new_row <- tibble(
+  年度 = "2022",
+  D     = NA,
+  DU    = NA,
+  rD    = NA
+)
+
+# 7行目まで + 新しい8行目 + 残りを9行目以降にずらす
+result <- bind_rows(
+  result[1:7, ],
+  new_row,
+  result[8:nrow(result), ]
+)
+
+# 各列ベクトルを作成
+Net_income_vec <- c(Net_income[1:7], NA, Net_income[8:length(Net_income)])
+Net_asset_vec  <- c(Net_asset[1:7], NA, Net_asset[8:length(Net_asset)])
+CFO_vec        <- c(CFO_V[1:7], NA, CFO_V[8:length(CFO_V)])
+CFI_vec        <- c(CFI_V[1:7], NA, CFI_V[8:length(CFI_V)])
+FCF_vec        <- CFO_vec + CFI_vec
+
+# result に追加
+result <- result |> 
+  mutate(
+    Net_income = Net_income_vec,
+    Net_asset  = Net_asset_vec,
+    CFO        = CFO_vec,
+    CFI        = CFI_vec,
+    FCF        = FCF_vec
+  )
+
+write_csv(result, "bf/bf8542.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8562 <- read_csv("ProcessedBankData/8562_processed_data.csv")
+
+result <- df8562 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8562 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_asset <- df8562 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8562 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8562 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result, "bf/bf8562.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+df8563 <- read_csv("ProcessedBankData/8563_processed_data.csv")
+
+result <- df8563 |> 
+  mutate(年度 = str_sub(ファイル名, 5, 8)) %>%
+  filter(!is.na(`金額（百万円）`), `金額（百万円）` != 0) %>%
+  group_by(年度) %>%
+  summarise(
+    D  = sum(`金額（百万円）`[項目 %in% c("預金", "借用金", "社債")], na.rm = TRUE),
+    DU = sum(`金額（百万円）`[項目 %in% c("預金利息", "借用金利息", "社債利息")], na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  mutate(rD = DU / D)
+
+Net_income <- df8563 |> 
+  filter(項目 %in% c("当期純利益", "当期純利益又は当期純損失（△）")) |> 
+  slice(seq(1, n(), by = 2)) |>   # 奇数行抽出
+  pull(`金額（百万円）`)
+
+Net_asset <- df8563 |> 
+  filter(項目 == "純資産の部合計") |> 
+  pull(`金額（百万円）`)
+
+CFO_V <- df8563 |> 
+  filter(項目=="営業活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+CFI_V <- df8563 |> 
+  filter(項目=="投資活動によるキャッシュ・フロー") |> 
+  pull(`金額（百万円）`)
+
+result <- result |> 
+  mutate(
+    Net_income = Net_income,
+    Net_asset  = Net_asset,
+    CFO = CFO_V,
+    CFI = CFI_V,
+    FCF = CFO_V + CFI_V
+  )
+
+write_csv(result, "bf/bf8563.csv")
+
+
+```
+
+
+```{r}
+bf7150 <- read_csv("bf/bf7150.csv")
+
+af <- bf7150 |> 
+  mutate(
+    price = c(1395, 1426, 1370, 1380, 658, 661, 619, 543, 460, 515),   # 10年分
+    N = 8416000,           # 発行済株式数
+    beta = 1.0803,
+    Pay_ratio = c(0.4946, 0.4299, 0.2924, 0.4520, 0.3431, 0, 0.1302, 0.3003, 0.2187, 0.2157),
+    NP = N * price
+  )
+
+write_csv(af,"af/7150.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+bf7161 <- read_csv("bf/bf7161.csv")
+
+af <- bf7161 |> 
+  mutate(
+    price = c(2290,1990,1980,1950,1250,1130,821,642,440,545),
+    N = 72840263,
+    beta = 0.3849,
+    Pay_ratio = c(0.896, 0.8976, 0.8771,  0.9041, 0.8865, 0.7246, 1.0757, 1.8867, 0, 0),
+    NP = N * price
+  )
+
+write_csv(af,"af/7161.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8349 <- read_csv("bf/bf8349.csv")
+
+af <- bf8349 |> 
+  mutate(
+    price = c(1570, 1580, 1580, 1513, 1111, 1027, 1125, 1006, 1026, 1170),
+    N = 9509963,
+    beta = 0.6125,
+    Pay_ratio = c(0.3501, 0.2679, 0.2556, 0.4387, 0.3650, 0.3412, 0.4008, 0.3701, 0.3342, 0.3580),
+    NP = N * price
+  )
+
+write_csv(af,"af/8349.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8365 <- read_csv("bf/bf8365.csv")
+
+af <- bf8365 |> 
+  mutate(
+    price = c(2500, 4440, 4500, 4360, 3095, 2412, 2944, 1791, 1764, 1695),
+    N = 5444400,
+    beta = 1.0889,
+    Pay_ratio = c(0.2384, 0.2827, 0.2405, 0.2141, 0.1965, 0.3824, 0.5156, 0.8902, 0.2862, 0.4442),
+    NP = N * price
+  )
+
+write_csv(af,"af/8365.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8383 <- read_csv("bf/bf8383.csv")
+
+af <- bf8383 |> 
+  mutate(
+    price = c(2380, 2170, 1936, 1808, 1424, 1387, 1133, 1163, 1146, 1358),
+    N = 9619398,
+    beta = 0.5806,
+    Pay_ratio = c(0.2586, 0.2667, 0.4340, 0.5135, 0.5989, 0.5236, 0.4829, 0.5389, 0.4658, 0.4506),
+    NP = N * price
+  )
+
+write_csv(af,"af/8383.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8416 <- read_csv("bf/bf8416.csv")
+
+af <- bf8416 |> 
+  mutate(
+    price = c(1590, 1420, 1340, 1319, 740, 889, 722, 770, 716, 935 ),
+    N = 10244800,
+    beta = 0.8731,
+    Pay_ratio = c(0.707, 0.932, 0.1322, 0.1730, 0.3535, 0.2356, 0.4178, 0.1878, 0.1958, 0.2475),
+    NP = N * price
+  )
+
+write_csv(af,"af/8416.csv")
+
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8537 <- read_csv("bf/bf8537.csv")
+
+af <- bf8537 |> 
+  mutate(
+    price = c(2210, 2460, 2630, 2520, 1781, 1672, 1339, 1360, 1254, 1282),
+    N = 9671400,
+    beta = 0.6017,
+    Pay_ratio = c(0.3001, 0.1672, 0.1551, 0.1346, 0.1872, 0.4200, 0.3054, 0.2326, 0.3744, 0.2814),
+    NP = N * price
+  )
+
+write_csv(af,"af/8537.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8542 <- read_csv("bf/bf8542.csv")
+
+af <- bf8542 |> 
+  mutate(
+    price = c(1780, 1740, 1585, 1558, 1081, 1074, 1060, 1070, 1045, 1155),
+    N = 11679030,
+    beta = 0.5599,
+    Pay_ratio = c(0.3558, 0.3178, 0.3136, 0.4206, 0.5189, 0.5502, 0.4768, 0.4226, 0.3724, 0.4613),
+    NP = N * price
+  )
+
+write_csv(af,"af/8542.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+bf8562 <- read_csv("bf/bf8562.csv")
+
+af <- bf8562 |> 
+  mutate(
+    price = c(940, 960, 980, 944, 390, 273, 198, 235, 258, 235),
+    N = 34900000,
+    beta = 1.1149,
+    Pay_ratio = c(0.1045, 0.1959, 0.4255, 0, 0.1390, 0.1358, 0 , 0.1693, 0.1769, 0.1245),
+    NP = N * price
+  )
+
+write_csv(af,"af/8562.csv")
+#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+bf8563 <- read_csv("bf/bf8563.csv")
+
+af <- bf8563 |> 
+  mutate(
+    price = c(1410, 2080, 1680, 1651, 601, 648, 639, 761, 681, 740),
+    N = 12701000,
+    beta = 0.8016,
+    Pay_ratio = c(0.1426, 0.1532, 0.2764, 0.2986, 0.3195, 0.3742, 0.4017, 0.3294, 0.3121, 0.3131),
+    NP = N * price
+  )
+
+write_csv(af,"af/8563.csv")
+```
+
+```{r}
+df7150 <- read_csv("af/7150.csv")
+df7161 <- read_csv("af/7161.csv")
+df8349 <- read_csv("af/8349.csv")
+df8365 <- read_csv("af/8365.csv")
+df8383 <- read_csv("af/8383.csv")
+df8416 <- read_csv("af/8416.csv")
+df8537 <- read_csv("af/8537.csv")
+df8542 <- read_csv("af/8542.csv")
+df8562 <- read_csv("af/8562.csv")
+df8563 <- read_csv("af/8563.csv")
+
+
+calc_wacc <- function(df, Rf = 0.0157, Rm = 0.05, Tax = 0.2320) {
+  
+  wacc <- df |> 
+    mutate(
+      rE = Rf + beta * (Rm - Rf),     # CAPMで株主資本コスト
+      V  = D + NP,                    # 企業価値（負債＋株主資本）
+      WACC = (NP / V) * rE + (D / V) * rD * (1 - Tax)
+    )
+  
+  return(wacc)
+}
+
+
+wacc7150 <- calc_wacc(df7150)
+
+wacc7161 <- calc_wacc(df7161)
+
+wacc8349 <- calc_wacc(df8349)
+
+wacc8365 <- calc_wacc(df8365)
+
+wacc8383 <- calc_wacc(df8383)
+
+wacc8416 <- calc_wacc(df8416)
+
+wacc8537 <- calc_wacc(df8537)
+
+wacc8542 <- calc_wacc(df8542)
+
+wacc8562 <- calc_wacc(df8562)
+
+wacc8563 <- calc_wacc(df8563)
+# -----------------------------
+# 企業価値計算関数まとめ
+# -----------------------------
+
+calculate_valuation_env <- function(codes, g = 0.02, rE = 0.08, path = "Valuation_results.csv") {
+  
+  # DCF計算（過去データ加重平均、将来5年割引）
+  DCF_value <- function(df, g) {
+    fcf <- df$FCF
+    years <- df$年度
+    weights <- ifelse(is.na(years), 0, seq_along(fcf))
+    weights <- weights / sum(weights)
+    FCF_base <- sum(fcf * weights, na.rm = TRUE)
+    
+    FCF_future <- FCF_base * (1 + g)^(1:5)
+    discount_factors <- (1 + df$WACC[1])^(1:5)
+    sum(FCF_future / discount_factors)
+  }
+  
+  # RIM計算（Net_income の加重平均使用）
+  RIM_value <- function(df, rE, g) {
+    netinc <- df$Net_income
+    years <- df$年度
+    weights <- ifelse(is.na(years), 0, seq_along(netinc))
+    weights <- weights / sum(weights)
+    NetIncome_base <- sum(netinc * weights, na.rm = TRUE)
+    
+    df$Net_asset[nrow(df)] + (NetIncome_base * (1 + g)) / rE
+  }
+  
+  # DDM計算（配当ベース）
+  DDM_value <- function(df, rE, g) {
+    netinc <- df$Net_income
+    payratio <- df$Pay_ratio
+    years <- df$年度
+    weights <- ifelse(is.na(years), 0, seq_along(netinc))
+    weights <- weights / sum(weights)
+    
+    Div_base <- sum(netinc * payratio * weights, na.rm = TRUE)
+    Div_future <- Div_base * (1 + g)^(1:5)
+    discount_factors <- (1 + rE)^(1:5)
+    sum(Div_future / discount_factors)
+  }
+  
+  # 結果格納用
+  results <- tibble(df = character(),
+                    DCF_value = numeric(),
+                    RIM_value = numeric(),
+                    DDM_value = numeric(),
+                    g = numeric(),
+                    NP_latest = numeric())
+  
+  # 企業ごとにループ
+  for(code in codes) {
+    # 環境からデータフレーム取得
+    df_name <- paste0("wacc", code)
+    if(!exists(df_name)) next
+    df <- get(df_name)
+    
+    # 各モデル計算
+    dcf <- DCF_value(df, g)
+    rim <- RIM_value(df, rE, g)
+    ddm <- DDM_value(df, rE, g)
+    np_latest <- tail(df$NP, 1)  # 最新年度のNP
+    
+    results <- bind_rows(results,
+                         tibble(df = code,
+                                DCF_value = dcf,
+                                RIM_value = rim,
+                                DDM_value = ddm,
+                                g = g,
+                                NP_latest = np_latest))
+  }
+  
+  write_csv(results, path)
+  return(results)
+}
+
+```
+
+```{r}         
+library(tidyverse)
+df <- read_csv("Valuation_results.csv")
+df
+
+
+#円に戻す
+df$DCF_value <- df$DCF_value *1e6 
+df$RIM_value <- df$RIM_value *1e6
+df$DDM_value <- df$DDM_value *1e6
+
+#億
+df$DCF_value <- df$DCF_value /1e8 
+df$RIM_value <- df$RIM_value /1e8
+df$DDM_value <- df$DDM_value /1e8
+df$NP_latest <- df$NP_latest /1e8
+
+
+
+df_plot <- df[, c("df", "DCF_value", "RIM_value", "DDM_value", "NP_latest")]
+df_plot$df <- as.character(df_plot$df)
+# wide → long 形式に変換
+df_long <- pivot_longer(df_plot, cols = c("DCF_value", "RIM_value", "DDM_value", "NP_latest"),
+                        names_to = "モデル", values_to = "時価総額")
+
+# モデル名を整形（末尾の "_value" を削除）
+df_long$モデル <- sub("_value|_latest", "", df_long$モデル)
+
+
+
+
+df_long$モデル <- factor(df_long$モデル, levels = c("DCF", "RIM", "DDM", "NP"))
+# グラフ作成
+
+#2. 各企業の最大時価総額モデルを判定
+df_long <- df_long %>%
+  group_by(df) %>%
+  mutate(最大モデル = ifelse(時価総額 == max(時価総額), TRUE, FALSE)) %>%
+  ungroup()
+
+# 3. 企業ごとのモデル別時価総額グラフ
+p1 <- ggplot(df_long, aes(x = df, y = 時価総額, fill = モデル)) +
+  geom_bar(stat = "identity", position = position_dodge()) +
+  labs(title = "企業ごとのモデル別時価総額",
+       x = "企業", y = "時価総額（億円）") +
+  theme_minimal()
+
+print(p1)
+
+# 4. モデル別平均時価総額
+model_summary <- df_long %>%
+  group_by(モデル) %>%
+  summarise(
+    平均 = mean(時価総額),
+    中央値 = median(時価総額),
+    最大 = max(時価総額),
+    最小 = min(時価総額),
+    SD = sd(時価総額)
+  )
+
+print(model_summary)
+
+# 5. モデル別分布（箱ひげ図）
+p2 <- ggplot(df_long, aes(x = モデル, y = 時価総額, fill = モデル)) +
+  geom_boxplot() +
+  labs(title = "モデル別時価総額の分布",
+       x = "モデル", y = "時価総額（億円）") +
+  theme_minimal()
+
+print(p2)
+
+# p2 はモデル別分布の箱ひげ図
+ggsave("モデル別時価総額分布.png", plot = p2,
+       width = 6, height = 5, dpi = 600)
+
+
+
+# 6. 優位モデルの企業数を集計
+dominant_model <- df_long %>%
+  filter(最大モデル) %>%
+  group_by(モデル) %>%
+  summarise(企業数 = n())
+
+print(dominant_model)
+```

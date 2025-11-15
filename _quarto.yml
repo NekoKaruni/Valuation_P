@@ -12,8 +12,8 @@ website:
         href: 00_About_Valuation.qmd
       - text: "TOPIX"
         href: 00_TOPIX.qmd
-      - text: "指数平滑法"
-        href: 00_Exponsmooth.qmd
+      - text: "code"
+        href: Last.qmd
       - text: "環境設定"
         href: 10_Environment.qmd
       - icon: globe-asia-australia
