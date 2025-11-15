@@ -491,7 +491,6 @@ write_csv(result, "bf/bf8563.csv")
 
 ```
 
-
 ```{r}
 bf7150 <- read_csv("bf/bf7150.csv")
 
@@ -706,18 +705,31 @@ calculate_valuation_env <- function(codes, g = 0.02, rE = 0.08, path = "Valuatio
   }
   
   # DDM計算（配当ベース）
-  DDM_value <- function(df, rE, g) {
-    netinc <- df$Net_income
-    payratio <- df$Pay_ratio
-    years <- df$年度
-    weights <- ifelse(is.na(years), 0, seq_along(netinc))
-    weights <- weights / sum(weights)
-    
-    Div_base <- sum(netinc * payratio * weights, na.rm = TRUE)
-    Div_future <- Div_base * (1 + g)^(1:5)
-    discount_factors <- (1 + rE)^(1:5)
-    sum(Div_future / discount_factors)
-  }
+  DDM_value <- function(df, rE, g, horizon = 5) {
+  netinc <- df$Net_income
+  payratio <- df$Pay_ratio
+  years <- df$年度
+  
+  # 過去配当の加重平均
+  weights <- ifelse(is.na(years), 0, seq_along(netinc))
+  weights <- weights / sum(weights)
+  Div_base <- sum(netinc * payratio * weights, na.rm = TRUE)
+  
+  # 最初のhorizon年間の配当予測
+  Div_future <- Div_base * (1 + g)^(1:horizon)
+  discount_factors <- (1 + rE)^(1:horizon)
+  PV_initial <- sum(Div_future / discount_factors)
+  
+  # horizon年目の配当
+  D_horizon <- Div_base * (1 + g)^horizon
+  
+  # 定率成長モデルによる永続価値
+  PV_terminal <- D_horizon * (1 + g) / (rE - g) / ((1 + rE)^horizon)
+  
+  # 合計企業価値
+  V <- PV_initial + PV_terminal
+  return(V)
+}
   
   # 結果格納用
   results <- tibble(df = character(),
@@ -755,7 +767,7 @@ calculate_valuation_env <- function(codes, g = 0.02, rE = 0.08, path = "Valuatio
 
 ```
 
-```{r}         
+```{r}
 library(tidyverse)
 library(showtext)
 showtext_auto()
@@ -768,24 +780,35 @@ theme(text = element_text(family = "hiragino"))
 df <- read_csv("Valuation_results.csv")
 df
 
-
+df <- df |> 
+  mutate(
+    RIM_DDM = (RIM_value + DDM_value) / 2,
+    RIM_DDM25 = (RIM_value * 0.25 + DDM_value * 0.75),
+    RIM_DDM12 = (RIM_value * 0.125 + DDM_value * 0.875)
+  )
 #円に戻す
 df$DCF_value <- df$DCF_value *1e6 
 df$RIM_value <- df$RIM_value *1e6
 df$DDM_value <- df$DDM_value *1e6
-
+df$RIM_DDM   <- df$RIM_DDM   *1e6
+df$RIM_DDM25 <- df$RIM_DDM25 *1e6
+df$RIM_DDM12 <- df$RIM_DDM12 *1e6
 #億
 df$DCF_value <- df$DCF_value /1e8 
 df$RIM_value <- df$RIM_value /1e8
 df$DDM_value <- df$DDM_value /1e8
+df$RIM_DDM   <- df$RIM_DDM   /1e8
+df$RIM_DDM25 <- df$RIM_DDM25 /1e8
+df$RIM_DDM12 <- df$RIM_DDM12 /1e8
 df$NP_latest <- df$NP_latest /1e8
 
 
 
-df_plot <- df[, c("df", "DCF_value", "RIM_value", "DDM_value", "NP_latest")]
+
+df_plot <- df[, c("df", "DCF_value", "RIM_value", "DDM_value", "RIM_DDM","RIM_DDM25","RIM_DDM12","NP_latest")]
 df_plot$df <- as.character(df_plot$df)
 # wide → long 形式に変換
-df_long <- pivot_longer(df_plot, cols = c("DCF_value", "RIM_value", "DDM_value", "NP_latest"),
+df_long <- pivot_longer(df_plot, cols = c("DCF_value", "RIM_value", "DDM_value", "RIM_DDM","RIM_DDM25","RIM_DDM12","NP_latest"),
                         names_to = "モデル", values_to = "時価総額")
 
 # モデル名を整形（末尾の "_value" を削除）
@@ -794,7 +817,7 @@ df_long$モデル <- sub("_value|_latest", "", df_long$モデル)
 
 
 
-df_long$モデル <- factor(df_long$モデル, levels = c("DCF", "RIM", "DDM", "NP"))
+df_long$モデル <- factor(df_long$モデル, levels = c("DCF", "RIM", "DDM", "RIM_DDM","RIM_DDM25","RIM_DDM12","NP"))
 # グラフ作成
 
 #2. 各企業の最大時価総額モデルを判定
@@ -841,10 +864,33 @@ ggsave("モデル別時価総額分布.png", plot = p2,
 
 
 # 6. 優位モデルの企業数を集計
-dominant_model <- df_long %>%
-  filter(最大モデル) %>%
-  group_by(モデル) %>%
-  summarise(企業数 = n())
 
-print(dominant_model)
+# NPの評価額を各企業ごとに取得
+df_np <- df_long %>%
+  filter(モデル == "NP") %>%
+  select(df, NP_value = 時価総額)
+
+# NPとの差を計算
+df_comparison <- df_long %>%
+  filter(モデル != "NP") %>%        # NP自体は除く
+  left_join(df_np, by = "df") %>%   # NPの値を結合
+  mutate(
+    abs_diff = abs(時価総額 - NP_value),        # 絶対差
+    rel_diff = abs(時価総額 - NP_value) / NP_value  # 相対差
+  )
+
+# 企業ごとにNPに最も近いモデルを抽出
+dominant_model <- df_comparison %>%
+  group_by(df) %>%
+  slice_min(order_by = abs_diff, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(df, モデル, 時価総額, NP_value, abs_diff, rel_diff)
+
+model_count <- dominant_model %>%
+  group_by(モデル) %>%
+  summarise(企業数 = n()) %>%
+  arrange(desc(企業数))
+
+print(model_count)
+
 ```

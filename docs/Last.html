@@ -1420,52 +1420,65 @@ dbl (14): 年度, D, DU, rD, Net_income, Net_asset, CFO, CFI, FCF, price, N, bet
 <span id="cb65-61"><a href="#cb65-61" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb65-62"><a href="#cb65-62" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb65-63"><a href="#cb65-63" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DDM計算（配当ベース）</span></span>
-<span id="cb65-64"><a href="#cb65-64" aria-hidden="true" tabindex="-1"></a>  DDM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g) {</span>
-<span id="cb65-65"><a href="#cb65-65" aria-hidden="true" tabindex="-1"></a>    netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
-<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a>    payratio <span class="ot">&lt;-</span> df<span class="sc">$</span>Pay_ratio</span>
-<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
-<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
-<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
-<span id="cb65-70"><a href="#cb65-70" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a>    Div_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> payratio <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb65-72"><a href="#cb65-72" aria-hidden="true" tabindex="-1"></a>    Div_future <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a>    discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb65-74"><a href="#cb65-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(Div_future <span class="sc">/</span> discount_factors)</span>
-<span id="cb65-75"><a href="#cb65-75" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb65-76"><a href="#cb65-76" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb65-77"><a href="#cb65-77" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 結果格納用</span></span>
-<span id="cb65-78"><a href="#cb65-78" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> <span class="fu">character</span>(),</span>
-<span id="cb65-79"><a href="#cb65-79" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DCF_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb65-80"><a href="#cb65-80" aria-hidden="true" tabindex="-1"></a>                    <span class="at">RIM_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb65-81"><a href="#cb65-81" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DDM_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb65-82"><a href="#cb65-82" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb65-83"><a href="#cb65-83" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NP_latest =</span> <span class="fu">numeric</span>())</span>
+<span id="cb65-64"><a href="#cb65-64" aria-hidden="true" tabindex="-1"></a>  DDM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g, <span class="at">horizon =</span> <span class="dv">5</span>) {</span>
+<span id="cb65-65"><a href="#cb65-65" aria-hidden="true" tabindex="-1"></a>  netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
+<span id="cb65-66"><a href="#cb65-66" aria-hidden="true" tabindex="-1"></a>  payratio <span class="ot">&lt;-</span> df<span class="sc">$</span>Pay_ratio</span>
+<span id="cb65-67"><a href="#cb65-67" aria-hidden="true" tabindex="-1"></a>  years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
+<span id="cb65-68"><a href="#cb65-68" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-69"><a href="#cb65-69" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 過去配当の加重平均</span></span>
+<span id="cb65-70"><a href="#cb65-70" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
+<span id="cb65-71"><a href="#cb65-71" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
+<span id="cb65-72"><a href="#cb65-72" aria-hidden="true" tabindex="-1"></a>  Div_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> payratio <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb65-73"><a href="#cb65-73" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-74"><a href="#cb65-74" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 最初のhorizon年間の配当予測</span></span>
+<span id="cb65-75"><a href="#cb65-75" aria-hidden="true" tabindex="-1"></a>  Div_future <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>horizon)</span>
+<span id="cb65-76"><a href="#cb65-76" aria-hidden="true" tabindex="-1"></a>  discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>horizon)</span>
+<span id="cb65-77"><a href="#cb65-77" aria-hidden="true" tabindex="-1"></a>  PV_initial <span class="ot">&lt;-</span> <span class="fu">sum</span>(Div_future <span class="sc">/</span> discount_factors)</span>
+<span id="cb65-78"><a href="#cb65-78" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-79"><a href="#cb65-79" aria-hidden="true" tabindex="-1"></a>  <span class="co"># horizon年目の配当</span></span>
+<span id="cb65-80"><a href="#cb65-80" aria-hidden="true" tabindex="-1"></a>  D_horizon <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>horizon</span>
+<span id="cb65-81"><a href="#cb65-81" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-82"><a href="#cb65-82" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 定率成長モデルによる永続価値</span></span>
+<span id="cb65-83"><a href="#cb65-83" aria-hidden="true" tabindex="-1"></a>  PV_terminal <span class="ot">&lt;-</span> D_horizon <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g) <span class="sc">/</span> ((<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>horizon)</span>
 <span id="cb65-84"><a href="#cb65-84" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb65-85"><a href="#cb65-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 企業ごとにループ</span></span>
-<span id="cb65-86"><a href="#cb65-86" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(code <span class="cf">in</span> codes) {</span>
-<span id="cb65-87"><a href="#cb65-87" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 環境からデータフレーム取得</span></span>
-<span id="cb65-88"><a href="#cb65-88" aria-hidden="true" tabindex="-1"></a>    df_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"wacc"</span>, code)</span>
-<span id="cb65-89"><a href="#cb65-89" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(df_name)) <span class="cf">next</span></span>
-<span id="cb65-90"><a href="#cb65-90" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">get</span>(df_name)</span>
-<span id="cb65-91"><a href="#cb65-91" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb65-92"><a href="#cb65-92" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 各モデル計算</span></span>
-<span id="cb65-93"><a href="#cb65-93" aria-hidden="true" tabindex="-1"></a>    dcf <span class="ot">&lt;-</span> <span class="fu">DCF_value</span>(df, g)</span>
-<span id="cb65-94"><a href="#cb65-94" aria-hidden="true" tabindex="-1"></a>    rim <span class="ot">&lt;-</span> <span class="fu">RIM_value</span>(df, rE, g)</span>
-<span id="cb65-95"><a href="#cb65-95" aria-hidden="true" tabindex="-1"></a>    ddm <span class="ot">&lt;-</span> <span class="fu">DDM_value</span>(df, rE, g)</span>
-<span id="cb65-96"><a href="#cb65-96" aria-hidden="true" tabindex="-1"></a>    np_latest <span class="ot">&lt;-</span> <span class="fu">tail</span>(df<span class="sc">$</span>NP, <span class="dv">1</span>)  <span class="co"># 最新年度のNP</span></span>
-<span id="cb65-97"><a href="#cb65-97" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb65-98"><a href="#cb65-98" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(results,</span>
-<span id="cb65-99"><a href="#cb65-99" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">tibble</span>(<span class="at">df =</span> code,</span>
-<span id="cb65-100"><a href="#cb65-100" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DCF_value =</span> dcf,</span>
-<span id="cb65-101"><a href="#cb65-101" aria-hidden="true" tabindex="-1"></a>                                <span class="at">RIM_value =</span> rim,</span>
-<span id="cb65-102"><a href="#cb65-102" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DDM_value =</span> ddm,</span>
-<span id="cb65-103"><a href="#cb65-103" aria-hidden="true" tabindex="-1"></a>                                <span class="at">g =</span> g,</span>
-<span id="cb65-104"><a href="#cb65-104" aria-hidden="true" tabindex="-1"></a>                                <span class="at">NP_latest =</span> np_latest))</span>
-<span id="cb65-105"><a href="#cb65-105" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb65-106"><a href="#cb65-106" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb65-107"><a href="#cb65-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(results, path)</span>
-<span id="cb65-108"><a href="#cb65-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb65-109"><a href="#cb65-109" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb65-85"><a href="#cb65-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 合計企業価値</span></span>
+<span id="cb65-86"><a href="#cb65-86" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> PV_initial <span class="sc">+</span> PV_terminal</span>
+<span id="cb65-87"><a href="#cb65-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(V)</span>
+<span id="cb65-88"><a href="#cb65-88" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb65-89"><a href="#cb65-89" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-90"><a href="#cb65-90" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 結果格納用</span></span>
+<span id="cb65-91"><a href="#cb65-91" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> <span class="fu">character</span>(),</span>
+<span id="cb65-92"><a href="#cb65-92" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DCF_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb65-93"><a href="#cb65-93" aria-hidden="true" tabindex="-1"></a>                    <span class="at">RIM_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb65-94"><a href="#cb65-94" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DDM_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb65-95"><a href="#cb65-95" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb65-96"><a href="#cb65-96" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NP_latest =</span> <span class="fu">numeric</span>())</span>
+<span id="cb65-97"><a href="#cb65-97" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-98"><a href="#cb65-98" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 企業ごとにループ</span></span>
+<span id="cb65-99"><a href="#cb65-99" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(code <span class="cf">in</span> codes) {</span>
+<span id="cb65-100"><a href="#cb65-100" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 環境からデータフレーム取得</span></span>
+<span id="cb65-101"><a href="#cb65-101" aria-hidden="true" tabindex="-1"></a>    df_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"wacc"</span>, code)</span>
+<span id="cb65-102"><a href="#cb65-102" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(df_name)) <span class="cf">next</span></span>
+<span id="cb65-103"><a href="#cb65-103" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">get</span>(df_name)</span>
+<span id="cb65-104"><a href="#cb65-104" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb65-105"><a href="#cb65-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 各モデル計算</span></span>
+<span id="cb65-106"><a href="#cb65-106" aria-hidden="true" tabindex="-1"></a>    dcf <span class="ot">&lt;-</span> <span class="fu">DCF_value</span>(df, g)</span>
+<span id="cb65-107"><a href="#cb65-107" aria-hidden="true" tabindex="-1"></a>    rim <span class="ot">&lt;-</span> <span class="fu">RIM_value</span>(df, rE, g)</span>
+<span id="cb65-108"><a href="#cb65-108" aria-hidden="true" tabindex="-1"></a>    ddm <span class="ot">&lt;-</span> <span class="fu">DDM_value</span>(df, rE, g)</span>
+<span id="cb65-109"><a href="#cb65-109" aria-hidden="true" tabindex="-1"></a>    np_latest <span class="ot">&lt;-</span> <span class="fu">tail</span>(df<span class="sc">$</span>NP, <span class="dv">1</span>)  <span class="co"># 最新年度のNP</span></span>
+<span id="cb65-110"><a href="#cb65-110" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb65-111"><a href="#cb65-111" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(results,</span>
+<span id="cb65-112"><a href="#cb65-112" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">tibble</span>(<span class="at">df =</span> code,</span>
+<span id="cb65-113"><a href="#cb65-113" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DCF_value =</span> dcf,</span>
+<span id="cb65-114"><a href="#cb65-114" aria-hidden="true" tabindex="-1"></a>                                <span class="at">RIM_value =</span> rim,</span>
+<span id="cb65-115"><a href="#cb65-115" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DDM_value =</span> ddm,</span>
+<span id="cb65-116"><a href="#cb65-116" aria-hidden="true" tabindex="-1"></a>                                <span class="at">g =</span> g,</span>
+<span id="cb65-117"><a href="#cb65-117" aria-hidden="true" tabindex="-1"></a>                                <span class="at">NP_latest =</span> np_latest))</span>
+<span id="cb65-118"><a href="#cb65-118" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb65-119"><a href="#cb65-119" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb65-120"><a href="#cb65-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(results, path)</span>
+<span id="cb65-121"><a href="#cb65-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb65-122"><a href="#cb65-122" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -1528,48 +1541,60 @@ dbl (6): df, DCF_value, RIM_value, DDM_value, g, NP_latest
  9  8562     7399.    28907.      563.  0.02  8201500000
 10  8563     2935.    55038.     1695.  0.02  9398740000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co">#円に戻す</span></span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">*</span><span class="fl">1e6</span> </span>
-<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">*</span><span class="fl">1e6</span></span>
-<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">*</span><span class="fl">1e6</span></span>
-<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a><span class="co">#億</span></span>
-<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">/</span><span class="fl">1e8</span> </span>
-<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">/</span><span class="fl">1e8</span></span>
-<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">/</span><span class="fl">1e8</span></span>
-<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>NP_latest <span class="ot">&lt;-</span> df<span class="sc">$</span>NP_latest <span class="sc">/</span><span class="fl">1e8</span></span>
-<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-14"><a href="#cb76-14" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"df"</span>, <span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"NP_latest"</span>)]</span>
-<span id="cb76-15"><a href="#cb76-15" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>df <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_plot<span class="sc">$</span>df)</span>
-<span id="cb76-16"><a href="#cb76-16" aria-hidden="true" tabindex="-1"></a><span class="co"># wide → long 形式に変換</span></span>
-<span id="cb76-17"><a href="#cb76-17" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_plot, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"NP_latest"</span>),</span>
-<span id="cb76-18"><a href="#cb76-18" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"モデル"</span>, <span class="at">values_to =</span> <span class="st">"時価総額"</span>)</span>
-<span id="cb76-19"><a href="#cb76-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-20"><a href="#cb76-20" aria-hidden="true" tabindex="-1"></a><span class="co"># モデル名を整形（末尾の "_value" を削除）</span></span>
-<span id="cb76-21"><a href="#cb76-21" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_value|_latest"</span>, <span class="st">""</span>, df_long<span class="sc">$</span>モデル)</span>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM =</span> (RIM_value <span class="sc">+</span> DDM_value) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM25 =</span> (RIM_value <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">+</span> DDM_value <span class="sc">*</span> <span class="fl">0.75</span>),</span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM12 =</span> (RIM_value <span class="sc">*</span> <span class="fl">0.125</span> <span class="sc">+</span> DDM_value <span class="sc">*</span> <span class="fl">0.875</span>)</span>
+<span id="cb76-6"><a href="#cb76-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb76-7"><a href="#cb76-7" aria-hidden="true" tabindex="-1"></a><span class="co">#円に戻す</span></span>
+<span id="cb76-8"><a href="#cb76-8" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">*</span><span class="fl">1e6</span> </span>
+<span id="cb76-9"><a href="#cb76-9" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb76-10"><a href="#cb76-10" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb76-11"><a href="#cb76-11" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM   <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM   <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb76-12"><a href="#cb76-12" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM25 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM25 <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb76-13"><a href="#cb76-13" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM12 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM12 <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb76-14"><a href="#cb76-14" aria-hidden="true" tabindex="-1"></a><span class="co">#億</span></span>
+<span id="cb76-15"><a href="#cb76-15" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">/</span><span class="fl">1e8</span> </span>
+<span id="cb76-16"><a href="#cb76-16" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb76-17"><a href="#cb76-17" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb76-18"><a href="#cb76-18" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM   <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM   <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb76-19"><a href="#cb76-19" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM25 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM25 <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb76-20"><a href="#cb76-20" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM12 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM12 <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb76-21"><a href="#cb76-21" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>NP_latest <span class="ot">&lt;-</span> df<span class="sc">$</span>NP_latest <span class="sc">/</span><span class="fl">1e8</span></span>
 <span id="cb76-22"><a href="#cb76-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-23"><a href="#cb76-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-24"><a href="#cb76-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb76-25"><a href="#cb76-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-26"><a href="#cb76-26" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>モデル, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"DCF"</span>, <span class="st">"RIM"</span>, <span class="st">"DDM"</span>, <span class="st">"NP"</span>))</span>
-<span id="cb76-27"><a href="#cb76-27" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
-<span id="cb76-28"><a href="#cb76-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-29"><a href="#cb76-29" aria-hidden="true" tabindex="-1"></a><span class="co">#2. 各企業の最大時価総額モデルを判定</span></span>
-<span id="cb76-30"><a href="#cb76-30" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb76-31"><a href="#cb76-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
-<span id="cb76-32"><a href="#cb76-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(最大モデル <span class="ot">=</span> <span class="fu">ifelse</span>(時価総額 <span class="sc">==</span> <span class="fu">max</span>(時価総額), <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb76-33"><a href="#cb76-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb76-26"><a href="#cb76-26" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"df"</span>, <span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP_latest"</span>)]</span>
+<span id="cb76-27"><a href="#cb76-27" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>df <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_plot<span class="sc">$</span>df)</span>
+<span id="cb76-28"><a href="#cb76-28" aria-hidden="true" tabindex="-1"></a><span class="co"># wide → long 形式に変換</span></span>
+<span id="cb76-29"><a href="#cb76-29" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_plot, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP_latest"</span>),</span>
+<span id="cb76-30"><a href="#cb76-30" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"モデル"</span>, <span class="at">values_to =</span> <span class="st">"時価総額"</span>)</span>
+<span id="cb76-31"><a href="#cb76-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-32"><a href="#cb76-32" aria-hidden="true" tabindex="-1"></a><span class="co"># モデル名を整形（末尾の "_value" を削除）</span></span>
+<span id="cb76-33"><a href="#cb76-33" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_value|_latest"</span>, <span class="st">""</span>, df_long<span class="sc">$</span>モデル)</span>
 <span id="cb76-34"><a href="#cb76-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-35"><a href="#cb76-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 企業ごとのモデル別時価総額グラフ</span></span>
-<span id="cb76-36"><a href="#cb76-36" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> df, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
-<span id="cb76-37"><a href="#cb76-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb76-38"><a href="#cb76-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"企業ごとのモデル別時価総額"</span>,</span>
-<span id="cb76-39"><a href="#cb76-39" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"企業"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
-<span id="cb76-40"><a href="#cb76-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb76-41"><a href="#cb76-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb76-42"><a href="#cb76-42" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb76-35"><a href="#cb76-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-36"><a href="#cb76-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-37"><a href="#cb76-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-38"><a href="#cb76-38" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>モデル, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"DCF"</span>, <span class="st">"RIM"</span>, <span class="st">"DDM"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP"</span>))</span>
+<span id="cb76-39"><a href="#cb76-39" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
+<span id="cb76-40"><a href="#cb76-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-41"><a href="#cb76-41" aria-hidden="true" tabindex="-1"></a><span class="co">#2. 各企業の最大時価総額モデルを判定</span></span>
+<span id="cb76-42"><a href="#cb76-42" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb76-43"><a href="#cb76-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb76-44"><a href="#cb76-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(最大モデル <span class="ot">=</span> <span class="fu">ifelse</span>(時価総額 <span class="sc">==</span> <span class="fu">max</span>(時価総額), <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb76-45"><a href="#cb76-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb76-46"><a href="#cb76-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-47"><a href="#cb76-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 企業ごとのモデル別時価総額グラフ</span></span>
+<span id="cb76-48"><a href="#cb76-48" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> df, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
+<span id="cb76-49"><a href="#cb76-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb76-50"><a href="#cb76-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"企業ごとのモデル別時価総額"</span>,</span>
+<span id="cb76-51"><a href="#cb76-51" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"企業"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
+<span id="cb76-52"><a href="#cb76-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb76-53"><a href="#cb76-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb76-54"><a href="#cb76-54" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1590,13 +1615,16 @@ dbl (6): df, DCF_value, RIM_value, DDM_value, g, NP_latest
 <span id="cb77-11"><a href="#cb77-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb77-12"><a href="#cb77-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 6
-  モデル  平均 中央値   最大    最小    SD
-  &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 DCF    180.    16.6 1470.  -441.   535. 
-2 RIM    552.   554.  1033.   207.   263. 
-3 DDM     19.5   18.4   52.0    4.88  13.2
-4 NP     131.   104.   397.    43.3   97.4</code></pre>
+<pre><code># A tibble: 7 × 6
+  モデル     平均 中央値   最大    最小    SD
+  &lt;fct&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 DCF       180.    16.6 1470.  -441.   535. 
+2 RIM       552.   554.  1033.   207.   263. 
+3 DDM        19.5   18.4   52.0    4.88  13.2
+4 RIM_DDM   286.   286.   527.   106.   132. 
+5 RIM_DDM25 153.   152.   274.    55.3   67.4
+6 RIM_DDM12  86.1   85.0  147.    30.1   35.8
+7 NP        131.   104.   397.    43.3   97.4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
@@ -1620,18 +1648,41 @@ dbl (6): df, DCF_value, RIM_value, DDM_value, g, NP_latest
 <span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 優位モデルの企業数を集計</span></span>
-<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(最大モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>())</span>
-<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dominant_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="co"># NPの評価額を各企業ごとに取得</span></span>
+<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a>df_np <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">==</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, <span class="at">NP_value =</span> 時価総額)</span>
+<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a><span class="co"># NPとの差を計算</span></span>
+<span id="cb80-15"><a href="#cb80-15" aria-hidden="true" tabindex="-1"></a>df_comparison <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb80-16"><a href="#cb80-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">!=</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span>        <span class="co"># NP自体は除く</span></span>
+<span id="cb80-17"><a href="#cb80-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_np, <span class="at">by =</span> <span class="st">"df"</span>) <span class="sc">%&gt;%</span>   <span class="co"># NPの値を結合</span></span>
+<span id="cb80-18"><a href="#cb80-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb80-19"><a href="#cb80-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value),        <span class="co"># 絶対差</span></span>
+<span id="cb80-20"><a href="#cb80-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value) <span class="sc">/</span> NP_value  <span class="co"># 相対差</span></span>
+<span id="cb80-21"><a href="#cb80-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb80-22"><a href="#cb80-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-23"><a href="#cb80-23" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業ごとにNPに最も近いモデルを抽出</span></span>
+<span id="cb80-24"><a href="#cb80-24" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb80-25"><a href="#cb80-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb80-26"><a href="#cb80-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> abs_diff, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb80-27"><a href="#cb80-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb80-28"><a href="#cb80-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, モデル, 時価総額, NP_value, abs_diff, rel_diff)</span>
+<span id="cb80-29"><a href="#cb80-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-30"><a href="#cb80-30" aria-hidden="true" tabindex="-1"></a>model_count <span class="ot">&lt;-</span> dominant_model <span class="sc">%&gt;%</span></span>
+<span id="cb80-31"><a href="#cb80-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
+<span id="cb80-32"><a href="#cb80-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb80-33"><a href="#cb80-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(企業数))</span>
+<span id="cb80-34"><a href="#cb80-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb80-35"><a href="#cb80-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_count)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  モデル 企業数
-  &lt;fct&gt;   &lt;int&gt;
-1 DCF         2
-2 RIM         8</code></pre>
+<pre><code># A tibble: 3 × 2
+  モデル    企業数
+  &lt;fct&gt;      &lt;int&gt;
+1 RIM_DDM12      5
+2 RIM_DDM25      4
+3 RIM            1</code></pre>
 </div>
 </div>
 
@@ -2603,363 +2654,409 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb82-493"><a href="#cb82-493" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-494"><a href="#cb82-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb82-495"><a href="#cb82-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-496"><a href="#cb82-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-499"><a href="#cb82-499" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb82-500"><a href="#cb82-500" aria-hidden="true" tabindex="-1"></a>bf7150 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf7150.csv"</span>)</span>
-<span id="cb82-501"><a href="#cb82-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-502"><a href="#cb82-502" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf7150 <span class="sc">|&gt;</span> </span>
-<span id="cb82-503"><a href="#cb82-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-504"><a href="#cb82-504" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1395</span>, <span class="dv">1426</span>, <span class="dv">1370</span>, <span class="dv">1380</span>, <span class="dv">658</span>, <span class="dv">661</span>, <span class="dv">619</span>, <span class="dv">543</span>, <span class="dv">460</span>, <span class="dv">515</span>),   <span class="co"># 10年分</span></span>
-<span id="cb82-505"><a href="#cb82-505" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">8416000</span>,           <span class="co"># 発行済株式数</span></span>
-<span id="cb82-506"><a href="#cb82-506" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.0803</span>,</span>
-<span id="cb82-507"><a href="#cb82-507" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.4946</span>, <span class="fl">0.4299</span>, <span class="fl">0.2924</span>, <span class="fl">0.4520</span>, <span class="fl">0.3431</span>, <span class="dv">0</span>, <span class="fl">0.1302</span>, <span class="fl">0.3003</span>, <span class="fl">0.2187</span>, <span class="fl">0.2157</span>),</span>
-<span id="cb82-508"><a href="#cb82-508" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-509"><a href="#cb82-509" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-510"><a href="#cb82-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-511"><a href="#cb82-511" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/7150.csv"</span>)</span>
-<span id="cb82-512"><a href="#cb82-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-513"><a href="#cb82-513" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-514"><a href="#cb82-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-515"><a href="#cb82-515" aria-hidden="true" tabindex="-1"></a>bf7161 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf7161.csv"</span>)</span>
-<span id="cb82-516"><a href="#cb82-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-517"><a href="#cb82-517" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf7161 <span class="sc">|&gt;</span> </span>
-<span id="cb82-518"><a href="#cb82-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-519"><a href="#cb82-519" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2290</span>,<span class="dv">1990</span>,<span class="dv">1980</span>,<span class="dv">1950</span>,<span class="dv">1250</span>,<span class="dv">1130</span>,<span class="dv">821</span>,<span class="dv">642</span>,<span class="dv">440</span>,<span class="dv">545</span>),</span>
-<span id="cb82-520"><a href="#cb82-520" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">72840263</span>,</span>
-<span id="cb82-521"><a href="#cb82-521" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.3849</span>,</span>
-<span id="cb82-522"><a href="#cb82-522" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.896</span>, <span class="fl">0.8976</span>, <span class="fl">0.8771</span>,  <span class="fl">0.9041</span>, <span class="fl">0.8865</span>, <span class="fl">0.7246</span>, <span class="fl">1.0757</span>, <span class="fl">1.8867</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
-<span id="cb82-523"><a href="#cb82-523" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-524"><a href="#cb82-524" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-525"><a href="#cb82-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-526"><a href="#cb82-526" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/7161.csv"</span>)</span>
-<span id="cb82-527"><a href="#cb82-527" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-528"><a href="#cb82-528" aria-hidden="true" tabindex="-1"></a>bf8349 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8349.csv"</span>)</span>
-<span id="cb82-529"><a href="#cb82-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-530"><a href="#cb82-530" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8349 <span class="sc">|&gt;</span> </span>
-<span id="cb82-531"><a href="#cb82-531" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-532"><a href="#cb82-532" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1570</span>, <span class="dv">1580</span>, <span class="dv">1580</span>, <span class="dv">1513</span>, <span class="dv">1111</span>, <span class="dv">1027</span>, <span class="dv">1125</span>, <span class="dv">1006</span>, <span class="dv">1026</span>, <span class="dv">1170</span>),</span>
-<span id="cb82-533"><a href="#cb82-533" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9509963</span>,</span>
-<span id="cb82-534"><a href="#cb82-534" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.6125</span>,</span>
-<span id="cb82-535"><a href="#cb82-535" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3501</span>, <span class="fl">0.2679</span>, <span class="fl">0.2556</span>, <span class="fl">0.4387</span>, <span class="fl">0.3650</span>, <span class="fl">0.3412</span>, <span class="fl">0.4008</span>, <span class="fl">0.3701</span>, <span class="fl">0.3342</span>, <span class="fl">0.3580</span>),</span>
-<span id="cb82-536"><a href="#cb82-536" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-537"><a href="#cb82-537" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-538"><a href="#cb82-538" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-539"><a href="#cb82-539" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8349.csv"</span>)</span>
-<span id="cb82-540"><a href="#cb82-540" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-541"><a href="#cb82-541" aria-hidden="true" tabindex="-1"></a>bf8365 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8365.csv"</span>)</span>
-<span id="cb82-542"><a href="#cb82-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-543"><a href="#cb82-543" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8365 <span class="sc">|&gt;</span> </span>
-<span id="cb82-544"><a href="#cb82-544" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-545"><a href="#cb82-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2500</span>, <span class="dv">4440</span>, <span class="dv">4500</span>, <span class="dv">4360</span>, <span class="dv">3095</span>, <span class="dv">2412</span>, <span class="dv">2944</span>, <span class="dv">1791</span>, <span class="dv">1764</span>, <span class="dv">1695</span>),</span>
-<span id="cb82-546"><a href="#cb82-546" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">5444400</span>,</span>
-<span id="cb82-547"><a href="#cb82-547" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.0889</span>,</span>
-<span id="cb82-548"><a href="#cb82-548" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.2384</span>, <span class="fl">0.2827</span>, <span class="fl">0.2405</span>, <span class="fl">0.2141</span>, <span class="fl">0.1965</span>, <span class="fl">0.3824</span>, <span class="fl">0.5156</span>, <span class="fl">0.8902</span>, <span class="fl">0.2862</span>, <span class="fl">0.4442</span>),</span>
-<span id="cb82-549"><a href="#cb82-549" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-550"><a href="#cb82-550" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-551"><a href="#cb82-551" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-552"><a href="#cb82-552" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8365.csv"</span>)</span>
-<span id="cb82-553"><a href="#cb82-553" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-554"><a href="#cb82-554" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-555"><a href="#cb82-555" aria-hidden="true" tabindex="-1"></a>bf8383 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8383.csv"</span>)</span>
-<span id="cb82-556"><a href="#cb82-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-557"><a href="#cb82-557" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8383 <span class="sc">|&gt;</span> </span>
-<span id="cb82-558"><a href="#cb82-558" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-559"><a href="#cb82-559" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2380</span>, <span class="dv">2170</span>, <span class="dv">1936</span>, <span class="dv">1808</span>, <span class="dv">1424</span>, <span class="dv">1387</span>, <span class="dv">1133</span>, <span class="dv">1163</span>, <span class="dv">1146</span>, <span class="dv">1358</span>),</span>
-<span id="cb82-560"><a href="#cb82-560" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9619398</span>,</span>
-<span id="cb82-561"><a href="#cb82-561" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.5806</span>,</span>
-<span id="cb82-562"><a href="#cb82-562" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.2586</span>, <span class="fl">0.2667</span>, <span class="fl">0.4340</span>, <span class="fl">0.5135</span>, <span class="fl">0.5989</span>, <span class="fl">0.5236</span>, <span class="fl">0.4829</span>, <span class="fl">0.5389</span>, <span class="fl">0.4658</span>, <span class="fl">0.4506</span>),</span>
-<span id="cb82-563"><a href="#cb82-563" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-564"><a href="#cb82-564" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-565"><a href="#cb82-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-566"><a href="#cb82-566" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8383.csv"</span>)</span>
-<span id="cb82-567"><a href="#cb82-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-568"><a href="#cb82-568" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-569"><a href="#cb82-569" aria-hidden="true" tabindex="-1"></a>bf8416 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8416.csv"</span>)</span>
-<span id="cb82-570"><a href="#cb82-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-571"><a href="#cb82-571" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8416 <span class="sc">|&gt;</span> </span>
-<span id="cb82-572"><a href="#cb82-572" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-573"><a href="#cb82-573" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1590</span>, <span class="dv">1420</span>, <span class="dv">1340</span>, <span class="dv">1319</span>, <span class="dv">740</span>, <span class="dv">889</span>, <span class="dv">722</span>, <span class="dv">770</span>, <span class="dv">716</span>, <span class="dv">935</span> ),</span>
-<span id="cb82-574"><a href="#cb82-574" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">10244800</span>,</span>
-<span id="cb82-575"><a href="#cb82-575" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.8731</span>,</span>
-<span id="cb82-576"><a href="#cb82-576" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.707</span>, <span class="fl">0.932</span>, <span class="fl">0.1322</span>, <span class="fl">0.1730</span>, <span class="fl">0.3535</span>, <span class="fl">0.2356</span>, <span class="fl">0.4178</span>, <span class="fl">0.1878</span>, <span class="fl">0.1958</span>, <span class="fl">0.2475</span>),</span>
-<span id="cb82-577"><a href="#cb82-577" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-578"><a href="#cb82-578" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-579"><a href="#cb82-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-580"><a href="#cb82-580" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8416.csv"</span>)</span>
-<span id="cb82-581"><a href="#cb82-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-582"><a href="#cb82-582" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-583"><a href="#cb82-583" aria-hidden="true" tabindex="-1"></a>bf8537 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8537.csv"</span>)</span>
-<span id="cb82-584"><a href="#cb82-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-585"><a href="#cb82-585" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8537 <span class="sc">|&gt;</span> </span>
-<span id="cb82-586"><a href="#cb82-586" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-587"><a href="#cb82-587" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2210</span>, <span class="dv">2460</span>, <span class="dv">2630</span>, <span class="dv">2520</span>, <span class="dv">1781</span>, <span class="dv">1672</span>, <span class="dv">1339</span>, <span class="dv">1360</span>, <span class="dv">1254</span>, <span class="dv">1282</span>),</span>
-<span id="cb82-588"><a href="#cb82-588" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9671400</span>,</span>
-<span id="cb82-589"><a href="#cb82-589" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.6017</span>,</span>
-<span id="cb82-590"><a href="#cb82-590" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3001</span>, <span class="fl">0.1672</span>, <span class="fl">0.1551</span>, <span class="fl">0.1346</span>, <span class="fl">0.1872</span>, <span class="fl">0.4200</span>, <span class="fl">0.3054</span>, <span class="fl">0.2326</span>, <span class="fl">0.3744</span>, <span class="fl">0.2814</span>),</span>
-<span id="cb82-591"><a href="#cb82-591" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-592"><a href="#cb82-592" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-593"><a href="#cb82-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-594"><a href="#cb82-594" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8537.csv"</span>)</span>
-<span id="cb82-595"><a href="#cb82-595" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-596"><a href="#cb82-596" aria-hidden="true" tabindex="-1"></a>bf8542 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8542.csv"</span>)</span>
-<span id="cb82-597"><a href="#cb82-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-598"><a href="#cb82-598" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8542 <span class="sc">|&gt;</span> </span>
-<span id="cb82-599"><a href="#cb82-599" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-600"><a href="#cb82-600" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1780</span>, <span class="dv">1740</span>, <span class="dv">1585</span>, <span class="dv">1558</span>, <span class="dv">1081</span>, <span class="dv">1074</span>, <span class="dv">1060</span>, <span class="dv">1070</span>, <span class="dv">1045</span>, <span class="dv">1155</span>),</span>
-<span id="cb82-601"><a href="#cb82-601" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">11679030</span>,</span>
-<span id="cb82-602"><a href="#cb82-602" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.5599</span>,</span>
-<span id="cb82-603"><a href="#cb82-603" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3558</span>, <span class="fl">0.3178</span>, <span class="fl">0.3136</span>, <span class="fl">0.4206</span>, <span class="fl">0.5189</span>, <span class="fl">0.5502</span>, <span class="fl">0.4768</span>, <span class="fl">0.4226</span>, <span class="fl">0.3724</span>, <span class="fl">0.4613</span>),</span>
-<span id="cb82-604"><a href="#cb82-604" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-605"><a href="#cb82-605" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-606"><a href="#cb82-606" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-607"><a href="#cb82-607" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8542.csv"</span>)</span>
-<span id="cb82-608"><a href="#cb82-608" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-609"><a href="#cb82-609" aria-hidden="true" tabindex="-1"></a>bf8562 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8562.csv"</span>)</span>
-<span id="cb82-610"><a href="#cb82-610" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-611"><a href="#cb82-611" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8562 <span class="sc">|&gt;</span> </span>
-<span id="cb82-612"><a href="#cb82-612" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-613"><a href="#cb82-613" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">940</span>, <span class="dv">960</span>, <span class="dv">980</span>, <span class="dv">944</span>, <span class="dv">390</span>, <span class="dv">273</span>, <span class="dv">198</span>, <span class="dv">235</span>, <span class="dv">258</span>, <span class="dv">235</span>),</span>
-<span id="cb82-614"><a href="#cb82-614" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">34900000</span>,</span>
-<span id="cb82-615"><a href="#cb82-615" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.1149</span>,</span>
-<span id="cb82-616"><a href="#cb82-616" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.1045</span>, <span class="fl">0.1959</span>, <span class="fl">0.4255</span>, <span class="dv">0</span>, <span class="fl">0.1390</span>, <span class="fl">0.1358</span>, <span class="dv">0</span> , <span class="fl">0.1693</span>, <span class="fl">0.1769</span>, <span class="fl">0.1245</span>),</span>
-<span id="cb82-617"><a href="#cb82-617" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-618"><a href="#cb82-618" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-619"><a href="#cb82-619" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-620"><a href="#cb82-620" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8562.csv"</span>)</span>
-<span id="cb82-621"><a href="#cb82-621" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
-<span id="cb82-622"><a href="#cb82-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-623"><a href="#cb82-623" aria-hidden="true" tabindex="-1"></a>bf8563 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8563.csv"</span>)</span>
-<span id="cb82-624"><a href="#cb82-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-625"><a href="#cb82-625" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8563 <span class="sc">|&gt;</span> </span>
-<span id="cb82-626"><a href="#cb82-626" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-627"><a href="#cb82-627" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1410</span>, <span class="dv">2080</span>, <span class="dv">1680</span>, <span class="dv">1651</span>, <span class="dv">601</span>, <span class="dv">648</span>, <span class="dv">639</span>, <span class="dv">761</span>, <span class="dv">681</span>, <span class="dv">740</span>),</span>
-<span id="cb82-628"><a href="#cb82-628" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">12701000</span>,</span>
-<span id="cb82-629"><a href="#cb82-629" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.8016</span>,</span>
-<span id="cb82-630"><a href="#cb82-630" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.1426</span>, <span class="fl">0.1532</span>, <span class="fl">0.2764</span>, <span class="fl">0.2986</span>, <span class="fl">0.3195</span>, <span class="fl">0.3742</span>, <span class="fl">0.4017</span>, <span class="fl">0.3294</span>, <span class="fl">0.3121</span>, <span class="fl">0.3131</span>),</span>
-<span id="cb82-631"><a href="#cb82-631" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
-<span id="cb82-632"><a href="#cb82-632" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-633"><a href="#cb82-633" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-634"><a href="#cb82-634" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8563.csv"</span>)</span>
-<span id="cb82-635"><a href="#cb82-635" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb82-636"><a href="#cb82-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-639"><a href="#cb82-639" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb82-640"><a href="#cb82-640" aria-hidden="true" tabindex="-1"></a>df7150 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/7150.csv"</span>)</span>
-<span id="cb82-641"><a href="#cb82-641" aria-hidden="true" tabindex="-1"></a>df7161 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/7161.csv"</span>)</span>
-<span id="cb82-642"><a href="#cb82-642" aria-hidden="true" tabindex="-1"></a>df8349 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8349.csv"</span>)</span>
-<span id="cb82-643"><a href="#cb82-643" aria-hidden="true" tabindex="-1"></a>df8365 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8365.csv"</span>)</span>
-<span id="cb82-644"><a href="#cb82-644" aria-hidden="true" tabindex="-1"></a>df8383 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8383.csv"</span>)</span>
-<span id="cb82-645"><a href="#cb82-645" aria-hidden="true" tabindex="-1"></a>df8416 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8416.csv"</span>)</span>
-<span id="cb82-646"><a href="#cb82-646" aria-hidden="true" tabindex="-1"></a>df8537 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8537.csv"</span>)</span>
-<span id="cb82-647"><a href="#cb82-647" aria-hidden="true" tabindex="-1"></a>df8542 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8542.csv"</span>)</span>
-<span id="cb82-648"><a href="#cb82-648" aria-hidden="true" tabindex="-1"></a>df8562 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8562.csv"</span>)</span>
-<span id="cb82-649"><a href="#cb82-649" aria-hidden="true" tabindex="-1"></a>df8563 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8563.csv"</span>)</span>
+<span id="cb82-498"><a href="#cb82-498" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb82-499"><a href="#cb82-499" aria-hidden="true" tabindex="-1"></a>bf7150 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf7150.csv"</span>)</span>
+<span id="cb82-500"><a href="#cb82-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-501"><a href="#cb82-501" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf7150 <span class="sc">|&gt;</span> </span>
+<span id="cb82-502"><a href="#cb82-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-503"><a href="#cb82-503" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1395</span>, <span class="dv">1426</span>, <span class="dv">1370</span>, <span class="dv">1380</span>, <span class="dv">658</span>, <span class="dv">661</span>, <span class="dv">619</span>, <span class="dv">543</span>, <span class="dv">460</span>, <span class="dv">515</span>),   <span class="co"># 10年分</span></span>
+<span id="cb82-504"><a href="#cb82-504" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">8416000</span>,           <span class="co"># 発行済株式数</span></span>
+<span id="cb82-505"><a href="#cb82-505" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.0803</span>,</span>
+<span id="cb82-506"><a href="#cb82-506" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.4946</span>, <span class="fl">0.4299</span>, <span class="fl">0.2924</span>, <span class="fl">0.4520</span>, <span class="fl">0.3431</span>, <span class="dv">0</span>, <span class="fl">0.1302</span>, <span class="fl">0.3003</span>, <span class="fl">0.2187</span>, <span class="fl">0.2157</span>),</span>
+<span id="cb82-507"><a href="#cb82-507" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-508"><a href="#cb82-508" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-509"><a href="#cb82-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-510"><a href="#cb82-510" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/7150.csv"</span>)</span>
+<span id="cb82-511"><a href="#cb82-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-512"><a href="#cb82-512" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-513"><a href="#cb82-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-514"><a href="#cb82-514" aria-hidden="true" tabindex="-1"></a>bf7161 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf7161.csv"</span>)</span>
+<span id="cb82-515"><a href="#cb82-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-516"><a href="#cb82-516" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf7161 <span class="sc">|&gt;</span> </span>
+<span id="cb82-517"><a href="#cb82-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-518"><a href="#cb82-518" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2290</span>,<span class="dv">1990</span>,<span class="dv">1980</span>,<span class="dv">1950</span>,<span class="dv">1250</span>,<span class="dv">1130</span>,<span class="dv">821</span>,<span class="dv">642</span>,<span class="dv">440</span>,<span class="dv">545</span>),</span>
+<span id="cb82-519"><a href="#cb82-519" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">72840263</span>,</span>
+<span id="cb82-520"><a href="#cb82-520" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.3849</span>,</span>
+<span id="cb82-521"><a href="#cb82-521" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.896</span>, <span class="fl">0.8976</span>, <span class="fl">0.8771</span>,  <span class="fl">0.9041</span>, <span class="fl">0.8865</span>, <span class="fl">0.7246</span>, <span class="fl">1.0757</span>, <span class="fl">1.8867</span>, <span class="dv">0</span>, <span class="dv">0</span>),</span>
+<span id="cb82-522"><a href="#cb82-522" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-523"><a href="#cb82-523" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-524"><a href="#cb82-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-525"><a href="#cb82-525" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/7161.csv"</span>)</span>
+<span id="cb82-526"><a href="#cb82-526" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-527"><a href="#cb82-527" aria-hidden="true" tabindex="-1"></a>bf8349 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8349.csv"</span>)</span>
+<span id="cb82-528"><a href="#cb82-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-529"><a href="#cb82-529" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8349 <span class="sc">|&gt;</span> </span>
+<span id="cb82-530"><a href="#cb82-530" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-531"><a href="#cb82-531" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1570</span>, <span class="dv">1580</span>, <span class="dv">1580</span>, <span class="dv">1513</span>, <span class="dv">1111</span>, <span class="dv">1027</span>, <span class="dv">1125</span>, <span class="dv">1006</span>, <span class="dv">1026</span>, <span class="dv">1170</span>),</span>
+<span id="cb82-532"><a href="#cb82-532" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9509963</span>,</span>
+<span id="cb82-533"><a href="#cb82-533" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.6125</span>,</span>
+<span id="cb82-534"><a href="#cb82-534" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3501</span>, <span class="fl">0.2679</span>, <span class="fl">0.2556</span>, <span class="fl">0.4387</span>, <span class="fl">0.3650</span>, <span class="fl">0.3412</span>, <span class="fl">0.4008</span>, <span class="fl">0.3701</span>, <span class="fl">0.3342</span>, <span class="fl">0.3580</span>),</span>
+<span id="cb82-535"><a href="#cb82-535" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-536"><a href="#cb82-536" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-537"><a href="#cb82-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-538"><a href="#cb82-538" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8349.csv"</span>)</span>
+<span id="cb82-539"><a href="#cb82-539" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-540"><a href="#cb82-540" aria-hidden="true" tabindex="-1"></a>bf8365 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8365.csv"</span>)</span>
+<span id="cb82-541"><a href="#cb82-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-542"><a href="#cb82-542" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8365 <span class="sc">|&gt;</span> </span>
+<span id="cb82-543"><a href="#cb82-543" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-544"><a href="#cb82-544" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2500</span>, <span class="dv">4440</span>, <span class="dv">4500</span>, <span class="dv">4360</span>, <span class="dv">3095</span>, <span class="dv">2412</span>, <span class="dv">2944</span>, <span class="dv">1791</span>, <span class="dv">1764</span>, <span class="dv">1695</span>),</span>
+<span id="cb82-545"><a href="#cb82-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">5444400</span>,</span>
+<span id="cb82-546"><a href="#cb82-546" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.0889</span>,</span>
+<span id="cb82-547"><a href="#cb82-547" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.2384</span>, <span class="fl">0.2827</span>, <span class="fl">0.2405</span>, <span class="fl">0.2141</span>, <span class="fl">0.1965</span>, <span class="fl">0.3824</span>, <span class="fl">0.5156</span>, <span class="fl">0.8902</span>, <span class="fl">0.2862</span>, <span class="fl">0.4442</span>),</span>
+<span id="cb82-548"><a href="#cb82-548" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-549"><a href="#cb82-549" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-550"><a href="#cb82-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-551"><a href="#cb82-551" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8365.csv"</span>)</span>
+<span id="cb82-552"><a href="#cb82-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-553"><a href="#cb82-553" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-554"><a href="#cb82-554" aria-hidden="true" tabindex="-1"></a>bf8383 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8383.csv"</span>)</span>
+<span id="cb82-555"><a href="#cb82-555" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-556"><a href="#cb82-556" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8383 <span class="sc">|&gt;</span> </span>
+<span id="cb82-557"><a href="#cb82-557" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-558"><a href="#cb82-558" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2380</span>, <span class="dv">2170</span>, <span class="dv">1936</span>, <span class="dv">1808</span>, <span class="dv">1424</span>, <span class="dv">1387</span>, <span class="dv">1133</span>, <span class="dv">1163</span>, <span class="dv">1146</span>, <span class="dv">1358</span>),</span>
+<span id="cb82-559"><a href="#cb82-559" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9619398</span>,</span>
+<span id="cb82-560"><a href="#cb82-560" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.5806</span>,</span>
+<span id="cb82-561"><a href="#cb82-561" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.2586</span>, <span class="fl">0.2667</span>, <span class="fl">0.4340</span>, <span class="fl">0.5135</span>, <span class="fl">0.5989</span>, <span class="fl">0.5236</span>, <span class="fl">0.4829</span>, <span class="fl">0.5389</span>, <span class="fl">0.4658</span>, <span class="fl">0.4506</span>),</span>
+<span id="cb82-562"><a href="#cb82-562" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-563"><a href="#cb82-563" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-564"><a href="#cb82-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-565"><a href="#cb82-565" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8383.csv"</span>)</span>
+<span id="cb82-566"><a href="#cb82-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-567"><a href="#cb82-567" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-568"><a href="#cb82-568" aria-hidden="true" tabindex="-1"></a>bf8416 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8416.csv"</span>)</span>
+<span id="cb82-569"><a href="#cb82-569" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-570"><a href="#cb82-570" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8416 <span class="sc">|&gt;</span> </span>
+<span id="cb82-571"><a href="#cb82-571" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-572"><a href="#cb82-572" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1590</span>, <span class="dv">1420</span>, <span class="dv">1340</span>, <span class="dv">1319</span>, <span class="dv">740</span>, <span class="dv">889</span>, <span class="dv">722</span>, <span class="dv">770</span>, <span class="dv">716</span>, <span class="dv">935</span> ),</span>
+<span id="cb82-573"><a href="#cb82-573" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">10244800</span>,</span>
+<span id="cb82-574"><a href="#cb82-574" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.8731</span>,</span>
+<span id="cb82-575"><a href="#cb82-575" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.707</span>, <span class="fl">0.932</span>, <span class="fl">0.1322</span>, <span class="fl">0.1730</span>, <span class="fl">0.3535</span>, <span class="fl">0.2356</span>, <span class="fl">0.4178</span>, <span class="fl">0.1878</span>, <span class="fl">0.1958</span>, <span class="fl">0.2475</span>),</span>
+<span id="cb82-576"><a href="#cb82-576" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-577"><a href="#cb82-577" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-578"><a href="#cb82-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-579"><a href="#cb82-579" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8416.csv"</span>)</span>
+<span id="cb82-580"><a href="#cb82-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-581"><a href="#cb82-581" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-582"><a href="#cb82-582" aria-hidden="true" tabindex="-1"></a>bf8537 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8537.csv"</span>)</span>
+<span id="cb82-583"><a href="#cb82-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-584"><a href="#cb82-584" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8537 <span class="sc">|&gt;</span> </span>
+<span id="cb82-585"><a href="#cb82-585" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-586"><a href="#cb82-586" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">2210</span>, <span class="dv">2460</span>, <span class="dv">2630</span>, <span class="dv">2520</span>, <span class="dv">1781</span>, <span class="dv">1672</span>, <span class="dv">1339</span>, <span class="dv">1360</span>, <span class="dv">1254</span>, <span class="dv">1282</span>),</span>
+<span id="cb82-587"><a href="#cb82-587" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">9671400</span>,</span>
+<span id="cb82-588"><a href="#cb82-588" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.6017</span>,</span>
+<span id="cb82-589"><a href="#cb82-589" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3001</span>, <span class="fl">0.1672</span>, <span class="fl">0.1551</span>, <span class="fl">0.1346</span>, <span class="fl">0.1872</span>, <span class="fl">0.4200</span>, <span class="fl">0.3054</span>, <span class="fl">0.2326</span>, <span class="fl">0.3744</span>, <span class="fl">0.2814</span>),</span>
+<span id="cb82-590"><a href="#cb82-590" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-591"><a href="#cb82-591" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-592"><a href="#cb82-592" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-593"><a href="#cb82-593" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8537.csv"</span>)</span>
+<span id="cb82-594"><a href="#cb82-594" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-595"><a href="#cb82-595" aria-hidden="true" tabindex="-1"></a>bf8542 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8542.csv"</span>)</span>
+<span id="cb82-596"><a href="#cb82-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-597"><a href="#cb82-597" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8542 <span class="sc">|&gt;</span> </span>
+<span id="cb82-598"><a href="#cb82-598" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-599"><a href="#cb82-599" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1780</span>, <span class="dv">1740</span>, <span class="dv">1585</span>, <span class="dv">1558</span>, <span class="dv">1081</span>, <span class="dv">1074</span>, <span class="dv">1060</span>, <span class="dv">1070</span>, <span class="dv">1045</span>, <span class="dv">1155</span>),</span>
+<span id="cb82-600"><a href="#cb82-600" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">11679030</span>,</span>
+<span id="cb82-601"><a href="#cb82-601" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.5599</span>,</span>
+<span id="cb82-602"><a href="#cb82-602" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.3558</span>, <span class="fl">0.3178</span>, <span class="fl">0.3136</span>, <span class="fl">0.4206</span>, <span class="fl">0.5189</span>, <span class="fl">0.5502</span>, <span class="fl">0.4768</span>, <span class="fl">0.4226</span>, <span class="fl">0.3724</span>, <span class="fl">0.4613</span>),</span>
+<span id="cb82-603"><a href="#cb82-603" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-604"><a href="#cb82-604" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-605"><a href="#cb82-605" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-606"><a href="#cb82-606" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8542.csv"</span>)</span>
+<span id="cb82-607"><a href="#cb82-607" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-608"><a href="#cb82-608" aria-hidden="true" tabindex="-1"></a>bf8562 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8562.csv"</span>)</span>
+<span id="cb82-609"><a href="#cb82-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-610"><a href="#cb82-610" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8562 <span class="sc">|&gt;</span> </span>
+<span id="cb82-611"><a href="#cb82-611" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-612"><a href="#cb82-612" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">940</span>, <span class="dv">960</span>, <span class="dv">980</span>, <span class="dv">944</span>, <span class="dv">390</span>, <span class="dv">273</span>, <span class="dv">198</span>, <span class="dv">235</span>, <span class="dv">258</span>, <span class="dv">235</span>),</span>
+<span id="cb82-613"><a href="#cb82-613" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">34900000</span>,</span>
+<span id="cb82-614"><a href="#cb82-614" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">1.1149</span>,</span>
+<span id="cb82-615"><a href="#cb82-615" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.1045</span>, <span class="fl">0.1959</span>, <span class="fl">0.4255</span>, <span class="dv">0</span>, <span class="fl">0.1390</span>, <span class="fl">0.1358</span>, <span class="dv">0</span> , <span class="fl">0.1693</span>, <span class="fl">0.1769</span>, <span class="fl">0.1245</span>),</span>
+<span id="cb82-616"><a href="#cb82-616" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-617"><a href="#cb82-617" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-618"><a href="#cb82-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-619"><a href="#cb82-619" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8562.csv"</span>)</span>
+<span id="cb82-620"><a href="#cb82-620" aria-hidden="true" tabindex="-1"></a><span class="co">#ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</span></span>
+<span id="cb82-621"><a href="#cb82-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-622"><a href="#cb82-622" aria-hidden="true" tabindex="-1"></a>bf8563 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"bf/bf8563.csv"</span>)</span>
+<span id="cb82-623"><a href="#cb82-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-624"><a href="#cb82-624" aria-hidden="true" tabindex="-1"></a>af <span class="ot">&lt;-</span> bf8563 <span class="sc">|&gt;</span> </span>
+<span id="cb82-625"><a href="#cb82-625" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-626"><a href="#cb82-626" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">c</span>(<span class="dv">1410</span>, <span class="dv">2080</span>, <span class="dv">1680</span>, <span class="dv">1651</span>, <span class="dv">601</span>, <span class="dv">648</span>, <span class="dv">639</span>, <span class="dv">761</span>, <span class="dv">681</span>, <span class="dv">740</span>),</span>
+<span id="cb82-627"><a href="#cb82-627" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="dv">12701000</span>,</span>
+<span id="cb82-628"><a href="#cb82-628" aria-hidden="true" tabindex="-1"></a>    <span class="at">beta =</span> <span class="fl">0.8016</span>,</span>
+<span id="cb82-629"><a href="#cb82-629" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pay_ratio =</span> <span class="fu">c</span>(<span class="fl">0.1426</span>, <span class="fl">0.1532</span>, <span class="fl">0.2764</span>, <span class="fl">0.2986</span>, <span class="fl">0.3195</span>, <span class="fl">0.3742</span>, <span class="fl">0.4017</span>, <span class="fl">0.3294</span>, <span class="fl">0.3121</span>, <span class="fl">0.3131</span>),</span>
+<span id="cb82-630"><a href="#cb82-630" aria-hidden="true" tabindex="-1"></a>    <span class="at">NP =</span> N <span class="sc">*</span> price</span>
+<span id="cb82-631"><a href="#cb82-631" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-632"><a href="#cb82-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-633"><a href="#cb82-633" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(af,<span class="st">"af/8563.csv"</span>)</span>
+<span id="cb82-634"><a href="#cb82-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb82-635"><a href="#cb82-635" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-638"><a href="#cb82-638" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb82-639"><a href="#cb82-639" aria-hidden="true" tabindex="-1"></a>df7150 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/7150.csv"</span>)</span>
+<span id="cb82-640"><a href="#cb82-640" aria-hidden="true" tabindex="-1"></a>df7161 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/7161.csv"</span>)</span>
+<span id="cb82-641"><a href="#cb82-641" aria-hidden="true" tabindex="-1"></a>df8349 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8349.csv"</span>)</span>
+<span id="cb82-642"><a href="#cb82-642" aria-hidden="true" tabindex="-1"></a>df8365 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8365.csv"</span>)</span>
+<span id="cb82-643"><a href="#cb82-643" aria-hidden="true" tabindex="-1"></a>df8383 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8383.csv"</span>)</span>
+<span id="cb82-644"><a href="#cb82-644" aria-hidden="true" tabindex="-1"></a>df8416 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8416.csv"</span>)</span>
+<span id="cb82-645"><a href="#cb82-645" aria-hidden="true" tabindex="-1"></a>df8537 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8537.csv"</span>)</span>
+<span id="cb82-646"><a href="#cb82-646" aria-hidden="true" tabindex="-1"></a>df8542 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8542.csv"</span>)</span>
+<span id="cb82-647"><a href="#cb82-647" aria-hidden="true" tabindex="-1"></a>df8562 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8562.csv"</span>)</span>
+<span id="cb82-648"><a href="#cb82-648" aria-hidden="true" tabindex="-1"></a>df8563 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"af/8563.csv"</span>)</span>
+<span id="cb82-649"><a href="#cb82-649" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-650"><a href="#cb82-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-651"><a href="#cb82-651" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-652"><a href="#cb82-652" aria-hidden="true" tabindex="-1"></a>calc_wacc <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">Rf =</span> <span class="fl">0.0157</span>, <span class="at">Rm =</span> <span class="fl">0.05</span>, <span class="at">Tax =</span> <span class="fl">0.2320</span>) {</span>
-<span id="cb82-653"><a href="#cb82-653" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-654"><a href="#cb82-654" aria-hidden="true" tabindex="-1"></a>  wacc <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
-<span id="cb82-655"><a href="#cb82-655" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb82-656"><a href="#cb82-656" aria-hidden="true" tabindex="-1"></a>      <span class="at">rE =</span> Rf <span class="sc">+</span> beta <span class="sc">*</span> (Rm <span class="sc">-</span> Rf),     <span class="co"># CAPMで株主資本コスト</span></span>
-<span id="cb82-657"><a href="#cb82-657" aria-hidden="true" tabindex="-1"></a>      <span class="at">V  =</span> D <span class="sc">+</span> NP,                    <span class="co"># 企業価値（負債＋株主資本）</span></span>
-<span id="cb82-658"><a href="#cb82-658" aria-hidden="true" tabindex="-1"></a>      <span class="at">WACC =</span> (NP <span class="sc">/</span> V) <span class="sc">*</span> rE <span class="sc">+</span> (D <span class="sc">/</span> V) <span class="sc">*</span> rD <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> Tax)</span>
-<span id="cb82-659"><a href="#cb82-659" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb82-660"><a href="#cb82-660" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-661"><a href="#cb82-661" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(wacc)</span>
-<span id="cb82-662"><a href="#cb82-662" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb82-651"><a href="#cb82-651" aria-hidden="true" tabindex="-1"></a>calc_wacc <span class="ot">&lt;-</span> <span class="cf">function</span>(df, <span class="at">Rf =</span> <span class="fl">0.0157</span>, <span class="at">Rm =</span> <span class="fl">0.05</span>, <span class="at">Tax =</span> <span class="fl">0.2320</span>) {</span>
+<span id="cb82-652"><a href="#cb82-652" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-653"><a href="#cb82-653" aria-hidden="true" tabindex="-1"></a>  wacc <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb82-654"><a href="#cb82-654" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb82-655"><a href="#cb82-655" aria-hidden="true" tabindex="-1"></a>      <span class="at">rE =</span> Rf <span class="sc">+</span> beta <span class="sc">*</span> (Rm <span class="sc">-</span> Rf),     <span class="co"># CAPMで株主資本コスト</span></span>
+<span id="cb82-656"><a href="#cb82-656" aria-hidden="true" tabindex="-1"></a>      <span class="at">V  =</span> D <span class="sc">+</span> NP,                    <span class="co"># 企業価値（負債＋株主資本）</span></span>
+<span id="cb82-657"><a href="#cb82-657" aria-hidden="true" tabindex="-1"></a>      <span class="at">WACC =</span> (NP <span class="sc">/</span> V) <span class="sc">*</span> rE <span class="sc">+</span> (D <span class="sc">/</span> V) <span class="sc">*</span> rD <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> Tax)</span>
+<span id="cb82-658"><a href="#cb82-658" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb82-659"><a href="#cb82-659" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-660"><a href="#cb82-660" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(wacc)</span>
+<span id="cb82-661"><a href="#cb82-661" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb82-662"><a href="#cb82-662" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-663"><a href="#cb82-663" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-664"><a href="#cb82-664" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-665"><a href="#cb82-665" aria-hidden="true" tabindex="-1"></a>wacc7150 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df7150)</span>
-<span id="cb82-666"><a href="#cb82-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-667"><a href="#cb82-667" aria-hidden="true" tabindex="-1"></a>wacc7161 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df7161)</span>
-<span id="cb82-668"><a href="#cb82-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-669"><a href="#cb82-669" aria-hidden="true" tabindex="-1"></a>wacc8349 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8349)</span>
-<span id="cb82-670"><a href="#cb82-670" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-671"><a href="#cb82-671" aria-hidden="true" tabindex="-1"></a>wacc8365 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8365)</span>
-<span id="cb82-672"><a href="#cb82-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-673"><a href="#cb82-673" aria-hidden="true" tabindex="-1"></a>wacc8383 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8383)</span>
-<span id="cb82-674"><a href="#cb82-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-675"><a href="#cb82-675" aria-hidden="true" tabindex="-1"></a>wacc8416 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8416)</span>
-<span id="cb82-676"><a href="#cb82-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-677"><a href="#cb82-677" aria-hidden="true" tabindex="-1"></a>wacc8537 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8537)</span>
-<span id="cb82-678"><a href="#cb82-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-679"><a href="#cb82-679" aria-hidden="true" tabindex="-1"></a>wacc8542 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8542)</span>
-<span id="cb82-680"><a href="#cb82-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-681"><a href="#cb82-681" aria-hidden="true" tabindex="-1"></a>wacc8562 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8562)</span>
-<span id="cb82-682"><a href="#cb82-682" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-683"><a href="#cb82-683" aria-hidden="true" tabindex="-1"></a>wacc8563 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8563)</span>
-<span id="cb82-684"><a href="#cb82-684" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb82-685"><a href="#cb82-685" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業価値計算関数まとめ</span></span>
-<span id="cb82-686"><a href="#cb82-686" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
-<span id="cb82-687"><a href="#cb82-687" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-688"><a href="#cb82-688" aria-hidden="true" tabindex="-1"></a>calculate_valuation_env <span class="ot">&lt;-</span> <span class="cf">function</span>(codes, <span class="at">g =</span> <span class="fl">0.02</span>, <span class="at">rE =</span> <span class="fl">0.08</span>, <span class="at">path =</span> <span class="st">"Valuation_results.csv"</span>) {</span>
-<span id="cb82-689"><a href="#cb82-689" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-690"><a href="#cb82-690" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DCF計算（過去データ加重平均、将来5年割引）</span></span>
-<span id="cb82-691"><a href="#cb82-691" aria-hidden="true" tabindex="-1"></a>  DCF_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, g) {</span>
-<span id="cb82-692"><a href="#cb82-692" aria-hidden="true" tabindex="-1"></a>    fcf <span class="ot">&lt;-</span> df<span class="sc">$</span>FCF</span>
-<span id="cb82-693"><a href="#cb82-693" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
-<span id="cb82-694"><a href="#cb82-694" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(fcf))</span>
-<span id="cb82-695"><a href="#cb82-695" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
-<span id="cb82-696"><a href="#cb82-696" aria-hidden="true" tabindex="-1"></a>    FCF_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(fcf <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb82-697"><a href="#cb82-697" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb82-698"><a href="#cb82-698" aria-hidden="true" tabindex="-1"></a>    FCF_future <span class="ot">&lt;-</span> FCF_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb82-699"><a href="#cb82-699" aria-hidden="true" tabindex="-1"></a>    discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> df<span class="sc">$</span>WACC[<span class="dv">1</span>])<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb82-700"><a href="#cb82-700" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(FCF_future <span class="sc">/</span> discount_factors)</span>
-<span id="cb82-701"><a href="#cb82-701" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb82-702"><a href="#cb82-702" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-703"><a href="#cb82-703" aria-hidden="true" tabindex="-1"></a>  <span class="co"># RIM計算（Net_income の加重平均使用）</span></span>
-<span id="cb82-704"><a href="#cb82-704" aria-hidden="true" tabindex="-1"></a>  RIM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g) {</span>
-<span id="cb82-705"><a href="#cb82-705" aria-hidden="true" tabindex="-1"></a>    netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
-<span id="cb82-706"><a href="#cb82-706" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
-<span id="cb82-707"><a href="#cb82-707" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
-<span id="cb82-708"><a href="#cb82-708" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
-<span id="cb82-709"><a href="#cb82-709" aria-hidden="true" tabindex="-1"></a>    NetIncome_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb82-710"><a href="#cb82-710" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb82-711"><a href="#cb82-711" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Net_asset[<span class="fu">nrow</span>(df)] <span class="sc">+</span> (NetIncome_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)) <span class="sc">/</span> rE</span>
-<span id="cb82-712"><a href="#cb82-712" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb82-713"><a href="#cb82-713" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-714"><a href="#cb82-714" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DDM計算（配当ベース）</span></span>
-<span id="cb82-715"><a href="#cb82-715" aria-hidden="true" tabindex="-1"></a>  DDM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g) {</span>
-<span id="cb82-716"><a href="#cb82-716" aria-hidden="true" tabindex="-1"></a>    netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
-<span id="cb82-717"><a href="#cb82-717" aria-hidden="true" tabindex="-1"></a>    payratio <span class="ot">&lt;-</span> df<span class="sc">$</span>Pay_ratio</span>
-<span id="cb82-718"><a href="#cb82-718" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
-<span id="cb82-719"><a href="#cb82-719" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
-<span id="cb82-720"><a href="#cb82-720" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
-<span id="cb82-721"><a href="#cb82-721" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb82-722"><a href="#cb82-722" aria-hidden="true" tabindex="-1"></a>    Div_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> payratio <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb82-723"><a href="#cb82-723" aria-hidden="true" tabindex="-1"></a>    Div_future <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb82-724"><a href="#cb82-724" aria-hidden="true" tabindex="-1"></a>    discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
-<span id="cb82-725"><a href="#cb82-725" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(Div_future <span class="sc">/</span> discount_factors)</span>
-<span id="cb82-726"><a href="#cb82-726" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb82-727"><a href="#cb82-727" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-728"><a href="#cb82-728" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 結果格納用</span></span>
-<span id="cb82-729"><a href="#cb82-729" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> <span class="fu">character</span>(),</span>
-<span id="cb82-730"><a href="#cb82-730" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DCF_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb82-731"><a href="#cb82-731" aria-hidden="true" tabindex="-1"></a>                    <span class="at">RIM_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb82-732"><a href="#cb82-732" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DDM_value =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb82-733"><a href="#cb82-733" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g =</span> <span class="fu">numeric</span>(),</span>
-<span id="cb82-734"><a href="#cb82-734" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NP_latest =</span> <span class="fu">numeric</span>())</span>
-<span id="cb82-735"><a href="#cb82-735" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-736"><a href="#cb82-736" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 企業ごとにループ</span></span>
-<span id="cb82-737"><a href="#cb82-737" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(code <span class="cf">in</span> codes) {</span>
-<span id="cb82-738"><a href="#cb82-738" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 環境からデータフレーム取得</span></span>
-<span id="cb82-739"><a href="#cb82-739" aria-hidden="true" tabindex="-1"></a>    df_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"wacc"</span>, code)</span>
-<span id="cb82-740"><a href="#cb82-740" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(df_name)) <span class="cf">next</span></span>
-<span id="cb82-741"><a href="#cb82-741" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">get</span>(df_name)</span>
-<span id="cb82-742"><a href="#cb82-742" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb82-743"><a href="#cb82-743" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 各モデル計算</span></span>
-<span id="cb82-744"><a href="#cb82-744" aria-hidden="true" tabindex="-1"></a>    dcf <span class="ot">&lt;-</span> <span class="fu">DCF_value</span>(df, g)</span>
-<span id="cb82-745"><a href="#cb82-745" aria-hidden="true" tabindex="-1"></a>    rim <span class="ot">&lt;-</span> <span class="fu">RIM_value</span>(df, rE, g)</span>
-<span id="cb82-746"><a href="#cb82-746" aria-hidden="true" tabindex="-1"></a>    ddm <span class="ot">&lt;-</span> <span class="fu">DDM_value</span>(df, rE, g)</span>
-<span id="cb82-747"><a href="#cb82-747" aria-hidden="true" tabindex="-1"></a>    np_latest <span class="ot">&lt;-</span> <span class="fu">tail</span>(df<span class="sc">$</span>NP, <span class="dv">1</span>)  <span class="co"># 最新年度のNP</span></span>
-<span id="cb82-748"><a href="#cb82-748" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb82-749"><a href="#cb82-749" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(results,</span>
-<span id="cb82-750"><a href="#cb82-750" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">tibble</span>(<span class="at">df =</span> code,</span>
-<span id="cb82-751"><a href="#cb82-751" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DCF_value =</span> dcf,</span>
-<span id="cb82-752"><a href="#cb82-752" aria-hidden="true" tabindex="-1"></a>                                <span class="at">RIM_value =</span> rim,</span>
-<span id="cb82-753"><a href="#cb82-753" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DDM_value =</span> ddm,</span>
-<span id="cb82-754"><a href="#cb82-754" aria-hidden="true" tabindex="-1"></a>                                <span class="at">g =</span> g,</span>
-<span id="cb82-755"><a href="#cb82-755" aria-hidden="true" tabindex="-1"></a>                                <span class="at">NP_latest =</span> np_latest))</span>
-<span id="cb82-756"><a href="#cb82-756" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb82-757"><a href="#cb82-757" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb82-758"><a href="#cb82-758" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(results, path)</span>
-<span id="cb82-759"><a href="#cb82-759" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
-<span id="cb82-760"><a href="#cb82-760" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb82-761"><a href="#cb82-761" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-762"><a href="#cb82-762" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb82-763"><a href="#cb82-763" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-766"><a href="#cb82-766" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb82-767"><a href="#cb82-767" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb82-768"><a href="#cb82-768" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
-<span id="cb82-769"><a href="#cb82-769" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
-<span id="cb82-770"><a href="#cb82-770" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS のヒラギノを登録</span></span>
-<span id="cb82-771"><a href="#cb82-771" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add</span>(<span class="st">"hiragino"</span>, <span class="st">"/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc"</span>)</span>
-<span id="cb82-772"><a href="#cb82-772" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"hiragino"</span>))</span>
+<span id="cb82-664"><a href="#cb82-664" aria-hidden="true" tabindex="-1"></a>wacc7150 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df7150)</span>
+<span id="cb82-665"><a href="#cb82-665" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-666"><a href="#cb82-666" aria-hidden="true" tabindex="-1"></a>wacc7161 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df7161)</span>
+<span id="cb82-667"><a href="#cb82-667" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-668"><a href="#cb82-668" aria-hidden="true" tabindex="-1"></a>wacc8349 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8349)</span>
+<span id="cb82-669"><a href="#cb82-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-670"><a href="#cb82-670" aria-hidden="true" tabindex="-1"></a>wacc8365 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8365)</span>
+<span id="cb82-671"><a href="#cb82-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-672"><a href="#cb82-672" aria-hidden="true" tabindex="-1"></a>wacc8383 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8383)</span>
+<span id="cb82-673"><a href="#cb82-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-674"><a href="#cb82-674" aria-hidden="true" tabindex="-1"></a>wacc8416 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8416)</span>
+<span id="cb82-675"><a href="#cb82-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-676"><a href="#cb82-676" aria-hidden="true" tabindex="-1"></a>wacc8537 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8537)</span>
+<span id="cb82-677"><a href="#cb82-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-678"><a href="#cb82-678" aria-hidden="true" tabindex="-1"></a>wacc8542 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8542)</span>
+<span id="cb82-679"><a href="#cb82-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-680"><a href="#cb82-680" aria-hidden="true" tabindex="-1"></a>wacc8562 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8562)</span>
+<span id="cb82-681"><a href="#cb82-681" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-682"><a href="#cb82-682" aria-hidden="true" tabindex="-1"></a>wacc8563 <span class="ot">&lt;-</span> <span class="fu">calc_wacc</span>(df8563)</span>
+<span id="cb82-683"><a href="#cb82-683" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb82-684"><a href="#cb82-684" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業価値計算関数まとめ</span></span>
+<span id="cb82-685"><a href="#cb82-685" aria-hidden="true" tabindex="-1"></a><span class="co"># -----------------------------</span></span>
+<span id="cb82-686"><a href="#cb82-686" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-687"><a href="#cb82-687" aria-hidden="true" tabindex="-1"></a>calculate_valuation_env <span class="ot">&lt;-</span> <span class="cf">function</span>(codes, <span class="at">g =</span> <span class="fl">0.02</span>, <span class="at">rE =</span> <span class="fl">0.08</span>, <span class="at">path =</span> <span class="st">"Valuation_results.csv"</span>) {</span>
+<span id="cb82-688"><a href="#cb82-688" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-689"><a href="#cb82-689" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DCF計算（過去データ加重平均、将来5年割引）</span></span>
+<span id="cb82-690"><a href="#cb82-690" aria-hidden="true" tabindex="-1"></a>  DCF_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, g) {</span>
+<span id="cb82-691"><a href="#cb82-691" aria-hidden="true" tabindex="-1"></a>    fcf <span class="ot">&lt;-</span> df<span class="sc">$</span>FCF</span>
+<span id="cb82-692"><a href="#cb82-692" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
+<span id="cb82-693"><a href="#cb82-693" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(fcf))</span>
+<span id="cb82-694"><a href="#cb82-694" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
+<span id="cb82-695"><a href="#cb82-695" aria-hidden="true" tabindex="-1"></a>    FCF_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(fcf <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-696"><a href="#cb82-696" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb82-697"><a href="#cb82-697" aria-hidden="true" tabindex="-1"></a>    FCF_future <span class="ot">&lt;-</span> FCF_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb82-698"><a href="#cb82-698" aria-hidden="true" tabindex="-1"></a>    discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> df<span class="sc">$</span>WACC[<span class="dv">1</span>])<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span>
+<span id="cb82-699"><a href="#cb82-699" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sum</span>(FCF_future <span class="sc">/</span> discount_factors)</span>
+<span id="cb82-700"><a href="#cb82-700" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb82-701"><a href="#cb82-701" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-702"><a href="#cb82-702" aria-hidden="true" tabindex="-1"></a>  <span class="co"># RIM計算（Net_income の加重平均使用）</span></span>
+<span id="cb82-703"><a href="#cb82-703" aria-hidden="true" tabindex="-1"></a>  RIM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g) {</span>
+<span id="cb82-704"><a href="#cb82-704" aria-hidden="true" tabindex="-1"></a>    netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
+<span id="cb82-705"><a href="#cb82-705" aria-hidden="true" tabindex="-1"></a>    years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
+<span id="cb82-706"><a href="#cb82-706" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
+<span id="cb82-707"><a href="#cb82-707" aria-hidden="true" tabindex="-1"></a>    weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
+<span id="cb82-708"><a href="#cb82-708" aria-hidden="true" tabindex="-1"></a>    NetIncome_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-709"><a href="#cb82-709" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb82-710"><a href="#cb82-710" aria-hidden="true" tabindex="-1"></a>    df<span class="sc">$</span>Net_asset[<span class="fu">nrow</span>(df)] <span class="sc">+</span> (NetIncome_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)) <span class="sc">/</span> rE</span>
+<span id="cb82-711"><a href="#cb82-711" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb82-712"><a href="#cb82-712" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-713"><a href="#cb82-713" aria-hidden="true" tabindex="-1"></a>  <span class="co"># DDM計算（配当ベース）</span></span>
+<span id="cb82-714"><a href="#cb82-714" aria-hidden="true" tabindex="-1"></a>  DDM_value <span class="ot">&lt;-</span> <span class="cf">function</span>(df, rE, g, <span class="at">horizon =</span> <span class="dv">5</span>) {</span>
+<span id="cb82-715"><a href="#cb82-715" aria-hidden="true" tabindex="-1"></a>  netinc <span class="ot">&lt;-</span> df<span class="sc">$</span>Net_income</span>
+<span id="cb82-716"><a href="#cb82-716" aria-hidden="true" tabindex="-1"></a>  payratio <span class="ot">&lt;-</span> df<span class="sc">$</span>Pay_ratio</span>
+<span id="cb82-717"><a href="#cb82-717" aria-hidden="true" tabindex="-1"></a>  years <span class="ot">&lt;-</span> df<span class="sc">$</span>年度</span>
+<span id="cb82-718"><a href="#cb82-718" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-719"><a href="#cb82-719" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 過去配当の加重平均</span></span>
+<span id="cb82-720"><a href="#cb82-720" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(years), <span class="dv">0</span>, <span class="fu">seq_along</span>(netinc))</span>
+<span id="cb82-721"><a href="#cb82-721" aria-hidden="true" tabindex="-1"></a>  weights <span class="ot">&lt;-</span> weights <span class="sc">/</span> <span class="fu">sum</span>(weights)</span>
+<span id="cb82-722"><a href="#cb82-722" aria-hidden="true" tabindex="-1"></a>  Div_base <span class="ot">&lt;-</span> <span class="fu">sum</span>(netinc <span class="sc">*</span> payratio <span class="sc">*</span> weights, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-723"><a href="#cb82-723" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-724"><a href="#cb82-724" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 最初のhorizon年間の配当予測</span></span>
+<span id="cb82-725"><a href="#cb82-725" aria-hidden="true" tabindex="-1"></a>  Div_future <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>horizon)</span>
+<span id="cb82-726"><a href="#cb82-726" aria-hidden="true" tabindex="-1"></a>  discount_factors <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">:</span>horizon)</span>
+<span id="cb82-727"><a href="#cb82-727" aria-hidden="true" tabindex="-1"></a>  PV_initial <span class="ot">&lt;-</span> <span class="fu">sum</span>(Div_future <span class="sc">/</span> discount_factors)</span>
+<span id="cb82-728"><a href="#cb82-728" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-729"><a href="#cb82-729" aria-hidden="true" tabindex="-1"></a>  <span class="co"># horizon年目の配当</span></span>
+<span id="cb82-730"><a href="#cb82-730" aria-hidden="true" tabindex="-1"></a>  D_horizon <span class="ot">&lt;-</span> Div_base <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g)<span class="sc">^</span>horizon</span>
+<span id="cb82-731"><a href="#cb82-731" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-732"><a href="#cb82-732" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 定率成長モデルによる永続価値</span></span>
+<span id="cb82-733"><a href="#cb82-733" aria-hidden="true" tabindex="-1"></a>  PV_terminal <span class="ot">&lt;-</span> D_horizon <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">+</span> g) <span class="sc">/</span> (rE <span class="sc">-</span> g) <span class="sc">/</span> ((<span class="dv">1</span> <span class="sc">+</span> rE)<span class="sc">^</span>horizon)</span>
+<span id="cb82-734"><a href="#cb82-734" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-735"><a href="#cb82-735" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 合計企業価値</span></span>
+<span id="cb82-736"><a href="#cb82-736" aria-hidden="true" tabindex="-1"></a>  V <span class="ot">&lt;-</span> PV_initial <span class="sc">+</span> PV_terminal</span>
+<span id="cb82-737"><a href="#cb82-737" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(V)</span>
+<span id="cb82-738"><a href="#cb82-738" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb82-739"><a href="#cb82-739" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-740"><a href="#cb82-740" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 結果格納用</span></span>
+<span id="cb82-741"><a href="#cb82-741" aria-hidden="true" tabindex="-1"></a>  results <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">df =</span> <span class="fu">character</span>(),</span>
+<span id="cb82-742"><a href="#cb82-742" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DCF_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb82-743"><a href="#cb82-743" aria-hidden="true" tabindex="-1"></a>                    <span class="at">RIM_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb82-744"><a href="#cb82-744" aria-hidden="true" tabindex="-1"></a>                    <span class="at">DDM_value =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb82-745"><a href="#cb82-745" aria-hidden="true" tabindex="-1"></a>                    <span class="at">g =</span> <span class="fu">numeric</span>(),</span>
+<span id="cb82-746"><a href="#cb82-746" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NP_latest =</span> <span class="fu">numeric</span>())</span>
+<span id="cb82-747"><a href="#cb82-747" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-748"><a href="#cb82-748" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 企業ごとにループ</span></span>
+<span id="cb82-749"><a href="#cb82-749" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(code <span class="cf">in</span> codes) {</span>
+<span id="cb82-750"><a href="#cb82-750" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 環境からデータフレーム取得</span></span>
+<span id="cb82-751"><a href="#cb82-751" aria-hidden="true" tabindex="-1"></a>    df_name <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"wacc"</span>, code)</span>
+<span id="cb82-752"><a href="#cb82-752" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">exists</span>(df_name)) <span class="cf">next</span></span>
+<span id="cb82-753"><a href="#cb82-753" aria-hidden="true" tabindex="-1"></a>    df <span class="ot">&lt;-</span> <span class="fu">get</span>(df_name)</span>
+<span id="cb82-754"><a href="#cb82-754" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb82-755"><a href="#cb82-755" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 各モデル計算</span></span>
+<span id="cb82-756"><a href="#cb82-756" aria-hidden="true" tabindex="-1"></a>    dcf <span class="ot">&lt;-</span> <span class="fu">DCF_value</span>(df, g)</span>
+<span id="cb82-757"><a href="#cb82-757" aria-hidden="true" tabindex="-1"></a>    rim <span class="ot">&lt;-</span> <span class="fu">RIM_value</span>(df, rE, g)</span>
+<span id="cb82-758"><a href="#cb82-758" aria-hidden="true" tabindex="-1"></a>    ddm <span class="ot">&lt;-</span> <span class="fu">DDM_value</span>(df, rE, g)</span>
+<span id="cb82-759"><a href="#cb82-759" aria-hidden="true" tabindex="-1"></a>    np_latest <span class="ot">&lt;-</span> <span class="fu">tail</span>(df<span class="sc">$</span>NP, <span class="dv">1</span>)  <span class="co"># 最新年度のNP</span></span>
+<span id="cb82-760"><a href="#cb82-760" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb82-761"><a href="#cb82-761" aria-hidden="true" tabindex="-1"></a>    results <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(results,</span>
+<span id="cb82-762"><a href="#cb82-762" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">tibble</span>(<span class="at">df =</span> code,</span>
+<span id="cb82-763"><a href="#cb82-763" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DCF_value =</span> dcf,</span>
+<span id="cb82-764"><a href="#cb82-764" aria-hidden="true" tabindex="-1"></a>                                <span class="at">RIM_value =</span> rim,</span>
+<span id="cb82-765"><a href="#cb82-765" aria-hidden="true" tabindex="-1"></a>                                <span class="at">DDM_value =</span> ddm,</span>
+<span id="cb82-766"><a href="#cb82-766" aria-hidden="true" tabindex="-1"></a>                                <span class="at">g =</span> g,</span>
+<span id="cb82-767"><a href="#cb82-767" aria-hidden="true" tabindex="-1"></a>                                <span class="at">NP_latest =</span> np_latest))</span>
+<span id="cb82-768"><a href="#cb82-768" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb82-769"><a href="#cb82-769" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb82-770"><a href="#cb82-770" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_csv</span>(results, path)</span>
+<span id="cb82-771"><a href="#cb82-771" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(results)</span>
+<span id="cb82-772"><a href="#cb82-772" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb82-773"><a href="#cb82-773" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-774"><a href="#cb82-774" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-774"><a href="#cb82-774" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb82-775"><a href="#cb82-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-776"><a href="#cb82-776" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Valuation_results.csv"</span>)</span>
-<span id="cb82-777"><a href="#cb82-777" aria-hidden="true" tabindex="-1"></a>df</span>
-<span id="cb82-778"><a href="#cb82-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-779"><a href="#cb82-779" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-780"><a href="#cb82-780" aria-hidden="true" tabindex="-1"></a><span class="co">#円に戻す</span></span>
-<span id="cb82-781"><a href="#cb82-781" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">*</span><span class="fl">1e6</span> </span>
-<span id="cb82-782"><a href="#cb82-782" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">*</span><span class="fl">1e6</span></span>
-<span id="cb82-783"><a href="#cb82-783" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">*</span><span class="fl">1e6</span></span>
-<span id="cb82-784"><a href="#cb82-784" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-785"><a href="#cb82-785" aria-hidden="true" tabindex="-1"></a><span class="co">#億</span></span>
-<span id="cb82-786"><a href="#cb82-786" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">/</span><span class="fl">1e8</span> </span>
-<span id="cb82-787"><a href="#cb82-787" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">/</span><span class="fl">1e8</span></span>
-<span id="cb82-788"><a href="#cb82-788" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">/</span><span class="fl">1e8</span></span>
-<span id="cb82-789"><a href="#cb82-789" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>NP_latest <span class="ot">&lt;-</span> df<span class="sc">$</span>NP_latest <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-778"><a href="#cb82-778" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb82-779"><a href="#cb82-779" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb82-780"><a href="#cb82-780" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb82-781"><a href="#cb82-781" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb82-782"><a href="#cb82-782" aria-hidden="true" tabindex="-1"></a><span class="co"># macOS のヒラギノを登録</span></span>
+<span id="cb82-783"><a href="#cb82-783" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add</span>(<span class="st">"hiragino"</span>, <span class="st">"/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc"</span>)</span>
+<span id="cb82-784"><a href="#cb82-784" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"hiragino"</span>))</span>
+<span id="cb82-785"><a href="#cb82-785" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-786"><a href="#cb82-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-787"><a href="#cb82-787" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-788"><a href="#cb82-788" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Valuation_results.csv"</span>)</span>
+<span id="cb82-789"><a href="#cb82-789" aria-hidden="true" tabindex="-1"></a>df</span>
 <span id="cb82-790"><a href="#cb82-790" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-791"><a href="#cb82-791" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-792"><a href="#cb82-792" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-793"><a href="#cb82-793" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"df"</span>, <span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"NP_latest"</span>)]</span>
-<span id="cb82-794"><a href="#cb82-794" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>df <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_plot<span class="sc">$</span>df)</span>
-<span id="cb82-795"><a href="#cb82-795" aria-hidden="true" tabindex="-1"></a><span class="co"># wide → long 形式に変換</span></span>
-<span id="cb82-796"><a href="#cb82-796" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_plot, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"NP_latest"</span>),</span>
-<span id="cb82-797"><a href="#cb82-797" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"モデル"</span>, <span class="at">values_to =</span> <span class="st">"時価総額"</span>)</span>
-<span id="cb82-798"><a href="#cb82-798" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-799"><a href="#cb82-799" aria-hidden="true" tabindex="-1"></a><span class="co"># モデル名を整形（末尾の "_value" を削除）</span></span>
-<span id="cb82-800"><a href="#cb82-800" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_value|_latest"</span>, <span class="st">""</span>, df_long<span class="sc">$</span>モデル)</span>
-<span id="cb82-801"><a href="#cb82-801" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-802"><a href="#cb82-802" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-803"><a href="#cb82-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-804"><a href="#cb82-804" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-805"><a href="#cb82-805" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>モデル, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"DCF"</span>, <span class="st">"RIM"</span>, <span class="st">"DDM"</span>, <span class="st">"NP"</span>))</span>
-<span id="cb82-806"><a href="#cb82-806" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
-<span id="cb82-807"><a href="#cb82-807" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-808"><a href="#cb82-808" aria-hidden="true" tabindex="-1"></a><span class="co">#2. 各企業の最大時価総額モデルを判定</span></span>
-<span id="cb82-809"><a href="#cb82-809" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-810"><a href="#cb82-810" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
-<span id="cb82-811"><a href="#cb82-811" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(最大モデル <span class="ot">=</span> <span class="fu">ifelse</span>(時価総額 <span class="sc">==</span> <span class="fu">max</span>(時価総額), <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb82-812"><a href="#cb82-812" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb82-791"><a href="#cb82-791" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span> </span>
+<span id="cb82-792"><a href="#cb82-792" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-793"><a href="#cb82-793" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM =</span> (RIM_value <span class="sc">+</span> DDM_value) <span class="sc">/</span> <span class="dv">2</span>,</span>
+<span id="cb82-794"><a href="#cb82-794" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM25 =</span> (RIM_value <span class="sc">*</span> <span class="fl">0.25</span> <span class="sc">+</span> DDM_value <span class="sc">*</span> <span class="fl">0.75</span>),</span>
+<span id="cb82-795"><a href="#cb82-795" aria-hidden="true" tabindex="-1"></a>    <span class="at">RIM_DDM12 =</span> (RIM_value <span class="sc">*</span> <span class="fl">0.125</span> <span class="sc">+</span> DDM_value <span class="sc">*</span> <span class="fl">0.875</span>)</span>
+<span id="cb82-796"><a href="#cb82-796" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-797"><a href="#cb82-797" aria-hidden="true" tabindex="-1"></a><span class="co">#円に戻す</span></span>
+<span id="cb82-798"><a href="#cb82-798" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">*</span><span class="fl">1e6</span> </span>
+<span id="cb82-799"><a href="#cb82-799" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb82-800"><a href="#cb82-800" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb82-801"><a href="#cb82-801" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM   <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM   <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb82-802"><a href="#cb82-802" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM25 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM25 <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb82-803"><a href="#cb82-803" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM12 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM12 <span class="sc">*</span><span class="fl">1e6</span></span>
+<span id="cb82-804"><a href="#cb82-804" aria-hidden="true" tabindex="-1"></a><span class="co">#億</span></span>
+<span id="cb82-805"><a href="#cb82-805" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DCF_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DCF_value <span class="sc">/</span><span class="fl">1e8</span> </span>
+<span id="cb82-806"><a href="#cb82-806" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_value <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-807"><a href="#cb82-807" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>DDM_value <span class="ot">&lt;-</span> df<span class="sc">$</span>DDM_value <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-808"><a href="#cb82-808" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM   <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM   <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-809"><a href="#cb82-809" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM25 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM25 <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-810"><a href="#cb82-810" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>RIM_DDM12 <span class="ot">&lt;-</span> df<span class="sc">$</span>RIM_DDM12 <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-811"><a href="#cb82-811" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>NP_latest <span class="ot">&lt;-</span> df<span class="sc">$</span>NP_latest <span class="sc">/</span><span class="fl">1e8</span></span>
+<span id="cb82-812"><a href="#cb82-812" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-813"><a href="#cb82-813" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-814"><a href="#cb82-814" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 企業ごとのモデル別時価総額グラフ</span></span>
-<span id="cb82-815"><a href="#cb82-815" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> df, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
-<span id="cb82-816"><a href="#cb82-816" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
-<span id="cb82-817"><a href="#cb82-817" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"企業ごとのモデル別時価総額"</span>,</span>
-<span id="cb82-818"><a href="#cb82-818" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"企業"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
-<span id="cb82-819"><a href="#cb82-819" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb82-820"><a href="#cb82-820" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-821"><a href="#cb82-821" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span>
-<span id="cb82-822"><a href="#cb82-822" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-823"><a href="#cb82-823" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. モデル別平均時価総額</span></span>
-<span id="cb82-824"><a href="#cb82-824" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-825"><a href="#cb82-825" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb82-826"><a href="#cb82-826" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb82-827"><a href="#cb82-827" aria-hidden="true" tabindex="-1"></a>    平均 <span class="ot">=</span> <span class="fu">mean</span>(時価総額),</span>
-<span id="cb82-828"><a href="#cb82-828" aria-hidden="true" tabindex="-1"></a>    中央値 <span class="ot">=</span> <span class="fu">median</span>(時価総額),</span>
-<span id="cb82-829"><a href="#cb82-829" aria-hidden="true" tabindex="-1"></a>    最大 <span class="ot">=</span> <span class="fu">max</span>(時価総額),</span>
-<span id="cb82-830"><a href="#cb82-830" aria-hidden="true" tabindex="-1"></a>    最小 <span class="ot">=</span> <span class="fu">min</span>(時価総額),</span>
-<span id="cb82-831"><a href="#cb82-831" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(時価総額)</span>
-<span id="cb82-832"><a href="#cb82-832" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-833"><a href="#cb82-833" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-834"><a href="#cb82-834" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span>
-<span id="cb82-835"><a href="#cb82-835" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-836"><a href="#cb82-836" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
-<span id="cb82-837"><a href="#cb82-837" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
-<span id="cb82-838"><a href="#cb82-838" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb82-839"><a href="#cb82-839" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"モデル別時価総額の分布"</span>,</span>
-<span id="cb82-840"><a href="#cb82-840" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
-<span id="cb82-841"><a href="#cb82-841" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb82-842"><a href="#cb82-842" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-843"><a href="#cb82-843" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span>
-<span id="cb82-844"><a href="#cb82-844" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-845"><a href="#cb82-845" aria-hidden="true" tabindex="-1"></a><span class="co"># p2 はモデル別分布の箱ひげ図</span></span>
-<span id="cb82-846"><a href="#cb82-846" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"モデル別時価総額分布.png"</span>, <span class="at">plot =</span> p2,</span>
-<span id="cb82-847"><a href="#cb82-847" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
-<span id="cb82-848"><a href="#cb82-848" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-849"><a href="#cb82-849" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-850"><a href="#cb82-850" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-851"><a href="#cb82-851" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 優位モデルの企業数を集計</span></span>
-<span id="cb82-852"><a href="#cb82-852" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-853"><a href="#cb82-853" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(最大モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb82-854"><a href="#cb82-854" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb82-855"><a href="#cb82-855" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>())</span>
+<span id="cb82-814"><a href="#cb82-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-815"><a href="#cb82-815" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-816"><a href="#cb82-816" aria-hidden="true" tabindex="-1"></a>df_plot <span class="ot">&lt;-</span> df[, <span class="fu">c</span>(<span class="st">"df"</span>, <span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP_latest"</span>)]</span>
+<span id="cb82-817"><a href="#cb82-817" aria-hidden="true" tabindex="-1"></a>df_plot<span class="sc">$</span>df <span class="ot">&lt;-</span> <span class="fu">as.character</span>(df_plot<span class="sc">$</span>df)</span>
+<span id="cb82-818"><a href="#cb82-818" aria-hidden="true" tabindex="-1"></a><span class="co"># wide → long 形式に変換</span></span>
+<span id="cb82-819"><a href="#cb82-819" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(df_plot, <span class="at">cols =</span> <span class="fu">c</span>(<span class="st">"DCF_value"</span>, <span class="st">"RIM_value"</span>, <span class="st">"DDM_value"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP_latest"</span>),</span>
+<span id="cb82-820"><a href="#cb82-820" aria-hidden="true" tabindex="-1"></a>                        <span class="at">names_to =</span> <span class="st">"モデル"</span>, <span class="at">values_to =</span> <span class="st">"時価総額"</span>)</span>
+<span id="cb82-821"><a href="#cb82-821" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-822"><a href="#cb82-822" aria-hidden="true" tabindex="-1"></a><span class="co"># モデル名を整形（末尾の "_value" を削除）</span></span>
+<span id="cb82-823"><a href="#cb82-823" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"_value|_latest"</span>, <span class="st">""</span>, df_long<span class="sc">$</span>モデル)</span>
+<span id="cb82-824"><a href="#cb82-824" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-825"><a href="#cb82-825" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-826"><a href="#cb82-826" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-827"><a href="#cb82-827" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-828"><a href="#cb82-828" aria-hidden="true" tabindex="-1"></a>df_long<span class="sc">$</span>モデル <span class="ot">&lt;-</span> <span class="fu">factor</span>(df_long<span class="sc">$</span>モデル, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"DCF"</span>, <span class="st">"RIM"</span>, <span class="st">"DDM"</span>, <span class="st">"RIM_DDM"</span>,<span class="st">"RIM_DDM25"</span>,<span class="st">"RIM_DDM12"</span>,<span class="st">"NP"</span>))</span>
+<span id="cb82-829"><a href="#cb82-829" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
+<span id="cb82-830"><a href="#cb82-830" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-831"><a href="#cb82-831" aria-hidden="true" tabindex="-1"></a><span class="co">#2. 各企業の最大時価総額モデルを判定</span></span>
+<span id="cb82-832"><a href="#cb82-832" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-833"><a href="#cb82-833" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb82-834"><a href="#cb82-834" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(最大モデル <span class="ot">=</span> <span class="fu">ifelse</span>(時価総額 <span class="sc">==</span> <span class="fu">max</span>(時価総額), <span class="cn">TRUE</span>, <span class="cn">FALSE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb82-835"><a href="#cb82-835" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb82-836"><a href="#cb82-836" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-837"><a href="#cb82-837" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 企業ごとのモデル別時価総額グラフ</span></span>
+<span id="cb82-838"><a href="#cb82-838" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> df, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
+<span id="cb82-839"><a href="#cb82-839" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>()) <span class="sc">+</span></span>
+<span id="cb82-840"><a href="#cb82-840" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"企業ごとのモデル別時価総額"</span>,</span>
+<span id="cb82-841"><a href="#cb82-841" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"企業"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
+<span id="cb82-842"><a href="#cb82-842" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb82-843"><a href="#cb82-843" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-844"><a href="#cb82-844" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span>
+<span id="cb82-845"><a href="#cb82-845" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-846"><a href="#cb82-846" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. モデル別平均時価総額</span></span>
+<span id="cb82-847"><a href="#cb82-847" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-848"><a href="#cb82-848" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
+<span id="cb82-849"><a href="#cb82-849" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb82-850"><a href="#cb82-850" aria-hidden="true" tabindex="-1"></a>    平均 <span class="ot">=</span> <span class="fu">mean</span>(時価総額),</span>
+<span id="cb82-851"><a href="#cb82-851" aria-hidden="true" tabindex="-1"></a>    中央値 <span class="ot">=</span> <span class="fu">median</span>(時価総額),</span>
+<span id="cb82-852"><a href="#cb82-852" aria-hidden="true" tabindex="-1"></a>    最大 <span class="ot">=</span> <span class="fu">max</span>(時価総額),</span>
+<span id="cb82-853"><a href="#cb82-853" aria-hidden="true" tabindex="-1"></a>    最小 <span class="ot">=</span> <span class="fu">min</span>(時価総額),</span>
+<span id="cb82-854"><a href="#cb82-854" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(時価総額)</span>
+<span id="cb82-855"><a href="#cb82-855" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb82-856"><a href="#cb82-856" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-857"><a href="#cb82-857" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dominant_model)</span>
-<span id="cb82-858"><a href="#cb82-858" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb82-857"><a href="#cb82-857" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span>
+<span id="cb82-858"><a href="#cb82-858" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-859"><a href="#cb82-859" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
+<span id="cb82-860"><a href="#cb82-860" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
+<span id="cb82-861"><a href="#cb82-861" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb82-862"><a href="#cb82-862" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"モデル別時価総額の分布"</span>,</span>
+<span id="cb82-863"><a href="#cb82-863" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
+<span id="cb82-864"><a href="#cb82-864" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb82-865"><a href="#cb82-865" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-866"><a href="#cb82-866" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span>
+<span id="cb82-867"><a href="#cb82-867" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-868"><a href="#cb82-868" aria-hidden="true" tabindex="-1"></a><span class="co"># p2 はモデル別分布の箱ひげ図</span></span>
+<span id="cb82-869"><a href="#cb82-869" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"モデル別時価総額分布.png"</span>, <span class="at">plot =</span> p2,</span>
+<span id="cb82-870"><a href="#cb82-870" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
+<span id="cb82-871"><a href="#cb82-871" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-872"><a href="#cb82-872" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-873"><a href="#cb82-873" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-874"><a href="#cb82-874" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 優位モデルの企業数を集計</span></span>
+<span id="cb82-875"><a href="#cb82-875" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-876"><a href="#cb82-876" aria-hidden="true" tabindex="-1"></a><span class="co"># NPの評価額を各企業ごとに取得</span></span>
+<span id="cb82-877"><a href="#cb82-877" aria-hidden="true" tabindex="-1"></a>df_np <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-878"><a href="#cb82-878" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">==</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-879"><a href="#cb82-879" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, <span class="at">NP_value =</span> 時価総額)</span>
+<span id="cb82-880"><a href="#cb82-880" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-881"><a href="#cb82-881" aria-hidden="true" tabindex="-1"></a><span class="co"># NPとの差を計算</span></span>
+<span id="cb82-882"><a href="#cb82-882" aria-hidden="true" tabindex="-1"></a>df_comparison <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-883"><a href="#cb82-883" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">!=</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span>        <span class="co"># NP自体は除く</span></span>
+<span id="cb82-884"><a href="#cb82-884" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_np, <span class="at">by =</span> <span class="st">"df"</span>) <span class="sc">%&gt;%</span>   <span class="co"># NPの値を結合</span></span>
+<span id="cb82-885"><a href="#cb82-885" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-886"><a href="#cb82-886" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value),        <span class="co"># 絶対差</span></span>
+<span id="cb82-887"><a href="#cb82-887" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value) <span class="sc">/</span> NP_value  <span class="co"># 相対差</span></span>
+<span id="cb82-888"><a href="#cb82-888" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-889"><a href="#cb82-889" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-890"><a href="#cb82-890" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業ごとにNPに最も近いモデルを抽出</span></span>
+<span id="cb82-891"><a href="#cb82-891" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb82-892"><a href="#cb82-892" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb82-893"><a href="#cb82-893" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> abs_diff, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-894"><a href="#cb82-894" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb82-895"><a href="#cb82-895" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, モデル, 時価総額, NP_value, abs_diff, rel_diff)</span>
+<span id="cb82-896"><a href="#cb82-896" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-897"><a href="#cb82-897" aria-hidden="true" tabindex="-1"></a>model_count <span class="ot">&lt;-</span> dominant_model <span class="sc">%&gt;%</span></span>
+<span id="cb82-898"><a href="#cb82-898" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
+<span id="cb82-899"><a href="#cb82-899" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb82-900"><a href="#cb82-900" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(企業数))</span>
+<span id="cb82-901"><a href="#cb82-901" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-902"><a href="#cb82-902" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_count)</span>
+<span id="cb82-903"><a href="#cb82-903" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-904"><a href="#cb82-904" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
