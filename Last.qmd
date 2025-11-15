@@ -1,5 +1,8 @@
 ---
 title: "last"
+format:
+  html:
+   css: styles.css
 ---
 
 ```{r}
@@ -754,6 +757,14 @@ calculate_valuation_env <- function(codes, g = 0.02, rE = 0.08, path = "Valuatio
 
 ```{r}         
 library(tidyverse)
+library(showtext)
+showtext_auto()
+# macOS のヒラギノを登録
+font_add("hiragino", "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc")
+theme(text = element_text(family = "hiragino"))
+
+
+
 df <- read_csv("Valuation_results.csv")
 df
 
@@ -797,7 +808,7 @@ p1 <- ggplot(df_long, aes(x = df, y = 時価総額, fill = モデル)) +
   geom_bar(stat = "identity", position = position_dodge()) +
   labs(title = "企業ごとのモデル別時価総額",
        x = "企業", y = "時価総額（億円）") +
-  theme_minimal()
+  theme_bw()
 
 print(p1)
 
@@ -819,7 +830,7 @@ p2 <- ggplot(df_long, aes(x = モデル, y = 時価総額, fill = モデル)) +
   geom_boxplot() +
   labs(title = "モデル別時価総額の分布",
        x = "モデル", y = "時価総額（億円）") +
-  theme_minimal()
+  theme_bw()
 
 print(p2)
 

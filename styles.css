@@ -1,0 +1,25 @@
+/* 基本の本文フォント */
+body {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+               "Yu Gothic", "Helvetica", sans-serif;
+  line-height: 1.6;
+}
+
+/* 見出しの日本語も確実に通す */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+               "Yu Gothic", "Helvetica", sans-serif;
+  font-weight: 600;
+}
+
+/* 表やキャプションの日本語対応 */
+table, caption {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+               "Yu Gothic", "Helvetica", sans-serif;
+}
+
+/* コードブロックも統一（日本語コメントが化けない）*/
+pre, code {
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+               "Yu Gothic", monospace;
+}
