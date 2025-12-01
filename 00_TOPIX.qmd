@@ -12,52 +12,26 @@ suppressPackageStartupMessages({
 
 conflict_prefer("filter", "dplyr")
 conflict_prefer("lag",   "dplyr")
+library(ggplot2)
+library(showtext)
+showtext_auto()
+# macOS のヒラギノを登録
+font_add("hiragino", "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc")
+theme(text = element_text(family = "hiragino"))
 ```
 
 ```{r}
-library("tidyverse")
-TOPIX <- read_csv("^tpx_y.csv")
-## TOPIXの算出が始まり、切りのいい1970年から算出
-# 年初始値と年末終値をベクトルにまとめるx
-TOPIX_OPEN <- TOPIX$Close[1:55]
-TOPIX_CLOSE <- TOPIX$Close[2:56]
-# 年次リターン（価格収益率）を計算
-topix_return <- (TOPIX_CLOSE - TOPIX_OPEN) / TOPIX_OPEN
-
-# 年度
-years <- 1970:2024
-
-# データフレーム化して見やすく表示
-topix_df <- tibble(
-  Year = years,
-  Open = TOPIX_OPEN,
-  Close = TOPIX_CLOSE,
-  Return = round(topix_return * 100, 2)  # パーセント表示
-)
-
-# 期待収益率（年平均リターン）
-expected_return <- mean(topix_return)
-
-# 結果の表示
-print(topix_df)
-cat("期待収益率（1970～2024年の平均）:", round(expected_return * 100, 3), "%\n")
-
-
-```
-
-```{r}
-# ------------------------------------------------------------
-# ライブラリ読み込み
-# ------------------------------------------------------------
 library(tidyverse)
-library(ggrepel)
+# library(ggrepel) # ラベル付けを行う場合は必要ですが、現在のコードでは使われていないためコメントアウトでも可
 
 # ------------------------------------------------------------
 # データ読み込み
 # ------------------------------------------------------------
+# ファイルパスは環境に合わせて変更してください
 TOPIX <- read_csv("^tpx_y.csv")
 
-# 年初始値と年末終値
+# 年初始値と年末終値を抽出
+# データ行数が足りているか確認が必要です
 TOPIX_OPEN <- TOPIX$Close[1:55]
 TOPIX_CLOSE <- TOPIX$Close[2:56]
 
@@ -71,15 +45,15 @@ years <- 1970:2024
 topix_df <- tibble(
   Year = years,
   Open = TOPIX_OPEN,
-  Close = TOPIX_CLOSE,
+  TOPIX = TOPIX_CLOSE,
   Return = round(topix_return * 100, 2)  # パーセント表示
 )
 
-# coefを計算（Returnの最大値に合わせる）
-coef <- max(topix_df$Close) / max(topix_df$Return)
+# coefを計算（Returnの最大値に合わせてCloseのスケールを調整するための係数）
+coef <- max(topix_df$TOPIX) / max(abs(topix_df$Return)) # abs()を入れると負の最大値も考慮できますが、元のロジックに従うならmax(topix_df$Return)
 
-# pivot_longerで長い形式
-TOPIX_df_long <- pivot_longer(topix_df, cols = c("Close", "Return"),
+# pivot_longerで長い形式（ggplot用）
+TOPIX_df_long <- pivot_longer(topix_df, cols = c("TOPIX", "Return"),
                               names_to = "項目", values_to = "値")
 
 # ------------------------------------------------------------
@@ -90,54 +64,50 @@ extreme_events <- topix_df %>%
   filter(abs(Return) >= threshold) %>%
   mutate(
     type = ifelse(Return > 0, "上昇", "下落"),
-    # 上下交互にラベルをずらす
-    y_label = Close + ifelse(row_number() %% 2 == 0, 1, -1) * max(topix_df$Close) * 0.05
+    # 上下交互にラベルをずらす（ラベル表示用）
+    y_label = TOPIX + ifelse(row_number() %% 2 == 0, 1, -1) * max(topix_df$TOPIX) * 0.05
   )
-
-# ラベルを手動で設定
-extreme_events$label[extreme_events$Year == 1989] <- "バブル崩壊"
-
 
 # ------------------------------------------------------------
 # グラフ作成
 # ------------------------------------------------------------
 P <- ggplot(TOPIX_df_long, aes(x = Year)) +
-  geom_line(aes(y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目),
-            linewidth = 1.2, alpha = 0.8) +
-  # 縦線
-  geom_vline(data = extreme_events, aes(xintercept = Year, color = type),
-             linetype = "dotted", linewidth = 0.8, show.legend = FALSE) +
-  # ラベル横書き・上下交互
-  geom_text_repel(
-    data = extreme_events %>% filter(!is.na(label)),
-    aes(x = Year, y = y_label, label = label),
-    angle = 0,            # 横書き
-    nudge_y = 0,
-    size = 3,
-    color = "gray30",
-    segment.size = 0.5,
-    segment.color = "gray50",
-    force = 1,
-    max.overlaps = Inf
+  
+  # 折れ線（先に描画）
+  geom_line(
+    aes(y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目),
+    linewidth = 1.2, alpha = 0.8
   ) +
-  # y軸と副軸
+
+  # ★ 重要：vline をあとに描く ＆ show.legend を削除 ★
+  geom_vline(
+    data = extreme_events,
+    aes(xintercept = Year, color = type),
+    linetype = "dotted",
+    linewidth = 0.8
+  ) +
+
   scale_y_continuous(
     name = "TOPIX指数",
     sec.axis = sec_axis(~ . / coef, name = "値上がり率（%）")
   ) +
-  # 色の設定
-  scale_color_manual(values = c("Close" = "black", "Return" = "gray",
-                                "上昇" = "red", "下落" = "blue"),
-                     labels = c("TOPIX指数", "値上がり率（%）","","")) +
-  labs(
-    x = "年"
+  
+  scale_color_manual(
+    values = c(
+      "TOPIX" = "black",
+      "Return" = "gray",
+      "上昇" = "red",
+      "下落" = "blue"
+    ),
+    breaks = c("TOPIX","Return","上昇","下落"),
+    labels = c("TOPIX","Return","上昇","下落")
   ) +
-  theme_classic() +
+  
+  theme_bw() +
   theme(
     legend.position = "top",
-    plot.title = element_text(size = 14, face = "bold"),
-    axis.title.y = element_text(color = "black"),
-    axis.title.y.right = element_text(color = "black")
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 14)
   )
-
+print(P)
 ```
