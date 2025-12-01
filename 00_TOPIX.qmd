@@ -101,7 +101,7 @@ extreme_events$label[extreme_events$Year == 1989] <- "バブル崩壊"
 # ------------------------------------------------------------
 # グラフ作成
 # ------------------------------------------------------------
-ggplot(TOPIX_df_long, aes(x = Year)) +
+P <- ggplot(TOPIX_df_long, aes(x = Year)) +
   geom_line(aes(y = ifelse(項目 == "Return", 値 * coef, 値), color = 項目),
             linewidth = 1.2, alpha = 0.8) +
   # 縦線
@@ -130,7 +130,6 @@ ggplot(TOPIX_df_long, aes(x = Year)) +
                                 "上昇" = "red", "下落" = "blue"),
                      labels = c("TOPIX指数", "値上がり率（%）","","")) +
   labs(
-    title = "TOPIX指数と日本経済主要イベント",
     x = "年"
   ) +
   theme_classic() +

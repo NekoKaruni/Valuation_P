@@ -584,7 +584,7 @@ date (1): Date
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">ifelse</span>(項目 <span class="sc">==</span> <span class="st">"Return"</span>, 値 <span class="sc">*</span> coef, 値), <span class="at">color =</span> 項目),</span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 縦線</span></span>
@@ -613,23 +613,15 @@ date (1): Date
 <span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"上昇"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"下落"</span> <span class="ot">=</span> <span class="st">"blue"</span>),</span>
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"TOPIX指数"</span>, <span class="st">"値上がり率（%）"</span>,<span class="st">""</span>,<span class="st">""</span>)) <span class="sc">+</span></span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"TOPIX指数と日本経済主要イベント"</span>,</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="00_TOPIX_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="1152"></p>
-</figure>
-</div>
-</div>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -1210,7 +1202,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
 <span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a><span class="co"># グラフ作成</span></span>
 <span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a><span class="co"># ------------------------------------------------------------</span></span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>P <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(TOPIX_df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year)) <span class="sc">+</span></span>
 <span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">ifelse</span>(項目 <span class="sc">==</span> <span class="st">"Return"</span>, 値 <span class="sc">*</span> coef, 値), <span class="at">color =</span> 項目),</span>
 <span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a>            <span class="at">linewidth =</span> <span class="fl">1.2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
 <span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 縦線</span></span>
@@ -1239,18 +1231,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"上昇"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"下落"</span> <span class="ot">=</span> <span class="st">"blue"</span>),</span>
 <span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"TOPIX指数"</span>, <span class="st">"値上がり率（%）"</span>,<span class="st">""</span>,<span class="st">""</span>)) <span class="sc">+</span></span>
 <span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"TOPIX指数と日本経済主要イベント"</span>,</span>
-<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span></span>
-<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
-<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"年"</span></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y.right =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>)</span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

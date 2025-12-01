@@ -838,6 +838,8 @@ p1 <- ggplot(df_long, aes(x = df, y = 時価総額, fill = モデル)) +
 
 print(p1)
 
+
+
 # 4. モデル別平均時価総額
 model_summary <- df_long %>%
   group_by(モデル) %>%
@@ -854,15 +856,18 @@ print(model_summary)
 # 5. モデル別分布（箱ひげ図）
 p2 <- ggplot(df_long, aes(x = モデル, y = 時価総額, fill = モデル)) +
   geom_boxplot() +
-  labs(title = "モデル別時価総額の分布",
-       x = "モデル", y = "時価総額（億円）") +
+  labs(x = "モデル", y = "時価総額（億円）") +
+  theme(
+    axis.title = element_text(size = 16),
+    axis.text = element_text(size = 14)
+  )+
   theme_bw()
 
 print(p2)
 
 # p2 はモデル別分布の箱ひげ図
-ggsave("モデル別時価総額分布.png", plot = p2,
-       width = 6, height = 5, dpi = 600)
+ggsave("model_ima.png",p2,
+       width = 10, height = 7,units = "cm", dpi = 600)
 
 
 

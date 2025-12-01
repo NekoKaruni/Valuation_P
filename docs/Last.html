@@ -1641,11 +1641,14 @@ dbl (6): df, DCF_value, RIM_value, DDM_value, g, NP_latest
 <div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
 <span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
 <span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"モデル別時価総額の分布"</span>,</span>
-<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
-<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)</span>
+<span id="cb79-8"><a href="#cb79-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb79-9"><a href="#cb79-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb79-10"><a href="#cb79-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb79-11"><a href="#cb79-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1654,8 +1657,8 @@ dbl (6): df, DCF_value, RIM_value, DDM_value, g, NP_latest
 </div>
 </div>
 <div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># p2 はモデル別分布の箱ひげ図</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"モデル別時価総額分布.png"</span>, <span class="at">plot =</span> p2,</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
+<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"model_ima.png"</span>,p2,</span>
+<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>,<span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
 <span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a></span>
@@ -3014,65 +3017,70 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb82-846"><a href="#cb82-846" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb82-847"><a href="#cb82-847" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p1)</span>
 <span id="cb82-848"><a href="#cb82-848" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-849"><a href="#cb82-849" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. モデル別平均時価総額</span></span>
-<span id="cb82-850"><a href="#cb82-850" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-851"><a href="#cb82-851" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb82-852"><a href="#cb82-852" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb82-853"><a href="#cb82-853" aria-hidden="true" tabindex="-1"></a>    平均 <span class="ot">=</span> <span class="fu">mean</span>(時価総額),</span>
-<span id="cb82-854"><a href="#cb82-854" aria-hidden="true" tabindex="-1"></a>    中央値 <span class="ot">=</span> <span class="fu">median</span>(時価総額),</span>
-<span id="cb82-855"><a href="#cb82-855" aria-hidden="true" tabindex="-1"></a>    最大 <span class="ot">=</span> <span class="fu">max</span>(時価総額),</span>
-<span id="cb82-856"><a href="#cb82-856" aria-hidden="true" tabindex="-1"></a>    最小 <span class="ot">=</span> <span class="fu">min</span>(時価総額),</span>
-<span id="cb82-857"><a href="#cb82-857" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(時価総額)</span>
-<span id="cb82-858"><a href="#cb82-858" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-859"><a href="#cb82-859" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-860"><a href="#cb82-860" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span>
+<span id="cb82-849"><a href="#cb82-849" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-850"><a href="#cb82-850" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-851"><a href="#cb82-851" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. モデル別平均時価総額</span></span>
+<span id="cb82-852"><a href="#cb82-852" aria-hidden="true" tabindex="-1"></a>model_summary <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-853"><a href="#cb82-853" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
+<span id="cb82-854"><a href="#cb82-854" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb82-855"><a href="#cb82-855" aria-hidden="true" tabindex="-1"></a>    平均 <span class="ot">=</span> <span class="fu">mean</span>(時価総額),</span>
+<span id="cb82-856"><a href="#cb82-856" aria-hidden="true" tabindex="-1"></a>    中央値 <span class="ot">=</span> <span class="fu">median</span>(時価総額),</span>
+<span id="cb82-857"><a href="#cb82-857" aria-hidden="true" tabindex="-1"></a>    最大 <span class="ot">=</span> <span class="fu">max</span>(時価総額),</span>
+<span id="cb82-858"><a href="#cb82-858" aria-hidden="true" tabindex="-1"></a>    最小 <span class="ot">=</span> <span class="fu">min</span>(時価総額),</span>
+<span id="cb82-859"><a href="#cb82-859" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD =</span> <span class="fu">sd</span>(時価総額)</span>
+<span id="cb82-860"><a href="#cb82-860" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb82-861"><a href="#cb82-861" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-862"><a href="#cb82-862" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
-<span id="cb82-863"><a href="#cb82-863" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
-<span id="cb82-864"><a href="#cb82-864" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb82-865"><a href="#cb82-865" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"モデル別時価総額の分布"</span>,</span>
-<span id="cb82-866"><a href="#cb82-866" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
-<span id="cb82-867"><a href="#cb82-867" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb82-868"><a href="#cb82-868" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-869"><a href="#cb82-869" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span>
-<span id="cb82-870"><a href="#cb82-870" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-871"><a href="#cb82-871" aria-hidden="true" tabindex="-1"></a><span class="co"># p2 はモデル別分布の箱ひげ図</span></span>
-<span id="cb82-872"><a href="#cb82-872" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"モデル別時価総額分布.png"</span>, <span class="at">plot =</span> p2,</span>
-<span id="cb82-873"><a href="#cb82-873" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">6</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
-<span id="cb82-874"><a href="#cb82-874" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-862"><a href="#cb82-862" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_summary)</span>
+<span id="cb82-863"><a href="#cb82-863" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-864"><a href="#cb82-864" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. モデル別分布（箱ひげ図）</span></span>
+<span id="cb82-865"><a href="#cb82-865" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> モデル, <span class="at">y =</span> 時価総額, <span class="at">fill =</span> モデル)) <span class="sc">+</span></span>
+<span id="cb82-866"><a href="#cb82-866" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb82-867"><a href="#cb82-867" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"モデル"</span>, <span class="at">y =</span> <span class="st">"時価総額（億円）"</span>) <span class="sc">+</span></span>
+<span id="cb82-868"><a href="#cb82-868" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb82-869"><a href="#cb82-869" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>),</span>
+<span id="cb82-870"><a href="#cb82-870" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>)</span>
+<span id="cb82-871"><a href="#cb82-871" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb82-872"><a href="#cb82-872" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb82-873"><a href="#cb82-873" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-874"><a href="#cb82-874" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(p2)</span>
 <span id="cb82-875"><a href="#cb82-875" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-876"><a href="#cb82-876" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-877"><a href="#cb82-877" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 優位モデルの企業数を集計</span></span>
-<span id="cb82-878"><a href="#cb82-878" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-879"><a href="#cb82-879" aria-hidden="true" tabindex="-1"></a><span class="co"># NPの評価額を各企業ごとに取得</span></span>
-<span id="cb82-880"><a href="#cb82-880" aria-hidden="true" tabindex="-1"></a>df_np <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-881"><a href="#cb82-881" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">==</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb82-882"><a href="#cb82-882" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, <span class="at">NP_value =</span> 時価総額)</span>
+<span id="cb82-876"><a href="#cb82-876" aria-hidden="true" tabindex="-1"></a><span class="co"># p2 はモデル別分布の箱ひげ図</span></span>
+<span id="cb82-877"><a href="#cb82-877" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"model_ima.png"</span>,p2,</span>
+<span id="cb82-878"><a href="#cb82-878" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">7</span>,<span class="at">units =</span> <span class="st">"cm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>)</span>
+<span id="cb82-879"><a href="#cb82-879" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-880"><a href="#cb82-880" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-881"><a href="#cb82-881" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-882"><a href="#cb82-882" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. 優位モデルの企業数を集計</span></span>
 <span id="cb82-883"><a href="#cb82-883" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-884"><a href="#cb82-884" aria-hidden="true" tabindex="-1"></a><span class="co"># NPとの差を計算</span></span>
-<span id="cb82-885"><a href="#cb82-885" aria-hidden="true" tabindex="-1"></a>df_comparison <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
-<span id="cb82-886"><a href="#cb82-886" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">!=</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span>        <span class="co"># NP自体は除く</span></span>
-<span id="cb82-887"><a href="#cb82-887" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_np, <span class="at">by =</span> <span class="st">"df"</span>) <span class="sc">%&gt;%</span>   <span class="co"># NPの値を結合</span></span>
-<span id="cb82-888"><a href="#cb82-888" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb82-889"><a href="#cb82-889" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value),        <span class="co"># 絶対差</span></span>
-<span id="cb82-890"><a href="#cb82-890" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value) <span class="sc">/</span> NP_value  <span class="co"># 相対差</span></span>
-<span id="cb82-891"><a href="#cb82-891" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb82-892"><a href="#cb82-892" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-893"><a href="#cb82-893" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業ごとにNPに最も近いモデルを抽出</span></span>
-<span id="cb82-894"><a href="#cb82-894" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_comparison <span class="sc">%&gt;%</span></span>
-<span id="cb82-895"><a href="#cb82-895" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
-<span id="cb82-896"><a href="#cb82-896" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> abs_diff, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb82-897"><a href="#cb82-897" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb82-898"><a href="#cb82-898" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, モデル, 時価総額, NP_value, abs_diff, rel_diff)</span>
-<span id="cb82-899"><a href="#cb82-899" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-900"><a href="#cb82-900" aria-hidden="true" tabindex="-1"></a>model_count <span class="ot">&lt;-</span> dominant_model <span class="sc">%&gt;%</span></span>
-<span id="cb82-901"><a href="#cb82-901" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
-<span id="cb82-902"><a href="#cb82-902" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb82-903"><a href="#cb82-903" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(企業数))</span>
+<span id="cb82-884"><a href="#cb82-884" aria-hidden="true" tabindex="-1"></a><span class="co"># NPの評価額を各企業ごとに取得</span></span>
+<span id="cb82-885"><a href="#cb82-885" aria-hidden="true" tabindex="-1"></a>df_np <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-886"><a href="#cb82-886" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">==</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-887"><a href="#cb82-887" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, <span class="at">NP_value =</span> 時価総額)</span>
+<span id="cb82-888"><a href="#cb82-888" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-889"><a href="#cb82-889" aria-hidden="true" tabindex="-1"></a><span class="co"># NPとの差を計算</span></span>
+<span id="cb82-890"><a href="#cb82-890" aria-hidden="true" tabindex="-1"></a>df_comparison <span class="ot">&lt;-</span> df_long <span class="sc">%&gt;%</span></span>
+<span id="cb82-891"><a href="#cb82-891" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(モデル <span class="sc">!=</span> <span class="st">"NP"</span>) <span class="sc">%&gt;%</span>        <span class="co"># NP自体は除く</span></span>
+<span id="cb82-892"><a href="#cb82-892" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(df_np, <span class="at">by =</span> <span class="st">"df"</span>) <span class="sc">%&gt;%</span>   <span class="co"># NPの値を結合</span></span>
+<span id="cb82-893"><a href="#cb82-893" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-894"><a href="#cb82-894" aria-hidden="true" tabindex="-1"></a>    <span class="at">abs_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value),        <span class="co"># 絶対差</span></span>
+<span id="cb82-895"><a href="#cb82-895" aria-hidden="true" tabindex="-1"></a>    <span class="at">rel_diff =</span> <span class="fu">abs</span>(時価総額 <span class="sc">-</span> NP_value) <span class="sc">/</span> NP_value  <span class="co"># 相対差</span></span>
+<span id="cb82-896"><a href="#cb82-896" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb82-897"><a href="#cb82-897" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-898"><a href="#cb82-898" aria-hidden="true" tabindex="-1"></a><span class="co"># 企業ごとにNPに最も近いモデルを抽出</span></span>
+<span id="cb82-899"><a href="#cb82-899" aria-hidden="true" tabindex="-1"></a>dominant_model <span class="ot">&lt;-</span> df_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb82-900"><a href="#cb82-900" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(df) <span class="sc">%&gt;%</span></span>
+<span id="cb82-901"><a href="#cb82-901" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_min</span>(<span class="at">order_by =</span> abs_diff, <span class="at">n =</span> <span class="dv">1</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb82-902"><a href="#cb82-902" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb82-903"><a href="#cb82-903" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(df, モデル, 時価総額, NP_value, abs_diff, rel_diff)</span>
 <span id="cb82-904"><a href="#cb82-904" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-905"><a href="#cb82-905" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_count)</span>
-<span id="cb82-906"><a href="#cb82-906" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb82-907"><a href="#cb82-907" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb82-905"><a href="#cb82-905" aria-hidden="true" tabindex="-1"></a>model_count <span class="ot">&lt;-</span> dominant_model <span class="sc">%&gt;%</span></span>
+<span id="cb82-906"><a href="#cb82-906" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(モデル) <span class="sc">%&gt;%</span></span>
+<span id="cb82-907"><a href="#cb82-907" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(企業数 <span class="ot">=</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb82-908"><a href="#cb82-908" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(企業数))</span>
+<span id="cb82-909"><a href="#cb82-909" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-910"><a href="#cb82-910" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_count)</span>
+<span id="cb82-911"><a href="#cb82-911" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb82-912"><a href="#cb82-912" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
